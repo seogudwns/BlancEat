@@ -1,7 +1,18 @@
-function App() {
+import { BrowserRouter, Route, Routes } from "react-router-dom";
+import Header from './Header';
+import Footer from './Footer'
+
+const App = () => {
   return (
-    <div>
-    </div>
+    <>
+      <BrowserRouter>
+        <Header />
+        <Routes>
+          {/* <Route path="/" element={} /> */}
+        </Routes>
+        <Footer />
+      </BrowserRouter>
+    </>
   );
 }
 
