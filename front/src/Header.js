@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import styled, { css } from 'styled-components';
 
 const Header = () => {
@@ -31,7 +32,9 @@ const Header = () => {
 		<>
 			<StyledHeader>
 				<StyledLogo>This is Logo</StyledLogo>
-				<StyledMenu>This is Menu</StyledMenu>
+				<StyledMenu>
+					<Link to="/balancEat">This is Menu</Link>
+				</StyledMenu>
 				<StyledUserMenu>This is User</StyledUserMenu>
 			</StyledHeader>
 		</>
