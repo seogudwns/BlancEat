@@ -13,16 +13,8 @@ const Header = () => {
 		align-items: center;
 	`;
 
-	const StyledMenu = styled.nav`
-		flex: 4;
-		display: flex;
-		justify-content: space-around;
-		align-items: center;
-		list-style: none;
-	`;
-
-	const StyledUserMenu = styled.nav`
-		flex: 2;
+	const StyledNav = styled.nav`
+		flex: ${props => (props.flex ? props.flex : 0)};
 		display: flex;
 		justify-content: space-around;
 		align-items: center;
@@ -35,12 +27,12 @@ const Header = () => {
 		<>
 			<StyledHeader>
 				<StyledLogo>This is Logo</StyledLogo>
-				<StyledMenu>
+				<StyledNav flex="4">
 					<li>메뉴1</li>
 					<li>메뉴2</li>
 					<li>메뉴3</li>
-				</StyledMenu>
-				<StyledUserMenu>
+				</StyledNav>
+				<StyledNav flex="2">
 					{!isLogin ? <li>로그인</li> : <li>로그아웃</li>}
 					<li>회원가입</li>
 					{isLogin ? (
@@ -48,7 +40,7 @@ const Header = () => {
 					) : (
 						<li style={{ visibility: 'hidden' }}>사용자 정보</li>
 					)}
-				</StyledUserMenu>
+				</StyledNav>
 			</StyledHeader>
 		</>
 	);
