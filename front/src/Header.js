@@ -1,5 +1,5 @@
 import React from 'react';
-import styled, { css } from 'styled-components';
+import styled from 'styled-components';
 
 const Header = () => {
 	const StyledHeader = styled.div`
@@ -16,23 +16,39 @@ const Header = () => {
 	const StyledMenu = styled.nav`
 		flex: 4;
 		display: flex;
-		justify-content: space-between;
+		justify-content: space-around;
 		align-items: center;
+		list-style: none;
 	`;
 
 	const StyledUserMenu = styled.nav`
 		flex: 2;
 		display: flex;
-		justify-content: space-between;
+		justify-content: space-around;
 		align-items: center;
+		list-style: none;
 	`;
+
+	const isLogin = false;
 
 	return (
 		<>
 			<StyledHeader>
 				<StyledLogo>This is Logo</StyledLogo>
-				<StyledMenu>This is Menu</StyledMenu>
-				<StyledUserMenu>This is User</StyledUserMenu>
+				<StyledMenu>
+					<li>메뉴1</li>
+					<li>메뉴2</li>
+					<li>메뉴3</li>
+				</StyledMenu>
+				<StyledUserMenu>
+					{!isLogin ? <li>로그인</li> : <li>로그아웃</li>}
+					<li>회원가입</li>
+					{isLogin ? (
+						<li>사용자 정보</li>
+					) : (
+						<li style={{ visibility: 'hidden' }}>사용자 정보</li>
+					)}
+				</StyledUserMenu>
 			</StyledHeader>
 		</>
 	);
