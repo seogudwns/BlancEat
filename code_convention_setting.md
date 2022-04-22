@@ -1,5 +1,7 @@
 # CCS(정리이기 때문에 구분짓기 위해 snake_case 사용.)
 
+#### 맨 아래까지 끝까지 읽어주세요!!
+
 ## Common
 
 -   almost_camel_case
@@ -22,6 +24,10 @@
 -   JSX의 마지막 `>`를 다음 줄로 내릴지 여부
 -   JSX에 singe 쿼테이션 사용 여부
 -   혹시몰라서 넣어놓은 vue파일의 들여쓰기 여부.
+
+## git pull 후 로컬에서 세팅할 것!!
+
+setting
 
 #### ref : https://ui.toast.com/fe-guide/ko_CODING-CONVENTION
 
