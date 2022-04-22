@@ -1,9 +1,15 @@
 {
 	"extends": ["plugin:prettier/recommended"],
+	"plugins": ["prettier"],
+	"parserOptions": {
+		"ecmaVersion": 2020,
+		"sourceType": "module",
+		"ecmaFeatures": {
+			"jsx": true
+		},
+		"react/jsx-one-expression-per-line": "off"
+	},
 	"rules": {
 		"prettier/prettier": ["error"]
-	},
-	"parserOptions": {
-        "sourceType": "module"
-    }
+	}
 }
