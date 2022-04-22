@@ -20,5 +20,9 @@
 		"multer": "^1.4.4",
 		"nodemon": "^2.0.15"
 	},
-	"type": "module"
+	"type": "module",
+	"devDependencies": {
+		"swagger-jsdoc": "^6.2.1",
+		"swagger-ui-express": "^4.3.0"
+	}
 }

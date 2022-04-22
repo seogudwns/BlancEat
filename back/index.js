@@ -3,6 +3,9 @@ import cors from 'cors';
 import express from 'express';
 import mongoose from 'mongoose';
 
+// swagger module
+import { swaggerUi, specs } from './src/modules/swagger.js';
+
 const app = express();
 
 URL = process.env.MongoBD_URL || '주소에 접속이 되지 않았습니다.';
@@ -13,15 +16,13 @@ const db = mongoose.connection;
 
 db.on('connected', () => {
 	console.log('정상적으로 서버에 연결되었습니다.' + URL);
-	print(
-		'aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa',
-	);
 });
 db.on('error', error => console.error('MongoDB 연결에 실패하였습니다...\n' + URL + '\n' + error));
 
 // ===========================================
 
 app.use(cors());
+app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(specs, { explorer: true }));
 
 const PORT = process.env.SERVER_PORT || 5000;
 
