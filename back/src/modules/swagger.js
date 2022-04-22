@@ -11,7 +11,8 @@ const options = {
 		},
 		servers: [
 			{
-				url: 'http://localhost:4040',
+				description: 'localhost',
+				url: 'http://localhost:5000',
 			},
 		],
 	},
@@ -20,7 +21,4 @@ const options = {
 
 const specs = swaggerJsdoc(options);
 
-module.exports = {
-	swaggerUi,
-	specs,
-};
+export { swaggerUi, specs };
