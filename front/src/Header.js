@@ -5,7 +5,7 @@ const Header = () => {
 	const StyledHeader = styled.div`
 		display: flex;
 		justify-content: space-between;
-		height: 15%;
+		height: 50px;
 	`;
 
 	const StyledLogo = styled.div`
