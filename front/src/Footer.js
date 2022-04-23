@@ -2,21 +2,30 @@ import React from 'react';
 import styled from 'styled-components';
 
 const StyledFooter = styled.div`
-	width: 100%;
-	height: 10%;
-	color: #aeb5bc;
-	font-size: 0.8rem;
-	line-height: 1.5rem;
+	height: 120px;
+	padding: 20px;
+	font-size: 1rem;
+	line-height: 2rem;
+	background-color: #3b3d3b;
+`;
+
+const StyledText = styled.div`
+	text-align: ${props => (props.ta ? props.ta : 'none')};
+	color: ${props => (props.color ? props.color : 'none')};
 `;
 
 const Footer = () => {
 	return (
 		<StyledFooter>
-			CONTACT | elice4thdata@gmail.com
+			<StyledText ta="left" color="#c8c8c8">
+				Contact Us
+				<br />
+				이메일 : elice4thdata@gmail.com
+			</StyledText>
 			<br />
-			TELEPHONE | 070-1234-5678
-			<br />
-			Copyright ⓒ 2022 - 2022 BalancEat. All rights reserved.
+			<StyledText ta="right" color="#6e726e">
+				License 투머치코더
+			</StyledText>
 		</StyledFooter>
 	);
 };
