@@ -14,6 +14,7 @@ const StyledLogo = styled.div`
 	justify-content: center;
 	align-items: center;
 	max-width: 200px;
+	cursor: pointer;
 `;
 
 const StyledNav = styled.nav`
@@ -33,12 +34,14 @@ const StyledButton = styled.button`
 	border: 1px solid #fcfbfa;
 	color: #fcfbfa;
 	font-size: 1rem;
+	cursor: pointer;
 `;
 
 const StyledList = styled.li`
 	font-size: 1rem;
 	margin-left: 30px;
 	visibility: ${props => (props.visibility ? props.visibility : 'visible')};
+	cursor: pointer;
 `;
 
 const Header = () => {
