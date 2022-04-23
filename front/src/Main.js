@@ -1,49 +1,28 @@
 import React from 'react';
 import styled from 'styled-components';
 
-const StyledArticle = styled.div`
+const StyledSection = styled.div`
 	display: flex;
-	justify-content: ${props => (props.jc ? props.jc : 'none')};
-	align-items: ${props => (props.ai ? props.ai : 'none')};
 	width: 100%;
-	height: ${props => (props.height ? props.height : 'auto')};
-	background-color: ${props => (props.color ? props.color : 'none')};
-	margin: ${props => (props.margin ? props.margin : 'none')};
+	height: 646px;
 `;
 
-const StyledContentDiv = styled.div`
-	flex: ${props => (props.flex ? props.flex : 0)};
-	width: ${props => (props.width ? props.width : 'auto')};
-	height: ${props => (props.height ? props.height : 'auto')};
-	background-color: ${props => (props.color ? props.color : 'none')};
-	margin: ${props => (props.margin ? props.margin : 'none')};
+const StyledContents = styled.div`
+	flex: ${props => (props.flex ? props.flex : 'none')};
+	background-image: ${props => (props.bgImage ? props.bgImage : 'none')};
 `;
 
 const Main = () => {
+	const mainImages = ['/mainImage1.jpg', '/mainImage2.jpg', '/mainImage3.jpg'];
+
 	return (
 		<>
-			<StyledArticle height="940px" margin="auto">
-				어떻게 드시고 계신가요?
-			</StyledArticle>
-			<StyledArticle height="500px" jc="space-around" ai="center" color="green">
-				<StyledContentDiv flex="1" width="300px" height="300px" color="orange">
-					This is Inner Article.
-				</StyledContentDiv>
-				<StyledContentDiv flex="2" width="300px" height="300px" color="yellow">
-					This is Inner Article.
-				</StyledContentDiv>
-			</StyledArticle>
-			<StyledArticle height="500px" jc="space-around" ai="center" color="blue">
-				<StyledContentDiv flex="1" width="300px" height="300px" color="orange">
-					This is Inner Article.
-				</StyledContentDiv>
-				<StyledContentDiv flex="1" width="300px" height="300px" color="yellow">
-					This is Inner Article.
-				</StyledContentDiv>
-				<StyledContentDiv flex="1" width="300px" height="300px" color="ivory">
-					This is Inner Article.
-				</StyledContentDiv>
-			</StyledArticle>
+			<StyledSection>
+				<StyledContents>Hi</StyledContents>
+			</StyledSection>
+			<StyledSection>
+				<StyledContents>Hi</StyledContents>
+			</StyledSection>
 		</>
 	);
 };
