@@ -33,6 +33,16 @@ const BmiCalculator = () => {
 
 	const calculateBMI = evt => {
 		evt.preventDefault();
+		setBmi((kg / (cm / 100) ** 2).toFixed(2));
+		if (bmi < 18.5) {
+			setBmiState('저체중');
+		} else if (18.5 <= bmi < 23) {
+			setBmiState('정상');
+		} else if (23 <= bmi < 25) {
+			setBmiState('과체중');
+		} else if (25 <= bmi) {
+			setBmiState('비만');
+		}
 	};
 
 	const resetBMI = () => {
@@ -60,6 +70,7 @@ const BmiCalculator = () => {
 				</form>
 				<br />
 				비만도 결과 {bmiState} / BMI 지수 {bmi}
+				<img src="/bmi.png" style={{ maxWidth: '603px', marginTop: '50px' }} />
 			</StyledContainer>
 		</>
 	);
