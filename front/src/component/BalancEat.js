@@ -65,35 +65,24 @@ const BalancEat = () => {
 				<StyledContainer>
 					<div>
 						<h1>균형잡인 식단의 필요성</h1>
-						<h4>우리가 균형잡힌 식단을 먹어야 하는 이유는</h4>
+						<h4>
+							우리가 균형잡힌 식단을 먹어야 하는 이유는 BMI 점수가 높을수록
+							심장질환이나 당뇨병등 질병에 걸릴 확률이 높아지는 것을 볼 수있습니다.
+						</h4>
 					</div>
-					<StyledImg src="/img/unknown.png" />
+					<StyledImg src="/img/bmi와질병관계.png" />
 				</StyledContainer>
 
 				<StyledContainer>
 					<div>
 						<h1>균형잡인 식단의 필요성</h1>
-						<h4>우리가 균형잡힌 식단을 먹어야 하는 이유는</h4>
+						<h4>
+							당뇨병에 걸렸을 경우 다른 질병에 걸릴 확률 또한 매우 높아지므로 식단
+							관리를 해야 합니다.
+						</h4>
 					</div>
-					<StyledImg src="/img/unknown.png" />
+					<StyledImg src="/img/당뇨병있을경우 다른 질병이 있을 확률.png" />
 				</StyledContainer>
-
-				<StyledContainer>
-					<div>
-						<h1>균형잡인 식단의 필요성</h1>
-						<h4>우리가 균형잡힌 식단을 먹어야 하는 이유는</h4>
-					</div>
-					<StyledImg src="/img/unknown.png" />
-				</StyledContainer>
-
-				<StyledContainer>
-					<div>
-						<h1>균형잡인 식단의 필요성</h1>
-						<h4>우리가 균형잡힌 식단을 먹어야 하는 이유는</h4>
-					</div>
-					<StyledImg src="/img/unknown.png" />
-				</StyledContainer>
-
 				<StyledteamContainer>
 					<div style={{ display: 'inline-flex' }}>
 						<StyledToomuchBox>투머치 코더</StyledToomuchBox>
