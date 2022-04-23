@@ -31,7 +31,9 @@ const BmiCalculator = () => {
 	const [bmi, setBmi] = useState(0);
 	const [bmiState, setBmiState] = useState('');
 
-	const calculateBMI = () => {};
+	const calculateBMI = evt => {
+		evt.preventDefault();
+	};
 
 	const resetBMI = () => {
 		setCm(0);
@@ -57,6 +59,7 @@ const BmiCalculator = () => {
 					</StyledButton>
 				</form>
 				<br />
+				비만도 결과 {bmiState} / BMI 지수 {bmi}
 			</StyledContainer>
 		</>
 	);
