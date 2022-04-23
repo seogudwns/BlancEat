@@ -4,20 +4,41 @@ import styled from 'styled-components';
 const StyledHeader = styled.div`
 	display: flex;
 	justify-content: space-between;
-	height: 50px;
+	height: 80px;
+	background-color: #075f3a;
 `;
 
 const StyledLogo = styled.div`
+	display: flex;
 	flex: 1;
+	justify-content: center;
 	align-items: center;
+	max-width: 200px;
 `;
 
 const StyledNav = styled.nav`
 	flex: ${props => (props.flex ? props.flex : 0)};
 	display: flex;
-	justify-content: space-around;
+	justify-content: ${props => (props.jc ? props.jc : 'none')};
 	align-items: center;
 	list-style: none;
+	color: #fcfbfa;
+`;
+
+const StyledButton = styled.button`
+	width: 120px;
+	height: 35px;
+	background: transparent;
+	border-radius: 5px;
+	border: 1px solid #fcfbfa;
+	color: #fcfbfa;
+	font-size: 1rem;
+`;
+
+const StyledList = styled.li`
+	font-size: 1rem;
+	margin-left: 30px;
+	visibility: ${props => (props.visibility ? props.visibility : 'visible')};
 `;
 
 const Header = () => {
@@ -26,20 +47,21 @@ const Header = () => {
 	return (
 		<>
 			<StyledHeader>
-				<StyledLogo>This is Logo</StyledLogo>
-				<StyledNav flex="4">
-					<li>메뉴1</li>
-					<li>메뉴2</li>
-					<li>메뉴3</li>
-				</StyledNav>
-				<StyledNav flex="2">
-					{!isLogin ? <li>로그인</li> : <li>로그아웃</li>}
-					<li>회원가입</li>
+				<StyledLogo>
+					<img src="/balanceatLogo.png" />
+				</StyledLogo>
+				<StyledNav flex="4" jc="flex-end">
+					<StyledList>메인페이지</StyledList>
+					<StyledList>BalancEat</StyledList>
+					<StyledList>오늘 뭐 먹지</StyledList>
 					{isLogin ? (
-						<li>사용자 정보</li>
+						<StyledList>사용자페이지</StyledList>
 					) : (
-						<li style={{ visibility: 'hidden' }}>사용자 정보</li>
+						<StyledList visibility="hidden">사용자페이지</StyledList>
 					)}
+				</StyledNav>
+				<StyledNav flex="1" jc="center">
+					<StyledButton>Sign in</StyledButton>
 				</StyledNav>
 			</StyledHeader>
 		</>
