@@ -22,7 +22,7 @@ const BalancEat = () => {
 	const StyledUl = styled.ul`
 		display: flex;
 		margin: 10vh auto;
-		line-stlye: none;
+		line-style: none;
 		padding: 0px;
 	`;
 	const StyledLi = styled.li`
