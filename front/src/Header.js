@@ -1,26 +1,26 @@
 import React from 'react';
 import styled from 'styled-components';
 
+const StyledHeader = styled.div`
+	display: flex;
+	justify-content: space-between;
+	height: 50px;
+`;
+
+const StyledLogo = styled.div`
+	flex: 1;
+	align-items: center;
+`;
+
+const StyledNav = styled.nav`
+	flex: ${props => (props.flex ? props.flex : 0)};
+	display: flex;
+	justify-content: space-around;
+	align-items: center;
+	list-style: none;
+`;
+
 const Header = () => {
-	const StyledHeader = styled.div`
-		display: flex;
-		justify-content: space-between;
-		height: 50px;
-	`;
-
-	const StyledLogo = styled.div`
-		flex: 1;
-		align-items: center;
-	`;
-
-	const StyledNav = styled.nav`
-		flex: ${props => (props.flex ? props.flex : 0)};
-		display: flex;
-		justify-content: space-around;
-		align-items: center;
-		list-style: none;
-	`;
-
 	const isLogin = false;
 
 	return (

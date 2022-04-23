@@ -1,15 +1,15 @@
 import React from 'react';
 import styled from 'styled-components';
 
-const Footer = () => {
-	const StyledFooter = styled.div`
-		width: 100%;
-		height: 10%;
-		color: #aeb5bc;
-		font-size: 0.8rem;
-		line-height: 1.5rem;
-	`;
+const StyledFooter = styled.div`
+	width: 100%;
+	height: 10%;
+	color: #aeb5bc;
+	font-size: 0.8rem;
+	line-height: 1.5rem;
+`;
 
+const Footer = () => {
 	return (
 		<StyledFooter>
 			CONTACT | elice4thdata@gmail.com
