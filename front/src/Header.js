@@ -56,7 +56,7 @@ const Header = () => {
 				<StyledNav flex="4" jc="flex-end">
 					<StyledList>메인페이지</StyledList>
 					<StyledList>BalancEat</StyledList>
-					<StyledList>오늘 뭐 먹지</StyledList>
+					<StyledList>오늘 뭐 먹지?</StyledList>
 					{isLogin ? (
 						<StyledList>사용자페이지</StyledList>
 					) : (

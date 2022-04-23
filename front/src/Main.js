@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
+import BmiCalculator from './BmiCalculator';
 
 const StyledSection = styled.div`
 	display: flex;
@@ -37,13 +38,6 @@ const StyledText = styled.div`
 	font-size: ${props => (props.size ? props.size : 'none')};
 `;
 
-const StyledContainer = styled.div`
-	width: 623px;
-	height: 230px;
-	border: 2px solid #c8c8c8;
-	margin-top: 70px;
-`;
-
 const Main = () => {
 	const mainImages = ['/mainImage1.jpg', '/mainImage2.jpg', '/mainImage3.jpg'];
 	const [curImgIndex, setCurImgIndex] = useState(0);
@@ -77,7 +71,7 @@ const Main = () => {
 						<br />
 						BMI 지수를 확인해 보세요.
 					</StyledText>
-					<StyledContainer></StyledContainer>
+					<BmiCalculator />
 				</StyledContents>
 			</StyledSection>
 		</>
