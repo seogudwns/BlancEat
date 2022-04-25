@@ -27,7 +27,7 @@
 
 ## git pull 후 로컬에서 세팅할 것!!
 
--   setting.json에서 아래 8줄을 추가해주세요.
+-   setting.json에서 아래 9줄을 추가해주세요.
     "editor.defaultFormatter": "esbenp.prettier-vscode",
     "editor.formatOnSave": true,
     "eslint.alwaysShowStatus": true,
@@ -36,6 +36,7 @@
     "prettier.useTabs": true,
     "emmet.triggerExpansionOnTab": true,
     "prettier.tabWidth": 4,
+    "editor.codeActionsOnSave": { "source.fixAll.eslint": true }
 
 #### ref : https://ui.toast.com/fe-guide/ko_CODING-CONVENTION
 
