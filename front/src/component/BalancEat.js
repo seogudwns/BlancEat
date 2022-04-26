@@ -64,6 +64,53 @@ const BalancEat = () => {
 		margin: 30px;
 		height: 60px;
 	`;
+	const teamMembers = [
+		['홍일도', 'FRONTEND', 'theohong@gmail.com'],
+		['김기동', 'FRONTEND', 'dewrain331@gmail.com'],
+		['홍주완', 'FRONTEND', 'vjvl95@naver.com'],
+		['배주영', 'BACKEND', 'baejuyoung49@gmail.com'],
+		['김성훈', 'BACKEND', 'open7rms@gmail.com'],
+		['서형준', 'BACKEND', 'seogudwns12@gmail.com'],
+	];
+
+	const TeamMember = ({ teamMember }) => {
+		return (
+			<div style={{ display: 'inline-block', width: '50%' }}>
+				<StyledTeamBox style={{ backgroundColor: 'white' }}>
+					<img
+						style={{
+							borderRadius: '15px',
+							marginLeft: '10px',
+							marginTop: '5px',
+						}}
+						src="/img/bmcho-pic.1a18473a818b64ff3b5f.png"
+						width="50px"
+						height="50px"
+					/>
+
+					<span
+						style={{
+							fontWeight: 'bolder',
+							marginLeft: '20px',
+							fontSize: '20px',
+						}}
+					>
+						{teamMember[0]}
+						<span
+							style={{
+								fontWeight: 'lighter',
+								marginLeft: '20px',
+								fontSize: '20px',
+							}}
+						>
+							{teamMember[1]}
+						</span>
+						<p style={{ fontWeight: 'lighter', margin: '0px' }}>{teamMember[2]}</p>
+					</span>
+				</StyledTeamBox>
+			</div>
+		);
+	};
 	return (
 		<>
 			<Container>
@@ -113,214 +160,9 @@ const BalancEat = () => {
 						<StyledToomuchText>저희들이 만들었습니다!!</StyledToomuchText>
 					</div>
 					<div>
-						<div style={{ display: 'inline-block', width: '50%' }}>
-							<StyledTeamBox style={{ backgroundColor: 'white' }}>
-								<img
-									style={{
-										borderRadius: '15px',
-										marginLeft: '10px',
-										marginTop: '5px',
-									}}
-									src="/img/bmcho-pic.1a18473a818b64ff3b5f.png"
-									width="50px"
-									height="50px"
-								/>
-
-								<span
-									style={{
-										fontWeight: 'bolder',
-										marginLeft: '20px',
-										fontSize: '20px',
-									}}
-								>
-									홍일도
-									<span
-										style={{
-											fontWeight: 'lighter',
-											marginLeft: '20px',
-											fontSize: '20px',
-										}}
-									>
-										FRONTEND
-									</span>
-									<p style={{ fontWeight: 'lighter', margin: '0px' }}>
-										theohong@gmail.com
-									</p>
-								</span>
-							</StyledTeamBox>
-							<StyledTeamBox style={{ backgroundColor: 'white' }}>
-								<img
-									style={{
-										borderRadius: '15px',
-										marginLeft: '10px',
-										marginTop: '5px',
-									}}
-									src="/img/bmcho-pic.1a18473a818b64ff3b5f.png"
-									width="50px"
-									height="50px"
-								/>
-
-								<span
-									style={{
-										fontWeight: 'bolder',
-										marginLeft: '20px',
-										fontSize: '20px',
-									}}
-								>
-									김기동
-									<span
-										style={{
-											fontWeight: 'lighter',
-											marginLeft: '20px',
-											fontSize: '20px',
-										}}
-									>
-										FRONTEND
-									</span>
-									<p style={{ fontWeight: 'lighter', margin: '0px' }}>
-										dewrain331@gmail.com
-									</p>
-								</span>
-							</StyledTeamBox>
-							<StyledTeamBox style={{ backgroundColor: 'white' }}>
-								<img
-									style={{
-										borderRadius: '15px',
-										marginLeft: '10px',
-										marginTop: '5px',
-									}}
-									src="/img/bmcho-pic.1a18473a818b64ff3b5f.png"
-									width="50px"
-									height="50px"
-								/>
-
-								<span
-									style={{
-										fontWeight: 'bolder',
-										marginLeft: '20px',
-										fontSize: '20px',
-									}}
-								>
-									홍주완
-									<span
-										style={{
-											fontWeight: 'lighter',
-											marginLeft: '20px',
-											fontSize: '20px',
-										}}
-									>
-										FRONTEND
-									</span>
-									<p style={{ fontWeight: 'lighter', margin: '0px' }}>
-										vjvl95@naver.com
-									</p>
-								</span>
-							</StyledTeamBox>
-						</div>
-						<div style={{ display: 'inline-block', width: '50%', float: 'right' }}>
-							<StyledTeamBox style={{ backgroundColor: 'white' }}>
-								<img
-									style={{
-										borderRadius: '15px',
-										marginLeft: '10px',
-										marginTop: '5px',
-									}}
-									src="/img/bmcho-pic.1a18473a818b64ff3b5f.png"
-									width="50px"
-									height="50px"
-								/>
-
-								<span
-									style={{
-										fontWeight: 'bolder',
-										marginLeft: '20px',
-										fontSize: '20px',
-									}}
-								>
-									배주영
-									<span
-										style={{
-											fontWeight: 'lighter',
-											marginLeft: '20px',
-											fontSize: '20px',
-										}}
-									>
-										BACKEND
-									</span>
-									<p style={{ fontWeight: 'lighter', margin: '0px' }}>
-										baejuyoung49@gmail.com
-									</p>
-								</span>
-							</StyledTeamBox>
-							<StyledTeamBox style={{ backgroundColor: 'white' }}>
-								<img
-									style={{
-										borderRadius: '15px',
-										marginLeft: '10px',
-										marginTop: '5px',
-									}}
-									src="/img/bmcho-pic.1a18473a818b64ff3b5f.png"
-									width="50px"
-									height="50px"
-								/>
-
-								<span
-									style={{
-										fontWeight: 'bolder',
-										marginLeft: '20px',
-										fontSize: '20px',
-									}}
-								>
-									김성훈
-									<span
-										style={{
-											fontWeight: 'lighter',
-											marginLeft: '20px',
-											fontSize: '20px',
-										}}
-									>
-										BACKEND
-									</span>
-									<p style={{ fontWeight: 'lighter', margin: '0px' }}>
-										open7rms@gmail.com
-									</p>
-								</span>
-							</StyledTeamBox>
-							<StyledTeamBox style={{ backgroundColor: 'white' }}>
-								<img
-									style={{
-										borderRadius: '15px',
-										marginLeft: '10px',
-										marginTop: '5px',
-									}}
-									src="/img/bmcho-pic.1a18473a818b64ff3b5f.png"
-									width="50px"
-									height="50px"
-								/>
-
-								<span
-									style={{
-										fontWeight: 'bolder',
-										marginLeft: '20px',
-										fontSize: '20px',
-									}}
-								>
-									서형준
-									<span
-										style={{
-											fontWeight: 'lighter',
-											marginLeft: '20px',
-											fontSize: '20px',
-										}}
-									>
-										BACKEND
-									</span>
-									<p style={{ fontWeight: 'lighter', margin: '0px' }}>
-										seogudwns12@gmail.com
-									</p>
-								</span>
-							</StyledTeamBox>
-						</div>
+						{teamMembers.map((teamMember, index) => (
+							<TeamMember key={index} teamMember={teamMember} />
+						))}
 					</div>
 				</StyledteamContainer>
 			</Container>
