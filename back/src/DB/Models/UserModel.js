@@ -1,1 +1,1 @@
-// schema
+import UserModel from '../Schemas/UserSchema';

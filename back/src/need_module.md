@@ -17,7 +17,7 @@ Router - express, middleWare, service, tokenblacklist..
 
 UserModel - schema
 
-##### schema
+##### schema (done.)
 
 import { Schema, model } from "mongoose";
 
