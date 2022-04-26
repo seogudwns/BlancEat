@@ -16,7 +16,8 @@ const BalancEat = () => {
 		width: 1500px;
 	`;
 	const StyledImg3 = styled.img`
-		width: 1000px;
+		width: 1300px;
+		margin-left: 100px;
 	`;
 	const StyledteamContainer = styled.div`
 		border: 2px solid black;
@@ -65,12 +66,13 @@ const BalancEat = () => {
 		height: 60px;
 	`;
 	const teamMembers = [
-		['홍일도', 'FRONTEND', 'theohong@gmail.com'],
-		['김기동', 'FRONTEND', 'dewrain331@gmail.com'],
-		['홍주완', 'FRONTEND', 'vjvl95@naver.com'],
-		['배주영', 'BACKEND', 'baejuyoung49@gmail.com'],
-		['김성훈', 'BACKEND', 'open7rms@gmail.com'],
-		['서형준', 'BACKEND', 'seogudwns12@gmail.com'],
+		['홍일도', 'FRONTEND', 'theohong@gmail.com', '/img/홍일도님_프로필.jpg'],
+		['배주영', 'BACKEND', 'baejuyoung49@gmail.com', '/img/배주영님_프로필.png'],
+		['김기동', 'FRONTEND', 'dewrain331@gmail.com', '/img/김기동님_프로필.jpg'],
+		['김성훈', 'BACKEND', 'open7rms@gmail.com', '/img/김성훈님_프로필.png'],
+		['홍주완', 'FRONTEND', 'vjvl95@naver.com', '/img/홍주완님_프로필.jpg'],
+
+		['서형준', 'BACKEND', 'seogudwns12@gmail.com', '/img/서형준님_프로필.jpg'],
 	];
 
 	const TeamMember = ({ teamMember }) => {
@@ -83,7 +85,7 @@ const BalancEat = () => {
 							marginLeft: '10px',
 							marginTop: '5px',
 						}}
-						src="/img/bmcho-pic.1a18473a818b64ff3b5f.png"
+						src={teamMember[3]}
 						width="50px"
 						height="50px"
 					/>
@@ -116,6 +118,8 @@ const BalancEat = () => {
 			<Container>
 				<StyledContainer>
 					<div style={{ paddingRight: '50px', display: 'block' }}>
+						<StyledImg3 src="/img/obesity_protein.png" />
+
 						<h1>단백질 섭취와 비만의 상관관계</h1>
 						<h4>
 							비만율이 높은 국가는 동물성 단백질과 식물성 단백질의 섭취 비율이 절반인
@@ -126,7 +130,6 @@ const BalancEat = () => {
 							동물성 단백질로 섭취하는 것이 좋다고 합니다.
 						</h4>
 					</div>
-					<StyledImg3 src="/img/obesity_protein.png" />
 				</StyledContainer>
 				<StyledContainer>
 					<StyledImg src="/img/bmi와질병관계.png" />
