@@ -34,10 +34,11 @@ const StyledButton = styled.button`
 	background: transparent;
 	border-radius: 5px;
 	border: 1px solid #fcfbfa;
-	color: #fcfbfa;
+	color: primary;
 	font-size: 1rem;
 	cursor: pointer;
 `;
+// color: #fcfbfa;
 
 const StyledList = styled.li`
 	font-size: 1rem;
