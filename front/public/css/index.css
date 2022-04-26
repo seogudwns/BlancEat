@@ -1,0 +1,58 @@
+*{
+    margin:0;
+    padding:0;
+}
+
+/* FONT */
+html, body {
+    font-family: "Elice Digital Baeum","NanumSquare",
+    '맑은 고딕', 'malgun gothic', 'Apple SD Gothic Neo', 'Apple SD 산돌고딕 Neo',  		   
+	'Microsoft NeoGothic', 'Droid sans', sans-serif;
+}
+
+/* body		{ font-family: 나눔스퀘어, 'NanumSquare', sans-serif; } */
+body {font-family:'NanumSquare','Elice Digital Baeum';}
+.normal		{ font-weight: 400 }
+.bold		{ font-weight: 700 }
+.bolder		{ font-weight: 800 }
+.light		{ font-weight: 300 }
+
+Header div {
+    font-family:'Elice Digital Baeum','NanumSquare';
+}
+
+
+
+  
+  /* h1 {
+    font-size: 2.6rem;
+  }
+  
+  p {
+    font-size: 1.4rem;
+    color: red;
+    font-family: Helvetica, Arial, sans-serif;
+  } */
+/* 
+ul,li{
+    list-style:none;
+    padding:5px;
+    margin:5px;
+}
+
+body{
+    background:#000;
+    color:#fff;
+}
+
+.Comp{
+    border: 3px solid blue;
+}
+
+.ClassComp {
+    border:3px solid red;
+}
+
+.FuncComp {
+    border:3px solid yellow;
+} */

@@ -7,6 +7,7 @@ const StyledHeader = styled.div`
 	justify-content: space-between;
 	height: 80px;
 	background-color: #075f3a;
+	font-family: 'Elice Digital Baeum';
 `;
 
 const StyledLogo = styled.div`
