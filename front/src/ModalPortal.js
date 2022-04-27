@@ -1,5 +1,5 @@
 import React from 'react';
-import styled, { css } from 'styled-components';
+import styled from 'styled-components';
 
 const StyledDiv = styled.div`
 	display: none;
@@ -12,14 +12,18 @@ const StyledDiv = styled.div`
 	background-color: rgba(0, 0, 0, 0.6);
 	color: #fcfbfa;
 
-	${openModal} {
-		display: flex;
-		align-items: center;
-	}
+	${({ openModal }) => {
+		return openModal
+			? `
+        display: flex
+        align-items: center
+        `
+			: null;
+	}}
 `;
 
 const StyledButton = styled.button`
-	background: transparent;
+	background: ${props => (props.background ? props.background : 'none')};
 	border-radius: 5px;
 	border: 1px solid #fcfbfa;
 	color: #fcfbfa;
@@ -52,7 +56,9 @@ const StyledFooter = styled.footer`
 	text-align: right;
 `;
 
-const ModalPortal = ({ open, close, header, main, footer }) => {
+const ModalPortal = props => {
+	const { open, close, header, main, children } = props;
+
 	return (
 		<>
 			<StyledDiv {...(open ? openModal : none)}>
@@ -60,10 +66,12 @@ const ModalPortal = ({ open, close, header, main, footer }) => {
 					<StyledSection>
 						<StyledHeader>
 							{header}
-							<StyledButton onClick={close}>&times;</StyledButton>
+							<StyledButton onClick={close} background="transparent">
+								&times;
+							</StyledButton>
 						</StyledHeader>
-						<StyledMain>{main.children}</StyledMain>
-						<StyledFooter>{footer.children}</StyledFooter>
+						<StyledMain>{main}</StyledMain>
+						<StyledFooter>{children}</StyledFooter>
 					</StyledSection>
 				) : null}
 			</StyledDiv>

@@ -1,6 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import { Link } from 'react-router-dom';
+import LoginPage from './component/user/LoginPage';
 
 const StyledHeader = styled.div`
 	display: flex;
@@ -48,6 +49,10 @@ const StyledList = styled.li`
 const Header = () => {
 	const isLogin = true;
 
+	const openLoginModal = () => {
+		return <LoginPage ModalActive={true} />;
+	};
+
 	const createLink = (url, title) => {
 		return (
 			<Link to={url} style={{ textDecoration: 'none', color: '#fcfbfa' }}>
@@ -75,7 +80,7 @@ const Header = () => {
 					)}
 				</StyledNav>
 				<StyledNav flex="1" jc="center">
-					<StyledButton>Sign in</StyledButton>
+					<StyledButton onClick={openLoginModal}>Sign in</StyledButton>
 				</StyledNav>
 			</StyledHeader>
 		</>
