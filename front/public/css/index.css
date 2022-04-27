@@ -6,8 +6,7 @@
 :root {
     --background-color: #000000;
     --text-color: #121212;
-
-  }
+}
 
   /* 폰트 두께 */
 .normal		{ font-weight: 400 }
@@ -66,16 +65,17 @@ html, body {
     font-family: "Elice Digital Baeum","NanumSquare",
     '맑은 고딕', 'malgun gothic', 'Apple SD Gothic Neo', 'Apple SD 산돌고딕 Neo',  		   
 	'Microsoft NeoGothic', 'Droid sans', sans-serif;
-    max-width: 1440px;
     font-size: 16px; /*폰트크기 기준*/
-    --color-primary: #ffffffff
+ 
 }
-
-/* body		{ font-family: 나눔스퀘어, 'NanumSquare', sans-serif; } */
+ 
 body {
-    /* background: #000; */
-    /* background-color: var(--myblack); */
+
     font-family:'NanumSquare','Elice Digital Baeum';
+    display: flex;
+	flex-direction: row;
+    justify-content: center;
+    
 }
 
 Header div {

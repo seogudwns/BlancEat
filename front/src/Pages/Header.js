@@ -6,6 +6,7 @@ const StyledHeader = styled.div`
 	display: flex;
 	justify-content: space-between;
 	height: 80px;
+	width: 100%;
 	background-color: #075f3a;
 	font-family: 'Elice Digital Baeum';
 `;
@@ -69,9 +70,20 @@ const Header = () => {
 							BalancEat
 						</Link>
 					</StyledList>
-					<StyledList>오늘 뭐 먹지?</StyledList>
+					<StyledList>
+						<Link to="/recommand" style={{ textDecoration: 'none', color: '#fcfbfa' }}>
+							오늘 뭐 먹지?
+						</Link>
+					</StyledList>
 					{isLogin ? (
-						<StyledList>사용자페이지</StyledList>
+						<StyledList>
+							<Link
+								to="/userpage"
+								style={{ textDecoration: 'none', color: '#fcfbfa' }}
+							>
+								사용자페이지
+							</Link>
+						</StyledList>
 					) : (
 						<StyledList visibility="hidden">사용자페이지</StyledList>
 					)}
