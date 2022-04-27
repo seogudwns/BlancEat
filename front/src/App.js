@@ -5,6 +5,8 @@ import Header from './Header';
 import Main from './Main';
 import Footer from './Footer';
 import BalancEat from './component/BalancEat';
+import UserPage from './component/UserPage';
+
 const App = () => {
 	return (
 		<>
@@ -13,6 +15,7 @@ const App = () => {
 				<Routes>
 					<Route path="/" element={<Main />} />
 					<Route path="/balancEat" element={<BalancEat />} />
+					<Route path="/userpage" element={<UserPage />} />
 				</Routes>
 				<Footer />
 			</BrowserRouter>
