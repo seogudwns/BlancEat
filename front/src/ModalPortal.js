@@ -10,6 +10,7 @@ const StyledDiv = styled.div`
 	left: 0;
 	z-index: 99;
 	background-color: rgba(0, 0, 0, 0.6);
+	color: #fcfbfa;
 
 	${openModal} {
 		display: flex;
@@ -37,15 +38,34 @@ const StyledHeader = styled.header`
 	position: relative;
 	padding: 16px 64px 16px 16px;
 	background-color: #075f3a;
-	color: #fcfbfa;
 	font-weight: 700;
 `;
 
-const ModalPortal = ({ open, close, header }) => {
+const StyledMain = styled.main`
+	padding: 16px;
+	border-bottom: 1px solid #dee2e6;
+	border-top: 1px solid #dee2e6;
+`;
+
+const StyledFooter = styled.footer`
+	padding: 12px 16px;
+	text-align: right;
+`;
+
+const ModalPortal = ({ open, close, header, main, footer }) => {
 	return (
 		<>
 			<StyledDiv {...(open ? openModal : none)}>
-				{open ? <StyledSection></StyledSection> : null}
+				{open ? (
+					<StyledSection>
+						<StyledHeader>
+							{header}
+							<StyledButton onClick={close}>&times;</StyledButton>
+						</StyledHeader>
+						<StyledMain>{main.children}</StyledMain>
+						<StyledFooter>{footer.children}</StyledFooter>
+					</StyledSection>
+				) : null}
 			</StyledDiv>
 		</>
 	);
