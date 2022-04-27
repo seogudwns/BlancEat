@@ -130,6 +130,24 @@ const UserPage = () => {
 					</span>
 				</StyledGraphInfo>
 			</StyledContainer>
+
+			<StyledContainer>
+				<StyledUserInfo style={{ maxWidth: '800px', width: '700px', height: '500px' }}>
+					<h1 style={{ fontWeight: 'lighter' }}>추천 식품군</h1>
+					<div style={{ border: 'solid 1px black', marginBottom: '10px' }}></div>
+				</StyledUserInfo>
+
+				<StyledUserInfo
+					style={{
+						maxWidth: '800px',
+						width: '700px',
+						height: '500px',
+						marginRight: '100px',
+					}}
+				>
+					<h1 style={{ fontWeight: 'lighter', textAlign: 'center' }}>식단 추이표</h1>
+				</StyledUserInfo>
+			</StyledContainer>
 		</>
 	);
 };
