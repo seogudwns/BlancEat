@@ -48,6 +48,14 @@ const StyledList = styled.li`
 const Header = () => {
 	const isLogin = true;
 
+	const createLink = (url, title) => {
+		return (
+			<Link to={url} style={{ textDecoration: 'none', color: '#fcfbfa' }}>
+				{title}
+			</Link>
+		);
+	};
+
 	return (
 		<>
 			<StyledHeader>
@@ -57,16 +65,8 @@ const Header = () => {
 					</Link>
 				</StyledLogo>
 				<StyledNav flex="4" jc="flex-end">
-					<StyledList>
-						<Link to="/" style={{ textDecoration: 'none', color: '#fcfbfa' }}>
-							메인페이지
-						</Link>
-					</StyledList>
-					<StyledList>
-						<Link to="/balanceat" style={{ textDecoration: 'none', color: '#fcfbfa' }}>
-							BalancEat
-						</Link>
-					</StyledList>
+					<StyledList>{createLink('/', '메인페이지')}</StyledList>
+					<StyledList>{createLink('/balanceat', 'BalancEat')}</StyledList>
 					<StyledList>오늘 뭐 먹지?</StyledList>
 					{isLogin ? (
 						<StyledList>사용자페이지</StyledList>
