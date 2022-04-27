@@ -1,4 +1,5 @@
 import 'dotenv/config';
+<<<<<<< HEAD
 import cors from 'cors';
 import express from 'express';
 import mongoose from 'mongoose';
@@ -27,6 +28,9 @@ db.on('error', error => console.error('MongoDB 연결에 실패하였습니다..
 
 app.use(cors());
 app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(specs, { explorer: true }));
+=======
+import { app } from './src/index.js';
+>>>>>>> user_mvp_back
 
 const PORT = process.env.SERVER_PORT || 5000;
 
