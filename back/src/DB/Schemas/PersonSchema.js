@@ -80,6 +80,6 @@ const PersonSchema = new Schema({
 	},
 });
 
-const personModel = model('Person', PersonSchema);
+const person = model('Person', PersonSchema);
 
-export { personModel };
+export { person };

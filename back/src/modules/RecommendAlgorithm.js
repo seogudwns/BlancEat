@@ -22,19 +22,30 @@
 // .
 // .
 // .
-// import nutritionModel from '../DB/nutrition.js';
-// import recommend_nutrition_Model from '../DB/recommend_nutrition.js';
-const login = true;
+import Nutrition from '../DB/Models/NutritionModel.js';
+import Person from '../DB/Models/PersonModel';
 
-async function recommendSystem(Gender, Sex, Age, carbon, protein, fat, login) {
-    result = []
-    if (!login) {
-        const personModel = await .findOne({Gender, Sex, Age});
-        //!  ~~~~~~
-    } else {
-        const userInfo = await UserModel.findById({User_id : login});
-        //! ~~~~~~~  
-    }
-};
+async function recommendSystem(Sex, Age, weight, eat, login) {
+	let result;
+	if (!login) {
+		const personNutriant = await Person.getinfo({ Sex, Age });
+		const infoCarbon = await personNutriant.carbon;
+		const infoProtein = await personNutriant.protein;
+		const infoFat = await personNutriant.fat;
+
+		let temp = [infoCarbon * weight, infoProtein * weight, infoFat * weight];
+		let temp2 = [temp[0] / 10, temp[1] / 10, temp[2] / 10];
+		//!  ~~~~~~
+	} else {
+		// const userInfo = await UserModel.findById({ User_id: login });
+		console.log('로그인 후 사용가능한 기능입니다.');
+		const ErrorMessage = '로그인 기능 아직 없음. 나오면 이상한거임.';
+		return ErrorMessage;
+	}
+
+	return result;
+}
 // 로그인에 들어가는 값은 true, false.
-// 
+//
+
+export { recommendSystem };
