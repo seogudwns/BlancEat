@@ -18,7 +18,6 @@
 // 6. else { await find query items.
 //
 // };
-//! pyhton으로 데이터를 그냥 보내버릴까??..
 // .
 // .
 // .
