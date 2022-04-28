@@ -58,7 +58,58 @@ p {
     line-height: 150%;
     letter-spacing: 0.5px;
 }
-
+/*figma color define. 
+--scheme-type: light;
+    --primary: #000;
+    --secondary: #fff;
+    --tertiary: #236df6;
+    --quaternary: #000;
+    --header_background: #fff;
+    --header_primary: #333;
+    --highlight: #f5eac1;
+    --danger: #f24e1e;
+    --success: #0fa958;
+    --love: #f24e1e;
+    --always-black-rgb: 0, 0, 0;
+    --primary-rgb: 0,0,0;
+    --primary-low-rgb: 245,245,245;
+    --secondary-rgb: 255,255,255;
+    --header_background-rgb: 255,255,255;
+    --tertiary-rgb: 35,109,246;
+    --primary-very-low: #f7f7f7;
+    --primary-low: #f5f5f5;
+    --primary-low-mid: #d6d6d6;
+    --primary-medium: #5d5d5d;
+    --primary-high: #333;
+    --primary-very-high: #262626;
+    --primary-50: #f7f7f7;
+    --primary-100: #f0f0f0;
+    --primary-200: #e6e6e6;
+    --primary-300: #ccc;
+    --primary-400: #b3b3b3;
+    --primary-500: #999;
+    --primary-600: gray;
+    --primary-700: #4d4d4d;
+    --primary-800: #4d4d4d;
+    --primary-900: #262626;
+    --header_primary-low: #f2f2f2;
+    --header_primary-low-mid: #d0d0d0;
+    --header_primary-medium: #afafaf;
+    --header_primary-high: #929292;
+    --header_primary-very-high: #5e5e5e;
+    --secondary-low: #4d4d4d;
+    --secondary-medium: gray;
+    --secondary-high: #a6a6a6;
+    --secondary-very-high: #ededed;
+    --tertiary-very-low: #e9f0fe;
+    --tertiary-low: #f0f0f0;
+    --tertiary-medium: #91b6fb;
+    --tertiary-high: #4f8af8;
+    --tertiary-hover: #084cca;
+    --tertiary-50: #e9f0fe;
+    --tertiary-100: #e5edfe;
+    --tertiary-200: #e2ecfe;
+*/
 
 /* FONT */
 html, body {

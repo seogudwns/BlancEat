@@ -43,7 +43,13 @@ export const StyledteamContainer = styled.div`
 	margin-top: 100px;
 	background-color: gray;
 `;
-
+export const CenterContainer = styled.div`
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-contents: center;
+`;
+// width: 1440px;
 export const StyledToomuchBox = styled.h1`
 	margin-left: 30px;
 	padding: 10px 50px 0px 50px;
