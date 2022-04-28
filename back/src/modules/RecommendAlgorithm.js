@@ -4,7 +4,7 @@
 // Age,Sex,protein,fat,carbon,sugar,sugar_limit,fiber,VitA,VitA_limit,VitE,VitE_limit
 // VitC,VitC_limit,VitB6,VitB6_limit,Niacin,Niacin_limit,Folate,Folate_limit,Ca,Ca_limit,Na,Na_limit
 
-// 1. Age, Sex로부터 recomment_nutrition에서 사람 정보 뽑기.
+// 1. Gender, Age, Sex로부터 recomment_nutrition에서 사람 정보 뽑기.
 // 2. carbon, protein, fat 계산 후 temp = [] 에 넣기. + 10% 계산해서 temp2 = [] 에 넣기.
 // 3. 먹은 음식들로 carbon, protein, fat 추출, nutrient_table 만들기
 // 4. nutrient_table =    [[temp[0]+temp2[0],temp[1]+temp2[1],temp[2]+temp2[2]] +
@@ -23,6 +23,19 @@
 // .
 // .
 // .
+// import nutritionModel from '../DB/nutrition.js';
+// import recommend_nutrition_Model from '../DB/recommend_nutrition.js';
+const login = true;
 
-let abc = [1, 2, 3, 4];
-console.log(abc.reduce((x, y) => x + y));
+async function recommendSystem(Gender, Sex, Age, carbon, protein, fat, login) {
+    result = []
+    if (!login) {
+        const personModel = await .findOne({Gender, Sex, Age});
+        //!  ~~~~~~
+    } else {
+        const userInfo = await UserModel.findById({User_id : login});
+        //! ~~~~~~~  
+    }
+};
+// 로그인에 들어가는 값은 true, false.
+// 
