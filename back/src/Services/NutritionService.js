@@ -1,4 +1,4 @@
-import { Nutrition } from '../DB/Models/NutritionModel.js';
+import { Nutrition } from '../DB/index.js';
 
 class NutritionService {
     static async getNutritionalFact({ foodName }) {

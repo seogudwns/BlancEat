@@ -12,18 +12,21 @@ nutritionRouter.get('/nutrition', async (req, res, next) => {
         if (!foodList) {
             throw new Error("식사 정보를 입력해주세요.")
         } else {
+            let getFoodList;
+            
             for (let i = 0; i < foodList.length; i++) {
-                const getFoodList = await NutritionService.getNutritionalFact({ foodName: foodList[i] });
+                getFoodList = await NutritionService.getNutritionalFact({ foodName: foodList[i] });
                 result.push(getFoodList);
+            }
+
+            if (getFoodList.errorMessage) {
+                throw new Error(getFoodList.errorMessage);
             }
         }
         
 
-        if (getFoodList.errorMessage) {
-            throw new Error(getFoodList.errorMessage);
-        }
 
-        res.status(200).send(getFoodList);
+        res.status(200).send(result);
 
     } catch (error) {
         next(error);

@@ -1,7 +1,7 @@
 import mongoose from 'mongoose';
-import { Nutrition } from './Models/NutritionModel';
+import { Nutrition } from './Models/NutritionModel.js';
 
-const URL = process.env.MongoBD_URL || '주소에 접속이 되지 않았습니다.';
+const URL = process.env.MongoDB_URL || '주소에 접속이 되지 않았습니다.';
 
 mongoose.connect(URL);
 const db = mongoose.connection;
