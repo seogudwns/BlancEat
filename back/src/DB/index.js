@@ -1,4 +1,5 @@
 import mongoose from 'mongoose';
+import { Nutrition } from './Models/NutritionModel';
 
 const URL = process.env.MongoBD_URL || '주소에 접속이 되지 않았습니다.';
 
@@ -11,3 +12,4 @@ db.on('connected', () => {
 db.on('error', error => console.error('MongoDB 연결에 실패하였습니다...\n' + URL + '\n' + error));
 
 // model import 후 export로 Service에 연결하기.
+export { Nutrition };
