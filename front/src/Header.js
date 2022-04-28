@@ -1,6 +1,8 @@
-import React from 'react';
+// import는 node 모듈들을 상단에 쓰고, 그 외에는 아래에 쓰는 것이 좋다.
 import styled from 'styled-components';
 import { Link } from 'react-router-dom';
+
+import React from 'react';
 import LoginPage from './component/user/LoginPage';
 
 const StyledHeader = styled.div`
@@ -50,6 +52,7 @@ const Header = () => {
 	const isLogin = true;
 
 	const openLoginModal = () => {
+		// ModalActive={true} => modalActive
 		return <LoginPage ModalActive={true} />;
 	};
 
