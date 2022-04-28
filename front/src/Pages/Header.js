@@ -1,15 +1,14 @@
-import React from 'react';
 import styled from 'styled-components';
 import { Link } from 'react-router-dom';
+
+import React from 'react';
 import LoginPage from './component/user/LoginPage';
 
 const StyledHeader = styled.div`
 	display: flex;
 	justify-content: space-between;
 	height: 80px;
-	width: 100%;
 	background-color: #075f3a;
-	font-family: 'Elice Digital Baeum';
 `;
 
 const StyledLogo = styled.div`
@@ -36,11 +35,10 @@ const StyledButton = styled.button`
 	background: transparent;
 	border-radius: 5px;
 	border: 1px solid #fcfbfa;
-	color: primary;
+	color: #fcfbfa;
 	font-size: 1rem;
 	cursor: pointer;
 `;
-// color: #fcfbfa;
 
 const StyledList = styled.li`
 	font-size: 1rem;
@@ -53,6 +51,7 @@ const Header = () => {
 	const isLogin = true;
 
 	const openLoginModal = () => {
+		// ModalActive={true} => modalActive
 		return <LoginPage ModalActive={true} />;
 	};
 
@@ -73,30 +72,11 @@ const Header = () => {
 					</Link>
 				</StyledLogo>
 				<StyledNav flex="4" jc="flex-end">
-					<StyledList>
-						<Link to="/" style={{ textDecoration: 'none', color: '#fcfbfa' }}>
-							메인페이지
-						</Link>
-					</StyledList>
-					<StyledList>
-						<Link to="/balanceat" style={{ textDecoration: 'none', color: '#fcfbfa' }}>
-							BalancEat
-						</Link>
-					</StyledList>
-					<StyledList>
-						<Link to="/recommand" style={{ textDecoration: 'none', color: '#fcfbfa' }}>
-							오늘 뭐 먹지?
-						</Link>
-					</StyledList>
+					<StyledList>{createLink('/', '메인페이지')}</StyledList>
+					<StyledList>{createLink('/balanceat', 'BalancEat')}</StyledList>
+					<StyledList>오늘 뭐 먹지?</StyledList>
 					{isLogin ? (
-						<StyledList>
-							<Link
-								to="/userpage"
-								style={{ textDecoration: 'none', color: '#fcfbfa' }}
-							>
-								사용자페이지
-							</Link>
-						</StyledList>
+						<StyledList>사용자페이지</StyledList>
 					) : (
 						<StyledList visibility="hidden">사용자페이지</StyledList>
 					)}
