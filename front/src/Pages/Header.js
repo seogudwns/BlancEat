@@ -76,9 +76,11 @@ const Header = () => {
 					<StyledList>{createLink('/balanceat', 'BalancEat')}</StyledList>
 					<StyledList>오늘 뭐 먹지?</StyledList>
 					{isLogin ? (
-						<StyledList>사용자페이지</StyledList>
+						<StyledList>{createLink('/userpage', '유저페이지')}</StyledList>
 					) : (
-						<StyledList visibility="hidden">사용자페이지</StyledList>
+						<StyledList visibility="hidden">
+							<StyledList>{createLink('/userpage', '유저페이지')}</StyledList>
+						</StyledList>
 					)}
 				</StyledNav>
 				<StyledNav flex="1" jc="center">

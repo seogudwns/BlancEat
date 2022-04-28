@@ -2,6 +2,7 @@ import React from 'react';
 import { Container, Row } from 'react-bootstrap';
 import styled from 'styled-components';
 import ContentTooMuchCoder from '../Contents/ContentTooMuchCoder';
+import { Card } from 'react-bootstrap';
 
 const BalancEat = () => {
 	const StyledContainer = styled.div`
@@ -29,7 +30,7 @@ const BalancEat = () => {
 		<>
 			<Container>
 				<StyledContainer>
-					<div style={{ paddingRight: '50px', display: 'block' }}>
+					<Card style={{ paddingRight: '50px', display: 'block' }}>
 						<StyledImg
 							width="1300px"
 							margin="0px 0px 0px 100px"
@@ -47,7 +48,7 @@ const BalancEat = () => {
 							높아집니다. 건강하게 단백질을 섭취하려면 3분의 2는 식물성, 3분의 1은
 							동물성 단백질로 섭취하는 것이 좋다고 합니다.
 						</StyledH4>
-					</div>
+					</Card>
 				</StyledContainer>
 				<StyledContainer>
 					<StyledImg width="500px" height="500px" src="/img/bmi와질병관계.png" />
@@ -56,7 +57,7 @@ const BalancEat = () => {
 						height="500px"
 						src="/img/당뇨병있을경우 다른 질병이 있을 확률.png"
 					/>
-					<div style={{ paddingRight: '50px' }}>
+					<Card style={{ paddingRight: '50px' }}>
 						<h1 style={{ fontSize: '30px', textAlign: 'center' }}>비만과 질병관계</h1>
 						<StyledH4 padding="30px">
 							왼쪽은 비만과 질병의 연관성입니다. 당뇨병이 가장 관련성이 높습니다.
@@ -65,11 +66,11 @@ const BalancEat = () => {
 							<br />
 							상승하는것을 보실수 있습니다.
 						</StyledH4>
-					</div>
+					</Card>
 				</StyledContainer>
 
 				<StyledContainer margin="30px 0 0 30px">
-					<div>
+					<Card>
 						<StyledH1 fontSize="30px" textAlign="center">
 							비만과 음식과의 연관성
 						</StyledH1>
@@ -84,7 +85,7 @@ const BalancEat = () => {
 							src="/img/식단과 비만의 관계.png"
 							margin=" 0px 0px 0px 100px"
 						/>
-					</div>
+					</Card>
 				</StyledContainer>
 				<ContentTooMuchCoder />
 			</Container>

@@ -1,6 +1,6 @@
 import * as Content from './styleContents';
 import styled from 'styled-components';
-
+import { Card } from 'react-bootstrap';
 const ContentTooMuchCoder = () => {
 	const teamMembers = [
 		['홍일도', 'FRONTEND', 'theohong@gmail.com', '/img/홍일도님_프로필.jpg'],
@@ -11,14 +11,13 @@ const ContentTooMuchCoder = () => {
 		['서형준', 'BACKEND', 'seogudwns12@gmail.com', '/img/서형준님_프로필.jpg'],
 	];
 
-	const StyledImg = styled.img`
+	const StyledProfileImg = styled.img`
 		width: ${props => props.width};
-		src: ${props => props.src};
 		height: ${props => (props.height ? props.height : 'none')};
 		margin: ${props => (props.margin ? props.margin : 'none')};
 		border-radius: ${props => (props.borderRadius ? props.borderRadius : 'none')};
 	`;
-	const StyledSpan = styled.span`
+	const StyledTeamSpan = styled.span`
 		font-weight: ${props => (props.fontWeight ? props.fontWeight : 'none')};
 		margin: ${props => (props.margin ? props.margin : 'none')};
 		font-size: ${props => (props.fontSize ? props.fontSize : 'none')};
@@ -26,9 +25,9 @@ const ContentTooMuchCoder = () => {
 	`;
 	const TeamMember = ({ teamMember }) => {
 		return (
-			<div style={{ display: 'inline-block', width: '50%' }}>
+			<Card style={{ display: 'inline-block', width: '50%' }}>
 				<Content.StyledTeamBox style={{ backgroundColor: 'white' }}>
-					<StyledImg
+					<StyledProfileImg
 						borderRadius="15px"
 						margin="5px 0 0 10px"
 						src={teamMember[3]}
@@ -36,34 +35,34 @@ const ContentTooMuchCoder = () => {
 						height="50px"
 					/>
 
-					<StyledSpan
+					<StyledTeamSpan
 						fontWeight="bolder"
 						margin="0px 0px  0px 20px"
 						padding="10px 0px 0px 0px"
 						fontSize="20px"
 					>
 						{teamMember[0]}
-						<StyledSpan
+						<StyledTeamSpan
 							fontWeight="lighter"
 							padding="10px 0px 0px 0px"
 							margin="0px 0px 0px 20px"
 							fontSize="20px"
 						>
 							{teamMember[1]}
-						</StyledSpan>
+						</StyledTeamSpan>
 						<p style={{ fontWeight: 'lighter', margin: '0px' }}>{teamMember[2]}</p>
-					</StyledSpan>
+					</StyledTeamSpan>
 				</Content.StyledTeamBox>
-			</div>
+			</Card>
 		);
 	};
 
 	return (
-		<div>
+		<Card>
 			{teamMembers.map((teamMember, index) => (
 				<TeamMember key={index} teamMember={teamMember} />
 			))}
-		</div>
+		</Card>
 	);
 };
 
