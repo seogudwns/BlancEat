@@ -2,7 +2,7 @@ import styled from 'styled-components';
 import { Link } from 'react-router-dom';
 
 import React from 'react';
-import LoginPage from './component/user/LoginPage';
+import LoginPage from '../component/user/LoginPage';
 
 const StyledHeader = styled.div`
 	display: flex;
