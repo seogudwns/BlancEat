@@ -79,3 +79,7 @@ const PersonSchema = new Schema({
 		type: Number,
 	},
 });
+
+const personModel = model('Person', PersonSchema);
+
+export { personModel };
