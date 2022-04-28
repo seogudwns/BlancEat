@@ -47,7 +47,7 @@ export const CenterContainer = styled.div`
 	display: flex;
 	flex-direction: column;
 	align-items: center;
-	justify-contents: center;
+	justify-content: center;
 `;
 // width: 1440px;
 export const StyledToomuchBox = styled.h1`
