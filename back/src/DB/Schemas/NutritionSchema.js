@@ -96,6 +96,7 @@ const nutritionSchema = new Schema(
         type: Number,
         default: 0,
     },
+  })
 
 const nutritionModel = model('Nutrition', nutritionSchema);
 
