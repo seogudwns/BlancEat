@@ -2,7 +2,7 @@ import pkg from 'mongoose';
 
 const { Schema, model } = pkg;
 
-const PersonSchema = new Schema({
+const Recommend_nutritionSchema = new Schema({
 	age: {
 		type: String,
 		required: true,
@@ -82,6 +82,6 @@ const PersonSchema = new Schema({
 	},
 });
 
-const personModel = model('recommend_nutrition', PersonSchema);
+const recommend_nutritionModel = model('Recommend_nutrition', Recommend_nutritionSchema);
 
-export { personModel };
+export { recommend_nutritionModel };

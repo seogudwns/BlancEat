@@ -22,7 +22,7 @@
 // .
 // .
 // .
-import { Nutrition, Person } from '../DB/index.js';
+import { Nutrition, Recommend_nutrition } from '../DB/index.js';
 
 class Recommend {
 	static async recommendSystem(Age, Sex, Weight, eat, login) {
@@ -36,13 +36,14 @@ class Recommend {
 		});
 
 		let result = [];
+		let person_info;
 		if (!login) {
-			const personNutriant = await Person.getinfo({ Age, Sex });
-			console.log('personNut =', personNutriant);
-			//! 검색이 안됨.
-			const infoCarbon = await personNutriant.carbon;
-			const infoProtein = await personNutriant.protein;
-			const infoFat = await personNutriant.fat;
+			person_info = await Recommend_nutrition.getinfo({ Age, Sex });
+			// console.log('personNut =', RecommendNutrition); // 확인용.. done.
+
+			const infoCarbon = await person_info.carbon;
+			const infoProtein = await person_info.protein;
+			const infoFat = await person_info.fat;
 
 			let temp = [infoCarbon * Weight, infoProtein * Weight, infoFat * Weight];
 			let temp2 = [temp[0] / 10, temp[1] / 10, temp[2] / 10];
@@ -53,57 +54,67 @@ class Recommend {
 				temp[2] - eat_nutrition[2],
 			];
 
-			const nutrient_table2 = [
+			const nutrient_table = [
 				[temp[0] + temp2[0], temp[1] + temp2[1], temp[2] + temp2[2]],
 				temp,
 				[temp[0] - temp2[0], temp[1] - temp2[1], temp[2] - temp2[2]],
-				[temp[0] / 2, temp[1] / 2, temp[2] / 2],
 			];
 
-			let nutrient_table = [...nutrient_table2];
-			// 뭐든 더먹으면 초과량일 경우 물 원툴.
 			let recommend_food;
-			if (nutrient_table[3].reduce((x, y) => x + y) == 0) {
-				result.push = ['이미 정량을 다 채우셨습니다. 다른 음식을 추천?']; //TODO index로 추첨.
-				return result;
+			let c = false;
+
+			if (nutrient_table[2].reduce((x, y) => x + y) <= 0) {
+				console.log('초과량 흡입!');
+				recommend_food = [];
+				const a = await Nutrition.findFood();
+
+				result.push('충분한 음식을 섭취하셨습니다. 내일 이걸 드셔보시는 것은 어떨까요?');
+				result.push(a[parseInt(Math.random() * 22822)]);
+				c = true;
 			} else {
+				// console.log('확인.. ', nutrient_table[2][2], nutrient_table[0][2]);
 				recommend_food = await Nutrition.findManyByNutrition([
+					nutrient_table[2][0],
 					nutrient_table[2][1],
 					nutrient_table[2][2],
-					nutrient_table[2][3],
+					nutrient_table[1][0],
 					nutrient_table[1][1],
 					nutrient_table[1][2],
-					nutrient_table[1][3],
 				]);
+				console.log('leng =', recommend_food.length);
 			}
 
-			if (recommend_food) {
-				result.push(recommend_food[parseInt((Math.random() + 1) * recommend_food.length)]);
-
-				return result;
+			if (c == true) {
+			} else if (recommend_food.length > 0) {
+				result.push(recommend_food[parseInt(Math.random() * recommend_food.length)]);
+				result.push(recommend_food[parseInt(Math.random() * recommend_food.length)]);
+				c = true;
 			} else {
 				recommend_food = await Nutrition.findManyByNutrition([
+					nutrient_table[2][0],
 					nutrient_table[2][1],
 					nutrient_table[2][2],
-					nutrient_table[2][3],
+					nutrient_table[0][0],
 					nutrient_table[0][1],
 					nutrient_table[0][2],
-					nutrient_table[0][3],
 				]);
+				console.log('leng2 = ', recommend_food.length);
 			}
 
-			if (recommend_food) {
+			if (c == true) {
+			} else if (recommend_food.length > 0) {
 				result.push(recommend_food[parseInt(Math.random() * recommend_food.length)]);
-
-				return result;
+				result.push(recommend_food[parseInt(Math.random() * recommend_food.length)]);
 			} else {
-				recommend_food = await Nutrition.findManyByNutrition([
+				recommend_food = await Nutrition.findManyByNutrition2([
+					nutrient_table[0][0],
 					nutrient_table[0][1],
 					nutrient_table[0][2],
-					nutrient_table[0][3],
 				]);
-				temp_food = recommend_food[parseInt(Math.random() * recommend_food.length)];
-				result.push([temp_food]);
+				console.log('최후 음식 길이 =', recommend_food.length);
+				result.push(recommend_food[parseInt(Math.random() * recommend_food.length)]);
+				//! 처음에 경고 메세지 : '많은 음식을 섭취할 필요가 있는 것 같습니다.' 를 넣고 싶은데..
+				result.push(recommend_food[parseInt(Math.random() * recommend_food.length)]);
 			}
 
 			// }
@@ -114,7 +125,9 @@ class Recommend {
 			return ErrorMessage;
 		}
 
-		return { result, person_info };
+		console.log(result);
+
+		return { person_info, result };
 	}
 }
 export { Recommend };
