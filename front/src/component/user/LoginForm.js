@@ -1,12 +1,12 @@
 import { Form, Button, Row, Col } from 'react-bootstrap';
 import styled from 'styled-components';
-import ModalComp from '../../ModalComp';
-import ModalPortal from '../../ModalPortal';
 import { Link } from 'react-router-dom';
 
 import React, { useState, useEffect } from 'react';
 import { StyledText } from '../../Contents/styleContents';
 import * as Api from '../../Api';
+import ModalComp from '../../ModalComp';
+import ModalPortal from '../../ModalPortal';
 
 const StyledButton = styled(Button)`
 	background: ${props => props.background};
