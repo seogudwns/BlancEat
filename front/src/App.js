@@ -4,7 +4,7 @@ import styled from 'styled-components';
 
 import Header from './Pages/Header';
 import Main from './Pages/Main';
-import Recommand from './Pages/Recommand';
+import Recommand from './Pages/Recommands/Recommand';
 import Footer from './Pages/Footer';
 import BalancEat from './Pages/BalancEat';
 import Userpage from './Pages/Userpage';

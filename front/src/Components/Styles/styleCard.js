@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { Card, Button } from 'react-bootstrap';
+import { Card } from 'react-bootstrap';
 
 /*FoodCard Styles */
 
