@@ -1,8 +1,9 @@
 import styled from 'styled-components';
 import { Link } from 'react-router-dom';
-import { Container, Navbar, Row, Col, Button, Nav, NavDropdown } from 'react-bootstrap';
+import { Container, Navbar, Row, Col, Nav, NavDropdown } from 'react-bootstrap';
 import React from 'react';
 import LoginPage from '../component/user/LoginPage';
+import Button from '../Components/Button';
 
 const StyledHeader = styled.div`
 	display: flex;
@@ -107,7 +108,11 @@ const Header = () => {
 							</Nav>
 						</Navbar.Collapse>
 
-						<Button onClick={openLoginModal} style={{ marginLeft: '1em' }}>
+						<Button
+							variant="outline-light"
+							onClick={openLoginModal}
+							style={{ marginLeft: '1em' }}
+						>
 							Sign in
 						</Button>
 					</Nav>
