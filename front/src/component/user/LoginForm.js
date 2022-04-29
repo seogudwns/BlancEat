@@ -1,10 +1,9 @@
-import { useNavigate } from 'react-router-dom';
 import { Form, Button } from 'react-bootstrap';
 import styled from 'styled-components';
 import ModalComp from '../../ModalComp';
 import ModalPortal from '../../ModalPortal';
 
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { StyledText } from '../../Contents/styleContents';
 import * as Api from '../../Api';
 
@@ -12,8 +11,7 @@ const StyledButton = styled(Button)`
 	background: ${props => props.background};
 `;
 
-const LoginForm = (show, setShow) => {
-	const navigate = useNavigate();
+const LoginForm = ({ show, setShow }) => {
 	const [email, setEmail] = useState('');
 	const [pw, setPw] = useState('');
 
@@ -76,14 +74,16 @@ const LoginForm = (show, setShow) => {
 								비밀번호는 4글자 이상이어야 합니다.
 							</StyledText>
 						)}
-						<StyledButton type="submit" background="skyblue" disabled={!isFormValid}>
+						<StyledButton type="submit" disabled={!isFormValid} variant="primary">
 							Sign In
 						</StyledButton>
 					</Form>
 				}
 				children
 			>
-				hi
+				<StyledButton type="button" variant="secondary" onClick={() => setShow(false)}>
+					취소
+				</StyledButton>
 			</ModalComp>
 		</ModalPortal>
 	);

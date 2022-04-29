@@ -1,8 +1,7 @@
 import styled from 'styled-components';
 import { Link } from 'react-router-dom';
-import ModalPortal from '../ModalPortal';
 
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import LoginForm from '../component/user/LoginForm';
 
 const StyledHeader = styled.div`
@@ -60,6 +59,10 @@ const Header = () => {
 		);
 	};
 
+	useEffect(() => {
+		return () => setShow(false);
+	}, []);
+
 	return (
 		<>
 			<StyledHeader>
@@ -79,13 +82,7 @@ const Header = () => {
 					)}
 				</StyledNav>
 				<StyledNav flex="1" jc="center">
-					<StyledButton
-						onClick={() => {
-							setShow(true);
-						}}
-					>
-						Sign in
-					</StyledButton>
+					<StyledButton onClick={() => setShow(true)}>Sign in</StyledButton>
 				</StyledNav>
 			</StyledHeader>
 
