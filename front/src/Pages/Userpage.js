@@ -2,6 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 const StyledContainer = styled.div`
 	width: 100vw;
+	margin: ${param => param.margin};
 `;
 
 const StyledToomuchBox = styled.h1`
@@ -21,8 +22,10 @@ const StyledToomuchText = styled.h1`
 const StyledUserInfo = styled.div`
 	margin-left: 30px;
 	border: solid 1px black;
-	width: 80%;
-	max-width: 1000px;
+	width: ${param => (param.width ? param.width : 'none')};
+	max-width: ${param => (param.maxWidth ? param.maxWidth : 'none')};
+	height: ${param => param.height};
+	margin-right: ${param => (param.marginRight ? param.marginRight : 'none')};
 	border-radius: 10px;
 `;
 const StyledUserInfoBox = styled.div`
@@ -55,18 +58,24 @@ const StyledUserBmibox = styled.div`
 	border-radius: 10px;
 `;
 const StyledGraphInfo = styled.div`
+	background-color: ${param => param.backgroundColor};
 	border: solid 1px black;
-	width: 400px;
+	width: ${param => param.width};
 	height: 300px;
-	margin-right: 100px;
+	margin-right: 10px;
 	text-align: center;
 	padding-top: 20px;
 	margin-left: 20px;
 `;
-const Userpage = ({ title }) => {
+const StyledGraphInfoText = styled.span`
+	font-size: 30px;
+	color: white;
+	font-weight: bold;
+`;
+const Userpage = () => {
 	return (
 		<>
-			<StyledContainer>
+			<StyledContainer margin="0px">
 				<div style={{ display: 'inline-flex' }}>
 					<StyledToomuchBox
 						fontSize="30px"
@@ -84,8 +93,8 @@ const Userpage = ({ title }) => {
 					</StyledToomuchText>
 				</div>
 			</StyledContainer>
-			<StyledContainer>
-				<StyledUserInfo>
+			<StyledContainer margin="15px 0 0 0" style={{ display: 'flex' }}>
+				<StyledUserInfo width="40%">
 					<h1 style={{ fontWeight: 'lighter' }}>기본 신체 정보</h1>
 					<div style={{ border: 'solid 1px black', marginBottom: '10px' }}></div>
 					<div style={{ display: 'flex' }}>
@@ -111,8 +120,8 @@ const Userpage = ({ title }) => {
 				</StyledUserBmibox>
 			</StyledContainer>
 
-			<StyledContainer>
-				<StyledUserInfo style={{ maxWidth: '800px' }}>
+			<StyledContainer margin="25px 0 0 0" style={{ display: 'flex' }}>
+				<StyledUserInfo maxWidth="800px" width="25%">
 					<h1 style={{ fontWeight: 'lighter' }}>영양 정보</h1>
 					<div style={{ border: 'solid 1px black', marginBottom: '10px' }}></div>
 					<div style={{ display: 'flex' }}>
@@ -129,32 +138,21 @@ const Userpage = ({ title }) => {
 						</div>
 					</div>
 				</StyledUserInfo>
-				<StyledGraphInfo style={{ backgroundColor: 'pink' }}>
-					<span style={{ fontSize: '30px', color: 'white', fontWeight: 'bold' }}>
-						탄수 화물이 부족합니다
-					</span>
+				<StyledGraphInfo width="20%" backgroundColor="pink">
+					<StyledGraphInfoText>탄수 화물이 부족합니다</StyledGraphInfoText>
 				</StyledGraphInfo>
-				<StyledGraphInfo style={{ backgroundColor: 'green' }}>
-					<span style={{ fontSize: '30px', color: 'white', fontWeight: 'bold' }}>
-						지방섭취가 원활합니다
-					</span>
+				<StyledGraphInfo width="20%" backgroundColor="green">
+					<StyledGraphInfoText>지방섭취가 원활합니다</StyledGraphInfoText>
 				</StyledGraphInfo>
 			</StyledContainer>
 
-			<StyledContainer>
-				<StyledUserInfo style={{ maxWidth: '800px', width: '700px', height: '500px' }}>
+			<StyledContainer margin="25px 0 40px 0" style={{ display: 'flex' }}>
+				<StyledUserInfo maxWidth="800px" width="600px" height="500px">
 					<h1 style={{ fontWeight: 'lighter' }}>추천 식품군</h1>
 					<div style={{ border: 'solid 1px black', marginBottom: '10px' }}></div>
 				</StyledUserInfo>
 
-				<StyledUserInfo
-					style={{
-						maxWidth: '800px',
-						width: '700px',
-						height: '500px',
-						marginRight: '100px',
-					}}
-				>
+				<StyledUserInfo maxWidth="800px" width="660px" height="500px" marginRight="100px">
 					<h1 style={{ fontWeight: 'lighter', textAlign: 'center' }}>식단 추이표</h1>
 				</StyledUserInfo>
 			</StyledContainer>
