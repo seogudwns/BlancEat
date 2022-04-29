@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 import { Link } from 'react-router-dom';
-
+import { Container, Navbar, Row, Col, Button, Nav, NavDropdown } from 'react-bootstrap';
 import React from 'react';
 import LoginPage from '../component/user/LoginPage';
 
@@ -47,6 +47,26 @@ const StyledList = styled.li`
 	cursor: pointer;
 `;
 
+const StyledHeaderContainer = styled(Container)`
+	color: #ffffff;
+	background-color: #075f3a;
+	.nav-link {
+		font-family: 'Roboto', sans-serif;
+		color: #ffffff !important;
+	}
+`;
+
+/*
+
+	.navbar.scrolling-navbar.top-nav-collapse {
+		background: #ff0000;
+	}
+	.navbar-toggler {
+		color: #ffffff;
+		background: #ff0000;
+	}
+*/
+
 const Header = () => {
 	const isLogin = true;
 
@@ -64,29 +84,170 @@ const Header = () => {
 	};
 
 	return (
-		<>
-			<StyledHeader>
-				<StyledLogo>
-					<Link to="/">
+		<StyledHeaderContainer fluid>
+			<Navbar collapseOnSelect expand="md" color="white">
+				<Container>
+					<Navbar.Brand href="/">
 						<img src="/balanceatLogo.png" />
-					</Link>
-				</StyledLogo>
-				<StyledNav flex="4" jc="flex-end">
-					<StyledList>{createLink('/', '메인페이지')}</StyledList>
-					<StyledList>{createLink('/balanceat', 'BalancEat')}</StyledList>
-					<StyledList>오늘 뭐 먹지?</StyledList>
-					{isLogin ? (
-						<StyledList>사용자페이지</StyledList>
-					) : (
-						<StyledList visibility="hidden">사용자페이지</StyledList>
-					)}
-				</StyledNav>
-				<StyledNav flex="1" jc="center">
-					<StyledButton onClick={openLoginModal}>Sign in</StyledButton>
-				</StyledNav>
-			</StyledHeader>
-		</>
+					</Navbar.Brand>{' '}
+					<Navbar.Toggle aria-controls="responsive-navbar-nav" />
+					<Nav className="me-auto"> </Nav>
+					<Nav>
+						<Navbar.Collapse id="navbar-dark responsive-navbar-nav">
+							<Nav className="me-auto"></Nav>
+							<Nav>
+								<Nav.Link href="/">메인페이지</Nav.Link>
+								<Nav.Link href="/balanceat">BalancEat</Nav.Link>
+								<Nav.Link href="/recommand">오늘 뭐 먹지?</Nav.Link>
+								{isLogin ? (
+									<Nav.Link href="/userpage">사용자페이지</Nav.Link>
+								) : (
+									<Nav visibility="hidden">사용자페이지</Nav>
+								)}
+							</Nav>
+						</Navbar.Collapse>
+
+						<Button onClick={openLoginModal} style={{ marginLeft: '1em' }}>
+							Sign in
+						</Button>
+					</Nav>
+				</Container>
+			</Navbar>
+		</StyledHeaderContainer>
 	);
 };
 
 export default Header;
+
+/*
+<Container>
+  <Navbar expand="lg" variant="light" bg="light">
+    <Container>
+      <Navbar.Brand href="#">Navbar</Navbar.Brand>
+    </Container>
+  </Navbar>
+</Container>
+*/
+/*
+<Navbar.Collapse id="responsive-navbar-nav">
+    <Nav className="me-auto">
+      <Nav.Link href="#features">Features</Nav.Link>
+      <Nav.Link href="#pricing">Pricing</Nav.Link>
+      <NavDropdown title="Dropdown" id="collasible-nav-dropdown">
+        <NavDropdown.Item href="#action/3.1">Action</NavDropdown.Item>
+        <NavDropdown.Item href="#action/3.2">Another action</NavDropdown.Item>
+        <NavDropdown.Item href="#action/3.3">Something</NavDropdown.Item>
+        <NavDropdown.Divider />
+        <NavDropdown.Item href="#action/3.4">Separated link</NavDropdown.Item>
+      </NavDropdown>
+    </Nav>
+    <Nav>
+      <Nav.Link href="#deets">More deets</Nav.Link>
+      <Nav.Link eventKey={2} href="#memes">
+        Dank memes
+      </Nav.Link>
+    </Nav>
+  </Navbar.Collapse>
+*/
+/*
+<Navbar collapseOnSelect expand="lg" bg="dark" variant="dark">
+  <Container>
+  <Navbar.Brand href="#home">React-Bootstrap</Navbar.Brand>
+  <Navbar.Toggle aria-controls="responsive-navbar-nav" />
+  <Navbar.Collapse id="responsive-navbar-nav">
+    <Nav className="me-auto">
+      <Nav.Link href="#features">Features</Nav.Link>
+      <Nav.Link href="#pricing">Pricing</Nav.Link>
+      <NavDropdown title="Dropdown" id="collasible-nav-dropdown">
+        <NavDropdown.Item href="#action/3.1">Action</NavDropdown.Item>
+        <NavDropdown.Item href="#action/3.2">Another action</NavDropdown.Item>
+        <NavDropdown.Item href="#action/3.3">Something</NavDropdown.Item>
+        <NavDropdown.Divider />
+        <NavDropdown.Item href="#action/3.4">Separated link</NavDropdown.Item>
+      </NavDropdown>
+    </Nav>
+    <Nav>
+      <Nav.Link href="#deets">More deets</Nav.Link>
+      <Nav.Link eventKey={2} href="#memes">
+        Dank memes
+      </Nav.Link>
+    </Nav>
+  </Navbar.Collapse>
+  </Container>
+</Navbar>
+*/
+
+/*
+			<StyledHeaderContainer fluid>
+
+<Navbar>
+					<Container>
+						<Navbar.Brand href="/">
+							<img src="/balanceatLogo.png" />
+						</Navbar.Brand>
+						<Navbar.Collapse id="responsive-navbar-nav">
+							<Nav className="me-auto">
+								<Nav.Link href="/">메인페이지</Nav.Link>
+								<Nav.Link href="/balanceat">BalancEat</Nav.Link>
+								<Nav.Link href="/recommand">오늘 뭐 먹지?</Nav.Link>
+
+								{isLogin ? (
+									<Nav.Link href="/userpage">사용자페이지</Nav.Link>
+								) : (
+									<StyledList visibility="hidden">사용자페이지</StyledList>
+								)}
+								<Button onClick={openLoginModal}>Sign in</Button>
+							</Nav>
+						</Navbar.Collapse>
+					</Container>
+				</Navbar>
+							</StyledHeaderContainer>
+
+*/
+
+/*
+<Navbar bg="light" expand="lg">
+  <Container>
+    <Navbar.Brand href="#home">React-Bootstrap</Navbar.Brand>
+    <Navbar.Toggle aria-controls="basic-navbar-nav" />
+    <Navbar.Collapse id="basic-navbar-nav">
+      <Nav className="me-auto">
+        <Nav.Link href="#home">Home</Nav.Link>
+        <Nav.Link href="#link">Link</Nav.Link>
+        <NavDropdown title="Dropdown" id="basic-nav-dropdown">
+          <NavDropdown.Item href="#action/3.1">Action</NavDropdown.Item>
+          <NavDropdown.Item href="#action/3.2">Another action</NavDropdown.Item>
+          <NavDropdown.Item href="#action/3.3">Something</NavDropdown.Item>
+          <NavDropdown.Divider />
+          <NavDropdown.Item href="#action/3.4">Separated link</NavDropdown.Item>
+        </NavDropdown>
+      </Nav>
+    </Navbar.Collapse>
+  </Container>
+</Navbar>
+*/
+
+/*
+	<StyledHeaderContainer fluid>
+			<Navbar>
+				<Sdiv>
+					<Navbar.Brand href="/">
+						<img src="/balanceatLogo.png" />
+					</Navbar.Brand>
+				</Sdiv>
+				<Sdiv>
+					<SNav.Link href="/">메인페이지</SNav.Link>
+					<SNav.Link href="/balanceat">BalancEat</SNav.Link>
+					<SNav.Link href="/recommand">오늘 뭐 먹지?</SNav.Link>
+
+					{isLogin ? (
+						<SNav.Link href="/userpage">사용자페이지</SNav.Link>
+					) : (
+						<StyledList visibility="hidden">사용자페이지</StyledList>
+					)}
+					<Button onClick={openLoginModal}>Sign in</Button>
+				</Sdiv>
+			</Navbar>
+		</StyledHeaderContainer>
+ 
+ */

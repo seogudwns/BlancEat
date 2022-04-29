@@ -129,8 +129,21 @@ body {
     
 }
 
-Header div {
+/* Header div {
     font-family:'Elice Digital Baeum','NanumSquare';
+} */
+
+/* $theme-colors: (
+  "primary": #0074d9,
+  "danger": #ff4136
+);
+
+// Import Bootstrap and its default variables
+@import '~bootstrap/scss/bootstrap.scss'; */
+
+
+
+
+.color-nav {
+	color: #ffffff;
 }
-
-

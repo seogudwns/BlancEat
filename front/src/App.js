@@ -8,6 +8,7 @@ import Recommand from './Pages/Recommand';
 import Footer from './Pages/Footer';
 import BalancEat from './Pages/BalancEat';
 import Userpage from './Pages/Userpage';
+import 'bootstrap/dist/css/bootstrap.min.css';
 
 const Container = styled.div`
 	background-color: #f0f1f3;
@@ -53,3 +54,7 @@ const App = () => {
 };
 
 export default App;
+
+/**
+ 
+ */

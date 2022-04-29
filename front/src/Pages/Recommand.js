@@ -1,27 +1,30 @@
 import React from 'react';
 import styled from 'styled-components';
 import ContentRecommandOutput from '../Contents/ContentRecommandOutput';
+import ContentRecommand from '../Contents/ContentRecommand';
+
+import { Container } from 'react-bootstrap';
 
 const StyledContainer = styled.div`
 	width: 100vw;
 `;
 
-const Container = styled.div`
+const PageContainer = styled(Container)`
 	display: flex;
-	align-items: center;
-	height: 100vh;
-	width: 1440px;
-	margin: auto;
-	padding-top: 100px;
 	flex-direction: column;
+	align-items: center;
+	height: auto;
+	width: 1440px;
+	margin: 0;
+	padding: 0;
 `;
 
 const Recommand = () => {
 	return (
-		<Container>
-			<h1>this is Recommand</h1>
+		<PageContainer fluid>
+			<ContentRecommand />
 			<ContentRecommandOutput />
-		</Container>
+		</PageContainer>
 	);
 };
 
