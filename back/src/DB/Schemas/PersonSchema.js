@@ -82,6 +82,6 @@ const PersonSchema = new Schema({
 	},
 });
 
-const personModel = model('Person', PersonSchema);
+const personModel = model('recommend_nutrition', PersonSchema);
 
 export { personModel };

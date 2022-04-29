@@ -25,17 +25,21 @@
 import { Nutrition, Person } from '../DB/index.js';
 
 class Recommend {
-	static async recommendSystem(Sex, Age, Weight, eat, login) {
+	static async recommendSystem(Age, Sex, Weight, eat, login) {
 		let eat_nutrition = [0, 0, 0];
 		await eat.map(food => {
-			(eat_nutrition[0] += food.carbon),
-				(eat_nutrition[1] += food.protein),
-				(eat_nutrition[2] += food.fat);
+			// console.log(food);
+			// console.log(food.carbon);
+			eat_nutrition[0] += food.carbon;
+			eat_nutrition[1] += food.protein;
+			eat_nutrition[2] += food.fat;
 		});
 
 		let result = [];
 		if (!login) {
 			const personNutriant = await Person.getinfo({ Age, Sex });
+			console.log('personNut =', personNutriant);
+			//! 검색이 안됨.
 			const infoCarbon = await personNutriant.carbon;
 			const infoProtein = await personNutriant.protein;
 			const infoFat = await personNutriant.fat;
@@ -56,16 +60,14 @@ class Recommend {
 				[temp[0] / 2, temp[1] / 2, temp[2] / 2],
 			];
 
-			//! cnt = 0;
-			//! while (cnt < 3) {
 			let nutrient_table = [...nutrient_table2];
 			// 뭐든 더먹으면 초과량일 경우 물 원툴.
 			let recommend_food;
 			if (nutrient_table[3].reduce((x, y) => x + y) == 0) {
-				result.push = ['물'];
+				result.push = ['이미 정량을 다 채우셨습니다. 다른 음식을 추천?']; //TODO index로 추첨.
 				return result;
 			} else {
-				recommend_food = await Nutrition.findManyByNutrition1([
+				recommend_food = await Nutrition.findManyByNutrition([
 					nutrient_table[2][1],
 					nutrient_table[2][2],
 					nutrient_table[2][3],
@@ -76,12 +78,11 @@ class Recommend {
 			}
 
 			if (recommend_food) {
-				result.push(recommend_food[parseInt(Math.random() * recommend_food.length)]);
-				// cnt++;
-				// continue;
+				result.push(recommend_food[parseInt((Math.random() + 1) * recommend_food.length)]);
+
 				return result;
 			} else {
-				recommend_food = await Nutrition.findManyByNutrition1([
+				recommend_food = await Nutrition.findManyByNutrition([
 					nutrient_table[2][1],
 					nutrient_table[2][2],
 					nutrient_table[2][3],
@@ -93,11 +94,10 @@ class Recommend {
 
 			if (recommend_food) {
 				result.push(recommend_food[parseInt(Math.random() * recommend_food.length)]);
-				// cnt++;
-				// continue;
+
 				return result;
 			} else {
-				recommend_food = await Nutrition.findManyByNutrition2([
+				recommend_food = await Nutrition.findManyByNutrition([
 					nutrient_table[0][1],
 					nutrient_table[0][2],
 					nutrient_table[0][3],
@@ -106,7 +106,6 @@ class Recommend {
 				result.push([temp_food]);
 			}
 
-			nutrient_table;
 			// }
 		} else {
 			// const userInfo = await UserModel.findById({ User_id: login });
@@ -115,7 +114,7 @@ class Recommend {
 			return ErrorMessage;
 		}
 
-		return result;
+		return { result, person_info };
 	}
 }
 export { Recommend };

@@ -6,7 +6,7 @@ const nutritionRouter = Router();
 
 nutritionRouter.post('/nutrition', async (req, res, next) => {
 	try {
-		const { Sex, Age, Weight, foodList } = req.body;
+		const { Age, Sex, Weight, foodList } = req.body;
 		// console.log(foodList);
 		// const result = [];
 		let result;
@@ -15,8 +15,6 @@ nutritionRouter.post('/nutrition', async (req, res, next) => {
 		if (!foodList) {
 			throw new Error('식사 정보를 입력해주세요.');
 		} else {
-			let getFoodList;
-
 			for (let i = 0; i < foodList.length; i++) {
 				getFoodList = await NutritionService.getNutritionalFact({ foodName: foodList[i] });
 				eat.push(getFoodList);
@@ -26,12 +24,21 @@ nutritionRouter.post('/nutrition', async (req, res, next) => {
 				throw new Error(getFoodList.errorMessage);
 			}
 
+			// eat 다 계산해서? 개별정보가 필요 없으니 sum을 해서 보내자.(O) --> 주영님.
 			// result에는 추천음식의 list들이 들어갈 예정.
 			let login = false; //! 로그인 기능을 만든 이후 수정해야함.
-			result = await Recommend.recommendSystem(Sex, Age, Weight, eat, login);
+			const { result, person_info } = await Recommend.recommendSystem(
+				Age,
+				Sex,
+				Weight,
+				eat,
+				login,
+			);
 		}
 
-		const bundle = { eat, result };
+		// Age, Sex, Weight --> 사람 일일 섭취량. 넣자!
+		// eat_result = 먹은음식의 각각의 영양소의 sum. , result = { [사람정보], [추천음식1], [추천음식2]}
+		const bundle = { eat, person_info, result };
 		res.status(200).json(bundle);
 	} catch (error) {
 		next(error);
