@@ -1,10 +1,10 @@
 import * as s from './Styles/styleContents';
-import Card from '../Components/Card';
+import FoodCard from '../Components/FoodCard';
 
 const ContentRecommandOutput = () => {
 	return (
 		<s.ContentContainer fluid>
-			<Card />
+			<FoodCard />
 		</s.ContentContainer>
 	);
 };

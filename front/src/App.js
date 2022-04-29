@@ -42,7 +42,7 @@ const App = () => {
 			<BrowserRouter>
 				<Header />
 				<Routes>
-					<Route path="/" element={<Main />} />
+					<Route exact path="/" element={<Main />} />
 					<Route path="/balancEat" element={<BalancEat />} />
 					<Route path="/recommand" element={<Recommand />} />
 					<Route path="/userpage" element={<Userpage />} />
