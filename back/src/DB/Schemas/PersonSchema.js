@@ -1,16 +1,18 @@
-import { Schema, model } from 'mongoose';
+import pkg from 'mongoose';
+
+const { Schema, model } = pkg;
 
 const PersonSchema = new Schema({
 	age: {
-		type: string,
+		type: String,
 		required: true,
 	},
 	Sex: {
-		type: string,
+		type: String,
 		required: true,
 	},
 	protein: {
-		type: string,
+		type: String,
 	},
 	fat: {
 		type: Number,
@@ -80,6 +82,6 @@ const PersonSchema = new Schema({
 	},
 });
 
-const person = model('Person', PersonSchema);
+const personModel = model('Person', PersonSchema);
 
-export { person };
+export { personModel };

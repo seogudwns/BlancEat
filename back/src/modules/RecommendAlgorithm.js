@@ -22,30 +22,100 @@
 // .
 // .
 // .
-import Nutrition from '../DB/Models/NutritionModel.js';
-import Person from '../DB/Models/PersonModel';
+import { Nutrition, Person } from '../DB/index.js';
 
-async function recommendSystem(Sex, Age, weight, eat, login) {
-	let result;
-	if (!login) {
-		const personNutriant = await Person.getinfo({ Sex, Age });
-		const infoCarbon = await personNutriant.carbon;
-		const infoProtein = await personNutriant.protein;
-		const infoFat = await personNutriant.fat;
+class Recommend {
+	static async recommendSystem(Sex, Age, Weight, eat, login) {
+		let eat_nutrition = [0, 0, 0];
+		await eat.map(food => {
+			(eat_nutrition[0] += food.carbon),
+				(eat_nutrition[1] += food.protein),
+				(eat_nutrition[2] += food.fat);
+		});
 
-		let temp = [infoCarbon * weight, infoProtein * weight, infoFat * weight];
-		let temp2 = [temp[0] / 10, temp[1] / 10, temp[2] / 10];
-		//!  ~~~~~~
-	} else {
-		// const userInfo = await UserModel.findById({ User_id: login });
-		console.log('로그인 후 사용가능한 기능입니다.');
-		const ErrorMessage = '로그인 기능 아직 없음. 나오면 이상한거임.';
-		return ErrorMessage;
+		let result = [];
+		if (!login) {
+			const personNutriant = await Person.getinfo({ Age, Sex });
+			const infoCarbon = await personNutriant.carbon;
+			const infoProtein = await personNutriant.protein;
+			const infoFat = await personNutriant.fat;
+
+			let temp = [infoCarbon * Weight, infoProtein * Weight, infoFat * Weight];
+			let temp2 = [temp[0] / 10, temp[1] / 10, temp[2] / 10];
+
+			temp = [
+				temp[0] - eat_nutrition[0],
+				temp[1] - eat_nutrition[1],
+				temp[2] - eat_nutrition[2],
+			];
+
+			const nutrient_table2 = [
+				[temp[0] + temp2[0], temp[1] + temp2[1], temp[2] + temp2[2]],
+				temp,
+				[temp[0] - temp2[0], temp[1] - temp2[1], temp[2] - temp2[2]],
+				[temp[0] / 2, temp[1] / 2, temp[2] / 2],
+			];
+
+			//! cnt = 0;
+			//! while (cnt < 3) {
+			let nutrient_table = [...nutrient_table2];
+			// 뭐든 더먹으면 초과량일 경우 물 원툴.
+			let recommend_food;
+			if (nutrient_table[3].reduce((x, y) => x + y) == 0) {
+				result.push = ['물'];
+				return result;
+			} else {
+				recommend_food = await Nutrition.findManyByNutrition1([
+					nutrient_table[2][1],
+					nutrient_table[2][2],
+					nutrient_table[2][3],
+					nutrient_table[1][1],
+					nutrient_table[1][2],
+					nutrient_table[1][3],
+				]);
+			}
+
+			if (recommend_food) {
+				result.push(recommend_food[parseInt(Math.random() * recommend_food.length)]);
+				// cnt++;
+				// continue;
+				return result;
+			} else {
+				recommend_food = await Nutrition.findManyByNutrition1([
+					nutrient_table[2][1],
+					nutrient_table[2][2],
+					nutrient_table[2][3],
+					nutrient_table[0][1],
+					nutrient_table[0][2],
+					nutrient_table[0][3],
+				]);
+			}
+
+			if (recommend_food) {
+				result.push(recommend_food[parseInt(Math.random() * recommend_food.length)]);
+				// cnt++;
+				// continue;
+				return result;
+			} else {
+				recommend_food = await Nutrition.findManyByNutrition2([
+					nutrient_table[0][1],
+					nutrient_table[0][2],
+					nutrient_table[0][3],
+				]);
+				temp_food = recommend_food[parseInt(Math.random() * recommend_food.length)];
+				result.push([temp_food]);
+			}
+
+			nutrient_table;
+			// }
+		} else {
+			// const userInfo = await UserModel.findById({ User_id: login });
+			console.log('로그인 후 사용가능한 기능입니다.');
+			const ErrorMessage = '로그인 기능 아직 없음. 나오면 이상한거임.';
+			return ErrorMessage;
+		}
+
+		return result;
 	}
-
-	return result;
 }
-// 로그인에 들어가는 값은 true, false.
-//
-
-export { recommendSystem };
+export { Recommend };

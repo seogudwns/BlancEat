@@ -20,6 +20,22 @@ class Nutrition {
 		);
 		return foodName;
 	}
+	static async findManyByNutrition1([a, b, c, d, e, f]) {
+		const foods = await nutritionModel.find({
+			$and: [
+				{ carbon: { $gte: a, $lte: d } },
+				{ protein: { $gte: b, $lte: e } },
+				{ fat: { $gte: c, $lte: f } },
+			],
+		});
+		return foods;
+	}
+	static async findManyByNutrition2([a, b, c]) {
+		const foods = await nutritionModel.find({
+			$and: [{ carbon: { $lte: a } }, { protein: { $lte: b } }, { fat: { $lte: c } }],
+		});
+		return foods;
+	}
 }
 
 export { Nutrition };

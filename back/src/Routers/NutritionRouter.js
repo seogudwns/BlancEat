@@ -1,15 +1,16 @@
 import { Router } from 'express';
 import { NutritionService } from '../Services/NutritionService.js';
+import { Recommend } from '../modules/RecommendAlgorithm.js';
 
 const nutritionRouter = Router();
 
 nutritionRouter.post('/nutrition', async (req, res, next) => {
 	try {
-		const { foodList } = req.body;
+		const { Sex, Age, Weight, foodList } = req.body;
 		// console.log(foodList);
-		const result = [];
-		// let result;
-		// const eat = [];
+		// const result = [];
+		let result;
+		const eat = [];
 
 		if (!foodList) {
 			throw new Error('식사 정보를 입력해주세요.');
@@ -18,21 +19,20 @@ nutritionRouter.post('/nutrition', async (req, res, next) => {
 
 			for (let i = 0; i < foodList.length; i++) {
 				getFoodList = await NutritionService.getNutritionalFact({ foodName: foodList[i] });
-				result.push(getFoodList);
+				eat.push(getFoodList);
 			}
 
 			if (getFoodList.errorMessage) {
 				throw new Error(getFoodList.errorMessage);
 			}
 
-			//! 여기서부터 만들어야 함!!
-			// 1. 먹은 음식이 아닌 추천음식 리스트가 들어가야 함.....
-			// 다른 의도로 만든 것일까..?
-			// let login = false  //! 로그인 기능을 만든 이후 수정해야함.
-			// result = await recommendSystem(Sex, Age, weight, eat, login)
+			// result에는 추천음식의 list들이 들어갈 예정.
+			let login = false; //! 로그인 기능을 만든 이후 수정해야함.
+			result = await Recommend.recommendSystem(Sex, Age, Weight, eat, login);
 		}
 
-		res.status(200).json(result);
+		const bundle = { eat, result };
+		res.status(200).json(bundle);
 	} catch (error) {
 		next(error);
 	}
