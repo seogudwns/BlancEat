@@ -21,26 +21,26 @@ const StyledUserInfo = styled(Card)`
 `;
 
 const Userpage = () => {
-	const userInfo = ['연령 만 29 세/ 남성', '키 175cm', '몸무게 68kg'];
+	const userInfos = ['연령 만 29 세/ 남성', '키 175cm', '몸무게 68kg'];
 	return (
 		<>
 			<StyledContainer margin="0px">
 				<ContentUserPageText />
 			</StyledContainer>
 			<StyledContainer margin="15px 0 0 0" style={{ display: 'flex' }}>
-				<ContentUserInfo num={1} title={'기본정보'} userInfo={userInfo} />
-				<ContentUserInfo num={2} title={'기본정보'} userInfo={userInfo} />
+				<ContentUserInfo num={1} title={'기본정보'} userInfos={userInfos} />
+				<ContentUserInfo num={2} title={'기본정보'} userInfos={userInfos} />
 			</StyledContainer>
 
 			<StyledContainer margin="25px 0 0 0" style={{ display: 'flex' }}>
-				<ContentUserInfo num={3} title={'기본정보'} userInfo={userInfo} />
+				<ContentUserInfo num={3} title={'기본정보'} userInfos={userInfos} />
 				<ContentGraph title={'탄수화물이 부족합니다'} color={'pink'}></ContentGraph>
 				<ContentGraph title={' 지방섭취가 원활합니다'} color={'green'}></ContentGraph>
 			</StyledContainer>
 
 			<StyledContainer margin="25px 0 40px 0" style={{ display: 'flex' }}>
 				<StyledUserInfo maxWidth="800px" width="600px" height="500px">
-					<h1 style={{ fontWeight: 'lighter' }}>추천 식품군</h1>
+					<h1 style={{ fontWeight: 'lighter', textAlign: 'center' }}>추천 식품군</h1>
 					<div style={{ border: 'solid 1px black', marginBottom: '10px' }}></div>
 				</StyledUserInfo>
 

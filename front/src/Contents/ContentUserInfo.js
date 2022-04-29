@@ -7,11 +7,15 @@ const StyledUserInfo = styled(Card)`
 	border: solid 1px black;
 	width: ${param => (param.width ? param.width : 'none')};
 	max-width: ${param => (param.maxWidth ? param.maxWidth : 'none')};
+	min-width: ${param => (param.minWidth ? param.minWidth : 'none')};
+
 	height: ${param => param.height};
 	margin-right: ${param => (param.marginRight ? param.marginRight : 'none')};
 	border-radius: 10px;
 `;
 const StyledUserInfoBox = styled(Card)`
+	display: ${param => (param.display ? param.display : '')};
+	justify-content: ${param => (param.justifyContent ? param.justifyContent : '')};
 	padding-top: 13px;
 	color: gray;
 	font-size: 20px;
@@ -20,6 +24,7 @@ const StyledUserInfoBox = styled(Card)`
 	margin-bottom: 10px;
 	border-radius: 10px;
 	width: 90%;
+	margin-left: ${param => (param.marginLeft ? param.marginLeft : '')};
 `;
 
 const StyledUserBmiInfoBox = styled(Card)`
@@ -39,20 +44,36 @@ const StyledUserBmibox = styled(Card)`
 	max-width: 500px;
 	margin-right: 100px;
 	border-radius: 10px;
+	min-width: ${param => (param.minWidth ? param.minWidth : 'none')};
 `;
 
-const ContentUserInfo = ({ num, title, userInfo }) => {
+const StyledProcessBar = styled.progress`
+	appearance: none;
+	margin-left: 20px;
+	height: 30px;
+	width: 300px;
+	::-webkit-progress-value {
+		border-radius: 10px;
+		background: ${param => (param.color ? param.color : '')};
+	}
+	::-webkit-progress-bar {
+		border-radius: 10px;
+		background: none;
+	}
+`;
+
+const ContentUserInfo = ({ num, title, userInfos }) => {
 	const UserInfo = () => {
 		return (
 			<StyledUserInfo width="40%">
-				<h1 style={{ fontWeight: 'lighter' }}>{title}</h1>
+				<h1 style={{ fontWeight: 'lighter', textAlign: 'center' }}>{title}</h1>
 				<div style={{ border: 'solid 1px black', marginBottom: '10px' }}></div>
 				<div style={{ display: 'flex' }}>
 					<div style={{ width: '30%' }}>gd</div>
 					<div style={{ width: '70%' }}>
-						<StyledUserInfoBox>{userInfo[0]}</StyledUserInfoBox>
-						<StyledUserInfoBox>{userInfo[1]}</StyledUserInfoBox>
-						<StyledUserInfoBox>{userInfo[2]}</StyledUserInfoBox>
+						{userInfos.map((userInfo, index) => (
+							<StyledUserInfoBox>{userInfo}</StyledUserInfoBox>
+						))}
 					</div>
 				</div>
 			</StyledUserInfo>
@@ -60,8 +81,8 @@ const ContentUserInfo = ({ num, title, userInfo }) => {
 	};
 	const BmiInfo = () => {
 		return (
-			<StyledUserBmibox>
-				<h1 style={{ fontWeight: 'lighter' }}>BMI 지수</h1>
+			<StyledUserBmibox minWidth="320px">
+				<h1 style={{ fontWeight: 'lighter', textAlign: 'center' }}>BMI 지수</h1>
 				<div style={{ border: 'solid 1px black', marginBottom: '10px' }}></div>
 				<div style={{ display: 'flex' }}>
 					<div style={{ margin: '0px auto' }}>
@@ -75,21 +96,28 @@ const ContentUserInfo = ({ num, title, userInfo }) => {
 	};
 
 	const NutInfo = () => {
+		const Nutritions = ['단백질', '지방', '탄수화물'];
+		const BarColors = ['green', 'pink', 'gray'];
 		return (
-			<StyledUserInfo maxWidth="800px" width="25%">
-				<h1 style={{ fontWeight: 'lighter' }}>영양 정보</h1>
+			<StyledUserInfo maxWidth="800px" width="25%" minWidth="300px">
+				<h1 style={{ fontWeight: 'lighter', textAlign: 'center' }}>영양 정보</h1>
 				<div style={{ border: 'solid 1px black', marginBottom: '10px' }}></div>
 				<div style={{ display: 'flex' }}>
 					<div style={{ width: '100%', textAlign: 'right' }}>
-						<StyledUserInfoBox>
-							<span>단백질</span>
-						</StyledUserInfoBox>
-						<StyledUserInfoBox>
-							<span>지방</span>
-						</StyledUserInfoBox>
-						<StyledUserInfoBox>
-							<span>탄수화물</span>
-						</StyledUserInfoBox>
+						{Nutritions.map((nutrition, index) => (
+							<StyledUserInfoBox
+								marginLeft="15px"
+								display="flex"
+								justifyContent="space-between"
+							>
+								<StyledProcessBar
+									color={BarColors[index]}
+									value={(index + 1) * 30}
+									max="100"
+								/>
+								<span style={{ marginRight: '10px' }}>{nutrition}</span>
+							</StyledUserInfoBox>
+						))}
 					</div>
 				</div>
 			</StyledUserInfo>
