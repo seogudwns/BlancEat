@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { Container, Navbar, Row, Col, Nav, NavDropdown } from 'react-bootstrap';
+import { Container, Navbar, Nav } from 'react-bootstrap';
 import React, { useState, useEffect } from 'react';
 import LoginForm from '../component/user/LoginForm';
 import Button from '../Components/Button';
@@ -12,17 +12,6 @@ const StyledHeaderContainer = styled(Container)`
 		color: #ffffff !important;
 	}
 `;
-
-/*
-
-	.navbar.scrolling-navbar.top-nav-collapse {
-		background: #ff0000;
-	}
-	.navbar-toggler {
-		color: #ffffff;
-		background: #ff0000;
-	}
-*/
 
 const Header = () => {
 	const isLogin = true;
@@ -43,16 +32,13 @@ const Header = () => {
 	return (
 		<>
 			<StyledHeaderContainer fluid>
-				<Navbar collapseOnSelect expand="md" color="white">
+				<Navbar>
 					<Container>
 						<Navbar.Brand href="/">
 							<img src="/balanceatLogo.png" />
-						</Navbar.Brand>{' '}
-						<Navbar.Toggle aria-controls="responsive-navbar-nav" />
-						<Nav className="me-auto"> </Nav>
+						</Navbar.Brand>
 						<Nav>
-							<Navbar.Collapse id="navbar-dark responsive-navbar-nav">
-								<Nav className="me-auto"></Nav>
+							<Navbar.Collapse>
 								<Nav>
 									{createLink('/', '메인페이지')}
 									{createLink('/balanceat', 'BalancEat')}
