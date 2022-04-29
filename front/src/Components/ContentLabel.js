@@ -10,7 +10,7 @@ const AssetContainer = styled(Container)`
 	padding: 0px;
 `;
 
-const LabelWrapper = styled.div`
+const LabelContainer = styled.div`
 	display: flex;
 	flex-direction: row;
 	align-items: center;
@@ -20,7 +20,7 @@ const LabelWrapper = styled.div`
 	margin: 0 0 0 92px;
 	padding: 0;
 `;
-const LabelArea = styled.div`
+const TitleWrapper = styled.div`
 	display: flex;
 	flex-direction: row;
 	align-items: center;
@@ -54,12 +54,12 @@ const LabelText = styled.h2`
 const ContentLabel = ({ title, subtitle }) => {
 	return (
 		<AssetContainer fluid>
-			<LabelWrapper>
-				<LabelArea>
+			<LabelContainer>
+				<TitleWrapper>
 					<LabelTitle>{title}</LabelTitle>
-				</LabelArea>
+				</TitleWrapper>
 				<LabelText>{subtitle}</LabelText>
-			</LabelWrapper>
+			</LabelContainer>
 		</AssetContainer>
 	);
 };
