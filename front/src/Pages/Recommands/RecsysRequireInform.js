@@ -7,8 +7,9 @@ import { SubContainer, BGDiv, LargeText, LargeButton } from '../../Contents/Styl
 const RecsysRequireInform = () => {
 	const { step, dispatch } = useContext(RecommandContext);
 
-	const handleClickInput = () => {
-		dispatch({ type: 'OUTPUT' });
+	const handleClick = () => {
+		console.log('Click btn 스테이트 INPUT 으로 변경');
+		dispatch({ type: 'INPUT' });
 	};
 	return (
 		<SubContainer fluid>
@@ -18,7 +19,7 @@ const RecsysRequireInform = () => {
 					24시간동안 드신 식사 정보를 입력해주세요 당신에게 필요한 식사를 추천해 드립니다.
 				</LargeText>
 
-				<LargeButton variant="success" onClick={handleClickInput}>
+				<LargeButton variant="success" onClick={handleClick}>
 					<h3>식사 정보 입력하기 {'>'}</h3>
 				</LargeButton>
 			</BGDiv>

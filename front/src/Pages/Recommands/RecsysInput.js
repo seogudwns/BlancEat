@@ -7,19 +7,17 @@ import { SubContainer, BGDiv, LargeText, LargeButton } from '../../Contents/Styl
 const RecsysInput = () => {
 	const { step, dispatch } = useContext(RecommandContext);
 
-	const handleClickInput = () => {
+	const handleClick = () => {
 		dispatch({ type: 'OUTPUT' });
 	};
 	return (
 		<SubContainer fluid>
 			<ContentLabel />
 			<BGDiv>
-				<LargeText>
-					24시간동안 드신 식사 정보를 입력해주세요 당신에게 필요한 식사를 추천해 드립니다.
-				</LargeText>
+				<LargeText>인풋창입니다.</LargeText>
 
-				<LargeButton variant="success" onClick={handleClickInput}>
-					<h3>식사 정보 입력하기 {'>'}</h3>
+				<LargeButton variant="success" onClick={handleClick}>
+					<h3>정보입력 완료 {'>'}</h3>
 				</LargeButton>
 			</BGDiv>
 		</SubContainer>

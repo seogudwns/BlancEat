@@ -3,6 +3,7 @@ import React, { useReducer, createContext } from 'react';
 const initialState = { step: 'IDLE' };
 
 const reducer = (state, action) => {
+	console.log('리듀서 작동', action.type);
 	switch (action.type) {
 		case 'IDLE':
 			return { ...state, step: 'IDLE' };
@@ -11,7 +12,7 @@ const reducer = (state, action) => {
 		case 'OUTPUT':
 			return { ...state, step: 'OUTPUT' };
 		case 'RESET':
-			return initialState;
+			return { ...state, step: 'IDLE' };
 		default:
 			throw new Error('Unsupported action type:', action.type);
 	}

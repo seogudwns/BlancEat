@@ -98,3 +98,15 @@ export const LargeButton = styled(Button)`
 		line-height: 120%;
 	}
 `;
+
+export const CardContainerRow = styled(Container)`
+	display: flex;
+	flex-direction: row;
+	justify-content: space-between;
+	align-items: center;
+	width: 100%;
+	height: auto;
+	margin-top: 50px;
+	margin-bottom: 50px;
+	padding: 0;
+`;
