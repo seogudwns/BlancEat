@@ -1,7 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
 import { Card } from 'react-bootstrap';
-import ContentUserPage from '../Contents/ContentUserPage';
 import ContentUserPageText from '../Contents/ContentUserPageText';
 import ContentUserInfo from '../Contents/ContentUserInfo';
 import ContentGraph from '../Contents/ContentGraph';
@@ -29,7 +28,7 @@ const Userpage = () => {
 			</StyledContainer>
 			<StyledContainer margin="15px 0 0 0" style={{ display: 'flex' }}>
 				<ContentUserInfo num={1} title={'기본정보'} userInfos={userInfos} />
-				<ContentUserInfo num={2} title={'기본정보'} userInfos={userInfos} />
+				<ContentUserInfo num={2} title={'BMI'} userInfos={userInfos} />
 			</StyledContainer>
 
 			<StyledContainer margin="25px 0 0 0" style={{ display: 'flex' }}>
@@ -39,14 +38,8 @@ const Userpage = () => {
 			</StyledContainer>
 
 			<StyledContainer margin="25px 0 40px 0" style={{ display: 'flex' }}>
-				<StyledUserInfo maxWidth="800px" width="600px" height="500px">
-					<h1 style={{ fontWeight: 'lighter', textAlign: 'center' }}>추천 식품군</h1>
-					<div style={{ border: 'solid 1px black', marginBottom: '10px' }}></div>
-				</StyledUserInfo>
-
-				<StyledUserInfo maxWidth="800px" width="660px" height="500px" marginRight="100px">
-					<h1 style={{ fontWeight: 'lighter', textAlign: 'center' }}>식단 추이표</h1>
-				</StyledUserInfo>
+				<ContentUserInfo num={2} title={'추천식단'} userInfos={userInfos} />
+				<ContentUserInfo num={2} title={'식단그래프'} userInfos={userInfos} />
 			</StyledContainer>
 		</>
 	);

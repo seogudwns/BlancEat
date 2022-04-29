@@ -27,16 +27,6 @@ const StyledUserInfoBox = styled(Card)`
 	margin-left: ${param => (param.marginLeft ? param.marginLeft : '')};
 `;
 
-const StyledUserBmiInfoBox = styled(Card)`
-	padding-top: 13px;
-	color: gray;
-	font-size: 20px;
-	height: 50px;
-	border: 1px solid black;
-	margin-bottom: 10px;
-	border-radius: 10px;
-	width: 300px;
-`;
 const StyledUserBmibox = styled(Card)`
 	margin-left: 30px;
 	border: solid 1px black;
@@ -61,13 +51,20 @@ const StyledProcessBar = styled.progress`
 		background: none;
 	}
 `;
-
+const StyledTitle = styled.h1`
+	font-weight: lighter;
+	text-align: center;
+`;
+const StyledLine = styled.div`
+	border: solid 1px black;
+	margin-bottom: 10px;
+`;
 const ContentUserInfo = ({ num, title, userInfos }) => {
 	const UserInfo = () => {
 		return (
 			<StyledUserInfo width="40%">
-				<h1 style={{ fontWeight: 'lighter', textAlign: 'center' }}>{title}</h1>
-				<div style={{ border: 'solid 1px black', marginBottom: '10px' }}></div>
+				<StyledTitle>{title}</StyledTitle>
+				<StyledLine />
 				<div style={{ display: 'flex' }}>
 					<div style={{ width: '30%' }}>gd</div>
 					<div style={{ width: '70%' }}>
@@ -79,29 +76,25 @@ const ContentUserInfo = ({ num, title, userInfos }) => {
 			</StyledUserInfo>
 		);
 	};
-	const BmiInfo = () => {
+	const BmiInfo = ({ title }) => {
 		return (
 			<StyledUserBmibox minWidth="320px">
-				<h1 style={{ fontWeight: 'lighter', textAlign: 'center' }}>BMI 지수</h1>
-				<div style={{ border: 'solid 1px black', marginBottom: '10px' }}></div>
+				<StyledTitle>{title}</StyledTitle>
+				<StyledLine />
 				<div style={{ display: 'flex' }}>
-					<div style={{ margin: '0px auto' }}>
-						<StyledUserBmiInfoBox></StyledUserBmiInfoBox>
-						<StyledUserBmiInfoBox></StyledUserBmiInfoBox>
-						<StyledUserBmiInfoBox></StyledUserBmiInfoBox>
-					</div>
+					<div style={{ margin: '0px auto' }}></div>
 				</div>
 			</StyledUserBmibox>
 		);
 	};
 
-	const NutInfo = () => {
+	const NutritionInfo = () => {
 		const Nutritions = ['단백질', '지방', '탄수화물'];
 		const BarColors = ['green', 'pink', 'gray'];
 		return (
 			<StyledUserInfo maxWidth="800px" width="25%" minWidth="300px">
-				<h1 style={{ fontWeight: 'lighter', textAlign: 'center' }}>영양 정보</h1>
-				<div style={{ border: 'solid 1px black', marginBottom: '10px' }}></div>
+				<StyledTitle>영양 정보</StyledTitle>
+				<StyledLine />
 				<div style={{ display: 'flex' }}>
 					<div style={{ width: '100%', textAlign: 'right' }}>
 						{Nutritions.map((nutrition, index) => (
@@ -126,8 +119,8 @@ const ContentUserInfo = ({ num, title, userInfos }) => {
 	return (
 		<>
 			{num === 1 && <UserInfo />}
-			{num === 2 && <BmiInfo />}
-			{num === 3 && <NutInfo />}
+			{num === 2 && <BmiInfo title={title} />}
+			{num === 3 && <NutritionInfo />}
 		</>
 	);
 };
