@@ -3,7 +3,6 @@ import { nutritionModel } from '../Schemas/NutritionSchema.js';
 class Nutrition {
 	// 음식 하나만 가져오기
 	static async findOneByName({ foodName }) {
-		// console.log(foodName);
 		return await nutritionModel.findOne({ foodName });
 	}
 

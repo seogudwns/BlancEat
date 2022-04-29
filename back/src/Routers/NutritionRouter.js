@@ -37,7 +37,7 @@ nutritionRouter.post('/nutrition', async (req, res, next) => {
 		);
 
 		// Age, Sex, Weight --> 사람 일일 섭취량. 넣자!
-		// eat_result = 먹은음식의 각각의 영양소의 sum. , person_info, result = { [추천음식1], [추천음식2]} .... Done: person_info,
+		// eat_result = 먹은음식의 각각의 영양소의 sum. , person_info, result = { [추천음식1], [추천음식2]} .... Done: person_info, result.
 		const bundle = { eat, person_info, result };
 		res.status(200).json(bundle);
 		// res.status(200).send(eat);
