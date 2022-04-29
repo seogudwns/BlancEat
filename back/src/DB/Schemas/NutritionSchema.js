@@ -1,4 +1,4 @@
-import pkg from "mongoose";
+import pkg from 'mongoose';
 
 const { Schema, model } = pkg;
 
@@ -97,10 +97,6 @@ const nutritionSchema = new Schema(
         default: 0,
     },
 
-  },
-
-);
-
-const nutritionModel = model("Nutrition", nutritionSchema);
+const nutritionModel = model('Nutrition', nutritionSchema);
 
 export { nutritionModel };

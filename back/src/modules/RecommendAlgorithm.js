@@ -4,7 +4,7 @@
 // Age,Sex,protein,fat,carbon,sugar,sugar_limit,fiber,VitA,VitA_limit,VitE,VitE_limit
 // VitC,VitC_limit,VitB6,VitB6_limit,Niacin,Niacin_limit,Folate,Folate_limit,Ca,Ca_limit,Na,Na_limit
 
-// 1. Age, Sex로부터 recomment_nutrition에서 사람 정보 뽑기.
+// 1. Gender, Age, Sex로부터 recomment_nutrition에서 사람 정보 뽑기.
 // 2. carbon, protein, fat 계산 후 temp = [] 에 넣기. + 10% 계산해서 temp2 = [] 에 넣기.
 // 3. 먹은 음식들로 carbon, protein, fat 추출, nutrient_table 만들기
 // 4. nutrient_table =    [[temp[0]+temp2[0],temp[1]+temp2[1],temp[2]+temp2[2]] +
@@ -18,11 +18,34 @@
 // 6. else { await find query items.
 //
 // };
-//! pyhton으로 데이터를 그냥 보내버릴까??..
 // .
 // .
 // .
 // .
+import Nutrition from '../DB/Models/NutritionModel.js';
+import Person from '../DB/Models/PersonModel';
 
-let abc = [1, 2, 3, 4];
-console.log(abc.reduce((x, y) => x + y));
+async function recommendSystem(Sex, Age, weight, eat, login) {
+	let result;
+	if (!login) {
+		const personNutriant = await Person.getinfo({ Sex, Age });
+		const infoCarbon = await personNutriant.carbon;
+		const infoProtein = await personNutriant.protein;
+		const infoFat = await personNutriant.fat;
+
+		let temp = [infoCarbon * weight, infoProtein * weight, infoFat * weight];
+		let temp2 = [temp[0] / 10, temp[1] / 10, temp[2] / 10];
+		//!  ~~~~~~
+	} else {
+		// const userInfo = await UserModel.findById({ User_id: login });
+		console.log('로그인 후 사용가능한 기능입니다.');
+		const ErrorMessage = '로그인 기능 아직 없음. 나오면 이상한거임.';
+		return ErrorMessage;
+	}
+
+	return result;
+}
+// 로그인에 들어가는 값은 true, false.
+//
+
+export { recommendSystem };
