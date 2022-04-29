@@ -1,27 +1,15 @@
 import React from 'react';
-import styled from 'styled-components';
+
+import * as s from './Styles/stylePages';
 import ContentRecommandOutput from '../Contents/ContentRecommandOutput';
-
-const StyledContainer = styled.div`
-	width: 100vw;
-`;
-
-const Container = styled.div`
-	display: flex;
-	align-items: center;
-	height: 100vh;
-	width: 1440px;
-	margin: auto;
-	padding-top: 100px;
-	flex-direction: column;
-`;
+import ContentRecommand from '../Contents/ContentRecommand';
 
 const Recommand = () => {
 	return (
-		<Container>
-			<h1>this is Recommand</h1>
+		<s.PageContainer fluid>
+			<ContentRecommand />
 			<ContentRecommandOutput />
-		</Container>
+		</s.PageContainer>
 	);
 };
 
