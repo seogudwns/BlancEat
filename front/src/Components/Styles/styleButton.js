@@ -7,7 +7,7 @@ react strap button varient
 'outline-warning' //아웃라인스타일 빨강
 'outline-light' //아웃라인스타일 흰색
 */
-const StyledButton = styled(btn)`
+export const StyledButton = styled(btn)`
 	height: 40px;
 	left: 0px;
 	top: 0px;
