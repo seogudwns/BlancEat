@@ -9,7 +9,8 @@ class Nutrition{
 
     // 음식 여러개 한번에 가져오기
     static async findManyByName({ foodName }) {
-        return await nutritionModel.findMany({ foodName });
+        console.log(foodName);
+        return await nutritionModel.find({'foodName': { $in: foodName }});
     }
 
     // 음식 검색어 추천

@@ -12,6 +12,18 @@ const nutritionSchema = new Schema(
       type: String,
       required: true,
     },
+    recommend:{
+        type:Boolean,
+        required:true,
+    },
+    category:{
+        type:String,
+        required:true,
+    },
+    photo:{
+        type:String,
+        required:true,
+    },
     weight: {
         type: Number,
         required: true,
