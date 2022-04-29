@@ -1,7 +1,8 @@
-import { Form, Button } from 'react-bootstrap';
+import { Form, Button, Row, Col } from 'react-bootstrap';
 import styled from 'styled-components';
 import ModalComp from '../../ModalComp';
 import ModalPortal from '../../ModalPortal';
+import { Link } from 'react-router-dom';
 
 import React, { useState, useEffect } from 'react';
 import { StyledText } from '../../Contents/styleContents';
@@ -9,6 +10,7 @@ import * as Api from '../../Api';
 
 const StyledButton = styled(Button)`
 	background: ${props => props.background};
+	margin: ${props => props.margin};
 `;
 
 const LoginForm = ({ show, setShow }) => {
@@ -74,16 +76,24 @@ const LoginForm = ({ show, setShow }) => {
 								비밀번호는 4글자 이상이어야 합니다.
 							</StyledText>
 						)}
-						<StyledButton type="submit" disabled={!isFormValid} variant="primary">
+						<StyledButton
+							type="submit"
+							disabled={!isFormValid}
+							margin="0 0 0 386px"
+							variant="primary"
+						>
 							Sign In
 						</StyledButton>
 					</Form>
 				}
 				children
 			>
-				<StyledButton type="button" variant="secondary" onClick={() => setShow(false)}>
-					취소
-				</StyledButton>
+				<Col>
+					<Link to="/register" style={{ marginRight: '20px' }}>
+						아직 회원이 아니십니까?
+					</Link>
+					<Link to="/">비밀번호를 잊으셨나요?</Link>
+				</Col>
 			</ModalComp>
 		</ModalPortal>
 	);
