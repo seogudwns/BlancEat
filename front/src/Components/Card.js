@@ -1,5 +1,5 @@
 import React from 'react';
-import * as CardStyle from './styleCard';
+import * as CardStyle from './Styles/styleCard';
 import styled from 'styled-components';
 import { Button } from 'react-bootstrap';
 

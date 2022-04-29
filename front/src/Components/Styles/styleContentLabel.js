@@ -1,8 +1,9 @@
 import styled from 'styled-components';
 import { Container } from 'react-bootstrap';
-import * as s from './Styles/styleContentLabel';
 
-const AssetContainer = styled(Container)`
+/* Content Label's Styles */
+
+export const AssetContainer = styled(Container)`
 	display: flex;
 	flex-direction: row;
 	align-items: flex-start;
@@ -11,7 +12,7 @@ const AssetContainer = styled(Container)`
 	padding: 0px;
 `;
 
-const LabelContainer = styled.div`
+export const LabelContainer = styled.div`
 	display: flex;
 	flex-direction: row;
 	align-items: center;
@@ -21,7 +22,7 @@ const LabelContainer = styled.div`
 	margin: 0 0 0 92px;
 	padding: 0;
 `;
-const TitleWrapper = styled.div`
+export const TitleWrapper = styled.div`
 	display: flex;
 	flex-direction: row;
 	align-items: center;
@@ -32,7 +33,7 @@ const TitleWrapper = styled.div`
 	color: white;
 	background-color: #023d1a;
 `;
-const LabelTitle = styled.h2`
+export const LabelTitle = styled.h2`
 	font-family: 'Elice Digital Baeum';
 	font-size: 2rem;
 	font-weight: 400;
@@ -42,7 +43,7 @@ const LabelTitle = styled.h2`
 	margin: 0;
 `;
 
-const LabelText = styled.h2`
+export const LabelText = styled.h2`
 	font-family: 'Elice Digital Baeum';
 	font-size: 2rem;
 	font-weight: 400;
@@ -52,22 +53,3 @@ const LabelText = styled.h2`
 	align: center;
 	margin: 0 0 0 18px;
 `;
-const ContentLabel = ({ title, subtitle }) => {
-	return (
-		<s.AssetContainer fluid>
-			<s.LabelContainer>
-				<s.TitleWrapper>
-					<s.LabelTitle>{title}</s.LabelTitle>
-				</s.TitleWrapper>
-				<s.LabelText>{subtitle}</s.LabelText>
-			</s.LabelContainer>
-		</s.AssetContainer>
-	);
-};
-
-ContentLabel.defaultProps = {
-	title: '레이블 타이틀',
-	subtitle: '지금 당신에게 필요한 식사',
-};
-
-export default ContentLabel;
