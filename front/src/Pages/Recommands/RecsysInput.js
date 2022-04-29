@@ -1,24 +1,18 @@
 import React, { useContext } from 'react';
-import { RecommandContext } from './RecommandContext';
 
+// import { RecommandContext } from './RecommandContext';
+import RecsysInputForm from './RecsysInputForm';
 import ContentLabel from '../../Components/ContentLabel';
-import { SubContainer, BGDiv, LargeText, LargeButton } from '../../Contents/Styles/styleContents';
+import { SubContainer, BGDiv } from '../../Contents/Styles/styleContents';
 
 const RecsysInput = () => {
-	const { step, dispatch } = useContext(RecommandContext);
-
-	const handleClick = () => {
-		dispatch({ type: 'OUTPUT' });
-	};
+	const title = '식사 정보 입력';
+	const subtitle = '정보를 입력해 주세요';
 	return (
 		<SubContainer fluid>
-			<ContentLabel />
+			<ContentLabel title={title} subtitle={subtitle} />
 			<BGDiv>
-				<LargeText>인풋창입니다.</LargeText>
-
-				<LargeButton variant="success" onClick={handleClick}>
-					<h3>정보입력 완료 {'>'}</h3>
-				</LargeButton>
+				<RecsysInputForm />
 			</BGDiv>
 		</SubContainer>
 	);

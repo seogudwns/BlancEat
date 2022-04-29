@@ -49,7 +49,7 @@ export const LabelText = styled.h2`
 	font-weight: 400;
 	line-height: 120%;
 	letter-spacing: 0.5px;
-	color: #765413;
+	color: ${props => (props.color ? props.color : '#765413')};
 	align: center;
 	margin: 0 0 0 18px;
 `;

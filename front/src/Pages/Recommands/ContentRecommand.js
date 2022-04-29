@@ -1,12 +1,13 @@
 import React, { useContext } from 'react';
-import { RecommandContext } from './RecommandContext';
 
-import { ImgBGContentContainer } from '../../Contents/Styles/styleContents';
+import { RecommandContext } from './RecommandContext';
 import RecsysRequireInform from './RecsysRequireInform';
 import RecsysInput from './RecsysInput';
 import RecsysOutput from './RecsysOutput';
+import { ImgBGContentContainer } from '../../Contents/Styles/styleContents';
+
 const ContentRecommand = () => {
-	const { step, dispatch } = useContext(RecommandContext);
+	const { step } = useContext(RecommandContext);
 	return (
 		<ImgBGContentContainer fluid>
 			{step === 'IDLE' && <RecsysRequireInform />}

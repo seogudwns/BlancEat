@@ -1,9 +1,9 @@
 import React from 'react';
 
-import { PageContainer } from '../Styles/stylePages';
+import { RecommandProvider } from './RecommandContext';
 import RecsysOutputAddon from './RecsysOutputAddon';
 import ContentRecommand from './ContentRecommand';
-import { RecommandProvider } from './RecommandContext';
+import { PageContainer } from '../Styles/stylePages';
 
 const Recommand = () => {
 	return (

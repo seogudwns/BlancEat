@@ -13,7 +13,7 @@ export const ContentContainer = styled(Container)`
 	margin: 0;
 	margin-top: auto;
 	padding: 1rem;
-	background-color: gray;
+	background-color: #fcfbfa;
 `;
 
 export const ImgBGContentContainer = styled(Container)`
@@ -110,3 +110,40 @@ export const CardContainerRow = styled(Container)`
 	margin-bottom: 50px;
 	padding: 0;
 `;
+
+export const FormContainer = styled.div`
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+	align-items: center;
+	width: 900px;
+	height: 500px;
+	margin-top: 50px;
+	padding: 50px;
+	background-color: white;
+`;
+
+/*
+.form {
+		width: 500px;
+	}
+	.form-inline {
+		width: 100%;
+	}
+
+	.form-group {
+		width: 90%;
+	}
+
+	.input-group {
+		width: 90% !important;
+	}
+
+	.form-control {
+		width: 70%;
+	}
+
+	span.input-group-addon {
+		width: 50px !important;
+	}
+ */

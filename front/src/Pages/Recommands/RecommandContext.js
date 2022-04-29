@@ -3,7 +3,6 @@ import React, { useReducer, createContext } from 'react';
 const initialState = { step: 'IDLE' };
 
 const reducer = (state, action) => {
-	console.log('리듀서 작동', action.type);
 	switch (action.type) {
 		case 'IDLE':
 			return { ...state, step: 'IDLE' };
