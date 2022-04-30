@@ -92,7 +92,7 @@ const ContentUserInfo = ({ num, title, userInfos }) => {
 		const Nutritions = ['단백질', '지방', '탄수화물'];
 		const BarColors = ['green', 'pink', 'gray'];
 		return (
-			<StyledUserInfo maxWidth="800px" width="25%" minWidth="300px">
+			<StyledUserInfo maxWidth="800px" width="25%" minWidth="450px">
 				<StyledTitle>영양 정보</StyledTitle>
 				<StyledLine />
 				<div style={{ display: 'flex' }}>

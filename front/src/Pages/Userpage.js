@@ -33,8 +33,7 @@ const Userpage = () => {
 
 			<StyledContainer margin="25px 0 0 0" style={{ display: 'flex' }}>
 				<ContentUserInfo num={3} title={'기본정보'} userInfos={userInfos} />
-				<ContentGraph title={'탄수화물이 부족합니다'} color={'pink'}></ContentGraph>
-				<ContentGraph title={' 지방섭취가 원활합니다'} color={'green'}></ContentGraph>
+				<ContentGraph title={'금일 영양 정보'}></ContentGraph>
 			</StyledContainer>
 
 			<StyledContainer margin="25px 0 40px 0" style={{ display: 'flex' }}>
