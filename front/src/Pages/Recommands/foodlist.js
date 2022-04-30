@@ -27,3 +27,22 @@ export const FOODS = [
 	'시카고 피자',
 	'고르곤 졸라 피자',
 ];
+
+/*받게될 데이터 더미 */
+export const NUTS = {
+	cal: 110,
+	protein: 10,
+	fat: 10,
+	carbo: 103,
+	sugar: 333,
+	vegetable: 44,
+	ca: 331,
+	fe: 32,
+	na: 112,
+	zn: 20.11,
+	v1: 22,
+	v2: 22,
+	v3: 22,
+	v4: 22,
+	v5: 22,
+};
