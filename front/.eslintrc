@@ -6,8 +6,7 @@
 		"sourceType": "module",
 		"ecmaFeatures": {
 			"jsx": true
-		},
-		"react/jsx-one-expression-per-line": "off"
+		}
 	},
 	"rules": {
 		"prettier/prettier": ["error"]
