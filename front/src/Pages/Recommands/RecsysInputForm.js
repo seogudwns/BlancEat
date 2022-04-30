@@ -17,21 +17,16 @@ const RecsysInputForm = () => {
 	};
 	return (
 		<FormContainer>
-			<TagInput />
-
 			<InputGroup className="mb-3">
-				<InputGroup.Text id="inputGroup-sizing-default">아침</InputGroup.Text>
-				<FormControl aria-label="Default" aria-describedby="inputGroup-sizing-default" />
+				<TagInput />
 			</InputGroup>
 			<br />
 			<InputGroup className="mb-3">
-				<InputGroup.Text id="inputGroup-sizing-default">점심</InputGroup.Text>
-				<FormControl aria-label="Default" aria-describedby="inputGroup-sizing-default" />
+				<TagInput />
 			</InputGroup>
 			<br />
 			<InputGroup className="mb-3">
-				<InputGroup.Text id="inputGroup-sizing-default">저녁</InputGroup.Text>
-				<FormControl aria-label="Default" aria-describedby="inputGroup-sizing-default" />
+				<TagInput />
 			</InputGroup>
 			<br />
 			<Row>

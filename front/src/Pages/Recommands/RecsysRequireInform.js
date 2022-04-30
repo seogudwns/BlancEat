@@ -12,10 +12,6 @@ const RecsysRequireInform = () => {
 		dispatch({ type: 'INPUT' });
 	};
 
-	// const handleInput = () => {
-	// 	// dispatch({ type: 'INPUT' });
-	// 	console.log('hi');
-	// };
 	return (
 		<SubContainer fluid>
 			<ContentLabel title={title} subtitle={subtitle} />

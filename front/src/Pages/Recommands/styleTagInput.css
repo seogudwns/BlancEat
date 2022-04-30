@@ -1,20 +1,21 @@
 
+
 /* materialized min css 파일.. 바꾸야함 */
 /* Example Styles for React Tags*/
-#app {
-    padding: 40px;
-  }
+
+ /* Styles for the input */
+ div.ReactTags__tagInput {
+    width: 800px;
+    border-radius: 2px;
+    display: inline-block;
+}
+
   
   div.ReactTags__tags {
       position: relative;
   }
   
-  /* Styles for the input */
-  div.ReactTags__tagInput {
-      width: 200px;
-      border-radius: 2px;
-      display: inline-block;
-  }
+ 
   div.ReactTags__tagInput input.ReactTags__tagInputField,
   div.ReactTags__tagInput input.ReactTags__tagInputField:focus {
       height: 31px;

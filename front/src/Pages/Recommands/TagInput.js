@@ -6,7 +6,7 @@ import './styleTagInput.css';
 // import styles from "./ReactTags.module.scss";
 
 import { WithContext as ReactTags } from 'react-tag-input';
-// const ReactTags = require('react-tag-input').WithOutContext;
+//const ReactTags = require('react-tag-input').WithOutContext;
 const suggestions = FOODS.map(country => {
 	return {
 		id: country,
@@ -22,12 +22,7 @@ const KeyCodes = {
 const delimiters = [KeyCodes.comma, KeyCodes.enter];
 
 const TagInput = () => {
-	const [tags, setTags] = useState([
-		// { id: 'Thailand', text: 'Thailand' },
-		// { id: 'India', text: 'India' },
-		// { id: 'Vietnam', text: 'Vietnam' },
-		// { id: 'Turkey', text: 'Turkey' },
-	]);
+	const [tags, setTags] = useState([]);
 
 	const handleDelete = i => {
 		setTags(tags.filter((tag, index) => index !== i));
@@ -55,21 +50,22 @@ const TagInput = () => {
 	};
 
 	return (
-		// <div>
-		<ReactTags
-			tags={tags}
-			suggestions={suggestions}
-			delimiters={delimiters}
-			handleDelete={handleDelete}
-			handleAddition={handleAddition}
-			handleDrag={handleDrag}
-			handleTagClick={handleTagClick}
-			onClearAll={onClearAll}
-			inputFieldPosition="bottom"
-			autocomplete
-			clearAll={true}
-		/>
-		// </div>
+		<div>
+			<ReactTags
+				tags={tags}
+				suggestions={suggestions}
+				delimiters={delimiters}
+				handleDelete={handleDelete}
+				handleAddition={handleAddition}
+				handleDrag={handleDrag}
+				handleTagClick={handleTagClick}
+				onClearAll={onClearAll}
+				inputFieldPosition="bottom"
+				autocomplete
+				allowDeleteFromEmptyInput
+				clearAll={true}
+			/>
+		</div>
 	);
 };
 export default TagInput;
