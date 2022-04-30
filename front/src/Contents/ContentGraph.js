@@ -2,6 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 import { Card } from 'react-bootstrap';
 import ContentBarChart from './ContentBarChart';
+import ContnetLineChart from './ContentLineChart';
 
 const StyledGraphInfo = styled(Card)`
 	background-color: ${param => param.backgroundColor};
@@ -19,12 +20,12 @@ const StyledGraphInfoText = styled.span`
 	font-size: 30px;
 	font-weight: bold;
 `;
-const ContentGraph = ({ title, color }) => {
+const ContentGraph = ({ num, title, color, width, height }) => {
 	return (
 		<>
-			<StyledGraphInfo height="500px" minWidth="500px" width="42%" backgroundColor={color}>
+			<StyledGraphInfo height={height} minWidth="500px" width={width} backgroundColor={color}>
 				<StyledGraphInfoText>{title}</StyledGraphInfoText>
-				<ContentBarChart />
+				{num === 1 ? <ContentBarChart /> : <ContnetLineChart />}
 			</StyledGraphInfo>
 		</>
 	);

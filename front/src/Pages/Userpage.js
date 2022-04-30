@@ -33,12 +33,21 @@ const Userpage = () => {
 
 			<StyledContainer margin="25px 0 0 0" style={{ display: 'flex' }}>
 				<ContentUserInfo num={3} title={'기본정보'} userInfos={userInfos} />
-				<ContentGraph title={'금일 영양 정보'}></ContentGraph>
+				<ContentGraph
+					num={1}
+					height={'10%'}
+					width={'42%'}
+					title={'금일 영양 정보'}
+				></ContentGraph>
 			</StyledContainer>
 
 			<StyledContainer margin="25px 0 40px 0" style={{ display: 'flex' }}>
-				<ContentUserInfo num={2} title={'추천식단'} userInfos={userInfos} />
-				<ContentUserInfo num={2} title={'식단그래프'} userInfos={userInfos} />
+				<ContentGraph
+					num={2}
+					height={'20%'}
+					width={'68%'}
+					title={'요일별 칼로리 섭취량'}
+				></ContentGraph>
 			</StyledContainer>
 		</>
 	);

@@ -59,7 +59,7 @@ const StyledLine = styled.div`
 	border: solid 1px black;
 	margin-bottom: 10px;
 `;
-const ContentUserInfo = ({ num, title, userInfos }) => {
+const ContentUserInfo = ({ num, title, userInfos, width }) => {
 	const UserInfo = () => {
 		return (
 			<StyledUserInfo width="40%">
@@ -120,7 +120,7 @@ const ContentUserInfo = ({ num, title, userInfos }) => {
 		<>
 			{num === 1 && <UserInfo />}
 			{num === 2 && <BmiInfo title={title} />}
-			{num === 3 && <NutritionInfo />}
+			{num === 3 && <NutritionInfo width={width} />}
 		</>
 	);
 };
