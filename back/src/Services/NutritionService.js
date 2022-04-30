@@ -3,7 +3,6 @@ import { Nutrition } from '../DB/index.js';
 class NutritionService {
 	static async getNutritionalFact({ foodName }) {
 		const findFood = await Nutrition.findOneByName({ foodName });
-		// console.log(findFood);
 
 		if (!findFood) {
 			const errorMessage = '해당 음식을 찾을 수 없습니다. 다시 한번 확인해주세요.';

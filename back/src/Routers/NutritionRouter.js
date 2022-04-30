@@ -6,8 +6,6 @@ const nutritionRouter = Router();
 nutritionRouter.post('/nutrition', async (req, res, next) => {
 	try {
 		const { foodList } = req.body;
-		const result = [];
-		// const eat = [];
 
         if (foodList.length == 0) {
             throw new Error("식사 정보를 입력해주세요.")
@@ -51,7 +49,7 @@ nutritionRouter.post('/nutrition', async (req, res, next) => {
 			// let login = false  //! 로그인 기능을 만든 이후 수정해야함.
 			// result = await recommendSystem(Sex, Age, weight, eat, login)
 
-		res.status(200).json(nutritionSum);
+		res.status(200).json(getFoodList);
 	} catch (error) {
 		next(error);
 	}

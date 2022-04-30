@@ -15,14 +15,6 @@ app.use(express.urlencoded({ extended: false }));
 // swagger api
 app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(specs, {explorer: true }));
 
-
-/**
- * @swagger
- * tags:
- *   name: Nutritions
- *   description: 음식 영양소 조회
- * 
- */
 app.use(nutritionRouter);
 
 export { app };

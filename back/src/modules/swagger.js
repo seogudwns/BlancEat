@@ -16,7 +16,7 @@ const options = {
 			},
 		],
 	},
-	apis: ["../Routers/NutritionRouter.js"],
+	apis: ["./Routers/*.js", "./index.js"],
 };
 
 const specs = swaggerJsdoc(options);

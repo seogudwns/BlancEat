@@ -3,13 +3,22 @@ import { nutritionModel } from '../Schemas/NutritionSchema.js';
 class Nutrition {
 	// 음식 하나만 가져오기
 	static async findOneByName({ foodName }) {
-		// console.log(foodName);
 		return await nutritionModel.findOne({ foodName });
 	}
 
     // 음식 여러개 한번에 가져오기
     static async findManyByName({ foodName }) {
-        return await nutritionModel.find({'foodName': { $in: foodName }});
+        return await nutritionModel.find(
+            { foodName: { $in: foodName } },
+            {
+                _id: 0,
+                No: 0,
+                recommend: 0,
+                category: 0,
+                photo: 0,
+                weight: 0,
+                unit: 0
+            });
     }
 
 	// 음식 검색어 추천
