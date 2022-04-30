@@ -46,6 +46,7 @@
   /* Styles for suggestions */
   div.ReactTags__suggestions {
       position: absolute;
+      z-index: 10;
   }
   div.ReactTags__suggestions ul {
       list-style-type: none;

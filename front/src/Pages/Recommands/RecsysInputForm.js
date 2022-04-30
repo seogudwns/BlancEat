@@ -2,7 +2,7 @@ import React, { useContext, useState } from 'react';
 
 import { RecommandContext } from './RecommandContext';
 import { FoodDataContext } from './ContentRecommand';
-import { InputGroup, FormControl, Form, Col, Row } from 'react-bootstrap';
+import { InputGroup, Col, Row } from 'react-bootstrap';
 import { FormContainer } from '../../Contents/Styles/styleContents';
 import Button from '../../Components/Button';
 import TagInput from './TagInput';
