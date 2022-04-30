@@ -9,16 +9,6 @@ const StyledContainer = styled.div`
 	margin: ${param => param.margin};
 `;
 
-const StyledUserInfo = styled(Card)`
-	margin-left: 30px;
-	border: solid 1px black;
-	width: ${param => (param.width ? param.width : 'none')};
-	max-width: ${param => (param.maxWidth ? param.maxWidth : 'none')};
-	height: ${param => param.height};
-	margin-right: ${param => (param.marginRight ? param.marginRight : 'none')};
-	border-radius: 10px;
-`;
-
 const Userpage = () => {
 	const userInfos = ['연령 만 29 세/ 남성', '키 175cm', '몸무게 68kg'];
 	return (
