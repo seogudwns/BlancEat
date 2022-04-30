@@ -4,7 +4,7 @@ import styled from 'styled-components';
 
 import Header from './Pages/Header';
 import Main from './Pages/Main';
-import Recommand from './Pages/Recommand';
+import Recommand from './Pages/Recommands/Recommand';
 import Footer from './Pages/Footer';
 import BalancEat from './Pages/BalancEat';
 import Userpage from './Pages/Userpage';
@@ -44,7 +44,7 @@ const App = () => {
 			<BrowserRouter>
 				<Header />
 				<Routes>
-					<Route path="/" element={<Main />} />
+					<Route exact path="/" element={<Main />} />
 					<Route path="/balancEat" element={<BalancEat />} />
 					<Route path="/recommand" element={<Recommand />} />
 					<Route path="/userpage" element={<Userpage />} />

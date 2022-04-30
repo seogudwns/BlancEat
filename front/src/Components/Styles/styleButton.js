@@ -14,7 +14,6 @@ export const StyledButton = styled(btn)`
 
 	line-height: 50px;
 	text-align: center;
-	background: #075f3a;
 	border-radius: 28px;
 	padding: 14px 28px;
 
@@ -27,7 +26,6 @@ export const StyledButton = styled(btn)`
 
 	/* Primary/Base */
 
-	background: #075f3a;
 	border-radius: 10px;
 
 	/* Inside auto layout */
@@ -44,3 +42,5 @@ export const StyledButton = styled(btn)`
 `;
 
 export default StyledButton;
+//	background: #075f3a;
+//	background: #075f3a;
