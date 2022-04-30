@@ -4,9 +4,11 @@ import { Recommend } from '../modules/RecommendAlgorithm.js';
 
 const nutritionRouter = Router();
 
+
 nutritionRouter.post('/nutrition', async (req, res, next) => {
 	try {
 		const { Age, Sex, Weight, foodList } = req.body;
+        console.log(Age, Sex, Weight, foodList);
 
 		if (foodList.length == 0) {
 			throw new Error('식사 정보를 입력해주세요.');
