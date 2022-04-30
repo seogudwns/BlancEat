@@ -1,5 +1,6 @@
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 
+// import { FoodInputContext } from './RecsysInputForm';
 import { FOODS } from './foodlist';
 import './styleTagInput.css';
 // import './styleTagInput.scss';
@@ -7,10 +8,10 @@ import './styleTagInput.css';
 
 import { WithContext as ReactTags } from 'react-tag-input';
 //const ReactTags = require('react-tag-input').WithOutContext;
-const suggestions = FOODS.map(country => {
+const suggestions = FOODS.map(food => {
 	return {
-		id: country,
-		text: country,
+		id: food,
+		text: food,
 	};
 });
 
@@ -21,7 +22,8 @@ const KeyCodes = {
 
 const delimiters = [KeyCodes.comma, KeyCodes.enter];
 
-const TagInput = () => {
+const TagInput = ({ dataHandler }) => {
+	// const { setMorning } = useContext(FoodInputContext);
 	const [tags, setTags] = useState([]);
 
 	const handleDelete = i => {
@@ -29,7 +31,11 @@ const TagInput = () => {
 	};
 
 	const handleAddition = tag => {
-		setTags([...tags, tag]);
+		if (suggestions.includes(tag)) {
+			const newList = [...tags, tag];
+			setTags(newList);
+			dataHandler(newList);
+		}
 	};
 
 	const handleDrag = (tag, currPos, newPos) => {

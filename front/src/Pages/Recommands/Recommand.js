@@ -1,7 +1,6 @@
 import React from 'react';
 
 import { RecommandProvider } from './RecommandContext';
-import RecsysOutputAddon from './RecsysOutputAddon';
 import ContentRecommand from './ContentRecommand';
 import { PageContainer } from '../Styles/stylePages';
 
@@ -10,7 +9,6 @@ const Recommand = () => {
 		<RecommandProvider>
 			<PageContainer fluid>
 				<ContentRecommand />
-				<RecsysOutputAddon />
 			</PageContainer>
 		</RecommandProvider>
 	);
