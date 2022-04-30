@@ -4,6 +4,7 @@ import { RecommandContext } from './RecommandContext';
 import { InputGroup, FormControl, Form, Col, Row } from 'react-bootstrap';
 import { FormContainer } from '../../Contents/Styles/styleContents';
 import Button from '../../Components/Button';
+import TagInput from './TagInput';
 
 const RecsysInputForm = () => {
 	const { dispatch } = useContext(RecommandContext);
@@ -16,6 +17,8 @@ const RecsysInputForm = () => {
 	};
 	return (
 		<FormContainer>
+			<TagInput />
+
 			<InputGroup className="mb-3">
 				<InputGroup.Text id="inputGroup-sizing-default">아침</InputGroup.Text>
 				<FormControl aria-label="Default" aria-describedby="inputGroup-sizing-default" />

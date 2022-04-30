@@ -13,7 +13,7 @@ const RecsysOutputAddon = () => {
 		return (
 			<ContentContainer fluid>
 				<ContentContainer fluid>
-					<ContentLabel title={title} subtitle={subtitle} subtitleColor="white" />
+					<ContentLabel title={title} subtitle={subtitle} />
 					<FoodCard />
 				</ContentContainer>
 			</ContentContainer>
