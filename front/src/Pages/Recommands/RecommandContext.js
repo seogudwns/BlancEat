@@ -1,17 +1,18 @@
 import React, { useReducer, createContext } from 'react';
+import { RecommandStates } from '../../Commons/consts';
 
-const initialState = { step: 'IDLE' };
+const initialState = { step: RecommandStates.IDLE };
 
 const reducer = (state, action) => {
 	switch (action.type) {
-		case 'IDLE':
-			return { ...state, step: 'IDLE' };
-		case 'INPUT':
-			return { ...state, step: 'INPUT' };
-		case 'OUTPUT':
-			return { ...state, step: 'OUTPUT' };
-		case 'RESET':
-			return { ...state, step: 'IDLE' };
+		case RecommandStates.IDLE:
+			return { ...state, step: RecommandStates.IDLE };
+		case RecommandStates.INPUT:
+			return { ...state, step: RecommandStates.INPUT };
+		case RecommandStates.OUTPUT:
+			return { ...state, step: RecommandStates.OUTPUT };
+		case RecommandStates.RESET:
+			return { ...state, step: RecommandStates.IDLE };
 		default:
 			throw new Error('Unsupported action type:', action.type);
 	}
