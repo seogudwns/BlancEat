@@ -23,15 +23,23 @@ class Recommend {
 			let temp2 = [temp[0] / 10, temp[1] / 10, temp[2] / 10];
 
 			temp = [
-				temp[0] - eat_nutrition[0],
-				temp[1] - eat_nutrition[1],
-				temp[2] - eat_nutrition[2],
+				Math.max(0, temp[0] - eat_nutrition[0]),
+				Math.max(0, temp[1] - eat_nutrition[1]),
+				Math.max(0, temp[2] - eat_nutrition[2]),
 			];
 
 			const nutrient_table = [
-				[temp[0] + temp2[0], temp[1] + temp2[1], temp[2] + temp2[2]],
+				[
+					Math.max(0, temp[0] + temp2[0]),
+					Math.max(0, temp[1] + temp2[1]),
+					Math.max(0, temp[2] + temp2[2]),
+				],
 				temp,
-				[temp[0] - temp2[0], temp[1] - temp2[1], temp[2] - temp2[2]],
+				[
+					Math.max(0, temp[0] - temp2[0]),
+					Math.max(0, temp[1] - temp2[1]),
+					Math.max(0, temp[2] - temp2[2]),
+				],
 			];
 
 			let recommend_food;
