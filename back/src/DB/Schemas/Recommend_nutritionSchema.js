@@ -3,11 +3,11 @@ import pkg from 'mongoose';
 const { Schema, model } = pkg;
 
 const Recommend_nutritionSchema = new Schema({
-	age: {
+	ageRange: {
 		type: String,
 		required: true,
 	},
-	Sex: {
+	sex: {
 		type: String,
 		required: true,
 	},

@@ -4,8 +4,13 @@ const { Schema, model } = pkg;
 
 const UserSchema = new Schema(
 	{
+		nickName: {
+			type: String,
+			required: false,
+			default: 'Anonymous',
+		},
 		user_id: {
-			type: string,
+			type: String,
 			required: true,
 		},
 		gender: {
@@ -13,7 +18,7 @@ const UserSchema = new Schema(
 			required: true,
 		},
 		weight: {
-			type: string,
+			type: String,
 			required: true,
 		},
 		age: {
