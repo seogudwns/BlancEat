@@ -35,30 +35,30 @@ class Recommend {
 		}
 		const personInfo = await Recommend_nutrition.getinfo({ ageRange, sex });
 
-		let temp = [
+		let person3Nut = [
 			personInfo.carbon * weight,
 			personInfo.protein * weight,
 			personInfo.fat * weight,
 		];
-		const temp2 = [temp[0] / 10, temp[1] / 10, temp[2] / 10];
+		const nutBound = [person3Nut[0] / 10, person3Nut[1] / 10, person3Nut[2] / 10];
 
-		temp = [
-			Math.max(0, temp[0] - eatNutrition[0]),
-			Math.max(0, temp[1] - eatNutrition[1]),
-			Math.max(0, temp[2] - eatNutrition[2]),
+		person3Nut = [
+			Math.max(0, person3Nut[0] - eatNutrition[0]),
+			Math.max(0, person3Nut[1] - eatNutrition[1]),
+			Math.max(0, person3Nut[2] - eatNutrition[2]),
 		];
 
 		const nutrientTable = [
 			[
-				Math.max(0, temp[0] + temp2[0]),
-				Math.max(0, temp[1] + temp2[1]),
-				Math.max(0, temp[2] + temp2[2]),
+				Math.max(0, person3Nut[0] + nutBound[0]),
+				Math.max(0, person3Nut[1] + nutBound[1]),
+				Math.max(0, person3Nut[2] + nutBound[2]),
 			],
-			temp,
+			person3Nut,
 			[
-				Math.max(0, temp[0] - temp2[0]),
-				Math.max(0, temp[1] - temp2[1]),
-				Math.max(0, temp[2] - temp2[2]),
+				Math.max(0, person3Nut[0] - nutBound[0]),
+				Math.max(0, person3Nut[1] - nutBound[1]),
+				Math.max(0, person3Nut[2] - nutBound[2]),
 			],
 		];
 
@@ -80,7 +80,6 @@ class Recommend {
 				nutrientTable[1][1],
 				nutrientTable[1][2],
 			]);
-			// console.log('leng =', recommendFood.length);
 		}
 
 		if (isResult === true) {
@@ -100,7 +99,6 @@ class Recommend {
 				nutrientTable[0][1],
 				nutrientTable[0][2],
 			]);
-			// console.log('leng2 = ', recommendFood.length);
 		}
 
 		if (isResult === true) {
@@ -120,8 +118,6 @@ class Recommend {
 			);
 			result.push(recommendFood[parseInt(Math.random() * recommendFood.length)]);
 		}
-
-		// console.log(result);
 
 		return { personInfo, result };
 	}
