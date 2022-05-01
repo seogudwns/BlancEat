@@ -1,6 +1,8 @@
+import path from 'path';
 import swaggerJsdoc from 'swagger-jsdoc';
 import swaggerUi from 'swagger-ui-express';
 
+const __dirname = path.resolve();
 const options = {
 	swaggerDefinition: {
 		openapi: '3.0.0',
@@ -16,7 +18,7 @@ const options = {
 			},
 		],
 	},
-	apis: [],
+	apis: [`./src/modules/elice4th10-Elice_team10-1.0.0-swagger.yaml`, `./src/index.js`],
 };
 
 const specs = swaggerJsdoc(options);
