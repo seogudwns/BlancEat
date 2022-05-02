@@ -25,7 +25,8 @@ paths:
                                         type: string
             responses:
                 '200':
-                    description: 음식 별 섭취 영양소, 유저의 일일 권장섭취량, 추천 음식
+                    description: 음식 별 섭취 영양소, 유저의 일일 권장섭취량, 추천 음식.
+                        영양소 섭취가 부족할 때, 적절할 때, 넘칠 때의 경고 문구가 다르게 나옴
                     content:
                         application/json:
                             schema:
