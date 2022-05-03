@@ -7,7 +7,9 @@ const nutritionRouter = Router();
 // recommendSystem
 nutritionRouter.post('/nutrition', async (req, res, next) => {
 	try {
-		const { age, sex, weight, foodList } = req.body;
+		const { age, sex, weight, breakfast, lunch, dinner, snack } = req.body;
+
+		const foodList = [...breakfast, ...lunch, ...dinner, ...snack];
 
 		if (foodList.length == 0) {
 			throw new Error('식사 정보를 입력해주세요.');
@@ -20,6 +22,8 @@ nutritionRouter.post('/nutrition', async (req, res, next) => {
 		if (getFoodList.errorMessage) {
 			throw new Error(getFoodList.errorMessage);
 		}
+
+		// TODO 유저가 만들어진 이후 토큰이 있을 경우 해당 유저의 음식리스트에 등록시간과 아점저 + 간식을 추가시켜줘야 함.
 
 		let isLogin = false; //! 로그인 기능을 만든 이후 수정해야함.
 		const { personInfo, result } = await Recommend.recommendSystem(
