@@ -14,7 +14,7 @@ const RecsysInputForm = () => {
 	const [snack, setSnack] = useState([]);
 	const [showAlert, setShowAlert] = useState(false);
 	const { dispatch } = useContext(RecommandContext);
-	const { setFoodData } = useContext(FoodDataContext);
+	const { postData } = useContext(FoodDataContext);
 
 	/* 입력데이터 post, 결과 data get */
 	const handleClickSubmit = () => {
@@ -33,14 +33,14 @@ const RecsysInputForm = () => {
 			//return <></>;
 			setShowAlert(true);
 		} else {
-			const FOODINFORM = [...breakfast, ...lunch, ...dinner, ...snack];
-			// console.log(breakfast);
-			// console.log(lunch);
-			// console.log(dinner);
-			// console.log(snack);
-			// console.log('RecsysInputForm', FOODINFORM);
-			setFoodData(FOODINFORM);
-			dispatch({ type: 'OUTPUT' });
+			const inputData = [...breakfast, ...lunch, ...dinner, ...snack];
+
+			if (postData(inputData)) {
+				//성공시 다음 단계.
+				dispatch({ type: 'OUTPUT' });
+			} else {
+				//실패시 에러 처리단계... try catch?
+			}
 		}
 	};
 	const handleClickCancel = () => {

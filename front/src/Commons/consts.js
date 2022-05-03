@@ -44,3 +44,15 @@ export const NutInfoWords = {
 		return this[key];
 	},
 };
+
+/* 배열 유효성 체크 */
+export const ValidateArray = arr => {
+	if (Array.isArray(arr) && arr.length !== 0) {
+		//&& arr.length !== 0
+		// 정상적이며 비어있지 않은 배열??
+		//길이체크를 하지 못함
+		return true;
+	}
+	// console.log(arr.length, arr);
+	return false;
+};

@@ -14,9 +14,9 @@ const RecsysOutputAddon = () => {
 	// let newList = [];
 	// useEffect(()=>{},foodData);
 	useEffect(() => {
-		console.log('RecsysOutputAddon', foodData);
+		// console.log('RecsysOutputAddon', foodData);
 		// newList = [...foodData];
-	}, foodData);
+	}, foodData); //이제는 굳이 useEffect가 필요한지?
 
 	if (step === 'OUTPUT') {
 		return (
@@ -24,7 +24,7 @@ const RecsysOutputAddon = () => {
 				<ContentContainer fluid>
 					<ContentLabel title={title} subtitle={subtitle} />
 					<br />
-					{foodData ? <h1>{foodData[0].id}</h1> : <h1>없나봐</h1>}
+					{foodData ? <h1>{foodData[0]?.foodName}</h1> : <h1>없나봐</h1>}
 				</ContentContainer>
 			</ContentContainer>
 		);

@@ -8,7 +8,7 @@ const StyledHeaderContainer = styled(Container)`
 	color: #ffffff;
 	background-color: #075f3a;
 	.nav-link {
-		font-family: 'Roboto', sans-serif;
+		font-family: 'Elice Digital Baeum';
 		color: #ffffff !important;
 	}
 `;
