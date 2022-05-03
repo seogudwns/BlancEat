@@ -11,21 +11,9 @@ import {
 } from 'chart.js';
 import { Line } from 'react-chartjs-2';
 import faker from 'faker';
-
+import { options_LineChart } from './ChartData';
 const ContnetLineChart = () => {
 	ChartJS.register(CategoryScale, LinearScale, PointElement, LineElement, Title, Tooltip, Legend);
-
-	const options = {
-		responsive: true,
-		plugins: {
-			legend: {
-				display: false,
-			},
-			title: {
-				display: false,
-			},
-		},
-	};
 
 	const labels = ['4월2일', '4월3일', '4월4일', '4월5일', '4월6일', '4월7일', '4월8일'];
 
@@ -40,7 +28,7 @@ const ContnetLineChart = () => {
 		],
 	};
 
-	return <Line data={data} options={options} />;
+	return <Line data={data} options={options_LineChart} />;
 };
 
 export default ContnetLineChart;
