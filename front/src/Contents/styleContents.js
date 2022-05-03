@@ -66,5 +66,5 @@ export const StyledTeamBox = styled.div`
 	width: 92%;
 	border: 1px solid black;
 	margin: 30px;
-	height: 60px;
+	height: 70px;
 `;

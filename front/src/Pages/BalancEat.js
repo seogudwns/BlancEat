@@ -23,6 +23,7 @@ const BalancEat = () => {
 		border-radius: ${props => (props.borderRadius ? props.borderRadius : 'none')};
 	`;
 	const StyledH4 = styled.h4`
+		text-align: center;
 		padding: ${props => props.padding};
 	`;
 	const StyledH1 = styled.h1`
@@ -30,9 +31,9 @@ const BalancEat = () => {
 		text-align: ${props => (props.textAlign ? props.textAlign : 'none')};
 	`;
 	return (
-		<PageContainer>
+		<PageContainer fluid>
 			<StyledContainer>
-				<div style={{ paddingRight: '50px', display: 'block' }}>
+				<div style={{ paddingRight: '50px', display: 'block', backgroundColor: '#f0f1f3' }}>
 					<StyledImg
 						width="1200px"
 						margin="10px 0px 0px 0px"
@@ -59,7 +60,7 @@ const BalancEat = () => {
 					height="500px"
 					src="/img/당뇨병있을경우 다른 질병이 있을 확률.png"
 				/>
-				<div style={{ paddingRight: '50px' }}>
+				<div style={{ paddingRight: '50px', backgroundColor: '#f0f1f3' }}>
 					<h1 style={{ fontSize: '30px', textAlign: 'center' }}>비만과 질병관계</h1>
 					<StyledH4 padding="30px">
 						왼쪽은 비만과 질병의 연관성입니다. 당뇨병이 가장 관련성이 높습니다.
@@ -72,7 +73,7 @@ const BalancEat = () => {
 			</StyledContainer>
 
 			<StyledContainer margin="30px 0 0 30px">
-				<div>
+				<div style={{ backgroundColor: '#f0f1f3' }}>
 					<StyledH1 fontSize="30px" textAlign="center">
 						비만과 음식과의 연관성
 					</StyledH1>
