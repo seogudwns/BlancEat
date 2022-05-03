@@ -8,8 +8,6 @@ import Recommand from './Pages/Recommands/Recommand';
 import Footer from './Pages/Footer';
 import BalancEat from './Pages/BalancEat';
 import Userpage from './Pages/Userpage';
-import RegisterForm from './component/user/RegisterForm';
-import FindPw from './component/user/FindPw';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
 const Container = styled.div`
@@ -48,8 +46,6 @@ const App = () => {
 					<Route path="/balancEat" element={<BalancEat />} />
 					<Route path="/recommand" element={<Recommand />} />
 					<Route path="/userpage" element={<Userpage />} />
-					<Route path="/register" element={<RegisterForm />} />
-					<Route path="/findpw" element={<FindPw />} />
 				</Routes>
 				<Footer />
 			</BrowserRouter>
