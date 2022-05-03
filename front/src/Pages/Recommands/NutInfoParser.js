@@ -7,7 +7,7 @@ const NutInfoParser = foodData => {
 		ENERGY: { Cal: foodData.Cal },
 		MAJORNUTS: { Carbon: foodData.Carbon },
 		SNF: { Sugar: foodData.Sugar, Fiber: foodData.Fiber },
-		INORGANIC: { Ca: foodData.Ca, Na: foodData.Na, Fe: foodData.Fe, Zn: foodData.Zn },
+		INORGANICS: { Ca: foodData.Ca, Na: foodData.Na, Fe: foodData.Fe, Zn: foodData.Zn },
 		VITAMINS: {
 			VitA: foodData.VitA,
 			VitB6: foodData.VitB6,

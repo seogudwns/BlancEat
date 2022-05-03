@@ -23,11 +23,11 @@ const RecsysOutput = ({}) => {
 	const handleClick = () => {
 		dispatch({ type: 'RESET' });
 	};
-	/*예도 리팩토링. foodName을 id로 사용, FoodCard 자동으로 뿌리도록 변경. */
+
 	const handleDetail = e => {
 		e.preventDefault();
 		console.log(e.target, e.target.id);
-		setSelectedFoodData(foodData[e.target.id]);
+		setSelectedFoodData({ ...foodData[e.target.id] });
 		setShowDialog(true);
 	};
 
@@ -44,12 +44,7 @@ const RecsysOutput = ({}) => {
 		<SubContainer fluid>
 			<ContentLabel title={title} subtitle={subtitle} />
 
-			<CardContainerRow>
-				{drawFoodCards(foodData)}
-				{/* <FoodCard id="0" clickHandler={handleDetail} foodData={foodData[0]} />
-				<FoodCard id="1" clickHandler={handleDetail} foodData={foodData[1]} />
-				<FoodCard id="2" clickHandler={handleDetail} foodData={foodData[2]} /> */}
-			</CardContainerRow>
+			<CardContainerRow>{drawFoodCards(foodData)}</CardContainerRow>
 			<LargeButton variant="success" onClick={handleClick}>
 				<h3>돌아가기 {'>'}</h3>
 			</LargeButton>
@@ -57,7 +52,7 @@ const RecsysOutput = ({}) => {
 				show={showDialog}
 				setShow={setShowDialog}
 				title={'음식정보'}
-				main={<FoodInformationForm FoodData={selectedFoodData} />}
+				main={<FoodInformationForm foodData={selectedFoodData} />}
 			/>
 		</SubContainer>
 	);
