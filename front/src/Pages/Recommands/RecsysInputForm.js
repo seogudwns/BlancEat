@@ -81,7 +81,7 @@ const RecsysInputForm = () => {
 					식사 정보가 입력되지 않았습니다. 정보를 입력해주세요.
 					<hr />
 					<div className="d-flex justify-content-end">
-						<Button onClick={() => setShowAlert(false)} variant="outline-info">
+						<Button fullWidth size="small" onClick={() => setShowAlert(false)}>
 							확 인
 						</Button>
 					</div>

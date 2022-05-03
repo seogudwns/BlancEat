@@ -52,9 +52,11 @@ const Header = () => {
 							</Navbar.Collapse>
 
 							<Button
-								variant="outline-light"
+								outline
+								color="white_85"
+								// variant="outline-light"
 								onClick={() => setShow(true)}
-								style={{ marginLeft: '1em' }}
+								style={{ marginLeft: '1rem' }}
 							>
 								Sign in
 							</Button>

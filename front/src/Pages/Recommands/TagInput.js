@@ -2,9 +2,11 @@ import React, { useContext, useState } from 'react';
 
 // import { FoodInputContext } from './RecsysInputForm';
 import { FOODS } from './foodlist';
-import './styleTagInput.css';
+// import './styleTagInput.css';
+// import { ReactTagStyle } from './styleTagInput';
 // import './styleTagInput.scss';
 // import styles from "./ReactTags.module.scss";
+// import './ReactTags.css';
 
 import { WithContext as ReactTags } from 'react-tag-input';
 //const ReactTags = require('react-tag-input').WithOutContext;
@@ -66,10 +68,11 @@ const TagInput = ({ dataHandler }) => {
 				handleDrag={handleDrag}
 				handleTagClick={handleTagClick}
 				onClearAll={onClearAll}
-				inputFieldPosition="bottom"
+				// inputFieldPosition="bottom"
 				autocomplete
 				allowDeleteFromEmptyInput
 				clearAll={true}
+				inline
 			/>
 		</div>
 	);

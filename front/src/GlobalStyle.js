@@ -56,48 +56,52 @@ export const GlobalStyle = createGlobalStyle`
 }
 
   body {
+	ul {
+		list-style:none;
+	}
 	.bold		{ font-weight: 700 }
 	.bolder		{ font-weight: 800 }
 	.light		{ font-weight: 300 }
+	
 	h1 {
 		font-size: 3.5rem; 
 		font-weight: 700;
 		line-height: 130%;
 		letter-spacing: 0.5px;
-	  }
+	}
 	  
-	  h2 {
+	h2 {
 		font-size: 2rem;  
 		font-weight: 400;
 		line-height: 120%;
 		letter-spacing: 0.5px;
-	  }
-	  h3 {
+	}
+	h3 {
 		font-size: 1.625rem;
 		font-weight: 400;
 		line-height: 120%;
 		letter-spacing: 0.5px;
-	  }
-	  h4 {
+	}
+	h4 {
 		font-size: 1.375rem;
 		font-weight: 400;
 		line-height: 120%;
 		letter-spacing: 0.5px;
-	  }
-	  h5 {
+	}
+	h5 {
 		font-size: 1.25rem; 
 		font-weight: 400;
 		line-height: 120%;
 		letter-spacing: 0.5px;
-	  }
-	  h6 {
+	}
+	h6 {
 		font-size: 1.125rem;
 		font-weight: 400;
 		line-height: 120%;
 		letter-spacing: 0.5px;
-	  }
+	}
 	  
-	  p {
+	p {
 		font-size: 1.125rem;
 		font-weight: 400;
 		line-height: 150%;

@@ -3,7 +3,8 @@ import { useNavigate, Link } from 'react-router-dom';
 
 import React, { useState } from 'react';
 import { StyledSection, StyledText } from '../../Contents/styleContents';
-import { StyledButton } from '../../Components/Styles/styleButton';
+// import { StyledButton } from '../../Components/Styles/styleButton';
+import Button from '../../Components/Button';
 import { PageContainer } from '../../Pages/Styles/stylePages';
 import * as Api from '../../Api';
 
@@ -76,9 +77,9 @@ const FindPw = () => {
 							</a>
 							<Link to="/register">아직 회원이 아니십니까?</Link>
 						</Col>
-						<StyledButton type="submit" onClick={submitFindPw} disabled={!isEmailValid}>
+						<Button type="submit" onClick={submitFindPw} disabled={!isEmailValid}>
 							이메일로 인증 번호 받기
-						</StyledButton>
+						</Button>
 					</div>
 				</Form>
 			</StyledSection>

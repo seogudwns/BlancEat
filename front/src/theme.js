@@ -1,4 +1,12 @@
 const theme = {
+	palette: {
+		blue: '#228b36',
+		gray: '#495057',
+		pink: '#f06595',
+		primary: '#075F3A',
+		secondary: '#023D1A',
+		white_85: 'rgba(252, 251, 250, 0.85)',
+	},
 	primary_color: '#075F3A',
 	primary_variant_color: '#023D1A',
 	secondary_color: '#023D1A',
