@@ -20,12 +20,12 @@ const StyledGraphInfoText = styled.span`
 	font-size: 30px;
 	font-weight: bold;
 `;
-const ContentGraph = ({ num, title, color, width, height }) => {
+const ContentGraph = ({ num, title, color, width, height, data }) => {
 	return (
 		<>
 			<StyledGraphInfo height={height} minWidth="500px" width={width} backgroundColor={color}>
 				<StyledGraphInfoText>{title}</StyledGraphInfoText>
-				{num === 1 ? <ContentBarChart /> : <ContnetLineChart />}
+				{num === 1 ? <ContentBarChart data={data} /> : <ContnetLineChart data={data} />}
 			</StyledGraphInfo>
 		</>
 	);
