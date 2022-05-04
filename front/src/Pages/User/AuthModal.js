@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
 import LoginForm from './LoginForm';
 import RegisterForm from './RegisterForm';
-import ModalComp from '../../ModalComp';
-import ModalPortal from '../../ModalPortal';
+import ModalComp from '../../Components/ModalComp';
+import ModalPortal from '../../Components/ModalPortal';
 
 const AuthModal = ({ show, setShow }) => {
 	const [isLoginForm, setIsLoginForm] = useState(true);

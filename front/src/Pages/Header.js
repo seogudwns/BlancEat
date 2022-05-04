@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 import { Container, Navbar, Nav } from 'react-bootstrap';
 import React, { useState, useEffect } from 'react';
-import AuthModal from '../component/user/AuthModal';
+import AuthModal from './User/AuthModal';
 import Button from '../Components/Button';
 
 const StyledHeaderContainer = styled(Container)`
