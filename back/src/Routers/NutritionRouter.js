@@ -5,9 +5,11 @@ import { MealService } from '../services/MealService.js';
 
 const nutritionRouter = Router();
 
-// recommendSystem get, post
-
-nutritionRouter.get('/nutrition', async (req, res, next) => {
+//! 버튼?...
+// 결과를 보는 화면은 연산을 해야하니... data를 뿌려주는 것은 get으로 뿌려버림..
+// 저장을 하고싶으면... 저장하기 버튼을 누르면 back에서는 get,post..
+// recommendSystem
+nutritionRouter.post('/nutrition', async (req, res, next) => {
 	try {
 		const { age, sex, weight, breakfast, lunch, dinner, snack } = req.query;
 
@@ -33,13 +35,12 @@ nutritionRouter.get('/nutrition', async (req, res, next) => {
 		);
 
 		const bundle = { getFoodList, personInfo, result };
-		
+
 		res.status(200).json(bundle);
 	} catch (error) {
 		next(error);
 	}
 });
-
 
 nutritionRouter.post('/nutrition', async (req, res, next) => {
 	try {
@@ -53,17 +54,17 @@ nutritionRouter.post('/nutrition', async (req, res, next) => {
 				continue;
 			} else {
 				if (i == 0) {
-					const meal_time = "breakfast";
+					const meal_time = 'breakfast';
 				} else if (i == 1) {
-					const meal_time = "lunch";
+					const meal_time = 'lunch';
 				} else if (i == 2) {
-					const meal_time = "dinner";
+					const meal_time = 'dinner';
 				} else if (i == 3) {
-					const meal_time = "snack";
+					const meal_time = 'snack';
 				}
-	
+
 				const foodList = meals[i];
-	
+
 				await MealService.createMealData({ user_id, meal_time, foodList });
 			}
 		}
