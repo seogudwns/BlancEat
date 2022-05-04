@@ -22,7 +22,6 @@ const Footer = () => {
 				<br />
 				이메일 : elice4thdata@gmail.com
 			</StyledText>
-			<br />
 			<StyledText ta="right" color="#6e726e">
 				License 투머치코더
 			</StyledText>
