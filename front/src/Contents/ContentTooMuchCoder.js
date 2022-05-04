@@ -1,6 +1,7 @@
 import * as Content from './styleContents';
 import styled from 'styled-components';
 import { Card } from 'react-bootstrap';
+import { StyledToomuchBox } from './ContentUserPageText';
 const teamMembers = [
 	['홍일도', 'FRONTEND', 'theohong@gmail.com', '/img/홍일도님_프로필.jpg'],
 	['배주영', 'BACKEND', 'baejuyoung49@gmail.com', '/img/배주영님_프로필.png'],
@@ -59,6 +60,9 @@ const ContentTooMuchCoder = () => {
 
 	return (
 		<div>
+			<div style={{ margin: '20px 0px 0px 30px', display: 'flex' }}>
+				<StyledToomuchBox>우리가 만들었습니다</StyledToomuchBox>
+			</div>
 			{teamMembers.map((teamMember, index) => (
 				<TeamMember key={index} teamMember={teamMember} />
 			))}

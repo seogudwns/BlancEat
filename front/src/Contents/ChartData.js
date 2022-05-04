@@ -72,8 +72,28 @@ export const data2 = {
 		},
 	],
 };
-
+export const data3 = {
+	// 각 막대별 라벨
+	labels: ['뇌졸증', '심장병', '고혈압', '당뇨'],
+	datasets: [
+		{
+			borderWidth: 1, // 테두리 두께
+			data: [3, 5, 22, 25], // 수치
+		},
+	],
+};
+export const data4 = {
+	// 각 막대별 라벨
+	labels: ['뇌졸증', '심장병', '고혈압'],
+	datasets: [
+		{
+			borderWidth: 1, // 테두리 두께
+			data: [10, 18, 28], // 수치
+		},
+	],
+};
 export const options_BarChart = {
+	responsive: true,
 	plugins: {
 		legend: {
 			position: 'none',

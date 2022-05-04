@@ -11,17 +11,13 @@ import {
 	Legend,
 } from 'chart.js';
 import { Bar } from 'react-chartjs-2';
-import { data, data2, options_BarChart } from './ChartData';
-const ContentBarChart = ({ blanceEat }) => {
+import { options_BarChart } from './ChartData';
+const ContentBarChart = ({ data }) => {
 	ChartJS.register(CategoryScale, LinearScale, BarElement, Title, Tooltip, Legend);
 
 	return (
 		<>
-			{blanceEat ? (
-				<Bar options={options_BarChart} data={data2} />
-			) : (
-				<Bar options={options_BarChart} data={data} />
-			)}
+			<Bar options={options_BarChart} data={data} />
 		</>
 	);
 };
