@@ -1,11 +1,11 @@
 import { Form } from 'react-bootstrap';
 
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { StyledText } from '../../Contents/styleContents';
 import { StyledButton } from '../../Components/Styles/styleButton';
 import * as Api from '../../Commons/Api';
 
-const RegisterForm = () => {
+const RegisterForm = ({ setShow }) => {
 	const [email, setEmail] = useState('');
 	const [pw, setPw] = useState('');
 	const [confirmPw, setConfirmPw] = useState('');
@@ -14,8 +14,23 @@ const RegisterForm = () => {
 	const [age, setAge] = useState(0);
 	const [sex, setSex] = useState('');
 
-	const submitRegisterForm = evt => {
+	const submitRegisterForm = async evt => {
 		evt.preventDefault();
+		try {
+			await Api.post('user/register', {
+				email: email,
+				password: pw,
+				checkPassword: confirmPw,
+				nickname: nickname,
+				age: Number(age),
+				weight: Number(weight),
+				sex: sex,
+			});
+			setShow(false);
+			alert('회원 가입 완료');
+		} catch (err) {
+			console.log(err.message);
+		}
 	};
 
 	const validateEmail = email => {
