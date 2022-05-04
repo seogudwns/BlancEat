@@ -3,7 +3,6 @@ import { User } from './Models/UserModel.js';
 import { Meal } from './Models/MealModel.js';
 import { Nutrition } from './Models/NutritionModel.js';
 import { Recommend_nutrition } from './Models/Recommend_nutritionModel.js';
-import { Meal } from './Models/MealModel.js';
 
 const URL = process.env.MongoDB_URL || '주소에 접속이 되지 않았습니다.';
 
