@@ -36,7 +36,7 @@ const TagInput = ({ dataHandler }) => {
 	};
 
 	const handleAddition = tag => {
-		// getSuggestFoodList([])
+		// getSuggestFoodList(tag);
 		if (suggestions.includes(tag)) {
 			const newList = [...tags, tag];
 			setTags(newList);
