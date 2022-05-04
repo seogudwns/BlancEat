@@ -2,7 +2,7 @@ import express from 'express';
 import cors from 'cors';
 import { swaggerUi, specs } from './modules/swagger.js';
 import { nutritionRouter } from './Routers/NutritionRouter.js';
-
+import { userRouter } from './Routers/UserRouter.js';
 const app = express();
 
 app.use(cors());
@@ -13,7 +13,7 @@ app.use(express.urlencoded({ extended: false }));
 // User, Recommend and other Services.
 
 // swagger api
-app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(specs, {explorer: true }));
+app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(specs, { explorer: true }));
 
 /**
  * @swagger
@@ -21,6 +21,7 @@ app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(specs, {explorer: true }))
  *   name: Nutritions
  *   description: 음식 영양소 조회
  */
+app.use(userRouter);
 app.use(nutritionRouter);
 
 export { app };

@@ -4,6 +4,9 @@ import { Recommend } from '../modules/RecommendAlgorithm.js';
 
 const nutritionRouter = Router();
 
+//! 버튼?...
+// 결과를 보는 화면은 연산을 해야하니... data를 뿌려주는 것은 get으로 뿌려버림..
+// 저장을 하고싶으면... 저장하기 버튼을 누르면 back에서는 get,post..
 // recommendSystem
 nutritionRouter.post('/nutrition', async (req, res, next) => {
 	try {

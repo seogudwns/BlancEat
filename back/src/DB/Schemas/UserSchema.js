@@ -26,22 +26,12 @@ const UserSchema = new Schema(
 			required: true,
 		},
 		weight: {
-			type: String,
+			type: Number,
 			required: true,
 		},
 		sex: {
 			type: String,
 			required: true,
-		},
-		mealPlan: {
-			type: Array,
-			required: false,
-			default: [],
-		},
-		mealPlanTime: {
-			type: Array,
-			required: false,
-			default: [],
 		},
 	},
 	{ timestamps: true },
