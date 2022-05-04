@@ -2,9 +2,13 @@ import { Router } from 'express';
 import { NutritionService } from '../Services/NutritionService.js';
 import { Recommend } from '../modules/RecommendAlgorithm.js';
 import { MealService } from '../services/MealService.js';
+import { login_required } from '../MiddleWare/login_require.js';
 
 const nutritionRouter = Router();
 
+//! 버튼?...
+// 결과를 보는 화면은 연산을 해야하니... data를 뿌려주는 것은 get으로 뿌려버림..
+// 저장을 하고싶으면... 저장하기 버튼을 누르면 back에서는 get,post..
 // recommendSystem get, post
 
 nutritionRouter.get('/nutrition', async (req, res, next) => {
@@ -33,18 +37,18 @@ nutritionRouter.get('/nutrition', async (req, res, next) => {
 		);
 
 		const bundle = { getFoodList, personInfo, result };
-		
+
 		res.status(200).json(bundle);
 	} catch (error) {
 		next(error);
 	}
 });
 
-
-nutritionRouter.post('/nutrition', async (req, res, next) => {
+nutritionRouter.post('/nutrition', login_required, async (req, res, next) => {
 	try {
 		const { breakfast, lunch, dinner, snack } = req.body;
 		const meals = [breakfast, lunch, dinner, snack];
+		const user_id = req.currentUserId;
 
 		// TODO 유저가 만들어진 이후 토큰이 있을 경우 해당 유저의 음식리스트에 등록시간과 아점저 + 간식을 추가시켜줘야 함.
 
@@ -53,22 +57,25 @@ nutritionRouter.post('/nutrition', async (req, res, next) => {
 				continue;
 			} else {
 				if (i == 0) {
-					const meal_time = "breakfast";
+					const time = 'breakfast';
+					const foodList = meals[i];
+					await MealService.createMealData({ user_id, foodList, time });
 				} else if (i == 1) {
-					const meal_time = "lunch";
+					const time = 'lunch';
+					const foodList = meals[i];
+					await MealService.createMealData({ user_id, foodList, time });
 				} else if (i == 2) {
-					const meal_time = "dinner";
+					const time = 'dinner';
+					const foodList = meals[i];
+					await MealService.createMealData({ user_id, foodList, time });
 				} else if (i == 3) {
-					const meal_time = "snack";
+					const time = 'snack';
+					const foodList = meals[i];
+					await MealService.createMealData({ user_id, foodList, time });
 				}
-	
-				const foodList = meals[i];
-	
-				await MealService.createMealData({ user_id, meal_time, foodList });
 			}
 		}
-
-		res.status(201);
+		res.status(201).send('음식 정보 저장 완료');
 	} catch (error) {
 		next(error);
 	}
