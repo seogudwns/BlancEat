@@ -19,21 +19,21 @@ const ContentRecommand = () => {
 	/*TODO : api functions */
 
 	/*입력데이터 전송후 결과 수신 */
-	const postData = async (inputData = []) => {
-		//const postData = (inputData = []) => {
+	//const postData = async (inputData = []) => {
+	const postData = (inputData = []) => {
 		//수신된 데이터를 더미데이터 FOODNUTS로 가정하고 일단 구현
-		if (ValidateArray(inputData)) {
-			console.log('postData, input: ', inputData);
-			const sendData = {
-				Age: '15-18',
-				Sex: 'F',
-				Weight: 60,
-				foodList: ['불고기피자', '양념치킨'],
-			};
-			const result = await Api.post('nutrition/', sendData);
-			console.log('-' * 30);
-			console.log(result);
-		}
+		// if (ValidateArray(inputData)) {
+		// 	console.log('postData, input: ', inputData);
+		// 	const sendData = {
+		// 		Age: '15-18',
+		// 		Sex: 'F',
+		// 		Weight: 60,
+		// 		foodList: ['불고기피자', '양념치킨'],
+		// 	};
+		// 	const result = await Api.post('nutrition/', sendData);
+		// 	console.log('-' * 30);
+		// 	console.log(result);
+		// }
 
 		//송수신 아직 미구현
 		//receiveData = await API.post(inputData);
