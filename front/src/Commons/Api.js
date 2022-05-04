@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-const portNumber = '5001';
+const portNumber = '5000';
 const url = `http://${window.location.hostname}:${portNumber}/`;
 
 const get = async (endpoint, params = '') => {

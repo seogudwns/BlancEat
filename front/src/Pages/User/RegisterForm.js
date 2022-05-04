@@ -3,7 +3,7 @@ import { Form } from 'react-bootstrap';
 import React, { useState } from 'react';
 import { StyledText } from '../../Contents/styleContents';
 import { StyledButton } from '../../Components/Styles/styleButton';
-import * as Api from '../../Api';
+import * as Api from '../../Commons/Api';
 
 const RegisterForm = () => {
 	const [email, setEmail] = useState('');
