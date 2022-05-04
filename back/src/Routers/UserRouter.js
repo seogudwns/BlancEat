@@ -1,12 +1,14 @@
 // is? ... @sindresorhus/is 로부터 받는데 headertype에 대한 경고? 인 것 같다.
 // Router - express, middleWare, service, tokenblacklist..
 import { Router } from 'express';
-import { userService } from '../Services/UserService';
+import { userService } from '../Services/UserService.js';
+import { Meal } from '../DB/index.js';
+import { login_required } from '../MiddleWare/login_require.js';
 import is from '@sindresorhus/is';
 
 const userRouter = Router();
 
-// 아이디 등록.
+// 아이디 등록.. done
 userRouter.post('/user/register', async (req, res, next) => {
 	try {
 		if (is.emptyObject(req.body)) {
@@ -14,7 +16,6 @@ userRouter.post('/user/register', async (req, res, next) => {
 		}
 
 		const { nickName, email, password, checkPassword, age, weight, sex } = req.body;
-		// 닉네임, 이메일, 비밀번호(비밀번호 확인), 나이, 몸무게, 성별
 
 		if (password !== checkPassword) {
 			throw new Error('비밀번호가 일치하지 않습니다.');
@@ -39,18 +40,57 @@ userRouter.post('/user/register', async (req, res, next) => {
 	}
 });
 
+// 로그인.. done
 userRouter.post('/user/login', async (req, res, next) => {
 	try {
 		const { email, password } = req.body;
 
-		const user = await userService.getUser({ email, password });
+		const loginuser = await userService.getUser({ email, password });
 
-		if (user.errMessage) {
+		if (loginuser.errMessage) {
 			throw new Error(errMessage);
 		}
 
-		res.status(200).json(user);
+		res.status(200).json(loginuser);
 	} catch (err) {
 		next(err);
 	}
 });
+
+// 정보 변경.
+userRouter.put('/user/infoexchange/:id', login_required, async (req, res, next) => {
+	try {
+		const { password, nickName, newPassword, age, weight } = req.body;
+		const id = req.currentUserId;
+
+		const checgeUser = await setUser({ id, password, nickName, newPassword, age, weight });
+
+		if (checgeUser.errMessage) {
+			throw new Error(checgeUser.errMessage);
+		}
+	} catch (err) {
+		next(err);
+	}
+});
+
+//! NutritionRouter에 recommend는 어떻게 하지..?..
+
+//그동안 먹은 음식 정보 보내주기.
+userRouter.post('/user/mealdata', login_required, async (req, res, next) => {
+	try {
+		console.log(1);
+	} catch (err) {
+		next(err);
+	}
+});
+
+//음식 정보로부터 모든 영양소 합 보내주기... //! db에서 음식 정보가 삭제될 수도 있을까?..
+userRouter.get('/user/:meal_id', login_required, async (req, res, next) => {
+	try {
+		console.log(1);
+	} catch (err) {
+		next(err);
+	}
+});
+
+export { userRouter };
