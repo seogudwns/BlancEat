@@ -61,7 +61,8 @@ userRouter.get('/user/login', async (req, res, next) => {
 // 정보 변경.. done.
 userRouter.put('/user/infoexchange/:id', login_required, async (req, res, next) => {
 	try {
-		const { id, updateInfo } = req.body;
+		const { updateInfo } = req.body;
+		const id = req.params;
 		const checkId = req.currentUserId;
 		const changeUser = await userService.setUser(id, {
 			checkId,
@@ -81,9 +82,21 @@ userRouter.put('/user/infoexchange/:id', login_required, async (req, res, next) 
 //! NutritionRouter에 recommend는 어떻게 하지..?..
 
 //그동안 먹은 음식 정보 보내주기.
-userRouter.post('/user/mealdata', login_required, async (req, res, next) => {
+userRouter.post('/user/mealdata/:id', login_required, async (req, res, next) => {
 	try {
-		console.log(1);
+		const id = req.params;
+		const checkId = req.currentUserId;
+
+		if (id !== checkId) {
+			throw new Error('잘못된 토큰입니다.');
+		}
+
+		const eatenMenu = await Meal.findAll({ user_id: id });
+		if (eatenMenu.length === 0) {
+			throw new Error('매뉴가 없습니다.');
+		}
+
+		res.status(200).json(eatenMenu);
 	} catch (err) {
 		next(err);
 	}
