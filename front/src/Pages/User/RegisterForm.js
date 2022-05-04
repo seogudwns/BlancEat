@@ -180,8 +180,8 @@ const RegisterForm = ({ setShow }) => {
 						setSex(evt.target.value);
 					}}
 				>
-					<Form.Check inline label="남성" value="male" type="radio" name="sex" />
-					<Form.Check inline label="여성" value="female" type="radio" name="sex" />
+					<Form.Check inline label="남성" value="M" type="radio" name="sex" />
+					<Form.Check inline label="여성" value="F" type="radio" name="sex" />
 				</div>
 
 				{!isSexValid ? (

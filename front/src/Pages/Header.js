@@ -1,8 +1,11 @@
 import styled from 'styled-components';
 import { Container, Navbar, Nav } from 'react-bootstrap';
+import { useRecoilValue, useRecoilState } from 'recoil';
+
 import React, { useState, useEffect } from 'react';
 import AuthModal from './User/AuthModal';
 import Button from '../Components/Button';
+import { userIdState, loginState } from './User/UserAtom';
 
 const StyledHeaderContainer = styled(Container)`
 	color: #ffffff;
@@ -14,7 +17,9 @@ const StyledHeaderContainer = styled(Container)`
 `;
 
 const Header = () => {
-	const isLogin = true;
+	const [isLogin, setIsLogin] = useRecoilState(loginState);
+	const userId = useRecoilValue(userIdState);
+
 	const [showAuthModal, setShowAuthModal] = useState(false);
 
 	const createLink = (url, title) => {
@@ -46,20 +51,24 @@ const Header = () => {
 									{isLogin ? (
 										<Nav.Link href="/userpage">사용자페이지</Nav.Link>
 									) : (
-										<Nav visibility="hidden">사용자페이지</Nav>
+										<Nav.Link href="/userpage" style={{ visibility: 'hidden' }}>
+											사용자페이지
+										</Nav.Link>
 									)}
 								</Nav>
 							</Navbar.Collapse>
 
-							<Button
-								outline
-								color="white_85"
-								// variant="outline-light"
-								onClick={() => setShowAuthModal(true)}
-								style={{ marginLeft: '1rem' }}
-							>
-								Sign in
-							</Button>
+							{!isLogin ? (
+								<Button
+									outline
+									color="white_85"
+									// variant="outline-light"
+									onClick={() => setShowAuthModal(true)}
+									style={{ marginLeft: '1rem' }}
+								>
+									Sign in
+								</Button>
+							) : null}
 						</Nav>
 					</Container>
 				</Navbar>

@@ -15,7 +15,7 @@ const AuthModal = ({ show, setShow }) => {
 				title="SIGN IN"
 				main={
 					isLoginForm ? (
-						<LoginForm setshow={setShow} />
+						<LoginForm setShow={setShow} />
 					) : (
 						<RegisterForm setShow={setShow} />
 					)
