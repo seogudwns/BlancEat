@@ -3,21 +3,23 @@ import { BlankImageURL } from '../../Commons/consts';
 const NutInfoParser = foodData => {
 	const newData = {
 		foodName: foodData.foodName,
-		ImgURL: foodData.ImgURL || BlankImageURL,
-		ENERGY: { Cal: foodData.Cal },
-		MAJORNUTS: { Carbon: foodData.Carbon },
-		SNF: { Sugar: foodData.Sugar, Fiber: foodData.Fiber },
-		INORGANICS: { Ca: foodData.Ca, Na: foodData.Na, Fe: foodData.Fe, Zn: foodData.Zn },
+		ImgURL: foodData.photo || BlankImageURL,
+		ENERGY: { Cal: foodData.energy },
+		MAJORNUTS: { Carbon: foodData.carbon },
+		SNF: { Sugar: foodData.sugar, Fiber: foodData.fiber },
+		INORGANICS: { Ca: foodData.Ca, Na: foodData.na, Fe: foodData.fe, Zn: foodData.zn },
 		VITAMINS: {
-			VitA: foodData.VitA,
-			VitB6: foodData.VitB6,
-			VitC: foodData.VitC,
-			VitE: foodData.VitE,
-			Niacin: foodData.Niacin,
-			Folate: foodData.Folate,
+			VitA: foodData.vitA,
+			VitB6: foodData.vitB6,
+			VitC: foodData.vitC,
+			VitE: foodData.vitE,
+			Niacin: foodData.niacin,
+			Folate: foodData.folate,
 		},
 	};
 	return newData;
 };
 
 export default NutInfoParser;
+// Weight: foodData.weight,
+// Unit: foodData.unit,

@@ -17,7 +17,7 @@ const RecsysInputForm = () => {
 	const { postData } = useContext(FoodDataContext);
 
 	/* 입력데이터 post, 결과 data get */
-	const handleClickSubmit = () => {
+	const handleClickSubmit = async () => {
 		if (
 			Array.isArray(breakfast) &&
 			breakfast.length === 0 &&
@@ -33,9 +33,11 @@ const RecsysInputForm = () => {
 			//return <></>;
 			setShowAlert(true);
 		} else {
-			const inputData = [...breakfast, ...lunch, ...dinner, ...snack];
+			const dataSet = [...breakfast, ...lunch, ...dinner, ...snack];
+			const foodList = dataSet.map(el => el.text);
+			console.log('RECSYS INPUT FORM CHECK LIST : ', foodList);
 
-			if (postData(inputData)) {
+			if (await postData(foodList)) {
 				//성공시 다음 단계.
 				dispatch({ type: 'OUTPUT' });
 			} else {
