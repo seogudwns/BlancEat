@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 import { Container, Navbar, Nav } from 'react-bootstrap';
 import React, { useState, useEffect } from 'react';
-import LoginForm from '../component/user/LoginForm';
+import AuthModal from '../component/user/AuthModal';
 import Button from '../Components/Button';
 
 const StyledHeaderContainer = styled(Container)`
@@ -15,7 +15,7 @@ const StyledHeaderContainer = styled(Container)`
 
 const Header = () => {
 	const isLogin = true;
-	const [show, setShow] = useState(false);
+	const [showAuthModal, setShowAuthModal] = useState(false);
 
 	const createLink = (url, title) => {
 		return (
@@ -26,7 +26,7 @@ const Header = () => {
 	};
 
 	useEffect(() => {
-		return () => setShow(false);
+		return () => setShowAuthModal(false);
 	}, []);
 
 	return (
@@ -53,7 +53,7 @@ const Header = () => {
 
 							<Button
 								variant="outline-light"
-								onClick={() => setShow(true)}
+								onClick={() => setShowAuthModal(true)}
 								style={{ marginLeft: '1em' }}
 							>
 								Sign in
@@ -63,7 +63,7 @@ const Header = () => {
 				</Navbar>
 			</StyledHeaderContainer>
 
-			{show && <LoginForm show={show} setShow={setShow} />}
+			{showAuthModal && <AuthModal show={showAuthModal} setShow={setShowAuthModal} />}
 		</>
 	);
 };
