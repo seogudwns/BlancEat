@@ -1,7 +1,7 @@
 import React from 'react';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import { ThemeProvider } from 'styled-components';
-import { RecoilRoot } from 'recoil';
+import { useSetRecoilState } from 'recoil';
 
 import Header from './Pages/Header';
 import Main from './Pages/Main';
@@ -10,26 +10,43 @@ import Footer from './Pages/Footer';
 import BalancEat from './Pages/BalancEat';
 import Userpage from './Pages/Userpage';
 
+import { loginState } from './Pages/User/UserAtom';
+import { useEffect } from 'react';
+
 import theme from './Commons/theme';
 import { GlobalStyle, Container } from './Commons/GlobalStyle';
 
 const App = () => {
+	const setIsLogin = useSetRecoilState(loginState);
+	const fetchCurrentUser = async () => {
+		const userToken = sessionStorage.getItem('userToken');
+		if (userToken !== null) {
+			try {
+				setIsLogin(true);
+			} catch (err) {
+				console.error(err);
+			}
+		}
+	};
+
+	useEffect(() => {
+		fetchCurrentUser();
+	}, []);
+
 	return (
 		<ThemeProvider theme={theme}>
 			<GlobalStyle />
 			<Container>
-				<RecoilRoot>
-					<BrowserRouter>
-						<Header />
-						<Routes>
-							<Route exact path="/" element={<Main />} />
-							<Route path="/balancEat" element={<BalancEat />} />
-							<Route path="/recommand" element={<Recommand />} />
-							<Route path="/userpage" element={<Userpage />} />
-						</Routes>
-						<Footer />
-					</BrowserRouter>
-				</RecoilRoot>
+				<BrowserRouter>
+					<Header />
+					<Routes>
+						<Route exact path="/" element={<Main />} />
+						<Route path="/balancEat" element={<BalancEat />} />
+						<Route path="/recommand" element={<Recommand />} />
+						<Route path="/userpage" element={<Userpage />} />
+					</Routes>
+					<Footer />
+				</BrowserRouter>
 			</Container>
 		</ThemeProvider>
 	);

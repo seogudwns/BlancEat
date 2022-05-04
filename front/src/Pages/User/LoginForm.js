@@ -2,13 +2,12 @@ import { Form } from 'react-bootstrap';
 import { useSetRecoilState } from 'recoil';
 
 import React, { useState } from 'react';
-import { userIdState, loginState } from './UserAtom';
+import { loginState } from './UserAtom';
 import { StyledText } from '../../Contents/styleContents';
 import { StyledButton } from '../../Components/Styles/styleButton';
 import * as Api from '../../Commons/Api';
 
 const LoginForm = ({ setShow }) => {
-	const setUserId = useSetRecoilState(userIdState);
 	const setIsLogin = useSetRecoilState(loginState);
 
 	const [email, setEmail] = useState('');
@@ -26,7 +25,6 @@ const LoginForm = ({ setShow }) => {
 			const userIdFromServer = res.data.id;
 			const jwtToken = res.data.token;
 			sessionStorage.setItem('userToken', jwtToken);
-			setUserId(userIdFromServer);
 			setIsLogin(true);
 		} catch (err) {
 			console.error(err);

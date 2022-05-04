@@ -3,10 +3,10 @@ import { Container, Navbar, Nav } from 'react-bootstrap';
 import { useRecoilState } from 'recoil';
 import { useNavigate } from 'react-router-dom';
 
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import AuthModal from './User/AuthModal';
 import Button from '../Components/Button';
-import { userIdState, loginState } from './User/UserAtom';
+import { loginState } from './User/UserAtom';
 
 const StyledHeaderContainer = styled(Container)`
 	color: #ffffff;
@@ -20,7 +20,7 @@ const StyledHeaderContainer = styled(Container)`
 const Header = () => {
 	const navigate = useNavigate();
 	const [isLogin, setIsLogin] = useRecoilState(loginState);
-	const [userId, setUserId] = useRecoilState(userIdState);
+	const userToken = sessionStorage.getItem('userToken');
 
 	const [showAuthModal, setShowAuthModal] = useState(false);
 
@@ -34,15 +34,10 @@ const Header = () => {
 
 	const handleLogout = () => {
 		setIsLogin(false);
-		setUserId('');
 		sessionStorage.removeItem('userToken');
 		navigate('/');
 		alert('로그아웃');
 	};
-
-	useEffect(() => {
-		return () => setShowAuthModal(false);
-	}, []);
 
 	return (
 		<>
@@ -59,12 +54,12 @@ const Header = () => {
 									{createLink('/balanceat', 'BalancEat')}
 									<Nav.Link href="/recommand">오늘 뭐 먹지?</Nav.Link>
 									{isLogin ? (
-										<Nav.Link href={`/userpage/${userId}`}>
+										<Nav.Link href={`/userpage/${userToken}`}>
 											사용자페이지
 										</Nav.Link>
 									) : (
 										<Nav.Link
-											href={`/userpage/${userId}`}
+											href={`/userpage/${userToken}`}
 											style={{ visibility: 'hidden' }}
 										>
 											사용자페이지
