@@ -1,6 +1,6 @@
 import { Form } from 'react-bootstrap';
 
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { StyledText } from '../../Contents/styleContents';
 import { StyledButton } from '../../Components/Styles/styleButton';
 import * as Api from '../../Commons/Api';
@@ -9,7 +9,10 @@ const RegisterForm = () => {
 	const [email, setEmail] = useState('');
 	const [pw, setPw] = useState('');
 	const [confirmPw, setConfirmPw] = useState('');
-	const [name, setName] = useState('');
+	const [nickname, setNickname] = useState('');
+	const [weight, setWeight] = useState(0);
+	const [age, setAge] = useState(0);
+	const [sex, setSex] = useState('');
 
 	const submitRegisterForm = evt => {
 		evt.preventDefault();
@@ -26,8 +29,18 @@ const RegisterForm = () => {
 	const isEmailValid = validateEmail(email);
 	const isPwValid = pw.length >= 4;
 	const isPwSame = pw === confirmPw;
-	const isNameValid = name.length >= 2;
-	const isFormValid = isEmailValid && isPwValid && isPwSame && isNameValid;
+	const isNicknameValid = nickname.length >= 2;
+	const isWeightValid = weight > 0;
+	const isAgeValid = age > 0;
+	const isSexValid = sex.length > 0;
+	const isFormValid =
+		isEmailValid &&
+		isPwValid &&
+		isPwSame &&
+		isNicknameValid &&
+		isWeightValid &&
+		isAgeValid &&
+		isSexValid;
 
 	return (
 		<Form onSubmit={submitRegisterForm}>
@@ -92,18 +105,77 @@ const RegisterForm = () => {
 				<Form.Label>User Name</Form.Label>
 				<Form.Control
 					type="text"
-					placeholder="회원님의 이름을 알려주세요."
+					placeholder="사용하실 닉네임을 알려주세요."
 					autoComplete="off"
-					value={name}
-					onChange={evt => setName(evt.target.value)}
+					value={nickname}
+					onChange={evt => setNickname(evt.target.value)}
 				/>
-				{!isNameValid ? (
+				{!isNicknameValid ? (
 					<StyledText color="red" size="1rem">
-						이름은 두 글자 이상이어야 합니다.
+						닉네임은 두 글자 이상이어야 합니다.
 					</StyledText>
 				) : (
 					<StyledText color="red" size="1rem" style={{ visibility: 'hidden' }}>
-						이름은 두 글자 이상이어야 합니다.
+						닉네임은 두 글자 이상이어야 합니다.
+					</StyledText>
+				)}
+			</Form.Group>
+			<Form.Group style={{ marginBottom: '10px' }}>
+				<Form.Label>Weight</Form.Label>
+				<Form.Control
+					type="number"
+					placeholder="현재 체중을 알려주세요."
+					autoComplete="off"
+					value={weight}
+					onChange={evt => setWeight(evt.target.value)}
+				/>
+				{!isWeightValid ? (
+					<StyledText color="red" size="1rem">
+						현재 체중을 알려주세요.
+					</StyledText>
+				) : (
+					<StyledText color="red" size="1rem" style={{ visibility: 'hidden' }}>
+						현재 체중을 알려주세요.
+					</StyledText>
+				)}
+			</Form.Group>
+			<Form.Group style={{ marginBottom: '10px' }}>
+				<Form.Label>Age</Form.Label>
+				<Form.Control
+					type="number"
+					placeholder="현재 나이를 알려주세요."
+					autoComplete="off"
+					value={age}
+					onChange={evt => setAge(evt.target.value)}
+				/>
+				{!isAgeValid ? (
+					<StyledText color="red" size="1rem">
+						현재 나이를 설정해주세요.
+					</StyledText>
+				) : (
+					<StyledText color="red" size="1rem" style={{ visibility: 'hidden' }}>
+						현재 나이를 설정해주세요.
+					</StyledText>
+				)}
+			</Form.Group>
+			<Form.Group style={{ marginBottom: '10px' }}>
+				<Form.Label>Sex</Form.Label>
+				<div
+					onChange={evt => {
+						setSex(evt.target.value);
+					}}
+				>
+					<Form.Check inline label="남성" value="male" type="radio" name="sex" />
+					<Form.Check inline label="여성" value="female" type="radio" name="sex" />
+				</div>
+
+				{!isSexValid ? (
+					<StyledText color="red" size="1rem">
+						성별을 선택해주세요.
+					</StyledText>
+				) : (
+					<StyledText color="red" size="1rem" style={{ visibility: 'hidden' }}>
+						성별을 선택해주세요.
 					</StyledText>
 				)}
 			</Form.Group>
