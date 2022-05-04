@@ -8,7 +8,7 @@ const StyledHeaderContainer = styled(Container)`
 	color: #ffffff;
 	background-color: #075f3a;
 	.nav-link {
-		font-family: 'Roboto', sans-serif;
+		font-family: 'Elice Digital Baeum';
 		color: #ffffff !important;
 	}
 `;
@@ -52,9 +52,11 @@ const Header = () => {
 							</Navbar.Collapse>
 
 							<Button
-								variant="outline-light"
+								outline
+								color="white_85"
+								// variant="outline-light"
 								onClick={() => setShowAuthModal(true)}
-								style={{ marginLeft: '1em' }}
+								style={{ marginLeft: '1rem' }}
 							>
 								Sign in
 							</Button>

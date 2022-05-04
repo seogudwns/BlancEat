@@ -2,12 +2,17 @@ import React, { useContext, useState } from 'react';
 
 // import { FoodInputContext } from './RecsysInputForm';
 import { FOODS } from './foodlist';
-import './styleTagInput.css';
+// import './styleTagInput.css';
+// import { ReactTagStyle } from './styleTagInput';
 // import './styleTagInput.scss';
 // import styles from "./ReactTags.module.scss";
+// import './ReactTags.css';
 
 import { WithContext as ReactTags } from 'react-tag-input';
 //const ReactTags = require('react-tag-input').WithOutContext;
+
+import { FoodDataContext } from './ContentRecommand';
+
 const suggestions = FOODS.map(food => {
 	return {
 		id: food,
@@ -23,7 +28,7 @@ const KeyCodes = {
 const delimiters = [KeyCodes.comma, KeyCodes.enter];
 
 const TagInput = ({ dataHandler }) => {
-	// const { setMorning } = useContext(FoodInputContext);
+	const { getSuggestFoodList } = useContext(FoodDataContext);
 	const [tags, setTags] = useState([]);
 
 	const handleDelete = i => {
@@ -31,6 +36,7 @@ const TagInput = ({ dataHandler }) => {
 	};
 
 	const handleAddition = tag => {
+		// getSuggestFoodList([])
 		if (suggestions.includes(tag)) {
 			const newList = [...tags, tag];
 			setTags(newList);
@@ -66,10 +72,11 @@ const TagInput = ({ dataHandler }) => {
 				handleDrag={handleDrag}
 				handleTagClick={handleTagClick}
 				onClearAll={onClearAll}
-				inputFieldPosition="bottom"
+				// inputFieldPosition="bottom"
 				autocomplete
 				allowDeleteFromEmptyInput
 				clearAll={true}
+				inline
 			/>
 		</div>
 	);
