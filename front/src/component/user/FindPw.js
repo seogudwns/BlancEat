@@ -6,7 +6,7 @@ import { StyledSection, StyledText } from '../../Contents/styleContents';
 // import { StyledButton } from '../../Components/Styles/styleButton';
 import Button from '../../Components/Button';
 import { PageContainer } from '../../Pages/Styles/stylePages';
-import * as Api from '../../Api';
+import * as Api from '../../Commons/Api';
 
 const FindPw = () => {
 	const navigate = useNavigate();

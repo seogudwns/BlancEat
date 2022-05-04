@@ -6,7 +6,7 @@ import { StyledSection, StyledText } from '../../Contents/styleContents';
 import { StyledButton } from '../../Components/Styles/styleButton';
 import { PageContainer } from '../../Pages/Styles/stylePages';
 import LoginForm from './LoginForm';
-import * as Api from '../../Api';
+import * as Api from '../../Commons/Api';
 
 const RegisterForm = () => {
 	const navigate = useNavigate();

@@ -10,6 +10,9 @@ import { FOODS } from './foodlist';
 
 import { WithContext as ReactTags } from 'react-tag-input';
 //const ReactTags = require('react-tag-input').WithOutContext;
+
+import { FoodDataContext } from './ContentRecommand';
+
 const suggestions = FOODS.map(food => {
 	return {
 		id: food,
@@ -25,7 +28,7 @@ const KeyCodes = {
 const delimiters = [KeyCodes.comma, KeyCodes.enter];
 
 const TagInput = ({ dataHandler }) => {
-	// const { setMorning } = useContext(FoodInputContext);
+	const { getSuggestFoodList } = useContext(FoodDataContext);
 	const [tags, setTags] = useState([]);
 
 	const handleDelete = i => {
@@ -33,6 +36,7 @@ const TagInput = ({ dataHandler }) => {
 	};
 
 	const handleAddition = tag => {
+		// getSuggestFoodList([])
 		if (suggestions.includes(tag)) {
 			const newList = [...tags, tag];
 			setTags(newList);

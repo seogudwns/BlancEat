@@ -5,7 +5,7 @@ import { FoodDataContext } from './ContentRecommand';
 
 import FoodCard from '../../Components/FoodCard';
 import ContentLabel from '../../Components/ContentLabel';
-import ModalComp from '../../ModalComp';
+import ModalComp from '../../Components/ModalComp';
 import { SubContainer, LargeButton, CardContainerRow } from '../../Contents/Styles/styleContents';
 import FoodInformationForm from './FoodInformationForm';
 import { ValidateArray } from '../../Commons/consts';

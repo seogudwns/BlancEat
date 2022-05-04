@@ -1,6 +1,5 @@
 import styled from 'styled-components';
 import { Container, Button } from 'react-bootstrap';
-import { primary_color } from '../../theme';
 
 /* Styles of Contents */
 
@@ -121,28 +120,3 @@ export const FormContainer = styled.div`
 	padding: 50px;
 	background-color: white;
 `;
-
-/*
-.form {
-		width: 500px;
-	}
-	.form-inline {
-		width: 100%;
-	}
-
-	.form-group {
-		width: 90%;
-	}
-
-	.input-group {
-		width: 90% !important;
-	}
-
-	.form-control {
-		width: 70%;
-	}
-
-	span.input-group-addon {
-		width: 50px !important;
-	}
- */

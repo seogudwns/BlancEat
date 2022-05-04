@@ -4,9 +4,9 @@ import styled from 'styled-components';
 
 import React, { useState, useEffect } from 'react';
 import { StyledText } from '../../Contents/styleContents';
-import * as Api from '../../Api';
-import ModalComp from '../../ModalComp';
-import ModalPortal from '../../ModalPortal';
+import * as Api from '../../Commons/Api';
+import ModalComp from '../../Components/ModalComp';
+import ModalPortal from '../../Components/ModalPortal';
 
 const StyledButton = styled(Button)`
 	background: ${props => props.background};

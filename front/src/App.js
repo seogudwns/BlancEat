@@ -10,8 +10,8 @@ import BalancEat from './Pages/BalancEat';
 import Userpage from './Pages/Userpage';
 import RegisterForm from './component/user/RegisterForm';
 import FindPw from './component/user/FindPw';
-import theme from './theme';
-import { GlobalStyle, Container } from './GlobalStyle';
+import theme from './Commons/theme';
+import { GlobalStyle, Container } from './Commons/GlobalStyle';
 
 const App = () => {
 	return (
