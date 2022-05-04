@@ -71,9 +71,14 @@ class userService {
 		return loginUser;
 	}
 
-	static async setUser({ id, updateInfo }) {
+	static async setUser(id, { checkId, updateInfo }) {
 		// updateInfo === { password, nickName, newPassword, age, weight };
 		let changeUser = await User.findById({ id });
+		if (id !== checkId) {
+			const errMessage = '잘못된 토큰입니다.';
+			return { errMessage };
+		}
+
 		const isPasswordCorrect = await bcrypt.compare(updateInfo.password, changeUser.password);
 
 		if (!isPasswordCorrect) {

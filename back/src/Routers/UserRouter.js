@@ -61,11 +61,10 @@ userRouter.get('/user/login', async (req, res, next) => {
 // 정보 변경.. done.
 userRouter.put('/user/infoexchange/:id', login_required, async (req, res, next) => {
 	try {
-		const { updateInfo } = req.body;
-		const id = req.currentUserId;
-
-		const changeUser = await userService.setUser({
-			id,
+		const { id, updateInfo } = req.body;
+		const checkId = req.currentUserId;
+		const changeUser = await userService.setUser(id, {
+			checkId,
 			updateInfo,
 		});
 
