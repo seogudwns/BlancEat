@@ -2,7 +2,7 @@
 import { Nutrition, Recommend_nutrition } from '../DB/index.js';
 
 class Recommend {
-	static async recommendSystem(age, sex, weight, eat, isLogin) {
+	static async recommendSystem(age, sex, weight, eat) {
 		let eatNutrition = [0, 0, 0];
 		eat.forEach(food => {
 			eatNutrition[0] += food.carbon;
@@ -27,12 +27,9 @@ class Recommend {
 
 		let result = [];
 
-		if (isLogin) {
-			// const userInfo = await UserModel.findById({ User_id: login });
-			console.log('로그인 후 사용가능한 기능입니다.');
-			const ErrorMessage = '로그인 기능 아직 없음. 나오면 이상한거임.';
-			return ErrorMessage;
-		}
+		// ? 하루 식사로 생각하고, 로직을 약간 바꿔야하는데..... 절대량보다는 비율 우선?
+		// TODO 음식을 더 세세하게 영양소를 나눠서 추천.. db를 업데이트 후 생각해보기.
+
 		const personInfo = await Recommend_nutrition.getinfo({ ageRange, sex });
 
 		let person3Nut = [
@@ -70,6 +67,8 @@ class Recommend {
 
 			result.push('충분한 음식을 섭취하셨습니다. 내일 이걸 드셔보시는 것은 어떨까요?');
 			result.push(randomFood[parseInt(Math.random() * randomFood.length)]);
+			result.push(randomFood[parseInt(Math.random() * randomFood.length)]);
+			result.push(randomFood[parseInt(Math.random() * randomFood.length)]);
 			isResult = true;
 		} else {
 			recommendFood = await Nutrition.findManyByNutrition([
@@ -83,10 +82,8 @@ class Recommend {
 		}
 
 		if (isResult === true) {
-		} else if (recommendFood.length === 1) {
-			result.push(recommendFood[parseInt(Math.random() * recommendFood.length)]);
-			isResult = true;
 		} else if (recommendFood.length > 1) {
+			result.push(recommendFood[parseInt(Math.random() * recommendFood.length)]);
 			result.push(recommendFood[parseInt(Math.random() * recommendFood.length)]);
 			result.push(recommendFood[parseInt(Math.random() * recommendFood.length)]);
 			isResult = true;
@@ -102,9 +99,8 @@ class Recommend {
 		}
 
 		if (isResult === true) {
-		} else if (recommendFood.length === 1) {
-			result.push(recommendFood[parseInt(Math.random() * recommendFood.length)]);
 		} else if (recommendFood.length > 1) {
+			result.push(recommendFood[parseInt(Math.random() * recommendFood.length)]);
 			result.push(recommendFood[parseInt(Math.random() * recommendFood.length)]);
 			result.push(recommendFood[parseInt(Math.random() * recommendFood.length)]);
 		} else {
@@ -114,8 +110,10 @@ class Recommend {
 				nutrientTable[0][2],
 			]);
 			result.push(
-				'영양소 섭취가 매우 부족합니다. 많은 음식을 섭취할 필요가 있는 것 같습니다.', //! 경고메세지는 일도님과 상의 후 결정.
+				'영양소 섭취가 매우 부족합니다. 많은 음식을 섭취할 필요가 있는 것 같습니다.',
 			);
+			result.push(recommendFood[parseInt(Math.random() * recommendFood.length)]);
+			result.push(recommendFood[parseInt(Math.random() * recommendFood.length)]);
 			result.push(recommendFood[parseInt(Math.random() * recommendFood.length)]);
 		}
 
