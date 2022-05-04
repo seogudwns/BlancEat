@@ -61,11 +61,12 @@ class Recommend {
 
 		let recommendFood = [];
 		let isResult = false;
+		let errMessage = null;
 
 		if (nutrientTable[2].reduce((x, y) => x + y) <= 0) {
 			const randomFood = await Nutrition.findFood();
 
-			result.push('충분한 음식을 섭취하셨습니다. 내일 이걸 드셔보시는 것은 어떨까요?');
+			errMessage = '충분한 음식을 섭취하셨습니다. 내일 이걸 드셔보시는 것은 어떨까요?';
 			result.push(randomFood[parseInt(Math.random() * randomFood.length)]);
 			result.push(randomFood[parseInt(Math.random() * randomFood.length)]);
 			result.push(randomFood[parseInt(Math.random() * randomFood.length)]);
@@ -109,15 +110,14 @@ class Recommend {
 				nutrientTable[0][1],
 				nutrientTable[0][2],
 			]);
-			result.push(
-				'영양소 섭취가 매우 부족합니다. 많은 음식을 섭취할 필요가 있는 것 같습니다.',
-			);
+			errMessage =
+				'영양소 섭취가 매우 부족합니다. 많은 음식을 섭취할 필요가 있는 것 같습니다.';
 			result.push(recommendFood[parseInt(Math.random() * recommendFood.length)]);
 			result.push(recommendFood[parseInt(Math.random() * recommendFood.length)]);
 			result.push(recommendFood[parseInt(Math.random() * recommendFood.length)]);
 		}
 
-		return { personInfo, result };
+		return { personInfo, result, errMessage };
 	}
 }
 export { Recommend };
