@@ -1,0 +1,215 @@
+paths:
+    /user/register:
+        get:
+            summary: 유저 회원가입.
+            description: 유저 회원가입.
+            parameters:
+                - name: age
+                  in: query
+                  required: true
+                  schema:
+                      type: integer
+                - name: sex
+                  in: query
+                  required: true
+                  schema:
+                      type: string
+                - name: weight
+                  in: query
+                  required: true
+                  schema:
+                      type: integer
+                - name: breakfast
+                  in: query
+                  required: true
+                  schema:
+                      type: array
+                      items:
+                          type: string
+                - name: lunch
+                  in: query
+                  required: true
+                  schema:
+                      type: array
+                      items:
+                          type: string
+                - name: dinner
+                  in: query
+                  required: true
+                  schema:
+                      type: array
+                      items:
+                          type: string
+                - name: snack
+                  in: query
+                  required: true
+                  schema:
+                      type: array
+                      items:
+                          type: string
+
+            responses:
+                '200':
+                    description: 음식 별 섭취 영양소, 유저의 일일 권장섭취량, 추천 음식. 영양소 섭취가 부족할 때, 적절할 때, 넘칠 때의 경고 문구가 다르게 나옴
+                    content:
+                        application/json:
+                            schema:
+                                type: object
+                                properties:
+                                    getFoodList:
+                                        type: array
+                                        items:
+                                            type: object
+                                            example:
+                                                {
+                                                    'foodName': '불고기피자',
+                                                    'energy': 505,
+                                                    'protein': 27.4,
+                                                    'fat': 16.7,
+                                                    'carbon': 61.2,
+                                                    'sugar': 0,
+                                                    'fiber': 4.9,
+                                                    'Ca': 480.35,
+                                                    'vitA': 0,
+                                                    'fe': 1.47,
+                                                    'na': 916.87,
+                                                    'zn': 3.65,
+                                                    'niacin': 0.54,
+                                                    'vitE': 0,
+                                                    'vitC': 2.56,
+                                                    'folate': 38.43,
+                                                    'vitB6': 0,
+                                                }
+                                    personInfo:
+                                        type: object
+                                        example:
+                                            {
+                                                '_id': '626803c87cbbc7d7b40e333e',
+                                                'Age': '15-18',
+                                                'Sex': 'F',
+                                                'protein': '0.8',
+                                                'fat': 0.8,
+                                                'carbon': 5.8,
+                                                'sugar': 40,
+                                                'sugar_limit': 50,
+                                                'fiber': 20,
+                                                'VitA': 600,
+                                                'VitA_limit': 2400,
+                                                'VitE': 10,
+                                                'VitE_limit': 430,
+                                                'VitC': 100,
+                                                'VitC_limit': 1600,
+                                                'VitB6': 1.4,
+                                                'VitB6_limit': 100,
+                                                'Niacin': 30,
+                                                'Niacin_limit': 800,
+                                                'Folate': 400,
+                                                'Folate_limit': 900,
+                                                'Ca': 800,
+                                                'Ca_limit': 2500,
+                                                'Na': 1.5,
+                                                'Na_limit': 2,
+                                                'Fe': 17,
+                                                'Fe_limit': 45,
+                                                'Zn': 9,
+                                                'Zn_limit': 30,
+                                            }
+                                    result:
+                                        type: array
+                                        items:
+                                            type: string
+                                        example:
+                                            [
+                                                '영양소 섭취가 매우 부족합니다. 많은 음식을 섭취할 필요가 있는 것 같습니다.',
+                                                {
+                                                    'foodName': '동원컨트리핫도그',
+                                                    'photo': 'https://drive.google.com/file/d/1jmcdduIRHv4aFtrsrOp0gLUGe_QKxHgT/view?usp=sharing',
+                                                    'weight': 50,
+                                                    'unit': 'g',
+                                                    'energy': 140,
+                                                    'protein': 3,
+                                                    'fat': 6,
+                                                    'carbon': 18,
+                                                    'sugar': 3,
+                                                    'fiber': 0,
+                                                    'Ca': 0,
+                                                    'vitA': 0,
+                                                    'fe': 0,
+                                                    'na': 290,
+                                                    'zn': 0,
+                                                    'niacin': 0,
+                                                    'vitE': 0,
+                                                    'vitC': 0,
+                                                    'folate': 0,
+                                                    'vitB6': 0,
+                                                },
+                                            ]
+
+        post:
+            summary: 유저 식사 정보 db에 저장
+            requestBody:
+                required: true
+                content:
+                    application/json:
+                        schema:
+                            type: object
+                            properties:
+                                breakfast:
+                                    type: array
+                                    example: ['굴국밥']
+                                    items:
+                                        type: string
+                                lunch:
+                                    type: array
+                                    example: ['삼계탕', '열무얼갈이김치']
+                                    items:
+                                        type: string
+                                dinner:
+                                    type: array
+                                    example: ['양념치킨', '코카콜라']
+                                    items:
+                                        type: string
+                                snack:
+                                    type: array
+                                    example: ['라운드 쇼콜라 케이크', '딸기 요거트']
+                                    items:
+                                        type: string
+            responses:
+                '201':
+                    description: 유저 식사 정보 Meal collection에 저장
+                    content:
+                        text/html:
+                            schema:
+                                type: string
+                                example: 음식 정보 저장 완료
+
+    /user/{keyword}:
+        get:
+            summary: 음식 이름 검색
+            parameters:
+                - name: keyword
+                  in: path
+                  required: true
+                  schema:
+                      type: string
+
+            responses:
+                '200':
+                    description: 음식 이름 리스트
+                    content:
+                        application/json:
+                            schema:
+                                type: array
+                                items:
+                                    type: object
+                                example:
+                                    [
+                                        {
+                                            '_id': '626be818fbbdf2276b390223',
+                                            'foodName': '불싸이버거',
+                                        },
+                                        {
+                                            '_id': '626be818fbbdf2276b390226',
+                                            'foodName': '싸이버거',
+                                        },
+                                    ]

@@ -45,7 +45,7 @@ userRouter.post('/user/register', async (req, res, next) => {
 });
 
 // 로그인.. done
-userRouter.get('/user/login', async (req, res, next) => {
+userRouter.post('/user/login', async (req, res, next) => {
 	try {
 		const { email, password } = req.body;
 
