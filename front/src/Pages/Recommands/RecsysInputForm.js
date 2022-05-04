@@ -60,23 +60,24 @@ const RecsysInputForm = () => {
 	const dataHandlerSnack = arr => {
 		setSnack([...arr]);
 	};
+
 	return (
-		<FormContainer>
-			<InputGroup className="mb-3">
-				<TagInput dataHandler={dataHandlerBreakfast} />
-			</InputGroup>
+		<div>
+			{/* <InputGroup className="mb-3"> */}
+			<TagInput dataHandler={dataHandlerBreakfast} />
+			{/* </InputGroup> */}
 			<br />
-			<InputGroup className="mb-3">
-				<TagInput dataHandler={dataHandlerLunch} />
-			</InputGroup>
+			{/* <InputGroup className="mb-3"> */}
+			<TagInput dataHandler={dataHandlerLunch} />
+			{/* </InputGroup> */}
 			<br />
-			<InputGroup className="mb-3">
-				<TagInput dataHandler={dataHandlerDinner} />
-			</InputGroup>
+			{/* <InputGroup className="mb-3"> */}
+			<TagInput dataHandler={dataHandlerDinner} />
+			{/* </InputGroup> */}
 			<br />
-			<InputGroup className="mb-3">
-				<TagInput dataHandler={dataHandlerSnack} />
-			</InputGroup>
+			{/* <InputGroup className="mb-3"> */}
+			<TagInput dataHandler={dataHandlerSnack} />
+			{/* </InputGroup> */}
 			<br />
 			{showAlert && (
 				<Alert variant="info">
@@ -101,7 +102,7 @@ const RecsysInputForm = () => {
 					</Button>
 				</Col>
 			</Row>
-		</FormContainer>
+		</div>
 	);
 };
 

@@ -7,7 +7,7 @@ import { FOODS } from './foodlist';
 // import './styleTagInput.scss';
 // import styles from "./ReactTags.module.scss";
 // import './ReactTags.css';
-
+import ReactTagStyle from './ReactTagStyle';
 import { WithContext as ReactTags } from 'react-tag-input';
 //const ReactTags = require('react-tag-input').WithOutContext;
 
@@ -60,11 +60,48 @@ const TagInput = ({ dataHandler }) => {
 	const onClearAll = () => {
 		setTags([]);
 	};
+	const onTagUpdate = (i, newTag) => {
+		const updatedTags = tags.slice();
+		updatedTags.splice(i, 1, newTag);
+		setTags(updatedTags);
+	};
 
 	return (
-		<div>
+		<ReactTagStyle>
 			<ReactTags
+				handleDelete={handleDelete}
+				handleAddition={handleAddition}
+				handleDrag={handleDrag}
+				delimiters={delimiters}
+				handleTagClick={handleTagClick}
+				onClearAll={onClearAll}
+				onTagUpdate={onTagUpdate}
+				placeholder="Search..."
+				minQueryLength={2}
+				maxLength={5}
+				autofocus={false}
+				allowDeleteFromEmptyInput={true}
+				autocomplete={true}
+				readOnly={false}
+				allowUnique={true}
+				allowDragDrop={false}
+				inline={true}
+				inputFieldPosition="inline"
+				allowAdditionFromPaste={true}
+				editable={true}
+				clearAll={true}
 				tags={tags}
+				suggestions={suggestions}
+			/>
+		</ReactTagStyle>
+	);
+};
+export default TagInput;
+
+// render(<App />, document.getElementById('root'));
+
+/*
+			tags={tags}
 				suggestions={suggestions}
 				delimiters={delimiters}
 				handleDelete={handleDelete}
@@ -72,15 +109,33 @@ const TagInput = ({ dataHandler }) => {
 				handleDrag={handleDrag}
 				handleTagClick={handleTagClick}
 				onClearAll={onClearAll}
-				// inputFieldPosition="bottom"
+				inputFieldPosition="inline"
 				autocomplete
 				allowDeleteFromEmptyInput
 				clearAll={true}
-				inline
-			/>
-		</div>
-	);
-};
-export default TagInput;
+*/
+/*
 
-// render(<App />, document.getElementById('root'));
+        handleDelete={handleDelete}
+        handleAddition={handleAddition}
+        handleDrag={handleDrag}
+        delimiters={delimiters}
+        handleTagClick={handleTagClick}
+        onClearAll={onClearAll}
+        onTagUpdate={onTagUpdate}
+        suggestions={[{"id":"1","text":"Albania"},{"id":"2","text":"Australia"},{"id":"3","text":"France"},{"id":"4","text":"India"},{"id":"5","text":"Oman"},{"id":"6","text":"Russia"},{"id":"7","text":"Serbia"},{"id":"8","text":"Swaziland"},{"id":"9","text":"United States of America"},{"id":"10","text":"Vietnam"}]}
+        placeholder="Search..."
+        minQueryLength={2}
+        maxLength={5}
+        autofocus={false}
+        allowDeleteFromEmptyInput={true}
+        autocomplete={true}
+        readOnly={false}
+        allowUnique={true}
+        allowDragDrop={true}
+        inline={true}
+        allowAdditionFromPaste={true}
+        editable={true}
+        clearAll={true}
+        tags={tags}
+*/
