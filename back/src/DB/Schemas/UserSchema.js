@@ -1,28 +1,40 @@
 import pkg from 'mongoose';
 
 const { Schema, model } = pkg;
-
+// 닉네임, 이메일, 비밀번호, 나이, 몸무게, 성별
 const UserSchema = new Schema(
 	{
+		id: {
+			type: String,
+			required: true,
+		},
 		nickName: {
 			type: String,
 			required: false,
 			default: 'Anonymous',
 		},
-		user_id: {
+		email: {
 			type: String,
 			required: true,
 		},
-		gender: {
-			type: Number, //* 0과 1로.. 0일때는 남자, 1일때는 여자. 이 값은 실재 서비스를 시작하기 직전까지 변경 가능.
-			required: true,
-		},
-		weight: {
+		password: {
 			type: String,
 			required: true,
 		},
 		age: {
 			type: Number,
+			required: true,
+		},
+		weight: {
+			type: Number,
+			required: true,
+		},
+		height: {
+			type: Number,
+			required: true,
+		},
+		sex: {
+			type: String,
 			required: true,
 		},
 	},
