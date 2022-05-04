@@ -1,5 +1,4 @@
-import { Form, Button } from 'react-bootstrap';
-import styled from 'styled-components';
+import { Form } from 'react-bootstrap';
 
 import React, { useState } from 'react';
 import { StyledText } from '../../Contents/styleContents';
