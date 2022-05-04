@@ -13,9 +13,10 @@ const login_required = (req, res, next) => {
 		const secretKey = process.env.JWT_SECRET_KEY || 'secret-key';
 		const jwtDecoded = jwt.verify(userToken, secretKey);
 
-		req.currentUserId = jwtDecoded.user_id;
+		req.currentUserId = jwtDecoded.id;
 		next();
 	} catch (err) {
+		console.log('토큰 다름');
 		res.status(400).json({ errorMessage: err.message });
 		return;
 	}

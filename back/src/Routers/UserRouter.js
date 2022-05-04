@@ -41,12 +41,13 @@ userRouter.post('/user/register', async (req, res, next) => {
 });
 
 // 로그인.. done
-userRouter.post('/user/login', async (req, res, next) => {
+userRouter.get('/user/login', async (req, res, next) => {
 	try {
 		const { email, password } = req.body;
 
 		const loginuser = await userService.getUser({ email, password });
 
+		// null일 경우 false와 같음.
 		if (loginuser.errMessage) {
 			throw new Error(errMessage);
 		}
@@ -57,17 +58,22 @@ userRouter.post('/user/login', async (req, res, next) => {
 	}
 });
 
-// 정보 변경.
+// 정보 변경.. done.
 userRouter.put('/user/infoexchange/:id', login_required, async (req, res, next) => {
 	try {
-		const { password, nickName, newPassword, age, weight } = req.body;
+		const { updateInfo } = req.body;
 		const id = req.currentUserId;
 
-		const checgeUser = await setUser({ id, password, nickName, newPassword, age, weight });
+		const changeUser = await userService.setUser({
+			id,
+			updateInfo,
+		});
 
-		if (checgeUser.errMessage) {
-			throw new Error(checgeUser.errMessage);
+		if (changeUser.errMessage) {
+			throw new Error(changeUser.errMessage);
 		}
+
+		res.status(200).json(changeUser);
 	} catch (err) {
 		next(err);
 	}

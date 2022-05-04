@@ -12,6 +12,20 @@ class User {
 	static async findByEmail({ email }) {
 		return await UserModel.findOne({ email });
 	}
+
+	static async findById({ id }) {
+		return await UserModel.findOne({ id });
+	}
+
+	static async updateUser({ id, fieldToUpdate, newValue }) {
+		const filteredById = { id };
+		const updateData = { [fieldToUpdate]: newValue };
+		const option = { returnOriginal: false };
+
+		const updatedUser = await UserModel.findOneAndUpdate(filteredById, updateData, option);
+
+		return updatedUser;
+	}
 }
 
 export { User };
