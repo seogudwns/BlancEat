@@ -1,32 +1,56 @@
 paths:
     /nutrition:
-        post:
-            summary: '음식 영양소 정보 조회'
-            requestBody:
-                required: true
-                content:
-                    application/json:
-                        schema:
-                            type: object
-                            properties:
-                                age:
-                                    type: Integer
-                                    example: 18
-                                sex:
-                                    type: string
-                                    example: 'F'
-                                weight:
-                                    type: integer
-                                    example: 60
-                                foodList:
-                                    type: array
-                                    example: ['불고기피자']
-                                    items:
-                                        type: string
+        get:
+            summary: 음식 영양소 정보와 추천 음식 조회
+            description: 문제가 있는데 지금 swagger로 테스트할 때는 array 형식이라 그런지 음식을 하나만 넣으면 무시되고 두 개 이상 넣어서 보낼 때만 영양소 정보를 보내주네요..오류가 나는건 아니고 그냥 영양소 정보가 안옵니다.
+            parameters:
+                - name: age
+                  in: query
+                  required: true
+                  schema:
+                      type: integer
+                - name: sex
+                  in: query
+                  required: true
+                  schema:
+                      type: string
+                - name: weight
+                  in: query
+                  required: true
+                  schema:
+                      type: integer
+                - name: breakfast
+                  in: query
+                  required: true
+                  schema:
+                      type: array
+                      items:
+                          type: string
+                - name: lunch
+                  in: query
+                  required: true
+                  schema:
+                      type: array
+                      items:
+                          type: string
+                - name: dinner
+                  in: query
+                  required: true
+                  schema:
+                      type: array
+                      items:
+                          type: string
+                - name: snack
+                  in: query
+                  required: true
+                  schema:
+                      type: array
+                      items:
+                          type: string
+
             responses:
                 '200':
-                    description: 음식 별 섭취 영양소, 유저의 일일 권장섭취량, 추천 음식.
-                        영양소 섭취가 부족할 때, 적절할 때, 넘칠 때의 경고 문구가 다르게 나옴
+                    description: 음식 별 영양소 정보, 유저의 일일 권장섭취량, 추천 음식
                     content:
                         application/json:
                             schema:
@@ -39,8 +63,6 @@ paths:
                                             example:
                                                 {
                                                     'foodName': '불고기피자',
-                                                    'weight': 200,
-                                                    'unit': 'g',
                                                     'energy': 505,
                                                     'protein': 27.4,
                                                     'fat': 16.7,
@@ -58,13 +80,13 @@ paths:
                                                     'folate': 38.43,
                                                     'vitB6': 0,
                                                 }
-                                    person_info:
+                                    personInfo:
                                         type: object
                                         example:
                                             {
                                                 '_id': '626803c87cbbc7d7b40e333e',
-                                                'ageRange': '15-18',
-                                                'sex': 'F',
+                                                'Age': '15-18',
+                                                'Sex': 'F',
                                                 'protein': '0.8',
                                                 'fat': 0.8,
                                                 'carbon': 5.8,
@@ -95,7 +117,7 @@ paths:
                                     result:
                                         type: array
                                         items:
-                                            type: object
+                                            type: string
                                         example:
                                             [
                                                 '영양소 섭취가 매우 부족합니다. 많은 음식을 섭취할 필요가 있는 것 같습니다.',
@@ -122,3 +144,67 @@ paths:
                                                     'vitB6': 0,
                                                 },
                                             ]
+
+        post:
+            summary: 유저 식사 정보 db에 저장
+            requestBody:
+                required: true
+                content:
+                    application/json:
+                        schema:
+                            type: object
+                            properties:
+                                breakfast:
+                                    type: array
+                                    example: ['굴국밥']
+                                    items:
+                                        type: string
+                                lunch:
+                                    type: array
+                                    example: ['삼계탕', '열무얼갈이김치']
+                                    items:
+                                        type: string
+                                dinner:
+                                    type: array
+                                    example: ['양념치킨', '코카콜라']
+                                    items:
+                                        type: string
+                                snack:
+                                    type: array
+                                    example: ['라운드 쇼콜라 케이크', '딸기 요거트']
+                                    items:
+                                        type: string
+            responses:
+                '201':
+                    description: 유저 식사 정보 Meal collection에 저장
+
+    /nutrition_search/{keyword}:
+        get:
+            summary: 음식 이름 검색
+            parameters:
+                - name: keyword
+                  in: path
+                  required: true
+                  schema:
+                      type: string
+
+            responses:
+                '200':
+                    description: 음식 이름 리스트
+                    content:
+                        application/json:
+                            schema:
+                                type: array
+                                items:
+                                    type: object
+                                example:
+                                    [
+                                        {
+                                            '_id': '626be818fbbdf2276b390223',
+                                            'foodName': '불싸이버거',
+                                        },
+                                        {
+                                            '_id': '626be818fbbdf2276b390226',
+                                            'foodName': '싸이버거',
+                                        },
+                                    ]
