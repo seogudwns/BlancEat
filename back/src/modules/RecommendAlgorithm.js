@@ -2,7 +2,7 @@
 import { Nutrition, Recommend_nutrition } from '../DB/index.js';
 
 class Recommend {
-	static async recommendSystem(age, sex, weight, eat, isLogin) {
+	static async recommendSystem(age, sex, weight, eat) {
 		let eatNutrition = [0, 0, 0];
 		eat.forEach(food => {
 			eatNutrition[0] += food.carbon;
@@ -29,13 +29,6 @@ class Recommend {
 
 		// ? 하루 식사로 생각하고, 로직을 약간 바꿔야하는데..... 절대량보다는 비율 우선?
 		// TODO 음식을 더 세세하게 영양소를 나눠서 추천.. db를 업데이트 후 생각해보기.
-
-		if (isLogin) {
-			// const userInfo = await UserModel.findById({ User_id: login });
-			console.log('로그인 후 사용가능한 기능입니다.');
-			const ErrorMessage = '로그인 기능 아직 없음. 나오면 이상한거임.';
-			return [{}, [ErrorMessage]];
-		}
 
 		const personInfo = await Recommend_nutrition.getinfo({ ageRange, sex });
 
