@@ -33,11 +33,15 @@ const BmiCalculator = () => {
 	useEffect(() => {
 		if (!isNaN(bmi) && kg !== 0 && cm !== 0) {
 			setBmi((kg / (cm / 100) ** 2).toFixed(2));
-		} else if (isNaN(bmi)) {
+		} else if (isNaN(bmi) && kg === 0 && cm === 0) {
 			setBmi(0);
 		} else if (bmi === 'Infinity') {
 			setKg(0);
 			setCm(0);
+		}
+
+		if (kg === 0 || cm === 0) {
+			setBmi(0);
 		}
 
 		if (cm === '') {
@@ -64,14 +68,16 @@ const BmiCalculator = () => {
 					신장{' '}
 					<StyledInput
 						type="number"
+						min="0"
 						value={cm}
-						onChange={evt => setCm(evt.target.value)}
+						onChange={evt => setCm(Number(evt.target.value))}
 					/>{' '}
 					cm / 체중{' '}
 					<StyledInput
 						type="number"
+						min="0"
 						value={kg}
-						onChange={evt => setKg(evt.target.value)}
+						onChange={evt => setKg(Number(evt.target.value))}
 					/>{' '}
 					kg
 					<StyledButton
