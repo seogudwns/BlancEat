@@ -5,3 +5,8 @@ export const loginState = atom({
 	key: 'isLogin',
 	default: false,
 });
+
+export const userIdState = atom({
+	key: 'userId',
+	default: '',
+});

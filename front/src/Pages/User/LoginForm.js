@@ -2,13 +2,14 @@ import { Form } from 'react-bootstrap';
 import { useSetRecoilState } from 'recoil';
 
 import React, { useState } from 'react';
-import { loginState } from './UserAtom';
+import { loginState, userIdState } from './UserAtom';
 import { StyledText } from '../../Contents/styleContents';
 import { StyledButton } from '../../Components/Styles/styleButton';
 import * as Api from '../../Commons/Api';
 
 const LoginForm = ({ setShow }) => {
 	const setIsLogin = useSetRecoilState(loginState);
+	const setUserId = useSetRecoilState(userIdState);
 
 	const [email, setEmail] = useState('');
 	const [pw, setPw] = useState('');
@@ -22,8 +23,10 @@ const LoginForm = ({ setShow }) => {
 			});
 			setShow(false);
 			alert('로그인 완료');
+			const userIdFromServer = res.data.id;
 			const jwtToken = res.data.token;
 			sessionStorage.setItem('userToken', jwtToken);
+			sessionStorage.setItem('userId', userIdFromServer);
 			setIsLogin(true);
 		} catch (err) {
 			console.error(err);
