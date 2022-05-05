@@ -26,7 +26,7 @@ class NutritionService {
 	static async findFoodName({ keyword }) {
 		const foodList = await Nutrition.findNameByKeyword({ keyword });
 
-		if (!foodList) {
+		if (foodList.length === 0) {
 			const errorMessage =
 				'해당 키워드가 포함된 음식을 찾을 수 없습니다. 다시 한번 확인해주세요.';
 			return { errorMessage };
