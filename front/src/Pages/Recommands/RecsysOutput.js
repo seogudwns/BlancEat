@@ -28,6 +28,7 @@ const RecsysOutput = ({}) => {
 		e.preventDefault();
 		console.log(e.target, e.target.id);
 		setSelectedFoodData({ ...foodData[e.target.id] });
+		console.log(foodData[e.target.id]);
 		setShowDialog(true);
 	};
 

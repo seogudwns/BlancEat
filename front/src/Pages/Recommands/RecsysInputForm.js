@@ -6,6 +6,8 @@ import { InputGroup, Col, Row, Alert } from 'react-bootstrap';
 import { FormContainer } from '../../Contents/Styles/styleContents';
 import Button from '../../Components/Button';
 import TagInput from './TagInput';
+// import { Formik, Field, Form, ErrorMessage, FieldArray } from 'formik';
+// import FormikTagInput from './FormikTagInput';
 
 const RecsysInputForm = () => {
 	const [breakfast, setBreakfast] = useState([]);
@@ -17,7 +19,7 @@ const RecsysInputForm = () => {
 	const { postData } = useContext(FoodDataContext);
 
 	/* 입력데이터 post, 결과 data get */
-	const handleClickSubmit = () => {
+	const handleClickSubmit = async () => {
 		if (
 			Array.isArray(breakfast) &&
 			breakfast.length === 0 &&
@@ -33,9 +35,11 @@ const RecsysInputForm = () => {
 			//return <></>;
 			setShowAlert(true);
 		} else {
-			const inputData = [...breakfast, ...lunch, ...dinner, ...snack];
+			const dataSet = [...breakfast, ...lunch, ...dinner, ...snack];
+			const foodList = dataSet.map(el => el.text);
+			console.log('RECSYS INPUT FORM CHECK LIST : ', foodList);
 
-			if (postData(inputData)) {
+			if (await postData(foodList)) {
 				//성공시 다음 단계.
 				dispatch({ type: 'OUTPUT' });
 			} else {
@@ -58,23 +62,39 @@ const RecsysInputForm = () => {
 	const dataHandlerSnack = arr => {
 		setSnack([...arr]);
 	};
+	/*
+<Field name="careerPositionKeywords">
+{({}) => (
+<ReactTagInput
+className="py-5"
+tags={keywords} // useState
+placeholder="키워드를 쉼표 (,) 로 구분하여 입력해주세요."
+separatorKeys={[',']}
+readOnly={false}
+removeOnBackspace
+onChange={(keyword) => setKeywords(keyword)}
+/>
+)}
+</Field>
+*/
 	return (
-		<FormContainer>
-			<InputGroup className="mb-3">
-				<TagInput dataHandler={dataHandlerBreakfast} />
-			</InputGroup>
+		<div>
+			{/* <Field name="foodTagInput"> */}
+			<TagInput dataHandler={dataHandlerBreakfast} />
+			{/* </Field> */}
+
 			<br />
-			<InputGroup className="mb-3">
-				<TagInput dataHandler={dataHandlerLunch} />
-			</InputGroup>
+
+			<TagInput dataHandler={dataHandlerLunch} />
+
 			<br />
-			<InputGroup className="mb-3">
-				<TagInput dataHandler={dataHandlerDinner} />
-			</InputGroup>
+			{/* <FormikTagInput /> */}
+			<TagInput dataHandler={dataHandlerDinner} />
+
 			<br />
-			<InputGroup className="mb-3">
-				<TagInput dataHandler={dataHandlerSnack} />
-			</InputGroup>
+
+			<TagInput dataHandler={dataHandlerSnack} />
+
 			<br />
 			{showAlert && (
 				<Alert variant="info">
@@ -99,7 +119,7 @@ const RecsysInputForm = () => {
 					</Button>
 				</Col>
 			</Row>
-		</FormContainer>
+		</div>
 	);
 };
 

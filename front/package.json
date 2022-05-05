@@ -16,6 +16,7 @@
     "dotenv": "^16.0.0",
     "downshift": "^6.1.7",
     "faker": "^5.5.3",
+    "formik": "^2.2.9",
     "polished": "^4.2.2",
     "react": "^18.0.0",
     "react-bootstrap": "^2.3.1",
@@ -31,6 +32,7 @@
     "web-vitals": "^2.1.4"
   },
   "devDependencies": {
+    "babel-eslint": "^10.1.0",
     "eslint": "^8.2.0",
     "eslint-config-airbnb": "^19.0.4",
     "eslint-config-prettier": "^8.5.0",

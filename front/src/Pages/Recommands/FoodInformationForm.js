@@ -5,6 +5,7 @@ import { NutInfoWords } from '../../Commons/consts';
 const FoodInformationForm = ({ foodData }) => {
 	const { foodName, ImgURL, ...data } = foodData;
 	const foodList = [];
+	console.log(data);
 
 	for (let key in data) {
 		foodList.push(makelist(key, data[key]));

@@ -16,30 +16,30 @@ export const RecommandStates = {
 export const NutInfoWords = {
 	/*열량 */
 	ENERGY: '열량',
-	Cal: '칼로리',
+	Cal: '칼로리 (KCal)',
 	/*3대영양소 */
 	MAJORNUTS: '3대 영양소',
-	Carbon: '탄수화물',
-	Protein: '단백질',
-	Fat: '지방',
+	Carbon: '탄수화물 (g)',
+	Protein: '단백질 (g)',
+	Fat: '지방 (g)',
 	/*당/식이섬유*/
 	SNF: '당/식이섬유',
 	Sugar: '당류',
-	Fiber: '식이섬유',
+	Fiber: '식이섬유 (g)',
 	/*무기염류 */
 	INORGANICS: '무기염류',
-	Ca: '칼슘',
-	Na: '나트륨',
-	Fe: '철분',
-	Zn: '아연',
+	Ca: '칼슘 (㎎)',
+	Na: '나트륨 (㎎)',
+	Fe: '철분 (㎎)',
+	Zn: '아연 (㎎)',
 	/*비타민군 */
 	VITAMINS: '비타민군',
-	VitA: '비타민 A',
-	VitB6: '비타민 B6',
-	VitC: '비타민 C',
-	VitE: '비타민 E',
-	Niacin: '나이아신',
-	Folate: '엽산',
+	VitA: '비타민 A (㎍)',
+	VitB6: '비타민 B6 (㎎)',
+	VitC: '비타민 C (㎎)',
+	VitE: '비타민 E (㎎)',
+	Niacin: '나이아신 (㎎)',
+	Folate: '엽산 (㎍)',
 	nutToString(key) {
 		return this[key];
 	},
