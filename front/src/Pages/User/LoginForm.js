@@ -28,6 +28,7 @@ const LoginForm = ({ setShow }) => {
 			sessionStorage.setItem('userToken', jwtToken);
 			sessionStorage.setItem('userId', userIdFromServer);
 			setIsLogin(true);
+			setUserId(userIdFromServer);
 		} catch (err) {
 			console.error(err);
 		}
