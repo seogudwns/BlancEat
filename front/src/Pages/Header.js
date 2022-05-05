@@ -20,7 +20,6 @@ const StyledHeaderContainer = styled(Container)`
 const Header = () => {
 	const navigate = useNavigate();
 	const [isLogin, setIsLogin] = useRecoilState(loginState);
-	const userToken = sessionStorage.getItem('userToken');
 
 	const [showAuthModal, setShowAuthModal] = useState(false);
 
@@ -54,12 +53,10 @@ const Header = () => {
 									{createLink('/balanceat', 'BalancEat')}
 									<Nav.Link href="/recommand">오늘 뭐 먹지?</Nav.Link>
 									{isLogin ? (
-										<Nav.Link href={`/userpage/${userToken}`}>
-											사용자페이지
-										</Nav.Link>
+										<Nav.Link href={`/userpage`}>사용자페이지</Nav.Link>
 									) : (
 										<Nav.Link
-											href={`/userpage/${userToken}`}
+											href={`/userpage`}
 											style={{ visibility: 'hidden' }}
 										>
 											사용자페이지
