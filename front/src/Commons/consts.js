@@ -24,7 +24,7 @@ export const NutInfoWords = {
 	Fat: '지방 (g)',
 	/*당/식이섬유*/
 	SNF: '당/식이섬유',
-	Sugar: '당류',
+	Sugar: '당류 (g)',
 	Fiber: '식이섬유 (g)',
 	/*무기염류 */
 	INORGANICS: '무기염류',
@@ -51,4 +51,18 @@ export const ValidateArray = arr => {
 		return true;
 	}
 	return false;
+};
+
+export const isEmptyObj = obj => {
+	if (obj.constructor === Object && Object.keys(obj).length === 0) {
+		return true;
+	}
+
+	return false;
+};
+
+export const getRandomInt = (min, max) => {
+	min = Math.ceil(min);
+	max = Math.floor(max);
+	return Math.floor(Math.random() * (max - min + 1)) + min; //최댓값도 포함, 최솟값도 포함
 };
