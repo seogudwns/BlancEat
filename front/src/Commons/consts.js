@@ -53,6 +53,14 @@ export const ValidateArray = arr => {
 	return false;
 };
 
+export const isEmptyObj = obj => {
+	if (obj.constructor === Object && Object.keys(obj).length === 0) {
+		return true;
+	}
+
+	return false;
+};
+
 export const getRandomInt = (min, max) => {
 	min = Math.ceil(min);
 	max = Math.floor(max);

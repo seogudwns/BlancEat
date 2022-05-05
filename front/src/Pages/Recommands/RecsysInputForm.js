@@ -1,33 +1,19 @@
 import React, { useContext, useState } from 'react';
 
+import { Formik, Form, Field, useFormik } from 'formik';
 import { RecommandContext } from './RecommandContext';
 import { FoodDataContext } from './ContentRecommand';
-import { InputGroup, Col, Row, Alert } from 'react-bootstrap';
-import { FormContainer } from '../../Contents/Styles/styleContents';
+import { InputGroup, FormControl, Radio, Col, Row, Alert } from 'react-bootstrap';
+
+import { TitleWrapper } from '../../Components/Styles/styleContentLabel';
+
 import Button from '../../Components/Button';
 import TagInput from './TagInput';
-import { getRandomInt } from '../../Commons/consts';
-// import { Formik, Field, Form, ErrorMessage, FieldArray } from 'formik';
-// import FormikTagInput from './FormikTagInput';
-
-const keywords = [
-	'피자',
-	'돈까스',
-	'감ㅈ',
-	'핒',
-	'피짜',
-	'자장면',
-	'짬뽕',
-	'도넟',
-	'고롴',
-	'밥',
-	'라면 ',
-	' 두부,',
-	'ㅁ만두',
-	'만두',
-];
 
 const RecsysInputForm = () => {
+	const [age, setAge] = useState([]);
+	const [sex, setSex] = useState([]);
+	const [weight, setWeight] = useState([]);
 	const [breakfast, setBreakfast] = useState([]);
 	const [lunch, setLunch] = useState([]);
 	const [dinner, setDinner] = useState([]);
@@ -35,7 +21,12 @@ const RecsysInputForm = () => {
 	const [showAlert, setShowAlert] = useState(false);
 	const { dispatch } = useContext(RecommandContext);
 	const { postData } = useContext(FoodDataContext);
-	const { getSuggestFoodList } = useContext(FoodDataContext);
+
+	// const { handleSubmit, getFieldProps, touched, errors } = useFormik;
+
+	const formik = useFormik({
+		initialValues: { age: '', sex: '', weight: '' },
+	});
 
 	/* 입력데이터 post, 결과 data get */
 	const handleClickSubmit = async () => {
@@ -51,14 +42,21 @@ const RecsysInputForm = () => {
 		) {
 			/* 데이터가 입력되지 않은 경우 처리 */
 			console.log('input empty');
-			//return <></>;
 			setShowAlert(true);
 		} else {
-			const dataSet = [...breakfast, ...lunch, ...dinner, ...snack];
-			const foodList = dataSet.map(el => el.text);
-			console.log('RECSYS INPUT FORM CHECK LIST : ', foodList);
+			const dataSet = {
+				age: formik.values.age,
+				sex: formik.values.sex,
+				weight: formik.values.weight,
+				breakfast: breakfast.map(el => el.text),
+				lunch: lunch.map(el => el.text),
+				dinner: dinner.map(el => el.text),
+				snack: snack.map(el => el.text),
+			};
+			//const foodList = dataSet.map(el => el.text);
+			console.log('RECSYS INPUT FORM CHECK LIST : ', dataSet);
 
-			if (await postData(foodList)) {
+			if (await postData(dataSet)) {
 				//성공시 다음 단계.
 				dispatch({ type: 'OUTPUT' });
 			} else {
@@ -81,43 +79,61 @@ const RecsysInputForm = () => {
 	const dataHandlerSnack = arr => {
 		setSnack([...arr]);
 	};
-	const suggestHandler = () => {
-		/*테스트를 위해 keywords 배열안의 임의의 값을 전달 */
-		const keyword = keywords[getRandomInt(0, keywords.length - 1)];
-		console.log('sugget 시작 :', keyword);
-		getSuggestFoodList(keyword);
-	};
-	/*
-<Field name="careerPositionKeywords">
-{({}) => (
-<ReactTagInput
-className="py-5"
-tags={keywords} // useState
-placeholder="키워드를 쉼표 (,) 로 구분하여 입력해주세요."
-separatorKeys={[',']}
-readOnly={false}
-removeOnBackspace
-onChange={(keyword) => setKeywords(keyword)}
-/>
-)}
-</Field>
-*/
+	//나이/성별/몸무게
+
 	return (
 		<div>
-			{/* <Field name="foodTagInput"> */}
+			<Formik
+				initialValues={{ age: '', sex: '', weight: '' }}
+				onSubmit={(values, actions) => handleSubmit(values, actions)}
+			>
+				{FormikProps => (
+					<Form>
+						<Field
+							type="text"
+							id="age"
+							placeholder="나이"
+							{...formik.getFieldProps('age')}
+						/>
+						<div role="group" aria-labelledby="my-radio-group">
+							<label>
+								<Field
+									type="radio"
+									id="sex"
+									name="sex"
+									value="M"
+									checked={formik.values.sex === 'M'}
+									onChange={formik.getFieldProps('sex').onChange}
+								/>
+								남성
+							</label>
+							<label>
+								<Field
+									type="radio"
+									id="sex"
+									name="sex"
+									value="F"
+									checked={formik.values.sex === 'F'}
+									onChange={formik.getFieldProps('sex').onChange}
+								/>
+								여성
+							</label>
+						</div>
+						<Field
+							id="text"
+							name="weight"
+							placeholder="몸무게"
+							{...formik.getFieldProps('weight')}
+						/>
+					</Form>
+				)}
+			</Formik>
 			<TagInput dataHandler={dataHandlerBreakfast} />
-			{/* </Field> */}
-
 			<br />
-
 			<TagInput dataHandler={dataHandlerLunch} />
-
 			<br />
-			{/* <FormikTagInput /> */}
 			<TagInput dataHandler={dataHandlerDinner} />
-
 			<br />
-
 			<TagInput dataHandler={dataHandlerSnack} />
 
 			<br />
@@ -141,9 +157,6 @@ onChange={(keyword) => setKeywords(keyword)}
 				<Col>
 					<Button variant="outline-success" onClick={handleClickSubmit}>
 						완료
-					</Button>
-					<Button variant="outline-success" onClick={suggestHandler}>
-						testSuggest
 					</Button>
 				</Col>
 			</Row>
