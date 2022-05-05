@@ -22,10 +22,10 @@ class Nutrition {
 
 	// 음식 검색어 추천
 	static async findNameByKeyword({ keyword }) {
-		const foodName = await nutritionModel.find(
-			{ foodName: { $regex: keyword } },
-			{ foodName: 1 },
-		);
+		const foodName = await nutritionModel
+			.find({ foodName: { $regex: keyword } }, { foodName: 1 })
+			.limit(10)
+			.lean();
 		return foodName;
 	}
 
