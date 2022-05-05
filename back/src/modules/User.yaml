@@ -1,6 +1,8 @@
 paths:
     /user/register:
         get:
+            tags:
+                - User
             summary: 유저 회원가입.
             description: 유저 회원가입.
             parameters:
@@ -146,6 +148,8 @@ paths:
                                             ]
 
         post:
+            tags:
+                - User
             summary: 유저 식사 정보 db에 저장
             requestBody:
                 required: true
@@ -185,6 +189,8 @@ paths:
 
     /user/{keyword}:
         get:
+            tags:
+                - User
             summary: 음식 이름 검색
             parameters:
                 - name: keyword

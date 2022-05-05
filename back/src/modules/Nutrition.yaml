@@ -1,6 +1,8 @@
 paths:
     /nutrition:
         get:
+            tags:
+                - Nutritions
             summary: 음식 영양소 정보와 추천 음식 조회
             description: 문제가 있는데 지금 swagger로 테스트할 때는 array 형식이라 그런지 음식을 하나만 넣으면 무시되고 두 개 이상 넣어서 보낼 때만 영양소 정보를 보내주네요..오류가 나는건 아니고 그냥 영양소 정보가 안옵니다.
             parameters:
@@ -146,6 +148,8 @@ paths:
                                             ]
 
         post:
+            tags:
+                - Nutritions
             summary: 유저 식사 정보 db에 저장
             requestBody:
                 required: true
@@ -185,6 +189,8 @@ paths:
 
     /nutrition_search/{keyword}:
         get:
+            tags:
+                - Nutritions
             summary: 음식 이름 검색
             parameters:
                 - name: keyword
