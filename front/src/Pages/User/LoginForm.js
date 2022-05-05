@@ -22,7 +22,6 @@ const LoginForm = ({ setShow }) => {
 			});
 			setShow(false);
 			alert('로그인 완료');
-			const userIdFromServer = res.data.id;
 			const jwtToken = res.data.token;
 			sessionStorage.setItem('userToken', jwtToken);
 			setIsLogin(true);
