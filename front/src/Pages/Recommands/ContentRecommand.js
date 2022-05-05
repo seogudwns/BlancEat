@@ -1,6 +1,7 @@
 import React, { createContext, useContext, useState } from 'react';
 
 import * as Api from '../../Commons/Api';
+import { useRecoilValue } from 'recoil';
 import { RecommandContext } from './RecommandContext';
 import RecsysRequireInform from './RecsysRequireInform';
 import RecsysInput from './RecsysInput';
@@ -11,11 +12,15 @@ import { ImgBGContentContainer } from '../../Contents/Styles/styleContents';
 import { RecommandStates, ValidateArray } from '../../Commons/consts';
 import NutInfoParser from './NutInfoParser';
 import { FOODNUTS } from './foodlist';
+import { loginState, userIdState } from '../User/UserAtom';
 export const FoodDataContext = createContext();
 
 const ContentRecommand = () => {
 	const [foodData, setFoodData] = useState([]);
 	const { step } = useContext(RecommandContext);
+	const userId = useRecoilValue(userIdState); //userId.
+	const isLogin = useRecoilValue(loginState); //로긴되었는가 불린값
+
 	/*TODO : api functions */
 
 	/*입력데이터 전송후 결과 수신 */
