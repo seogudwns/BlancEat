@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-const portNumber = '5001';
+const portNumber = '5000';
 const url = `http://${window.location.hostname}:${portNumber}/`;
 
 const get = async (endpoint, params = '') => {
@@ -9,11 +9,11 @@ const get = async (endpoint, params = '') => {
 	return axios.get(
 		+endpoint + '/' + params,
 		// jwt 토큰 사용 시 아래 코드 주석 삭제
-		//     {
-		//     headers: {
-		//         Authorization : `Bearer ${sessionStorage.getItem("userToken")}`,
-		//     },
-		// }
+		{
+			headers: {
+				Authorization: `Bearer ${sessionStorage.getItem('userToken')}`,
+			},
+		},
 	);
 };
 
@@ -26,12 +26,12 @@ const post = async (endpoint, data) => {
 		url + endpoint,
 		bodyData,
 		// jwt 토큰 사용 시 아래 코드 주석 삭제
-		//     {
-		// 	headers: {
-		// 		'Content-type': 'application/json',
-		// 		Authorization: `Bearer ${sessionStorage.getItem('userToken')}`,
-		// 	},
-		// }
+		{
+			headers: {
+				'Content-type': 'application/json',
+				Authorization: `Bearer ${sessionStorage.getItem('userToken')}`,
+			},
+		},
 	);
 };
 
@@ -44,12 +44,12 @@ const put = async (endpoint, data) => {
 		url + endpoint,
 		bodyData,
 		// jwt 토큰 사용 시 아래 코드 주석 삭제
-		//     {
-		// 	headers: {
-		// 		'Content-type': 'application/json',
-		// 		Authorization: `Bearer ${sessionStorage.getItem('userToken')}`,
-		// 	},
-		// }
+		{
+			headers: {
+				'Content-type': 'application/json',
+				Authorization: `Bearer ${sessionStorage.getItem('userToken')}`,
+			},
+		},
 	);
 };
 
@@ -59,11 +59,11 @@ const del = async (endpoint, params = '') => {
 	return axios.delete(
 		+endpoint + '/' + params,
 		// jwt 토큰 사용 시 아래 코드 주석 삭제
-		//     {
-		//     headers: {
-		//         Authorization : `Bearer ${sessionStorage.getItem("userToken")}`,
-		//     },
-		// }
+		{
+			headers: {
+				Authorization: `Bearer ${sessionStorage.getItem('userToken')}`,
+			},
+		},
 	);
 };
 

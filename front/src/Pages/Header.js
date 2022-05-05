@@ -1,21 +1,27 @@
 import styled from 'styled-components';
 import { Container, Navbar, Nav } from 'react-bootstrap';
-import React, { useState, useEffect } from 'react';
-import LoginForm from '../component/user/LoginForm';
+import { useRecoilState } from 'recoil';
+import { useNavigate } from 'react-router-dom';
+
+import React, { useState } from 'react';
+import AuthModal from './User/AuthModal';
 import Button from '../Components/Button';
+import { loginState } from './User/UserAtom';
 
 const StyledHeaderContainer = styled(Container)`
 	color: #ffffff;
 	background-color: #075f3a;
 	.nav-link {
-		font-family: 'Roboto', sans-serif;
+		font-family: 'Elice Digital Baeum';
 		color: #ffffff !important;
 	}
 `;
 
 const Header = () => {
-	const isLogin = true;
-	const [show, setShow] = useState(false);
+	const navigate = useNavigate();
+	const [isLogin, setIsLogin] = useRecoilState(loginState);
+
+	const [showAuthModal, setShowAuthModal] = useState(false);
 
 	const createLink = (url, title) => {
 		return (
@@ -25,9 +31,12 @@ const Header = () => {
 		);
 	};
 
-	useEffect(() => {
-		return () => setShow(false);
-	}, []);
+	const handleLogout = () => {
+		setIsLogin(false);
+		sessionStorage.removeItem('userToken');
+		navigate('/');
+		alert('로그아웃');
+	};
 
 	return (
 		<>
@@ -44,26 +53,45 @@ const Header = () => {
 									{createLink('/balanceat', 'BalancEat')}
 									<Nav.Link href="/recommand">오늘 뭐 먹지?</Nav.Link>
 									{isLogin ? (
-										<Nav.Link href="/userpage">사용자페이지</Nav.Link>
+										<Nav.Link href={`/userpage`}>사용자페이지</Nav.Link>
 									) : (
-										<Nav visibility="hidden">사용자페이지</Nav>
+										<Nav.Link
+											href={`/userpage`}
+											style={{ visibility: 'hidden' }}
+										>
+											사용자페이지
+										</Nav.Link>
 									)}
 								</Nav>
 							</Navbar.Collapse>
 
-							<Button
-								variant="outline-light"
-								onClick={() => setShow(true)}
-								style={{ marginLeft: '1em' }}
-							>
-								Sign in
-							</Button>
+							{!isLogin ? (
+								<Button
+									outline
+									color="white_85"
+									// variant="outline-light"
+									onClick={() => setShowAuthModal(true)}
+									style={{ marginLeft: '1rem' }}
+								>
+									Sign in
+								</Button>
+							) : (
+								<Button
+									outline
+									color="white_85"
+									// variant="outline-light"
+									onClick={handleLogout}
+									style={{ marginLeft: '1rem' }}
+								>
+									Sign Out
+								</Button>
+							)}
 						</Nav>
 					</Container>
 				</Navbar>
 			</StyledHeaderContainer>
 
-			{show && <LoginForm show={show} setShow={setShow} />}
+			{showAuthModal && <AuthModal show={showAuthModal} setShow={setShowAuthModal} />}
 		</>
 	);
 };

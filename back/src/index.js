@@ -15,13 +15,19 @@ app.use(express.urlencoded({ extended: false }));
 // swagger api
 app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(specs, { explorer: true }));
 
+app.use(userRouter);
+/**
+ * @swagger
+ * tags:
+ *   name: User
+ *   description: User API 조회
+ */
+app.use(nutritionRouter);
 /**
  * @swagger
  * tags:
  *   name: Nutritions
  *   description: 음식 영양소 조회
  */
-app.use(userRouter);
-app.use(nutritionRouter);
 
 export { app };

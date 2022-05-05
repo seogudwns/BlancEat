@@ -29,14 +29,14 @@ nutritionRouter.get('/nutrition', async (req, res, next) => {
 			throw new Error(getFoodList.errorMessage);
 		}
 
-		const { personInfo, result } = await Recommend.recommendSystem(
+		const { personInfo, result, errMessage } = await Recommend.recommendSystem(
 			age,
 			sex,
 			weight,
 			getFoodList,
 		);
 
-		const bundle = { getFoodList, personInfo, result };
+		const bundle = { getFoodList, personInfo, result, errMessage };
 
 		res.status(200).json(bundle);
 	} catch (error) {

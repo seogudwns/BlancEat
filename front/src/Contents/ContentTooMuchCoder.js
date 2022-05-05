@@ -1,6 +1,7 @@
 import * as Content from './styleContents';
 import styled from 'styled-components';
 import { Card } from 'react-bootstrap';
+import { StyledToomuchBox } from './ContentUserPageText';
 const teamMembers = [
 	['홍일도', 'FRONTEND', 'theohong@gmail.com', '/img/홍일도님_프로필.jpg'],
 	['배주영', 'BACKEND', 'baejuyoung49@gmail.com', '/img/배주영님_프로필.png'],
@@ -25,11 +26,11 @@ const StyledTeamSpan = styled.span`
 const ContentTooMuchCoder = () => {
 	const TeamMember = ({ teamMember }) => {
 		return (
-			<Card style={{ display: 'inline-block', width: '50%' }}>
+			<div style={{ display: 'inline-block', width: '50%' }}>
 				<Content.StyledTeamBox style={{ backgroundColor: 'white' }}>
 					<StyledProfileImg
 						borderRadius="15px"
-						margin="5px 0 0 10px"
+						margin="10px 0 0 10px"
 						src={teamMember[3]}
 						width="50px"
 						height="50px"
@@ -38,7 +39,7 @@ const ContentTooMuchCoder = () => {
 					<StyledTeamSpan
 						fontWeight="bolder"
 						margin="0px 0px  0px 20px"
-						padding="10px 0px 0px 0px"
+						padding="5px 0px 0px 0px"
 						fontSize="20px"
 					>
 						{teamMember[0]}
@@ -53,16 +54,19 @@ const ContentTooMuchCoder = () => {
 						<p style={{ fontWeight: 'lighter', margin: '0px' }}>{teamMember[2]}</p>
 					</StyledTeamSpan>
 				</Content.StyledTeamBox>
-			</Card>
+			</div>
 		);
 	};
 
 	return (
-		<Card>
+		<div>
+			<div style={{ margin: '20px 0px 0px 30px', display: 'flex' }}>
+				<StyledToomuchBox>우리가 만들었습니다</StyledToomuchBox>
+			</div>
 			{teamMembers.map((teamMember, index) => (
 				<TeamMember key={index} teamMember={teamMember} />
 			))}
-		</Card>
+		</div>
 	);
 };
 

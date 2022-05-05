@@ -12,6 +12,10 @@ class Meal {
 	static async findSome({ user_id, time, timestamps }) {
 		return await MealModel.find({ user_id, meal_time: time }, { timestamps });
 	}
+
+	static async deleteOne(meal_id) {
+		return await MealModel.findOneAndDelete({ id: meal_id });
+	}
 }
 
 export { Meal };
