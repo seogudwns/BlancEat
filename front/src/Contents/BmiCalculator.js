@@ -43,17 +43,6 @@ const BmiCalculator = () => {
 		if (kg === 0 || cm === 0) {
 			setBmi(0);
 		}
-
-		if (cm === '') {
-			setCm(0);
-		} else if (cm < 0) {
-			setCm(0);
-		}
-		if (kg === '') {
-			setKg(0);
-		} else if (kg < 0) {
-			setKg(0);
-		}
 	}, [kg, cm, bmi]);
 
 	const resetBMI = () => {
