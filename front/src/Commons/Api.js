@@ -11,6 +11,7 @@ const get = async (endpoint, params = '') => {
 		// jwt 토큰 사용 시 아래 코드 주석 삭제
 		{
 			headers: {
+				'Content-type': 'application/json',
 				Authorization: `Bearer ${sessionStorage.getItem('userToken')}`,
 			},
 		},
@@ -23,6 +24,23 @@ const post = async (endpoint, data) => {
 	console.log(`POST 데이터 : ${bodyData}`);
 
 	return axios.post(
+		url + endpoint,
+		bodyData,
+		// jwt 토큰 사용 시 아래 코드 주석 삭제
+		{
+			headers: {
+				'Content-type': 'application/json',
+				Authorization: `Bearer ${sessionStorage.getItem('userToken')}`,
+			},
+		},
+	);
+};
+const getRecsys = async (endpoint, data) => {
+	const bodyData = JSON.stringify(data);
+	console.log(`POST 요청 : ${url + endpoint}`);
+	console.log(`POST 데이터 : ${bodyData}`);
+
+	return axios.get(
 		url + endpoint,
 		bodyData,
 		// jwt 토큰 사용 시 아래 코드 주석 삭제
@@ -67,4 +85,4 @@ const del = async (endpoint, params = '') => {
 	);
 };
 
-export { get, post, put, del as delete };
+export { get, post, put, getRecsys, del as delete };

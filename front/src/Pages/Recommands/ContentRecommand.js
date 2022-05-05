@@ -27,18 +27,31 @@ const ContentRecommand = () => {
 	const postData = async (inputData = []) => {
 		// const postData = (inputData = []) => {
 		// 수신된 데이터를 더미데이터 FOODNUTS로 가정하고 일단 구현
+
 		if (ValidateArray(inputData)) {
 			console.log('postData, input: ', inputData);
 			const sendData = {
 				age: 18,
 				sex: 'F',
 				weight: 60,
-				foodList: inputData,
+				// foodList: inputData,
+				breakfast: inputData,
+				lunch: [],
+				dinner: [],
+				snack: [],
 			};
-			const result = await Api.post('nutrition/', sendData);
+			let result = null;
+			if (isLogin) {
+				console.log('로그인 사용자 음식추천 요청');
+				result = await Api.post('nutrition/', sendData);
+			} else {
+				console.log('비로그인 사용자 음식추천 요청');
+				result = await Api.getRecsys('nutrition/', sendData);
+			}
+
 			console.log('-------------------------');
 			console.log(result);
-			if (result.status === 200) {
+			if (result.status > 99 && result.status < 300) {
 				const { data } = result;
 				// const resultMSG = data.result[0];
 				const rawArr = data.result;
@@ -58,17 +71,15 @@ const ContentRecommand = () => {
 	};
 
 	/* 음식정보입력시 취급품목인지 validation, Debouncing */
-	const getSuggestFoodList = async ({ foodList }) => {
-		console.log('getSuggestFoodList');
-		const sendData = {
-			age: 18,
-			sex: 'F',
-			weight: 60,
-			foodList: ['불고기피자'],
-		};
+	const getSuggestFoodList = async keyword => {
+		let timeStart = new Date().getTime();
+		console.log('컨텐트 리커멘드, getSuggestFoodList', keyword);
+
 		/*return 검색어가 포함된 음식정보 10종 이하, 없을 경우 는 취급 안하는 품목 */
-		const result = await Api.post('nutrition/', sendData);
-		console.log(result);
+		const result = await Api.get('nutrition_search', keyword);
+		let timeEnd = new Date().getTime();
+		console.log('데이터 수신 소요시간 : ', (timeEnd - timeStart) / 1000);
+		console.log('수신결과 : ', result);
 	};
 
 	return (

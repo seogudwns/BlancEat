@@ -6,8 +6,26 @@ import { InputGroup, Col, Row, Alert } from 'react-bootstrap';
 import { FormContainer } from '../../Contents/Styles/styleContents';
 import Button from '../../Components/Button';
 import TagInput from './TagInput';
+import { getRandomInt } from '../../Commons/consts';
 // import { Formik, Field, Form, ErrorMessage, FieldArray } from 'formik';
 // import FormikTagInput from './FormikTagInput';
+
+const keywords = [
+	'피자',
+	'돈까스',
+	'감ㅈ',
+	'핒',
+	'피짜',
+	'자장면',
+	'짬뽕',
+	'도넟',
+	'고롴',
+	'밥',
+	'라면 ',
+	' 두부,',
+	'ㅁ만두',
+	'만두',
+];
 
 const RecsysInputForm = () => {
 	const [breakfast, setBreakfast] = useState([]);
@@ -17,6 +35,7 @@ const RecsysInputForm = () => {
 	const [showAlert, setShowAlert] = useState(false);
 	const { dispatch } = useContext(RecommandContext);
 	const { postData } = useContext(FoodDataContext);
+	const { getSuggestFoodList } = useContext(FoodDataContext);
 
 	/* 입력데이터 post, 결과 data get */
 	const handleClickSubmit = async () => {
@@ -61,6 +80,12 @@ const RecsysInputForm = () => {
 	};
 	const dataHandlerSnack = arr => {
 		setSnack([...arr]);
+	};
+	const suggestHandler = () => {
+		/*테스트를 위해 keywords 배열안의 임의의 값을 전달 */
+		const keyword = keywords[getRandomInt(0, keywords.length - 1)];
+		console.log('sugget 시작 :', keyword);
+		getSuggestFoodList(keyword);
 	};
 	/*
 <Field name="careerPositionKeywords">
@@ -116,6 +141,9 @@ onChange={(keyword) => setKeywords(keyword)}
 				<Col>
 					<Button variant="outline-success" onClick={handleClickSubmit}>
 						완료
+					</Button>
+					<Button variant="outline-success" onClick={suggestHandler}>
+						testSuggest
 					</Button>
 				</Col>
 			</Row>
