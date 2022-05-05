@@ -1,15 +1,8 @@
 import React, { useContext, useState } from 'react';
 
-// import { FoodInputContext } from './RecsysInputForm';
 import { FOODS } from './foodlist';
-// import './styleTagInput.css';
-// import { ReactTagStyle } from './styleTagInput';
-// import './styleTagInput.scss';
-// import styles from "./ReactTags.module.scss";
-// import './ReactTags.css';
 import ReactTagStyle from './ReactTagStyle';
 import { WithContext as ReactTags } from 'react-tag-input';
-//const ReactTags = require('react-tag-input').WithOutContext;
 
 import { FoodDataContext } from './ContentRecommand';
 
@@ -97,7 +90,35 @@ const TagInput = ({ dataHandler }) => {
 	);
 };
 export default TagInput;
-
+/*
+		<ReactTagStyle>
+			<ReactTags
+				handleDelete={handleDelete}
+				handleAddition={handleAddition}
+				handleDrag={handleDrag}
+				delimiters={delimiters}
+				handleTagClick={handleTagClick}
+				onClearAll={onClearAll}
+				onTagUpdate={onTagUpdate}
+				placeholder="Search..."
+				minQueryLength={2}
+				maxLength={5}
+				autofocus={false}
+				allowDeleteFromEmptyInput={true}
+				autocomplete={true}
+				readOnly={false}
+				allowUnique={true}
+				allowDragDrop={false}
+				inline={true}
+				inputFieldPosition="inline"
+				allowAdditionFromPaste={true}
+				editable={true}
+				clearAll={true}
+				tags={tags}
+				suggestions={suggestions}
+			/>
+		</ReactTagStyle>
+*/
 // render(<App />, document.getElementById('root'));
 
 /*

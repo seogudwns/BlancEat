@@ -6,6 +6,8 @@ import { InputGroup, Col, Row, Alert } from 'react-bootstrap';
 import { FormContainer } from '../../Contents/Styles/styleContents';
 import Button from '../../Components/Button';
 import TagInput from './TagInput';
+// import { Formik, Field, Form, ErrorMessage, FieldArray } from 'formik';
+// import FormikTagInput from './FormikTagInput';
 
 const RecsysInputForm = () => {
 	const [breakfast, setBreakfast] = useState([]);
@@ -60,24 +62,39 @@ const RecsysInputForm = () => {
 	const dataHandlerSnack = arr => {
 		setSnack([...arr]);
 	};
-
+	/*
+<Field name="careerPositionKeywords">
+{({}) => (
+<ReactTagInput
+className="py-5"
+tags={keywords} // useState
+placeholder="키워드를 쉼표 (,) 로 구분하여 입력해주세요."
+separatorKeys={[',']}
+readOnly={false}
+removeOnBackspace
+onChange={(keyword) => setKeywords(keyword)}
+/>
+)}
+</Field>
+*/
 	return (
 		<div>
-			{/* <InputGroup className="mb-3"> */}
+			{/* <Field name="foodTagInput"> */}
 			<TagInput dataHandler={dataHandlerBreakfast} />
-			{/* </InputGroup> */}
+			{/* </Field> */}
+
 			<br />
-			{/* <InputGroup className="mb-3"> */}
+
 			<TagInput dataHandler={dataHandlerLunch} />
-			{/* </InputGroup> */}
+
 			<br />
-			{/* <InputGroup className="mb-3"> */}
+			{/* <FormikTagInput /> */}
 			<TagInput dataHandler={dataHandlerDinner} />
-			{/* </InputGroup> */}
+
 			<br />
-			{/* <InputGroup className="mb-3"> */}
+
 			<TagInput dataHandler={dataHandlerSnack} />
-			{/* </InputGroup> */}
+
 			<br />
 			{showAlert && (
 				<Alert variant="info">
