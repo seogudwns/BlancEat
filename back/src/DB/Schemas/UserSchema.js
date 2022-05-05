@@ -29,6 +29,9 @@ const UserSchema = new Schema(
 			type: Number,
 			required: true,
 		},
+		height: {
+			type: Number,
+		},
 		sex: {
 			type: String,
 			required: true,

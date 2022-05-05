@@ -51,14 +51,14 @@ class userService {
 		}
 
 		// 로그인 성공, JWT 웹 토큰 생성
-		const secretKey = process.env.JWT_SECRET_KEY || 'jwt-secret-key';
-		const token = jwt.sign({ user_id: user.id }, secretKey, {
+		const secretKey = process.env.JWT_SECRET_KEY || 'secret-key';
+		const token = jwt.sign({ id: user.id }, secretKey, {
 			expiresIn: '6h',
 		});
 
 		// 반환할 loginuser 객체를 위한 변수 설정
 		const id = user.id;
-		const nickName = user.name;
+		const nickName = user.nickName;
 
 		const loginUser = {
 			token,
@@ -69,6 +69,48 @@ class userService {
 		};
 
 		return loginUser;
+	}
+
+	static async setUser(id, { checkId, updateInfo }) {
+		// updateInfo === { password, nickName, newPassword, age, weight };
+		let changeUser = await User.findById({ id });
+		if (id !== checkId) {
+			const errMessage = '잘못된 토큰입니다.';
+			return { errMessage };
+		}
+
+		const isPasswordCorrect = await bcrypt.compare(updateInfo.password, changeUser.password);
+
+		if (!isPasswordCorrect) {
+			const errMessage = '비밀번호가 일치하지 않습니다.';
+			return { errMessage };
+		}
+
+		if (updateInfo.nickName) {
+			const fieldToUpdate = 'nickName';
+			const newValue = updateInfo.nickName;
+			changeUser = await User.updateUser({ id, fieldToUpdate, newValue });
+		}
+
+		if (updateInfo.newPassword) {
+			const fieldToUpdate = 'password';
+			const newValue = await bcrypt.hash(updateInfo.newPassword, 10);
+			changeUser = await User.updateUser({ id, fieldToUpdate, newValue });
+		}
+
+		if (updateInfo.age) {
+			const fieldToUpdate = 'age';
+			const newValue = updateInfo.age;
+			changeUser = await User.updateUser({ id, fieldToUpdate, newValue });
+		}
+
+		if (updateInfo.weight) {
+			const fieldToUpdate = 'weight';
+			const newValue = updateInfo.weight;
+			changeUser = await User.updateUser({ id, fieldToUpdate, newValue });
+		}
+
+		return changeUser;
 	}
 }
 
