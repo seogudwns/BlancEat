@@ -11,13 +11,18 @@ import {
 	Legend,
 } from 'chart.js';
 import { Bar } from 'react-chartjs-2';
-
-const ContentBarChart = () => {
-	ChartJS.register(CategoryScale, LinearScale, BarElement, Title, Tooltip, Legend);
-	const options = {
+import { options_BarChart } from './ChartData';
+const ContentBarChart = ({ data, title, option1 }) => {
+	const options_BarChart = {
+		responsive: true,
+		maintainAspectRatio: option1,
 		plugins: {
 			legend: {
 				position: 'none',
+			},
+			title: {
+				display: true,
+				text: title,
 			},
 		},
 		scales: {
@@ -35,19 +40,15 @@ const ContentBarChart = () => {
 		// true : 크기가 알아서 결정됨.
 	};
 
-	const data = {
-		// 각 막대별 라벨
-		labels: ['탄수화물', '지방', '단백질', '설탕', '소금', '캴슘', '마그네슘'],
-		datasets: [
-			{
-				borderWidth: 1, // 테두리 두께
-				data: [30, 5, 82, 30, 52, 81, 68, 55, 5], // 수치
-				backgroundColor: ['yellow', 'red', 'green', 'gray', 'pink', 'skyblue', 'blue'], // 각 막대 색
-			},
-		],
-	};
+	// false : 사용자 정의 크기에 따라 그래프 크기가 결정됨.
+	// true : 크기가 알아서 결정됨.
+	ChartJS.register(CategoryScale, LinearScale, BarElement, Title, Tooltip, Legend);
 
-	return <Bar options={options} data={data} />;
+	return (
+		<>
+			<Bar options={options_BarChart} data={data} />
+		</>
+	);
 };
 
 export default ContentBarChart;

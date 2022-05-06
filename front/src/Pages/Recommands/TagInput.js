@@ -1,19 +1,9 @@
 import React, { useContext, useState } from 'react';
 
-// import { FoodInputContext } from './RecsysInputForm';
-import { FOODS } from './foodlist';
-import './styleTagInput.css';
-// import './styleTagInput.scss';
-// import styles from "./ReactTags.module.scss";
-
+import ReactTagStyle from './ReactTagStyle';
 import { WithContext as ReactTags } from 'react-tag-input';
-//const ReactTags = require('react-tag-input').WithOutContext;
-const suggestions = FOODS.map(food => {
-	return {
-		id: food,
-		text: food,
-	};
-});
+
+import { FoodDataContext } from './ContentRecommand';
 
 const KeyCodes = {
 	comma: 188,
@@ -23,7 +13,7 @@ const KeyCodes = {
 const delimiters = [KeyCodes.comma, KeyCodes.enter];
 
 const TagInput = ({ dataHandler }) => {
-	// const { setMorning } = useContext(FoodInputContext);
+	const { suggestions, getSuggestFoodList } = useContext(FoodDataContext);
 	const [tags, setTags] = useState([]);
 
 	const handleDelete = i => {
@@ -47,6 +37,9 @@ const TagInput = ({ dataHandler }) => {
 		// re-render
 		setTags(newTags);
 	};
+	const handleInputChange = tag => {
+		getSuggestFoodList(tag);
+	};
 
 	const handleTagClick = index => {
 		console.log('The tag at index ' + index + ' was clicked');
@@ -54,26 +47,48 @@ const TagInput = ({ dataHandler }) => {
 	const onClearAll = () => {
 		setTags([]);
 	};
+	const onTagUpdate = (i, newTag) => {
+		const updatedTags = tags.slice();
+		updatedTags.splice(i, 1, newTag);
+		setTags(updatedTags);
+	};
 
 	return (
-		<div>
+		<ReactTagStyle>
 			<ReactTags
-				tags={tags}
-				suggestions={suggestions}
-				delimiters={delimiters}
 				handleDelete={handleDelete}
 				handleAddition={handleAddition}
+				handleInputChange={handleInputChange}
 				handleDrag={handleDrag}
+				delimiters={delimiters}
 				handleTagClick={handleTagClick}
 				onClearAll={onClearAll}
-				inputFieldPosition="bottom"
-				autocomplete
-				allowDeleteFromEmptyInput
+				onTagUpdate={onTagUpdate}
+				placeholder="Search..."
+				minQueryLength={2}
+				maxLength={5}
+				autofocus={false}
+				allowDeleteFromEmptyInput={true}
+				autocomplete={true}
+				readOnly={false}
+				allowUnique={true}
+				allowDragDrop={false}
+				inline={true}
+				inputFieldPosition="inline"
+				allowAdditionFromPaste={true}
+				editable={true}
 				clearAll={true}
+				tags={tags}
+				suggestions={suggestions}
 			/>
-		</div>
+		</ReactTagStyle>
 	);
 };
 export default TagInput;
 
-// render(<App />, document.getElementById('root'));
+// const suggestions = FOODS.map(food => {
+// 	return {
+// 		id: food,
+// 		text: food,
+// 	};
+// });

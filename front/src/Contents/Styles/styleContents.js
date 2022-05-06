@@ -13,7 +13,7 @@ export const ContentContainer = styled(Container)`
 	margin: 0;
 	margin-top: auto;
 	padding: 1rem;
-	background-color: #fcfbfa;
+	background-color: ${props => props.theme.surface_color};
 `;
 
 export const ImgBGContentContainer = styled(Container)`
@@ -50,22 +50,21 @@ export const BGDiv = styled.div`
 	height: 640px;
 	margin: 0;
 	padding: 0;
-	background-color: rgba(252, 251, 250, 0.45); ;
+	background-color: ${props => props.theme.white_45};
 `;
 export const LargeText = styled.p`
-	width: 578px;
-	height: 76px;
-	left: 313px;
-	top: 222px;
+	width: 36.125rem;
+	height: 4.75rem;
+	left: 19.75rem;
+	top: 13.875rem;
 
 	/* NanumSquare/H2 */
 
 	font-family: 'NanumSquare';
-	font-style: normal;
+	font-style: bold;
 	font-weight: 700;
-	font-size: 32px;
-	line-height: 120%;
-	/* or 38px */
+	font-size: 2rem;
+	line-height: 150%;
 
 	display: flex;
 	align-items: center;
@@ -73,7 +72,7 @@ export const LargeText = styled.p`
 
 	/* Gray/600 */
 
-	color: #3b3d3b;
+	color: ${props => props.theme.gray_600};
 
 	margin: 222px 312px 90px 312px;
 `;
@@ -88,10 +87,9 @@ export const LargeButton = styled(Button)`
 	padding: 14px 28px;
 
 	h3 {
-		font-family: 'Nanum Square';
+		font-family: ${props => props.theme.heading_font_family};
 		line-height: 120%;
 		letter-spacing: 0.5px;
-		font-family: 'NanumSquare';
 
 		font-weight: 700;
 		font-size: 24px;
@@ -122,28 +120,3 @@ export const FormContainer = styled.div`
 	padding: 50px;
 	background-color: white;
 `;
-
-/*
-.form {
-		width: 500px;
-	}
-	.form-inline {
-		width: 100%;
-	}
-
-	.form-group {
-		width: 90%;
-	}
-
-	.input-group {
-		width: 90% !important;
-	}
-
-	.form-control {
-		width: 70%;
-	}
-
-	span.input-group-addon {
-		width: 50px !important;
-	}
- */

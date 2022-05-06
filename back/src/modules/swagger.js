@@ -18,7 +18,7 @@ const options = {
 			},
 		],
 	},
-	apis: [`./src/modules/elice4th10-Elice_team10-1.0.0-swagger.yaml`, `./src/index.js`],
+	apis: [`./src/modules/Nutrition.yaml`, `./src/index.js`, './src/modules/User.yaml'],
 };
 
 const specs = swaggerJsdoc(options);
