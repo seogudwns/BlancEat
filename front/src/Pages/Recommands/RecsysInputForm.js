@@ -1,5 +1,6 @@
 import React, { useContext, useState, useRef, useEffect } from 'react';
 
+import Autosuggest from 'react-autosuggest';
 import { Formik, Form, Field, useFormik } from 'formik';
 import { RecommandContext } from './RecommandContext';
 import { FoodDataContext } from './ContentRecommand';
@@ -12,116 +13,25 @@ import TagInput from './TagInput';
 import ReactFormikTagsInput from './ReactFormikTagsInput';
 
 import { FormikTagsInputStyle, RecsysInputFormStyle } from './FormikTagsInputStyle';
-import TagsInput from 'react-tagsinput';
+import TagsInput from 'react-tagsinput-2';
+
+import SuggestTagInput from './autosuggestRenderInput';
 
 const RecsysInputForm = () => {
-	// const { values } = useFormikContext();
-
-	// const formRef = useRef();
-	// const [age, setAge] = useState([]);
-	// const [sex, setSex] = useState([]);
-	// const [weight, setWeight] = useState([]);
-	// const [breakfast, setBreakfast] = useState([]);
-	// const [lunch, setLunch] = useState([]);
-	// const [dinner, setDinner] = useState([]);
-	// const [snack, setSnack] = useState([]);
+	// const [breakfast, set]
 	const [showAlert, setShowAlert] = useState(false);
 	const { dispatch } = useContext(RecommandContext);
 	const { postData } = useContext(FoodDataContext);
-	/*
-	const formik = useFormik({
-		initialValues: {
-			age: '',
-			sex: '',
-			weight: '',
-			breakfast: [],
-			lunch: [],
-			dinner: [],
-			snack: [],
-		},
-		onSubmit: values => {
-			const dataSet = {
-				age: values.age,
-				sex: values.sex,
-				weight: values.weight,
-				breakfast: values.breakfast.map(el => el.text),
-				lunch: values.lunch.map(el => el.text),
-				dinner: values.dinner.map(el => el.text),
-				snack: values.snack.map(el => el.text),
-			};
-			//const foodList = dataSet.map(el => el.text);
-			console.log('RECSYS INPUT FORM CHECK LIST : ', dataSet);
 
-			if (postData(dataSet)) {
-				//성공시 다음 단계.
-				dispatch({ type: 'OUTPUT' });
-			} else {
-				//실패시 에러 처리단계... try catch?
-			}
-		},
-		onClickCancel: () => {
-			dispatch({ type: 'RESET' });
-		},
-	});
-	*/
 	const onKeyDown = keyEvent => {
 		if ((keyEvent.charCode || keyEvent.keyCode) === 13) {
 			keyEvent.preventDefault();
 		}
 	};
 
-	/* 입력데이터 post, 결과 data get */
-	// const onSubmit = async values => {
-	// 	console.log('handleClickSubmit');
-	// 	if (
-	// 		ValidateArray(values.breakfast) &&
-	// 		ValidateArray(values.lunch) &&
-	// 		ValidateArray(values.dinner) &&
-	// 		ValidateArray(values.snack)
-	// 	) {
-	// 		console.log('input empty');
-	// 		setShowAlert(true);
-	// 		setTimeout(() => {
-	// 			setShowAlert(false);
-	// 		}, 2000);
-	// 	} else {
-	// 		const dataSet = {
-	// 			age: values.age,
-	// 			sex: values.sex,
-	// 			weight: values.weight,
-	// 			breakfast: values.breakfast.map(el => el.text),
-	// 			lunch: values.lunch.map(el => el.text),
-	// 			dinner: values.dinner.map(el => el.text),
-	// 			snack: values.snack.map(el => el.text),
-	// 		};
-	// 		//const foodList = dataSet.map(el => el.text);
-	// 		console.log('RECSYS INPUT FORM CHECK LIST : ', dataSet);
-
-	// 		if (await postData(dataSet)) {
-	// 			//성공시 다음 단계.
-	// 			dispatch({ type: 'OUTPUT' });
-	// 		} else {
-	// 			//실패시 에러 처리단계... try catch?
-	// 		}
-	// 	}
-	// };
-
 	const handleClickCancel = () => {
 		dispatch({ type: 'RESET' });
 	};
-	// const dataHandlerBreakfast = arr => {
-	// 	setBreakfast([...arr]);
-	// };
-	// const dataHandlerLunch = arr => {
-	// 	setLunch([...arr]);
-	// };
-	// const dataHandlerDinner = arr => {
-	// 	setDinner([...arr]);
-	// };
-	// const dataHandlerSnack = arr => {
-	// 	setSnack([...arr]);
-	// };
-	// const sleep = ms => new Promise(r => setTimeout(r, ms));
 
 	const initialValues = {
 		age: '',
@@ -139,8 +49,7 @@ const RecsysInputForm = () => {
 			initialValues={initialValues}
 			onSubmit={async (values, { setSubmitting }) => {
 				setSubmitting(true);
-				// await handleClickSubmit(values);
-
+				//need loading process
 				const dataSet = {
 					age: values.age,
 					sex: values.sex,
@@ -226,7 +135,11 @@ const RecsysInputForm = () => {
 
 						<FormikTagsInputStyle>
 							<div className="tagsinput_container">
-								<label id="breakfast" className="tagsinput_label">
+								<label
+									htmlFor="breakfast"
+									id="breakfast"
+									className="tagsinput_label"
+								>
 									아침
 								</label>
 								<TagsInput
@@ -237,6 +150,14 @@ const RecsysInputForm = () => {
 										setFieldValue('breakfast', tags);
 									}}
 								/>
+								{/* <Autosuggest
+									inputProps={{
+										placeholder: '음식 이름을 검색해보세요.',
+										autoComplete: 'abcd',
+										name: 'breakfast',
+										id: 'breakfast',
+									}}
+								/> */}
 							</div>
 							<div className="tagsinput_container">
 								<label id="lunch" className="tagsinput_label">
@@ -247,7 +168,6 @@ const RecsysInputForm = () => {
 									name="lunch"
 									value={values.lunch}
 									onChange={tags => {
-										console.log(tags);
 										setFieldValue('lunch', tags);
 									}}
 								/>
@@ -260,7 +180,6 @@ const RecsysInputForm = () => {
 									name="dinner"
 									value={values.dinner}
 									onChange={tags => {
-										console.log(tags);
 										setFieldValue('dinner', tags);
 									}}
 								/>
@@ -273,7 +192,6 @@ const RecsysInputForm = () => {
 									name="snack"
 									value={values.snack}
 									onChange={tags => {
-										console.log(tags);
 										setFieldValue('snack', tags);
 									}}
 								/>
@@ -281,6 +199,7 @@ const RecsysInputForm = () => {
 						</FormikTagsInputStyle>
 
 						<div className="footer">
+							{/* <SuggestTagInput /> */}
 							<Button
 								type="button"
 								onClick={() => {
@@ -302,57 +221,3 @@ const RecsysInputForm = () => {
 };
 
 export default RecsysInputForm;
-/**
- 	{showAlert && (
-							<div>
-								식사 정보가 입력되지 않았습니다. 정보를 입력해주세요.
-								<hr />
-								<div>
-									<Button
-										fullWidth
-										size="small"
-										onClick={() => setShowAlert(false)}
-									>
-										확 인
-									</Button>
-								</div>
-							</div>
-						)}
- */
-/*
-<div>
-<Formik
-	initialValues={formData}
-	onSubmit={values => setFormData(values)}
-	// innerRef={formRef}
-	render={({
-		values,
-		errors,
-		touched,
-		status,
-		dirty,
-		handleChange,
-		handleBlur,
-		handleSubmit,
-		isSubmitting,
-		isValid,
-		handleReset,
-		setTouched,
-		setFieldValue,
-		getFieldProps,
-	}) => (
-		)}
-			/>
-		</div>
-	);
-	*/
-
-/*
-<TagInput dataHandler={dataHandlerBreakfast} />
-			<br />
-			<TagInput dataHandler={dataHandlerLunch} />
-			<br />
-			<TagInput dataHandler={dataHandlerDinner} />
-			<br />
-							<TagInput dataHandler={dataHandlerSnack} /> 
-*/

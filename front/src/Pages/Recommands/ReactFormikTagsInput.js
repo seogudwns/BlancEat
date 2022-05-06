@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { ReactDOM } from 'react';
-import TagsInput from 'react-tagsinput';
+import TagsInput from 'react-tagsinput-2';
 import Button from '../../Components/Button';
 
 import { Formik, Form, FieldArray, ErrorMessage } from 'formik';

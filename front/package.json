@@ -28,7 +28,7 @@
     "react-router-dom": "^6.3.0",
     "react-scripts": "^5.0.1",
     "react-tag-input": "^6.8.0",
-    "react-tagsinput": "^3.19.0",
+    "react-tagsinput-2": "^3.19.8",
     "recoil": "^0.7.2",
     "styled-components": "^5.3.5",
     "web-vitals": "^2.1.4"

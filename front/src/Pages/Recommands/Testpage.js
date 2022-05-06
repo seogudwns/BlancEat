@@ -1,9 +1,12 @@
-import React from 'react';
+import React, { useState } from 'react';
 
 import { PageContainer } from '../Styles/stylePages';
 import FormikTagInput from './FormikTagInput';
 import ReactFormikTagsInput from './ReactFormikTagsInput';
 import styled from 'styled-components';
+import autosuggestRenderInput from './autosuggestRenderInput';
+import TagsInput from 'react-tagsinput-2';
+import { RecsysInputFormStyle, FormikTagsInputStyle } from './FormikTagsInputStyle';
 
 const Container = styled.div`
 	height: 500px;
@@ -13,14 +16,25 @@ const Container = styled.div`
 `;
 
 const Testpage = () => {
+	const [tags, setTags] = useState([]);
+	const handleChange = newtags => {
+		setTags(newtags);
+	};
 	return (
 		<PageContainer fluid>
-			<Container>
-				<FormikTagInput />
+			<FormikTagsInputStyle>
+				<TagsInput
+					key={1}
+					renderInput={autosuggestRenderInput}
+					value={tags}
+					onChange={tags => setTags(tags)}
+				/>
+
+				{/* <FormikTagInput /> */}
 				<br />
 				<br />
-				<ReactFormikTagsInput />
-			</Container>
+				{/* <ReactFormikTagsInput /> */}
+			</FormikTagsInputStyle>
 		</PageContainer>
 	);
 };
