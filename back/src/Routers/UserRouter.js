@@ -83,10 +83,8 @@ userRouter.put('/user/infoexchange/:id', login_required, async (req, res, next) 
 	}
 });
 
-//! NutritionRouter에 recommend는 어떻게 하지..?..
-
 //그동안 먹은 음식 정보 보내주기.
-userRouter.post('/user/mealdata/:id', login_required, async (req, res, next) => {
+userRouter.get('/user/mealdata/:id', login_required, async (req, res, next) => {
 	try {
 		const id = req.params;
 		const checkId = req.currentUserId;
@@ -109,7 +107,7 @@ userRouter.post('/user/mealdata/:id', login_required, async (req, res, next) => 
 //음식 삭제 기능 구현.
 userRouter.delete('/user/meal/:meal_id', login_required, async (req, res, next) => {
 	try {
-		const { meal_id } = req.body;
+		const { meal_id } = req.params;
 		const deleteRequireFoodList = await Meal.deleteOne(meal_id);
 
 		if (!deleteRequireFoodList) {
