@@ -55,18 +55,31 @@ const BalancEat = () => {
 				</div>
 			</StyledContainer>
 			<StyledContainer style={{ margin: '100px 0 100px 0' }}>
-				{/* <StyledImg width="500px" height="500px" src="/img/bmi와질병관계.png" />
-				<StyledImg
-					width="500px"
-					height="500px"
-					src="/img/당뇨병있을경우 다른 질병이 있을 확률.png"
-				/> */}
-				{/* */}
-
-				<div style={{ height: '300px', paddingRight: '50px', backgroundColor: '#f0f1f3' }}>
-					<ContentBarChart data={data4} />
-					<ContentBarChart data={data3} />
+				<div
+					style={{
+						width: '70%',
+						display: 'flex',
+						justifyContent: 'space-between',
+						backgroundColor: '#f0f1f3',
+						paddingLeft: '30px',
+					}}
+				>
+					<div style={{ paddingRight: '50px', backgroundColor: '#f0f1f3' }}>
+						<ContentBarChart
+							title={'비만과 질병의 연관성'}
+							data={data3}
+							option1={false}
+						/>
+					</div>
+					<div style={{ paddingRight: '50px', backgroundColor: '#f0f1f3' }}>
+						<ContentBarChart
+							title={'당뇨병이 있을경우 합병증에 걸릴 확률'}
+							data={data4}
+							option1={false}
+						/>
+					</div>
 				</div>
+
 				<div style={{ paddingRight: '50px', backgroundColor: '#f0f1f3' }}>
 					<h1 style={{ fontSize: '30px', textAlign: 'center' }}>비만과 질병관계</h1>
 					<StyledH4 padding="30px">
@@ -89,7 +102,7 @@ const BalancEat = () => {
 						오른쪽은 플러스로 되어있습니다. 맨왼쪽의 경우 야채,채소류이며, 맨오른쪽은
 						설당과 당류입니다.
 					</StyledH4>
-					<ContentBarChart data={data2} />
+					<ContentBarChart data={data2} option1={true} />
 				</div>
 			</StyledContainer>
 			<ContentTooMuchCoder />
