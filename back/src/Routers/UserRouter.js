@@ -86,7 +86,7 @@ userRouter.put('/user/infoexchange/:id', login_required, async (req, res, next) 
 //그동안 먹은 음식 정보 보내주기.
 userRouter.get('/user/mealdata/:id', login_required, async (req, res, next) => {
 	try {
-		const id = req.params;
+		const { id } = req.params;
 		const checkId = req.currentUserId;
 
 		if (id !== checkId) {
