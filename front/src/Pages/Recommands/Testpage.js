@@ -2,7 +2,7 @@ import React from 'react';
 
 import { PageContainer } from '../Styles/stylePages';
 import FormikTagInput from './FormikTagInput';
-
+import ReactFormikTagsInput from './ReactFormikTagsInput';
 import styled from 'styled-components';
 
 const Container = styled.div`
@@ -17,6 +17,9 @@ const Testpage = () => {
 		<PageContainer fluid>
 			<Container>
 				<FormikTagInput />
+				<br />
+				<br />
+				<ReactFormikTagsInput />
 			</Container>
 		</PageContainer>
 	);
