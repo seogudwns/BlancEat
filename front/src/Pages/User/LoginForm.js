@@ -29,6 +29,7 @@ const LoginForm = ({ setShow }) => {
 			sessionStorage.setItem('userId', userIdFromServer);
 			setIsLogin(true);
 			setUserId(userIdFromServer);
+			console.log(userIdFromServer);
 		} catch (err) {
 			console.error(err);
 		}

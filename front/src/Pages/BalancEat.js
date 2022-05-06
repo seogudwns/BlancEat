@@ -5,10 +5,6 @@ import ContentBarChart from '../Contents/ContentBarChart';
 import { PageContainer } from './Styles/stylePages';
 import { data1, data2, data3, data4, options_BarChart } from '../Contents/ChartData';
 const BalancEat = () => {
-	const PageDivContainer = styled.div`
-		width: 100vw;
-		margin: ${param => param.margin};
-	`;
 	const StyledContainer = styled.div`
 		background-color: gray;
 		display: flex;
