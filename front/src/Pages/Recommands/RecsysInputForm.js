@@ -1,4 +1,5 @@
 import React, { useContext, useState, useRef, useEffect } from 'react';
+import * as Api from '../../Commons/Api';
 
 import Autosuggest from 'react-autosuggest';
 import { Formik, Form, Field, useFormik } from 'formik';
@@ -17,11 +18,16 @@ import TagsInput from 'react-tagsinput-2';
 
 import SuggestTagInput from './autosuggestRenderInput';
 
+import autosuggestRenderInput from './autosuggestRenderInput';
+// import TagsInput from 'react-tagsinput-2';
+
 const RecsysInputForm = () => {
-	// const [breakfast, set]
+	const [breakfast, setBreakfast] = useState([]);
 	const [showAlert, setShowAlert] = useState(false);
 	const { dispatch } = useContext(RecommandContext);
 	const { postData } = useContext(FoodDataContext);
+
+	const { suggestions, setSuggestions, getSuggestFoodList } = useContext(FoodDataContext);
 
 	const onKeyDown = keyEvent => {
 		if ((keyEvent.charCode || keyEvent.keyCode) === 13) {
@@ -144,13 +150,59 @@ const RecsysInputForm = () => {
 								</label>
 								<TagsInput
 									name="breakfast"
+									renderInput={autosuggestRenderInput}
+									inputProps={{
+										placeholder: '음식입력',
+										autoComplete: 'aabds',
+										name: 'breakfast',
+										id: 'breakfast',
+									}}
 									value={values.breakfast}
+									suggestions={suggestions}
+									onChange={tags => {
+										setFieldValue('breakfast', tags);
+									}}
+									onSuggestionsFetchRequested={async value => {
+										console.log('onSuggestionsFetchRequested');
+										if (!value) {
+											setSuggestions([]);
+											return;
+										}
+										try {
+											const result = await Api.getSuggest(
+												'nutrition_search',
+												value,
+											);
+
+											console.log('수신결과 : ', result);
+										} catch (e) {
+											setSuggestions([]);
+										}
+
+										getSuggestFoodList(value);
+									}}
+									onSuggestionsClearRequested={() => {
+										setSuggestions([]);
+									}}
+									getSuggestionValue={suggestion => suggestion.text}
+									renderSuggestion={suggestion => <div>{suggestion.text}</div>}
+								/>
+								{/* 
+								
+								value={values.breakfast}
 									onChange={tags => {
 										console.log(tags);
 										setFieldValue('breakfast', tags);
+										onSuggestionsFetchRequested();
 									}}
-								/>
-								{/* <Autosuggest
+									suggestions={suggestions}
+									onSuggestionsClearRequested={() => {
+										setSuggestion([]);
+									}}
+									onSuggestionsFetchRequested={async value => {
+										await getSuggestFoodList(value);
+									}}
+								<Autosuggest
 									inputProps={{
 										placeholder: '음식 이름을 검색해보세요.',
 										autoComplete: 'abcd',

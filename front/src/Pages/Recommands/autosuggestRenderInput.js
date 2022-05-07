@@ -1,5 +1,57 @@
-import React from 'react';
+import React, { useState } from 'react';
 import Autosuggest from 'react-autosuggest';
+// import { FoodDataContext } from './ContentRecommand';
+
+function state() {
+	// getSuggestFoodList(tags);
+}
+const autosuggestRenderInput = ({ addTag, ...props }) => {
+	// const { suggestions, getSuggestFoodList } = useContext(FoodDataContext);
+	// const [value, setValue] = useState('');
+	// const [suggestion, setSuggestion] = useState([]);
+	// // onChange = (event, { newValue }) => {
+	// 	this.setState({
+	// 	  value: newValue
+	// 	});
+	//   };
+	const handleOnChange = (e, { newValue, method }) => {
+		if (method === 'enter') {
+			e.preventDefault();
+		} else {
+			props.onChange(e);
+
+			// getSuggestFoodList(newValue);
+		}
+	};
+
+	const inputValue = (props.value && props.value.trim().toLowerCase()) || '';
+	const inputLength = inputValue.length;
+
+	// let suggestionsList = [...suggestions];
+	/*
+	suggestions.filter(state => {
+		return state.name.toLowerCase().slice(0, inputLength) === inputValue;
+	});
+*/
+	return (
+		<Autosuggest
+			ref={props.ref}
+			suggestions={[]}
+			shouldRenderSuggestions={value => value && value.trim().length > 0}
+			getSuggestionValue={suggestion => suggestion.name}
+			renderSuggestion={suggestion => <span>{suggestion.name}</span>}
+			inputProps={{ ...props, onChange: handleOnChange }}
+			onSuggestionSelected={(e, { suggestion }) => {
+				addTag(suggestion.name);
+			}}
+			onSuggestionsClearRequested={() => {}}
+			onSuggestionsFetchRequested={() => {}}
+			// theme={theme}
+		/>
+	);
+};
+
+export default autosuggestRenderInput;
 
 /*
 const theme = {
@@ -58,6 +110,7 @@ const theme = {
 	},
 };
 */
+/*
 function states() {
 	return [
 		{ abbr: 'AL', name: 'Alabama' },
@@ -112,38 +165,4 @@ function states() {
 		{ abbr: 'WY', name: 'Wyoming' },
 	];
 }
-const autosuggestRenderInput = ({ addTag, ...props }) => {
-	const handleOnChange = (e, { newValue, method }) => {
-		if (method === 'enter') {
-			e.preventDefault();
-		} else {
-			props.onChange(e);
-		}
-	};
-
-	const inputValue = (props.value && props.value.trim().toLowerCase()) || '';
-	const inputLength = inputValue.length;
-
-	let suggestions = states().filter(state => {
-		return state.name.toLowerCase().slice(0, inputLength) === inputValue;
-	});
-
-	return (
-		<Autosuggest
-			ref={props.ref}
-			suggestions={suggestions}
-			shouldRenderSuggestions={value => value && value.trim().length > 0}
-			getSuggestionValue={suggestion => suggestion.name}
-			renderSuggestion={suggestion => <span>{suggestion.name}</span>}
-			inputProps={{ ...props, onChange: handleOnChange }}
-			onSuggestionSelected={(e, { suggestion }) => {
-				addTag(suggestion.name);
-			}}
-			onSuggestionsClearRequested={() => {}}
-			onSuggestionsFetchRequested={() => {}}
-			// theme={theme}
-		/>
-	);
-};
-
-export default autosuggestRenderInput;
+*/

@@ -118,7 +118,14 @@ const ContentRecommand = () => {
 
 	return (
 		<FoodDataContext.Provider
-			value={{ foodData, suggestions, setFoodData, postData, getSuggestFoodList }}
+			value={{
+				foodData,
+				suggestions,
+				setSuggestions,
+				setFoodData,
+				postData,
+				getSuggestFoodList,
+			}}
 		>
 			<ImgBGContentContainer fluid>
 				{step === RecommandStates.IDLE && <RecsysRequireInform />}

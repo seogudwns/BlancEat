@@ -73,6 +73,10 @@ export const FormikTagsInputStyle = styled.div`
 		padding-left: 0.25rem;
 		padding-top: 0.25rem;
 		border-radius: 0.5rem;
+
+		span {
+			display: inline-flex;
+		}
 	}
 
 	.react-tagsinput--focused {
