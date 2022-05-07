@@ -56,7 +56,7 @@ userRouter.post('/user/login', async (req, res, next) => {
 
 		// null일 경우 false와 같음.
 		if (loginuser.errMessage) {
-			throw new Error(errMessage);
+			throw new Error(loginuser.errMessage);
 		}
 
 		res.status(200).json(loginuser);
