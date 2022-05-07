@@ -52,8 +52,8 @@ const getSuggest = async (endpoint, params = '') => {
 
 /*비로그인 사용자의 음식추천 요청 */
 const getRecsys = async (endpoint, data) => {
-	console.log(`POST 요청 : ${url + endpoint}`);
-	console.log(`POST 데이터 : ${{ ...data }}`);
+	console.log(`get 요청 : ${url + endpoint}`);
+	console.log(`get 데이터 : ${{ ...data }}`);
 
 	return axios.get(
 		url + endpoint,

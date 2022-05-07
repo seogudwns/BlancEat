@@ -5,14 +5,12 @@ import { RecommandContext } from './RecommandContext';
 import { FoodDataContext } from './ContentRecommand';
 import { Alert } from 'react-bootstrap';
 
-import { FormikTagsInputStyle, RecsysInputFormStyle } from './FormikTagsInputStyle';
+import { RecsysInputFormStyle } from './FormikTagsInputStyle';
 import Button from '../../Components/Button';
-import TagInput_keep from './TagInput_keep';
+import TagInput from './TagInput';
 
 const RecsysInputForm = () => {
-	const [age, setAge] = useState([]);
-	const [sex, setSex] = useState([]);
-	const [weight, setWeight] = useState([]);
+	//age, sex, weight => formik handling
 	const [breakfast, setBreakfast] = useState([]);
 	const [lunch, setLunch] = useState([]);
 	const [dinner, setDinner] = useState([]);
@@ -146,22 +144,22 @@ const RecsysInputForm = () => {
 			</Formik>
 			<div className="infoContainer">
 				<label> 아 침 </label>
-				<TagInput_keep alertHandler={alertHandler} dataHandler={dataHandlerBreakfast} />
+				<TagInput alertHandler={alertHandler} dataHandler={dataHandlerBreakfast} />
 			</div>
 			<br />
 			<div className="infoContainer">
 				<label> 점 심 </label>
-				<TagInput_keep alertHandler={alertHandler} dataHandler={dataHandlerLunch} />
+				<TagInput alertHandler={alertHandler} dataHandler={dataHandlerLunch} />
 			</div>
 			<br />
 			<div className="infoContainer">
 				<label> 저 녁 </label>
-				<TagInput_keep alertHandler={alertHandler} dataHandler={dataHandlerDinner} />
+				<TagInput alertHandler={alertHandler} dataHandler={dataHandlerDinner} />
 			</div>
 			<br />
 			<div className="infoContainer">
 				<label> 간 식 </label>
-				<TagInput_keep alertHandler={alertHandler} dataHandler={dataHandlerSnack} />
+				<TagInput alertHandler={alertHandler} dataHandler={dataHandlerSnack} />
 			</div>
 			<br />
 			{showAlert && (

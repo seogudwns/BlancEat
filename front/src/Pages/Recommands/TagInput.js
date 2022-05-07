@@ -4,10 +4,12 @@ import ReactTagStyle from './ReactTagStyle';
 import { WithContext as ReactTags } from 'react-tag-input';
 import { FoodDataContext } from './ContentRecommand';
 import { TagInputStyle } from './TagInputStyle';
+
 const KeyCodes = {
 	comma: 188,
 	enter: 13,
 };
+
 const delimiters = [KeyCodes.comma, KeyCodes.enter];
 
 const TagInput = ({ dataHandler, alertHandler }) => {

@@ -30,12 +30,12 @@ const ContentRecommand = () => {
 				age: inputData.age || 25,
 				sex: inputData.sex || 'F',
 				weight: inputData.weight || 60,
-				breakfast: inputData.breakfast || [''],
-				lunch: inputData.lunch || [''],
-				dinner: inputData.dinner || [''],
-				snack: inputData.snack || [''],
+				breakfast: inputData.breakfast.length !== 0 ? inputData.breakfast : [''],
+				lunch: inputData.lunch.length !== 0 ? inputData.lunch : [''],
+				dinner: inputData.dinner.length !== 0 ? inputData.dinner : [''],
+				snack: inputData.snack.length !== 0 ? inputData.snack : [''],
 			};
-
+			console.log('로그인 체크', isLogin);
 			let result = null;
 			if (isLogin) {
 				console.log('로그인 사용자 음식추천 요청');
