@@ -1,23 +1,29 @@
 import React, { useContext, useState } from 'react';
 
 import ReactTagStyle from './ReactTagStyle';
-// import { WithContext as ReactTags } from 'react-tag-input';
-import ReactTags from 'react-tag-autocomplete';
+import { WithContext as ReactTags } from 'react-tag-input';
 import { FoodDataContext } from './ContentRecommand';
-
-const KeyCodes = { comma: 'Enter', comma: 'Tab' };
-
-const delimiters = [KeyCodes.comma, KeyCodes.comma];
+import { TagInputStyle } from './TagInputStyle';
+const KeyCodes = {
+	comma: 188,
+	enter: 13,
+};
+const delimiters = [KeyCodes.comma, KeyCodes.enter];
 
 const TagInput = ({ dataHandler }) => {
 	const { suggestions, getSuggestFoodList } = useContext(FoodDataContext);
 	const [tags, setTags] = useState([]);
 
+	const INPUT_LIMIT = 4;
 	const handleDelete = i => {
 		setTags(tags.filter((tag, index) => index !== i));
 	};
 
 	const handleAddition = tag => {
+		if (tags.length >= INPUT_LIMIT) {
+			return;
+			//setAlert
+		}
 		if (suggestions.includes(tag)) {
 			const newList = [...tags, tag];
 			setTags(newList);
@@ -25,15 +31,6 @@ const TagInput = ({ dataHandler }) => {
 		}
 	};
 
-	// const handleDrag = (tag, currPos, newPos) => {
-	// 	const newTags = tags.slice();
-
-	// 	newTags.splice(currPos, 1);
-	// 	newTags.splice(newPos, 0, tag);
-
-	// 	// re-render
-	// 	setTags(newTags);
-	// };
 	const handleInputChange = tag => {
 		getSuggestFoodList(tag);
 	};
@@ -51,15 +48,13 @@ const TagInput = ({ dataHandler }) => {
 	};
 
 	return (
-		<ReactTagStyle>
+		<TagInputStyle>
 			<ReactTags
 				handleDelete={handleDelete}
 				handleAddition={handleAddition}
 				handleInputChange={handleInputChange}
-				// handleDrag={handleDrag}
 				delimiters={delimiters}
 				handleTagClick={handleTagClick}
-				// onClearAll={onClearAll}
 				onTagUpdate={onTagUpdate}
 				placeholder="Search..."
 				minQueryLength={2}
@@ -72,13 +67,13 @@ const TagInput = ({ dataHandler }) => {
 				allowDragDrop={false}
 				inline={true}
 				inputFieldPosition="inline"
-				allowAdditionFromPaste={true}
+				allowAdditionFromPaste={false}
 				editable={true}
 				clearAll={false}
 				tags={tags}
 				suggestions={suggestions}
 			/>
-		</ReactTagStyle>
+		</TagInputStyle>
 	);
 };
 export default TagInput;

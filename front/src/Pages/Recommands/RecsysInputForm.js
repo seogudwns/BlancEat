@@ -10,7 +10,7 @@ import { InputGroup, FormControl, Radio, Col, Row, Alert } from 'react-bootstrap
 import { TitleWrapper } from '../../Components/Styles/styleContentLabel';
 import { ValidateArray } from '../../Commons/consts';
 import Button from '../../Components/Button';
-import TagInput from './TagInput';
+import TagInput from './TagInput_keep';
 import ReactFormikTagsInput from './ReactFormikTagsInput';
 
 import { FormikTagsInputStyle, RecsysInputFormStyle } from './FormikTagsInputStyle';

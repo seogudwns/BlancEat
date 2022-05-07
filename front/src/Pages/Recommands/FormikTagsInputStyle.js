@@ -27,7 +27,11 @@ export const RecsysInputFormStyle = styled.div`
 		overflow: hidden;
 		padding-left: 0.25rem;
 		padding-top: 0.25rem;
+		margin: 0 1rem 0 1rem;
 		border-radius: 0.5rem;
+	}
+	label {
+		text-align: center;
 	}
 	label + label {
 		margin-left: 1.5rem;
