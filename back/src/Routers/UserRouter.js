@@ -1,11 +1,10 @@
-// is? ... @sindresorhus/is 로부터 받는데 headertype에 대한 경고? 인 것 같다.
-// Router - express, middleWare, service, tokenblacklist..
 import { Router } from 'express';
 import { userService } from '../Services/UserService.js';
 import { Meal } from '../DB/index.js';
 import { login_required } from '../MiddleWare/login_require.js';
 import is from '@sindresorhus/is';
 import moment from 'moment';
+import { NutritionService } from '../Services/NutritionService.js';
 
 const userRouter = Router();
 
@@ -45,14 +44,13 @@ userRouter.post('/user/register', async (req, res, next) => {
 	}
 });
 
-// 로그인.. done
+// 로그인.
 userRouter.post('/user/login', async (req, res, next) => {
 	try {
 		const { email, password } = req.body;
 
 		const loginuser = await userService.getUser({ email, password });
 
-		// null일 경우 false와 같음.
 		if (loginuser.errMessage) {
 			throw new Error(errMessage);
 		}
@@ -63,7 +61,7 @@ userRouter.post('/user/login', async (req, res, next) => {
 	}
 });
 
-// 정보 변경.. done.
+// 정보 변경.
 userRouter.put('/user/infoexchange/:id', login_required, async (req, res, next) => {
 	try {
 		const { updateInfo } = req.body;
@@ -99,7 +97,20 @@ userRouter.get('/user/mealdata/:id', login_required, async (req, res, next) => {
 			throw new Error('매뉴가 없습니다.');
 		}
 
-		res.status(200).json(eatenMenu);
+		const todayMeals = eatenMenu.reduce((prev, curr) => {
+			prev.foodList = prev.foodList.concat(curr.foodList);
+			return prev;
+		});
+
+		const nutritionData = await NutritionService.getNutritionalFacts({
+			foodName: todayMeals.foodList,
+		});
+
+		if (nutritionData.errorMessage) {
+			throw new Error(nutritionData.errorMessage);
+		}
+
+		res.status(200).json(nutritionData);
 	} catch (err) {
 		next(err);
 	}

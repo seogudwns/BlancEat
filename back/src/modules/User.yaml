@@ -3,7 +3,7 @@ paths:
         get:
             tags:
                 - User
-            summary: 유저 회원가입.
+            summary: 결국 시간이 없어서 완성을 못함.... 야물파일 다루는거 뭐이리 어렵지??..
             description: 유저 회원가입.
             parameters:
                 - name: id
