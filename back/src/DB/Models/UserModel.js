@@ -14,7 +14,15 @@ class User {
 	}
 
 	static async findById({ id }) {
-		return await UserModel.findOne({ id });
+		return await UserModel.findOne(
+			{ id },
+			{
+				age: 1,
+				sex: 1,
+				weight: 1,
+				nickName: 1,
+			},
+		);
 	}
 
 	static async updateUser({ id, fieldToUpdate, newValue }) {

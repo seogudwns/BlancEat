@@ -5,6 +5,7 @@ import { userService } from '../Services/UserService.js';
 import { Meal } from '../DB/index.js';
 import { login_required } from '../MiddleWare/login_require.js';
 import is from '@sindresorhus/is';
+import moment from 'moment';
 
 const userRouter = Router();
 
@@ -66,7 +67,7 @@ userRouter.post('/user/login', async (req, res, next) => {
 userRouter.put('/user/infoexchange/:id', login_required, async (req, res, next) => {
 	try {
 		const { updateInfo } = req.body;
-		const id = req.params;
+		const { id } = req.params;
 		const checkId = req.currentUserId;
 		const changeUser = await userService.setUser(id, {
 			checkId,
@@ -83,6 +84,22 @@ userRouter.put('/user/infoexchange/:id', login_required, async (req, res, next) 
 	}
 });
 
+// 유저 아이디 받아서 유저 정보 보내주기
+userRouter.get('/user/:id', login_required, async (req, res, next) => {
+	try {
+		const { id } = req.params;
+		const user = await userService.getUserData({ id });
+
+		if (user.errorMessage) {
+			throw new Error(user.errorMessage);
+		}
+
+		res.status(200).json(user);
+	} catch (err) {
+		next(err);
+	}
+});
+
 //그동안 먹은 음식 정보 보내주기.
 userRouter.get('/user/mealdata/:id', login_required, async (req, res, next) => {
 	try {
@@ -93,9 +110,13 @@ userRouter.get('/user/mealdata/:id', login_required, async (req, res, next) => {
 			throw new Error('잘못된 토큰입니다.');
 		}
 
-		const eatenMenu = await Meal.findAll({ user_id: id });
+		const now = moment().format();
+		const start = moment(now).startOf('day').format();
+		const end = moment(now).endOf('day').format();
+
+		const eatenMenu = await Meal.findSome({ user_id: id, start, end });
 		if (eatenMenu.length === 0) {
-			throw new Error('매뉴가 없습니다.');
+			throw new Error('메뉴가 없습니다.');
 		}
 
 		res.status(200).json(eatenMenu);
