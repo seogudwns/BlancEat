@@ -1,4 +1,4 @@
-import React, { createContext, useContext, useState } from 'react';
+import React, { createContext, useContext, useState, useEffect } from 'react';
 
 import * as Api from '../../Commons/Api';
 import { useRecoilValue } from 'recoil';
@@ -21,6 +21,25 @@ const ContentRecommand = () => {
 	const { step } = useContext(RecommandContext);
 	const userId = useRecoilValue(userIdState); //userId.
 	const isLogin = useRecoilValue(loginState); //로긴되었는가 불린값
+	const [userInfo, setUserInfo] = useState({ age: '', sex: '', weight: '' });
+
+	const loadingUserInfo = async () => {
+		if (isLogin) {
+			console.log('user logged in');
+
+			const res = await Api.get(`user/${userId}`);
+			console.log('res data', res.data.age, res.data.sex, res.data.weight);
+			setUserInfo({ age: res.data.age, sex: res.data.sex, weight: res.data.weight });
+			console.log(userInfo);
+		} else {
+			console.log('not login');
+			setUserInfo({ age: '', sex: '', weight: '' });
+		}
+	};
+
+	useEffect(() => {
+		loadingUserInfo();
+	}, []);
 
 	/*입력데이터 전송후 결과 수신 */
 	const postData = async (inputData = {}) => {
@@ -116,6 +135,7 @@ const ContentRecommand = () => {
 	return (
 		<FoodDataContext.Provider
 			value={{
+				userInfo,
 				foodData,
 				suggestions,
 				setSuggestions,

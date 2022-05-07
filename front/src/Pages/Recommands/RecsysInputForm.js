@@ -12,7 +12,7 @@ import { RecsysInputFormStyle } from './FormikTagsInputStyle';
 import Button from '../../Components/Button';
 import TagInput from './TagInput';
 
-const RecsysInputForm = () => {
+const RecsysInputForm = ({ age, sex, weight }) => {
 	//age, sex, weight => formik handling
 	const [breakfast, setBreakfast] = useState([]);
 	const [lunch, setLunch] = useState([]);
@@ -21,28 +21,28 @@ const RecsysInputForm = () => {
 	const [showAlert, setShowAlert] = useState(false);
 	const [alertMessage, setAlertMessage] = useState('');
 	const { dispatch } = useContext(RecommandContext);
-	const { postData } = useContext(FoodDataContext);
-	const userId = useRecoilValue(userIdState);
+	const { postData, userInfo } = useContext(FoodDataContext);
+	// const userId = useRecoilValue(userIdState);
 	const isLogin = useRecoilValue(loginState); //로긴되었는가 불린값
 
-	const [userInfo, setUserInfo] = useState({ age: '', sex: '', weight: '' });
+	// const [userInfo, setUserInfo] = useState({ age: '', sex: '', weight: '' });
 
-	const loadingUserInfo = async () => {
-		if (isLogin) {
-			console.log('user logged in');
+	// const loadingUserInfo = async () => {
+	// 	if (isLogin) {
+	// 		console.log('user logged in');
 
-			const res = await Api.get(`user/${userId}`);
-			console.log('res data', res.data.age, res.data.sex, res.data.weight);
-			setUserInfo({ age: res.data.age, sex: res.data.sex, weight: res.data.weight });
-			console.log(userInfo);
-		} else {
-			console.log('not login');
-			setUserInfo({ age: '', sex: '', weight: '' });
-		}
-	};
-	useEffect(() => {
-		loadingUserInfo();
-	}, []);
+	// 		const res = await Api.get(`user/${userId}`);
+	// 		console.log('res data', res.data.age, res.data.sex, res.data.weight);
+	// 		setUserInfo({ age: res.data.age, sex: res.data.sex, weight: res.data.weight });
+	// 		console.log(userInfo);
+	// 	} else {
+	// 		console.log('not login');
+	// 		setUserInfo({ age: '', sex: '', weight: '' });
+	// 	}
+	// };
+	// useEffect(() => {
+	// 	loadingUserInfo();
+	// }, []);
 
 	// const { handleSubmit, getFieldProps, touched, errors } = useFormik;
 	const ALERT_TYPE = {
@@ -120,7 +120,10 @@ const RecsysInputForm = () => {
 
 	return (
 		<RecsysInputFormStyle>
-			<Formik onSubmit={(values, actions) => handleSubmit(values, actions)}>
+			<Formik
+				enableReinitialize
+				onSubmit={(values, actions) => handleSubmit(values, actions)}
+			>
 				{FormikProps => (
 					<Form className="infoContainer">
 						<div>기본 정보 </div>
