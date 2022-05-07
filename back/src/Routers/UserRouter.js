@@ -3,7 +3,6 @@ import { userService } from '../Services/UserService.js';
 import { MealService } from '../services/MealService.js';
 import { login_required } from '../MiddleWare/login_require.js';
 import is from '@sindresorhus/is';
-import moment from 'moment';
 import { NutritionService } from '../Services/NutritionService.js';
 
 const userRouter = Router();
@@ -108,13 +107,9 @@ userRouter.get('/user/mealdata/:id', login_required, async (req, res, next) => {
 			throw new Error('잘못된 토큰입니다.');
 		}
 
-		const now = moment().format();
-		const start = moment(now).startOf('day').format();
-		const end = moment(now).endOf('day').format();
-
-		const eatenMenu = await MealService.findSome({ user_id: id, start, end });
-		if (eatenMenu.errMessage) {
-			throw new Error(eatenMenu.errMessage);
+		const eatenMenu = await Meal.findAll({ user_id: id });
+		if (eatenMenu.length === 0) {
+			throw new Error('매뉴가 없습니다.');
 		}
 		// const eatenMenu = await Meal.findSome({ user_id: id, start, end });
 		// if (eatenMenu.length === 0) {
@@ -135,6 +130,20 @@ userRouter.get('/user/mealdata/:id', login_required, async (req, res, next) => {
 		}
 
 		res.status(200).json(nutritionData);
+	} catch (err) {
+		next(err);
+	}
+});
+userRouter.get('/user/:id', login_required, async (req, res, next) => {
+	try {
+		const { id } = req.params;
+		const user = await userService.getUserData({ id });
+
+		if (user.errorMessage) {
+			throw new Error(user.errorMessage);
+		}
+
+		res.status(200).json(user);
 	} catch (err) {
 		next(err);
 	}
