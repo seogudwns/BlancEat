@@ -36,6 +36,7 @@ const Header = () => {
 		setIsLogin(false);
 		setUserId('');
 		sessionStorage.removeItem('userToken');
+		sessionStorage.removeItem('userId');
 		navigate('/');
 		alert('로그아웃');
 	};
