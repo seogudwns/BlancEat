@@ -22,12 +22,13 @@ import autosuggestRenderInput from './autosuggestRenderInput';
 // import TagsInput from 'react-tagsinput-2';
 
 const RecsysInputForm = () => {
+	const [suggestions, setSuggestions] = useState([]);
 	const [breakfast, setBreakfast] = useState([]);
 	const [showAlert, setShowAlert] = useState(false);
 	const { dispatch } = useContext(RecommandContext);
 	const { postData } = useContext(FoodDataContext);
 
-	const { suggestions, setSuggestions, getSuggestFoodList } = useContext(FoodDataContext);
+	// const { suggestions, setSuggestions, getSuggestFoodList } = useContext(FoodDataContext);
 
 	const onKeyDown = keyEvent => {
 		if ((keyEvent.charCode || keyEvent.keyCode) === 13) {
