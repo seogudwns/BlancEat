@@ -1,10 +1,37 @@
 paths:
     /user/register:
         get:
+            tags:
+                - User
             summary: 유저 회원가입.
             description: 유저 회원가입.
             parameters:
+                - name: id
+                  in: query
+                  required: true
+                  schema:
+                      type: string
+                - name: nickName
+                  in: query
+                  required: true
+                  schema:
+                      type: string
+                - name: email
+                  in: query
+                  required: true
+                  schema:
+                      type: string
+                - name: password
+                  in: query
+                  required: true
+                  schema:
+                      type: string
                 - name: age
+                  in: query
+                  required: true
+                  schema:
+                      type: integer
+                - name: weight
                   in: query
                   required: true
                   schema:
@@ -14,43 +41,10 @@ paths:
                   required: true
                   schema:
                       type: string
-                - name: weight
-                  in: query
-                  required: true
-                  schema:
-                      type: integer
-                - name: breakfast
-                  in: query
-                  required: true
-                  schema:
-                      type: array
-                      items:
-                          type: string
-                - name: lunch
-                  in: query
-                  required: true
-                  schema:
-                      type: array
-                      items:
-                          type: string
-                - name: dinner
-                  in: query
-                  required: true
-                  schema:
-                      type: array
-                      items:
-                          type: string
-                - name: snack
-                  in: query
-                  required: true
-                  schema:
-                      type: array
-                      items:
-                          type: string
 
             responses:
                 '200':
-                    description: 음식 별 섭취 영양소, 유저의 일일 권장섭취량, 추천 음식. 영양소 섭취가 부족할 때, 적절할 때, 넘칠 때의 경고 문구가 다르게 나옴
+                    description: 회원가입.
                     content:
                         application/json:
                             schema:
@@ -146,6 +140,8 @@ paths:
                                             ]
 
         post:
+            tags:
+                - User
             summary: 유저 식사 정보 db에 저장
             requestBody:
                 required: true
@@ -185,6 +181,8 @@ paths:
 
     /user/{keyword}:
         get:
+            tags:
+                - User
             summary: 음식 이름 검색
             parameters:
                 - name: keyword

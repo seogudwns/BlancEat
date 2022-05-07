@@ -7,7 +7,7 @@ export const StyledToomuchBox = styled.h1`
 	padding: ${param => (param.padding ? param.padding : 'none')};
 	background-color: green;
 	color: white;
-	height: 50px;
+	height: 70px;
 	font-size: ${param => (param.fontSize ? param.fontSize : 'none')};
 `;
 const StyledToomuchText = styled.h1`

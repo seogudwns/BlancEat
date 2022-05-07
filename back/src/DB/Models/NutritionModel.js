@@ -22,45 +22,11 @@ class Nutrition {
 
 	// 음식 검색어 추천
 	static async findNameByKeyword({ keyword }) {
-		const foodName = await nutritionModel.find(
-			{ foodName: { $regex: keyword } },
-			{ foodName: 1 },
-		);
+		const foodName = await nutritionModel
+			.find({ foodName: { $regex: keyword } }, { foodName: 1 })
+			.limit(10)
+			.lean();
 		return foodName;
-	}
-
-	static async findManyByNutrition([a, b, c, d, e, f]) {
-		const foods = await nutritionModel.find(
-			{
-				$and: [
-					{ carbon: { $gte: a, $lte: d } },
-					{ protein: { $gte: b, $lte: e } },
-					{ fat: { $gte: c, $lte: f } },
-					{ recommend: true },
-				],
-			},
-			{ _id: 0, No: 0, recommend: 0, category: 0 },
-		);
-		return foods;
-	}
-
-	static async findManyByNutrition2([a, b, c]) {
-		const foods = await nutritionModel.find(
-			{
-				$and: [
-					{ carbon: { $lte: a } },
-					{ protein: { $lte: b } },
-					{ fat: { $lte: c } },
-					{ recommend: true },
-				],
-			},
-			{ _id: 0, No: 0, recommend: 0, category: 0 },
-		);
-		return foods;
-	}
-
-	static async findFood() {
-		return await nutritionModel.find({ recommend: true });
 	}
 }
 
