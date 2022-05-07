@@ -10,20 +10,22 @@ import { userIdState, loginState } from './User/UserAtom';
 import * as Api from '../Commons/Api';
 import { StyledText } from '../Contents/styleContents';
 
-import { data, data2, data3, data4, options_BarChart } from '../Contents/ChartData';
+import { data } from '../Contents/ChartData';
 const StyledContainer = styled.div`
 	width: 100%;
 	margin: ${param => param.margin};
 `;
 
 const Userpage = () => {
-	// const loadingUser = async () => {
-	// 	const res = await Api.get(`user/mealdata/${userId}`);
-	// 	console.log(res);
-	// };
-	// useEffect(() => {
-	// 	loadingUser();
-	// }, []);
+	const id = useRecoilValue(userIdState);
+
+	const loadingUserFood = async () => {
+		const res = await Api.get(`user/mealdata/${id}`);
+		console.log(res);
+	};
+	useEffect(() => {
+		loadingUserFood();
+	}, []);
 
 	const noFood = true;
 
