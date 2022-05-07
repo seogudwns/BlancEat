@@ -108,9 +108,13 @@ userRouter.get('/user/mealdata/:id', login_required, async (req, res, next) => {
 			throw new Error('잘못된 토큰입니다.');
 		}
 
-		const eatenMenu = await Meal.findAll({ user_id: id });
+		const now = moment().format();
+		const start = moment(now).startOf('day').format();
+		const end = moment(now).endOf('day').format();
+
+		const eatenMenu = await Meal.findSome({ user_id: id, start, end });
 		if (eatenMenu.length === 0) {
-			throw new Error('매뉴가 없습니다.');
+			throw new Error('메뉴가 없습니다.');
 		}
 
 		const todayMeals = eatenMenu.reduce((prev, curr) => {
@@ -127,20 +131,6 @@ userRouter.get('/user/mealdata/:id', login_required, async (req, res, next) => {
 		}
 
 		res.status(200).json(nutritionData);
-	} catch (err) {
-		next(err);
-	}
-});
-userRouter.get('/user/:id', login_required, async (req, res, next) => {
-	try {
-		const { id } = req.params;
-		const user = await userService.getUserData({ id });
-
-		if (user.errorMessage) {
-			throw new Error(user.errorMessage);
-		}
-
-		res.status(200).json(user);
 	} catch (err) {
 		next(err);
 	}

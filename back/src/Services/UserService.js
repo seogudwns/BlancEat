@@ -75,9 +75,22 @@ class userService {
 			return { errMessage };
 		}
 
+		const isPasswordCorrect = await bcrypt.compare(updateInfo.password, changeUser.password); //! 요거 문제인데..
+
+		if (!isPasswordCorrect) {
+			const errMessage = '비밀번호가 일치하지 않습니다.';
+			return { errMessage };
+		}
+
 		if (updateInfo.nickName) {
 			const fieldToUpdate = 'nickName';
 			const newValue = updateInfo.nickName;
+			changeUser = await User.updateUser({ id, fieldToUpdate, newValue });
+		}
+
+		if (updateInfo.newPassword) {
+			const fieldToUpdate = 'password';
+			const newValue = await bcrypt.hash(updateInfo.newPassword, 10);
 			changeUser = await User.updateUser({ id, fieldToUpdate, newValue });
 		}
 

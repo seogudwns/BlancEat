@@ -21,7 +21,7 @@ const RegisterForm = ({ setShow }) => {
 				email: email,
 				password: pw,
 				checkPassword: confirmPw,
-				nickName: nickname,
+				nickname: nickname,
 				age: Number(age),
 				weight: Number(weight),
 				sex: sex,
