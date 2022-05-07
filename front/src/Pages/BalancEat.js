@@ -2,8 +2,10 @@ import React from 'react';
 import styled from 'styled-components';
 import ContentTooMuchCoder from '../Contents/ContentTooMuchCoder';
 import ContentBarChart from '../Contents/ContentBarChart';
+import ContentPieChart from '../Contents/ContentPieChart';
+
 import { PageContainer } from './Styles/stylePages';
-import { data1, data2, data3, data4, options_BarChart } from '../Contents/ChartData';
+import { data1, data2, data3, data4, PieData1, PieData2 } from '../Contents/ChartData';
 const BalancEat = () => {
 	const StyledContainer = styled.div`
 		background-color: gray;
@@ -36,7 +38,12 @@ const BalancEat = () => {
 						margin="10px 0px 0px 150px"
 						src="/img/obesity_protein.png"
 					/>
-
+					<div
+						style={{ width: '600px', display: 'flex', justifyContent: 'space-between' }}
+					>
+						<ContentPieChart data={PieData1} />
+						<ContentPieChart data={PieData2} />
+					</div>
 					<StyledH1 fontSize="30px" textAlign="center">
 						단백질 섭취와 비만의 상관관계
 					</StyledH1>
