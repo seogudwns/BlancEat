@@ -126,7 +126,7 @@ userRouter.get('/user/mealdata/:id', login_required, async (req, res, next) => {
 			return prev;
 		});
 
-		const nutritionData = await NutritionService.getNutritionalFacts({
+		const nutritionData = await NutritionService.getNutrient({
 			foodName: todayMeals.foodList,
 		});
 
