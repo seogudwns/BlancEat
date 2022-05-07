@@ -69,13 +69,13 @@ class userService {
 	}
 
 	static async setUser(id, { checkId, updateInfo }) {
-		let changeUser = await User.findById({ id });
+		let changeUser = await User.finByIdAllinfo({ id });
 		if (id !== checkId) {
 			const errMessage = '잘못된 토큰입니다.';
 			return { errMessage };
 		}
 
-		const isPasswordCorrect = await bcrypt.compare(updateInfo.password, changeUser.password);
+		const isPasswordCorrect = await bcrypt.compare(updateInfo.password, changeUser.password); //! 요거 문제인데..
 
 		if (!isPasswordCorrect) {
 			const errMessage = '비밀번호가 일치하지 않습니다.';

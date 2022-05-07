@@ -25,6 +25,10 @@ class User {
 		);
 	}
 
+	static async finByIdAllinfo({ id }) {
+		return await UserModel.findOne({ id });
+	}
+
 	static async updateUser({ id, fieldToUpdate, newValue }) {
 		const filteredById = { id };
 		const updateData = { [fieldToUpdate]: newValue };
