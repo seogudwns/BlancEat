@@ -16,7 +16,7 @@ const login_required = (req, res, next) => {
 		req.currentUserId = jwtDecoded.id;
 		next();
 	} catch (err) {
-		console.log('토큰 다름');
+		console.log('토큰 다름 from login_required');
 		res.status(400).json({ errorMessage: err.message });
 		return;
 	}
