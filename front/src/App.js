@@ -8,7 +8,6 @@ import Recommand from './Pages/Recommands/Recommand';
 import Footer from './Pages/Footer';
 import BalancEat from './Pages/BalancEat';
 import Userpage from './Pages/Userpage';
-import Testpage from './Pages/Recommands/Testpage';
 
 import theme from './Commons/theme';
 import { GlobalStyle, Container } from './Commons/GlobalStyle';
@@ -25,7 +24,6 @@ const App = () => {
 						<Route path="/balancEat" element={<BalancEat />} />
 						<Route path="/recommand" element={<Recommand />} />
 						<Route path="/userpage" element={<Userpage />} />
-						<Route path="/testpage" element={<Testpage />} />
 					</Routes>
 					<Footer />
 				</BrowserRouter>
