@@ -3,10 +3,19 @@ import styled from 'styled-components';
 import { useNavigate } from 'react-router-dom';
 import ContentTooMuchCoder from '../Contents/ContentTooMuchCoder';
 import ContentBarChart from '../Contents/ContentBarChart';
-import { PageContainer } from './Styles/stylePages';
-import { data1, data2, data3, data4, options_BarChart } from '../Contents/ChartData';
-import { LargeButton } from '../Contents/Styles/styleContents';
+import ContentPieChart from '../Contents/ContentPieChart';
 
+import { PageContainer } from './Styles/stylePages';
+import {
+	data1,
+	data2,
+	data3,
+	data4,
+	options_BarChart,
+	PieData1,
+	PieData2,
+} from '../Contents/ChartData';
+import { LargeButton } from '../Contents/Styles/styleContents';
 const BalancEat = () => {
 	const navigate = useNavigate();
 	const StyledContainer = styled.div`
@@ -36,13 +45,13 @@ const BalancEat = () => {
 		<PageContainer fluid>
 			<StyledContainer>
 				<div style={{ paddingRight: '50px', display: 'block', backgroundColor: '#f0f1f3' }}>
-					<StyledImg
-						width="1200px"
-						margin="10px 0px 0px 150px"
-						src="/img/obesity_protein.png"
-					/>
-
-					<StyledH1 fontSize="30px" textAlign="center">
+					<div
+						style={{ width: '600px', display: 'flex', justifyContent: 'space-between' }}
+					>
+						<ContentPieChart data={PieData1} title={'고비만 국가의 단백질 섭취'} />
+						<ContentPieChart data={PieData2} title={'저비만 국가의 단백질 섭취'} />
+					</div>
+					<StyledH1 style={{ marginTop: '30px' }} fontSize="30px" textAlign="center">
 						단백질 섭취의 균형을 잡아라!
 					</StyledH1>
 					<StyledH4 padding="30px">
