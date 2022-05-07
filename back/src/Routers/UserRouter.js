@@ -6,6 +6,7 @@ import { Meal } from '../DB/index.js';
 import { login_required } from '../MiddleWare/login_require.js';
 import is from '@sindresorhus/is';
 import moment from 'moment';
+import { NutritionService } from '../Services/NutritionService.js';
 
 const userRouter = Router();
 
@@ -119,7 +120,20 @@ userRouter.get('/user/mealdata/:id', login_required, async (req, res, next) => {
 			throw new Error('메뉴가 없습니다.');
 		}
 
-		res.status(200).json(eatenMenu);
+		const todayMeals = eatenMenu.reduce((prev, curr) => {
+			prev.foodList = prev.foodList.concat(curr.foodList);
+			return prev;
+		});
+
+		const nutritionData = await NutritionService.getNutritionalFacts({
+			foodName: todayMeals.foodList,
+		});
+
+		if (nutritionData.errorMessage) {
+			throw new Error(nutritionData.errorMessage);
+		}
+
+		res.status(200).json(nutritionData);
 	} catch (err) {
 		next(err);
 	}
