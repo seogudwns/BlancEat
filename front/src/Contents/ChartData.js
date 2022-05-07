@@ -93,26 +93,6 @@ export const data4 = {
 		},
 	],
 };
-export const PieData1 = {
-	labels: ['동물성 지방 음식', '식물성 지방 음식'],
-	datasets: [
-		{
-			data: [50.5, 49.5],
-			backgroundColor: ['pink', 'green'],
-			hoverBackgroundColor: ['#36A2EB', '#FFCE56'],
-		},
-	],
-};
-export const PieData2 = {
-	labels: ['동물성 지방 음식', '식물성 지방 음식'],
-	datasets: [
-		{
-			data: [70, 30],
-			backgroundColor: ['pink', 'green'],
-			hoverBackgroundColor: ['#36A2EB', '#FFCE56'],
-		},
-	],
-};
 
 export const options_LineChart = {
 	responsive: true,
