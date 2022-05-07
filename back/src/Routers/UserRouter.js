@@ -1,5 +1,3 @@
-// is? ... @sindresorhus/is 로부터 받는데 headertype에 대한 경고? 인 것 같다.
-// Router - express, middleWare, service, tokenblacklist..
 import { Router } from 'express';
 import { userService } from '../Services/UserService.js';
 import { Meal } from '../DB/index.js';
@@ -45,14 +43,13 @@ userRouter.post('/user/register', async (req, res, next) => {
 	}
 });
 
-// 로그인.. done
+// 로그인.
 userRouter.post('/user/login', async (req, res, next) => {
 	try {
 		const { email, password } = req.body;
 
 		const loginuser = await userService.getUser({ email, password });
 
-		// null일 경우 false와 같음.
 		if (loginuser.errMessage) {
 			throw new Error(errMessage);
 		}
@@ -63,7 +60,7 @@ userRouter.post('/user/login', async (req, res, next) => {
 	}
 });
 
-// 정보 변경.. done.
+// 정보 변경.
 userRouter.put('/user/infoexchange/:id', login_required, async (req, res, next) => {
 	try {
 		const { updateInfo } = req.body;
@@ -84,7 +81,7 @@ userRouter.put('/user/infoexchange/:id', login_required, async (req, res, next) 
 	}
 });
 
-// 유저 아이디 받아서 유저 정보 보내주기
+// 유저 아이디 받아서 유저 정보 보내주기.
 userRouter.get('/user/:id', login_required, async (req, res, next) => {
 	try {
 		const { id } = req.params;

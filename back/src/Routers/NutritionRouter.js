@@ -6,7 +6,7 @@ import { login_required } from '../MiddleWare/login_require.js';
 
 const nutritionRouter = Router();
 
-// 빈 배열인지 확인하는 함수
+// 빈 배열인지 확인하는 함수.
 function isEmptyArr(array) {
 	if (Array.isArray(array) && array.length === 0) {
 		return true;
@@ -47,7 +47,7 @@ nutritionRouter.get('/nutrition', async (req, res, next) => {
 	}
 });
 
-// 로그인 유저 음식 추천 및 식사 정보 저장
+// 로그인 유저 음식 추천 및 식사 정보 저장.
 nutritionRouter.post('/nutrition', login_required, async (req, res, next) => {
 	try {
 		const { age, sex, weight, breakfast, lunch, dinner, snack } = req.body;
@@ -76,8 +76,6 @@ nutritionRouter.post('/nutrition', login_required, async (req, res, next) => {
 		);
 
 		const bundle = { getFoodList, personInfo, result, errMessage };
-
-		// TODO 유저가 만들어진 이후 토큰이 있을 경우 해당 유저의 음식리스트에 등록시간과 아점저 + 간식을 추가시켜줘야 함.
 
 		for (let i = 0; i < meals.length; i++) {
 			if (isEmptyArr(meals[i])) {
