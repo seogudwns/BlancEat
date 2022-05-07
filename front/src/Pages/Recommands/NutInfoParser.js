@@ -3,18 +3,27 @@ import { BlankImageURL } from '../../Commons/consts';
 const NutInfoParser = foodData => {
 	const newData = {
 		foodName: foodData.foodName,
-		ImgURL: foodData.photo || BlankImageURL,
-		ENERGY: { Cal: foodData.energy },
-		MAJORNUTS: { Carbon: foodData.carbon },
-		SNF: { Sugar: foodData.sugar, Fiber: foodData.fiber },
-		INORGANICS: { Ca: foodData.Ca, Na: foodData.na, Fe: foodData.fe, Zn: foodData.zn },
+		ImgURL: foodData.ImgURL || BlankImageURL,
+		ENERGY: { Cal: foodData.Cal.toFixed(2) },
+		MAJORNUTS: {
+			Carbon: foodData.Carbon.toFixed(2),
+			Fat: foodData.Fat.toFixed(2),
+			Protein: foodData.Protein.toFixed(2),
+		},
+		SNF: { Sugar: foodData.Sugar.toFixed(2), Fiber: foodData.Fiber.toFixed(2) },
+		INORGANICS: {
+			Ca: foodData.Ca.toFixed(2),
+			Na: foodData.Na.toFixed(2),
+			Fe: foodData.Fe.toFixed(2),
+			Zn: foodData.Zn.toFixed(2),
+		},
 		VITAMINS: {
-			VitA: foodData.vitA,
-			VitB6: foodData.vitB6,
-			VitC: foodData.vitC,
-			VitE: foodData.vitE,
-			Niacin: foodData.niacin,
-			Folate: foodData.folate,
+			VitA: foodData.VitA.toFixed(2),
+			VitB6: foodData.VitB6.toFixed(2),
+			VitC: foodData.VitC.toFixed(2),
+			VitE: foodData.VitE.toFixed(2),
+			Niacin: foodData.Niacin.toFixed(2),
+			Folate: foodData.Folate.toFixed(2),
 		},
 	};
 	return newData;

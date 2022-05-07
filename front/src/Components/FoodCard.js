@@ -6,8 +6,17 @@ import { BlankImageURL } from '../Commons/consts';
 /* clickHandler props make FoodCard works like button */
 const FoodCard = ({ clickHandler, foodData, id }) => {
 	const title = foodData.foodName;
-	const description = foodData.Cal;
-	const url = foodData.ImgURL || BlankImageURL;
+	const Description = () => {
+		return (
+			<div>
+				열량 : {foodData.ENERGY.Cal} KCal <br />
+				탄수화물 : {foodData.MAJORNUTS.Carbon} g <br />
+				지방 : {foodData.MAJORNUTS.Fat} g <br />
+				단백질: {foodData.MAJORNUTS.Protein} g<br />
+			</div>
+		);
+	};
+	const url = foodData.ImgURL;
 
 	return (
 		<StyledCard>
@@ -15,7 +24,9 @@ const FoodCard = ({ clickHandler, foodData, id }) => {
 			<Card.Body>
 				<Card.Title>{title}</Card.Title>
 				<Divider />
-				<Card.Text>{description}</Card.Text>
+				<Card.Text>
+					<Description />
+				</Card.Text>
 				{clickHandler && (
 					<Button
 						id={id}

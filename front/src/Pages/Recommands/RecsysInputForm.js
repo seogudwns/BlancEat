@@ -1,9 +1,12 @@
-import React, { useContext, useState } from 'react';
+import React, { useContext, useState, useEffect } from 'react';
 
+import * as Api from '../../Commons/Api';
 import { Formik, Form, Field, useFormik } from 'formik';
 import { RecommandContext } from './RecommandContext';
 import { FoodDataContext } from './ContentRecommand';
 import { Alert } from 'react-bootstrap';
+import { useRecoilValue } from 'recoil';
+import { userIdState, loginState } from '../User/UserAtom';
 
 import { RecsysInputFormStyle } from './FormikTagsInputStyle';
 import Button from '../../Components/Button';
@@ -19,6 +22,27 @@ const RecsysInputForm = () => {
 	const [alertMessage, setAlertMessage] = useState('');
 	const { dispatch } = useContext(RecommandContext);
 	const { postData } = useContext(FoodDataContext);
+	const userId = useRecoilValue(userIdState);
+	const isLogin = useRecoilValue(loginState); //로긴되었는가 불린값
+
+	const [userInfo, setUserInfo] = useState({ age: '', sex: '', weight: '' });
+
+	const loadingUserInfo = async () => {
+		if (isLogin) {
+			console.log('user logged in');
+
+			const res = await Api.get(`user/${userId}`);
+			console.log('res data', res.data.age, res.data.sex, res.data.weight);
+			setUserInfo({ age: res.data.age, sex: res.data.sex, weight: res.data.weight });
+			console.log(userInfo);
+		} else {
+			console.log('not login');
+			setUserInfo({ age: '', sex: '', weight: '' });
+		}
+	};
+	useEffect(() => {
+		loadingUserInfo();
+	}, []);
 
 	// const { handleSubmit, getFieldProps, touched, errors } = useFormik;
 	const ALERT_TYPE = {
@@ -30,7 +54,7 @@ const RecsysInputForm = () => {
 		FULLFILLED: '항목 당 최대 4개의 품목만 입력할 수 있습니다.',
 	};
 	const formik = useFormik({
-		initialValues: { age: '', sex: '', weight: '' },
+		initialValues: { age: userInfo.age, sex: userInfo.sex, weight: userInfo.weight },
 	});
 
 	const alertHandler = type => {
@@ -96,10 +120,7 @@ const RecsysInputForm = () => {
 
 	return (
 		<RecsysInputFormStyle>
-			<Formik
-				initialValues={{ age: '', sex: '', weight: '' }}
-				onSubmit={(values, actions) => handleSubmit(values, actions)}
-			>
+			<Formik onSubmit={(values, actions) => handleSubmit(values, actions)}>
 				{FormikProps => (
 					<Form className="infoContainer">
 						<div>기본 정보 </div>
@@ -107,6 +128,7 @@ const RecsysInputForm = () => {
 							type="text"
 							id="age"
 							placeholder="나이"
+							disabled={isLogin}
 							{...formik.getFieldProps('age')}
 						/>
 						<div role="group" aria-labelledby="my-radio-group">
@@ -116,6 +138,7 @@ const RecsysInputForm = () => {
 									id="sex"
 									name="sex"
 									value="M"
+									disabled={isLogin}
 									checked={formik.values.sex === 'M'}
 									onChange={formik.getFieldProps('sex').onChange}
 								/>
@@ -127,6 +150,7 @@ const RecsysInputForm = () => {
 									id="sex"
 									name="sex"
 									value="F"
+									disabled={isLogin}
 									checked={formik.values.sex === 'F'}
 									onChange={formik.getFieldProps('sex').onChange}
 								/>
@@ -137,6 +161,7 @@ const RecsysInputForm = () => {
 							id="text"
 							name="weight"
 							placeholder="몸무게"
+							disabled={isLogin}
 							{...formik.getFieldProps('weight')}
 						/>
 					</Form>
