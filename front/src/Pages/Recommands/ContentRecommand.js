@@ -30,14 +30,14 @@ const ContentRecommand = () => {
 
 			//빈배열, 빈문자열 처리 필요.
 			const sendData = {
-				age: inputData.age && 25,
-				sex: inputData.sex && 'F',
-				weight: inputData.weight && 60,
+				age: inputData.age || 25,
+				sex: inputData.sex || 'F',
+				weight: inputData.weight || 60,
 				// foodList: inputData,
-				breakfast: inputData.breakfast && [''],
-				lunch: inputData.lunch && [''],
-				dinner: inputData.dinner && [''],
-				snack: inputData.snack && [''],
+				breakfast: inputData.breakfast || [''],
+				lunch: inputData.lunch || [''],
+				dinner: inputData.dinner || [''],
+				snack: inputData.snack || [''],
 			};
 			let result = null;
 			if (isLogin) {

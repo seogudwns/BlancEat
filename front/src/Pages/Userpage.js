@@ -5,8 +5,8 @@ import { Card } from 'react-bootstrap';
 import ContentUserPageText from '../Contents/ContentUserPageText';
 import ContentUserInfo from '../Contents/ContentUserInfo';
 import ContentGraph from '../Contents/ContentGraph';
-import { useSetRecoilState, useRecoilValue } from 'recoil';
-import { userIdState, loginState } from './User/UserAtom';
+import { useRecoilState, useRecoilValue } from 'recoil';
+import { userIdState, loginState, carbonState } from './User/UserAtom';
 import * as Api from '../Commons/Api';
 import { StyledText } from '../Contents/styleContents';
 
@@ -18,10 +18,20 @@ const StyledContainer = styled.div`
 
 const Userpage = () => {
 	const id = useRecoilValue(userIdState);
-
+	const [protein, setProtein] = useState(0);
+	const [fat, setfat] = useState(0);
+	const [carbon, setCarbon] = useRecoilState(carbonState);
+	const [fooddata, setFooddata] = useState();
 	const loadingUserFood = async () => {
 		const res = await Api.get(`user/mealdata/${id}`);
-		console.log(res);
+
+		res.data.map(data => {
+			setfat(fat + data.fat);
+
+			setProtein(protein + data.protein);
+			setCarbon(carbon + data.carbon);
+		});
+		setFooddata({ fat, protein, carbon });
 	};
 	useEffect(() => {
 		loadingUserFood();
@@ -38,13 +48,16 @@ const Userpage = () => {
 				margin="25px 0 0 0"
 				style={{ display: 'flex', justifyContent: 'center' }}
 			>
-				<ContentGraph
-					data={data}
-					num={1}
-					height={'10%'}
-					width={'70%'}
-					title={'금일 영양 정보'}
-				></ContentGraph>
+				{
+					<ContentGraph
+						data={data}
+						num={1}
+						height={'10%'}
+						width={'70%'}
+						title={'금일 영양 정보'}
+						fooddata={fooddata}
+					></ContentGraph>
+				}
 			</StyledContainer>
 			<div style={{ display: 'flex', justifyContent: 'center', marginTop: '1.5rem' }}>
 				{!noFood ? (

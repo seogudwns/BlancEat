@@ -94,7 +94,7 @@ export const data4 = {
 	],
 };
 export const PieData1 = {
-	labels: ['동물성 지방 음식', '식물성 지방 음식'],
+	labels: ['동물성 단백질 음식', '식물성 단백질 음식'],
 	datasets: [
 		{
 			data: [50.5, 49.5],
@@ -104,10 +104,10 @@ export const PieData1 = {
 	],
 };
 export const PieData2 = {
-	labels: ['동물성 지방 음식', '식물성 지방 음식'],
+	labels: ['동물성 단백질 음식', '식물성 단백질 음식'],
 	datasets: [
 		{
-			data: [70, 30],
+			data: [30, 70],
 			backgroundColor: ['pink', 'green'],
 			hoverBackgroundColor: ['#36A2EB', '#FFCE56'],
 		},
