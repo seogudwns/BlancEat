@@ -1,12 +1,12 @@
 import styled from 'styled-components';
 import { Container, Navbar, Nav } from 'react-bootstrap';
-import { useRecoilState } from 'recoil';
+import { useRecoilState, useSetRecoilState } from 'recoil';
 import { useNavigate } from 'react-router-dom';
 
 import React, { useState } from 'react';
 import AuthModal from './User/AuthModal';
 import Button from '../Components/Button';
-import { loginState } from './User/UserAtom';
+import { loginState, userIdState } from './User/UserAtom';
 
 const StyledHeaderContainer = styled(Container)`
 	color: #ffffff;
@@ -20,6 +20,7 @@ const StyledHeaderContainer = styled(Container)`
 const Header = () => {
 	const navigate = useNavigate();
 	const [isLogin, setIsLogin] = useRecoilState(loginState);
+	const setUserId = useSetRecoilState(userIdState);
 
 	const [showAuthModal, setShowAuthModal] = useState(false);
 
@@ -33,6 +34,7 @@ const Header = () => {
 
 	const handleLogout = () => {
 		setIsLogin(false);
+		setUserId('');
 		sessionStorage.removeItem('userToken');
 		navigate('/');
 		alert('로그아웃');
