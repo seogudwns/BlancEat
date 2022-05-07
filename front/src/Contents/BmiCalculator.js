@@ -29,6 +29,7 @@ const BmiCalculator = () => {
 	const [cm, setCm] = useState(0);
 	const [kg, setKg] = useState(0);
 	const [bmi, setBmi] = useState(0);
+	const [status, setStatus] = useState(0);
 
 	useEffect(() => {
 		if (!isNaN(bmi) && kg !== 0 && cm !== 0) {
@@ -79,8 +80,7 @@ const BmiCalculator = () => {
 					</StyledButton>
 				</form>
 				<br />
-				당신의 BMI 지수는 {bmi} 입니다.
-				<img src="/bmi.png" style={{ maxWidth: '560px' }} />
+				회원님의
 			</StyledContainer>
 		</>
 	);
