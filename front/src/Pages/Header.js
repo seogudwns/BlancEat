@@ -33,6 +33,7 @@ const Header = () => {
 
 	const handleLogout = () => {
 		setIsLogin(false);
+		setUserId('');
 		sessionStorage.removeItem('userToken');
 		navigate('/');
 		alert('로그아웃');

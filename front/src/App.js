@@ -18,25 +18,6 @@ import theme from './Commons/theme';
 import { GlobalStyle, Container } from './Commons/GlobalStyle';
 
 const App = () => {
-	const setIsLogin = useSetRecoilState(loginState);
-	const setUserId = useSetRecoilState(userIdState);
-	const fetchCurrentUser = async () => {
-		const userToken = sessionStorage.getItem('userToken');
-		const userIdFromServer = sessionStorage.getItem('userId');
-		if (userToken !== null) {
-			try {
-				setIsLogin(true);
-				setUserId(userIdFromServer);
-			} catch (err) {
-				console.error(err);
-			}
-		}
-	};
-
-	useEffect(() => {
-		fetchCurrentUser();
-	}, []);
-
 	return (
 		<ThemeProvider theme={theme}>
 			<GlobalStyle />
