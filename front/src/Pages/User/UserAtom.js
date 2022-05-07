@@ -15,9 +15,3 @@ export const userIdState = atom({
 	default: '',
 	effects_UNSTABLE: [persistAtom],
 });
-
-export const carbonState = atom({
-	key: 'carbon',
-	default: 0,
-	effects_UNSTABLE: [persistAtom],
-});

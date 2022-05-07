@@ -32,7 +32,6 @@ class NutritionService {
 		}
 
 		const nutrient = findFoods.map(food => {
-			// console.log(food.carbon, food.protein, food.fat);
 			return {
 				탄수화물: food.carbon,
 				단백질: food.protein,

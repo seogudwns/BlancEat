@@ -3,7 +3,9 @@ import styled from 'styled-components';
 import { Card } from 'react-bootstrap';
 import ContentBarChart from './ContentBarChart';
 import ContnetLineChart from './ContentLineChart';
-
+import * as Api from '../Commons/Api';
+import { useRecoilState, useRecoilValue } from 'recoil';
+import { userIdState, loginState, carbonState } from '../Pages/User/UserAtom';
 const StyledGraphInfo = styled(Card)`
 	background-color: ${param => param.backgroundColor};
 	border: solid 1px black;
@@ -21,10 +23,23 @@ const StyledGraphInfoText = styled.span`
 	font-weight: bold;
 `;
 
-const ContentGraph = ({ num, title, color, width, height, fooddata }) => {
+const ContentGraph = ({ num, title, color, width, height }) => {
+	const id = useRecoilValue(userIdState);
+
+	const [protein, setProtein] = useState(0);
+	const [fat, setfat] = useState(0);
+	const [carbon, setCarbon] = useState(0);
+	const [fooddata, setFooddata] = useState();
+	const loadingUserFood = async () => {
+		const res = await Api.get(`user/mealdata/${id}`);
+		setfat(res.data.지방);
+		setProtein(res.data.단백질);
+		setCarbon(res.data.탄수화물);
+		setFooddata({ fat, protein, carbon });
+	};
 	useEffect(() => {
-		console.log(fooddata);
-	});
+		loadingUserFood();
+	}, []);
 
 	const data = {
 		// 각 막대별 라벨

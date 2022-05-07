@@ -1,7 +1,7 @@
 import { Router } from 'express';
 import { NutritionService } from '../Services/NutritionService.js';
 import { Recommend } from '../modules/RecommendAlgorithm.js';
-import { MealService } from '../services/MealService.js';
+import { MealService } from '../Services/MealService.js';
 import { login_required } from '../MiddleWare/login_require.js';
 
 const nutritionRouter = Router();

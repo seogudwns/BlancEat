@@ -18,24 +18,6 @@ const StyledContainer = styled.div`
 
 const Userpage = () => {
 	const id = useRecoilValue(userIdState);
-	const [protein, setProtein] = useState(0);
-	const [fat, setfat] = useState(0);
-	const [carbon, setCarbon] = useRecoilState(carbonState);
-	const [fooddata, setFooddata] = useState();
-	const loadingUserFood = async () => {
-		const res = await Api.get(`user/mealdata/${id}`);
-
-		res.data.map(data => {
-			setfat(fat + data.fat);
-
-			setProtein(protein + data.protein);
-			setCarbon(carbon + data.carbon);
-		});
-		setFooddata({ fat, protein, carbon });
-	};
-	useEffect(() => {
-		loadingUserFood();
-	}, []);
 
 	const noFood = true;
 
@@ -55,7 +37,6 @@ const Userpage = () => {
 						height={'10%'}
 						width={'70%'}
 						title={'금일 영양 정보'}
-						fooddata={fooddata}
 					></ContentGraph>
 				}
 			</StyledContainer>
