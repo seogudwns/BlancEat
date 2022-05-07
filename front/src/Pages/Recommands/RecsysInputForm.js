@@ -1,19 +1,18 @@
 import React, { useContext, useState, useEffect } from 'react';
 
-import * as Api from '../../Commons/Api';
 import { Formik, Form, Field, useFormik } from 'formik';
 import { RecommandContext } from './RecommandContext';
 import { FoodDataContext } from './ContentRecommand';
 import { Alert } from 'react-bootstrap';
 import { useRecoilValue } from 'recoil';
-import { userIdState, loginState } from '../User/UserAtom';
+import { loginState } from '../User/UserAtom';
 
 import { RecsysInputFormStyle } from './FormikTagsInputStyle';
 import Button from '../../Components/Button';
 import TagInput from './TagInput';
 
-const RecsysInputForm = ({ age, sex, weight }) => {
-	//age, sex, weight => formik handling
+const RecsysInputForm = () => {
+	//age, sex, weight get by userInfo FoodDataContext => formik handling
 	const [breakfast, setBreakfast] = useState([]);
 	const [lunch, setLunch] = useState([]);
 	const [dinner, setDinner] = useState([]);
@@ -22,29 +21,8 @@ const RecsysInputForm = ({ age, sex, weight }) => {
 	const [alertMessage, setAlertMessage] = useState('');
 	const { dispatch } = useContext(RecommandContext);
 	const { postData, userInfo } = useContext(FoodDataContext);
-	// const userId = useRecoilValue(userIdState);
 	const isLogin = useRecoilValue(loginState); //로긴되었는가 불린값
 
-	// const [userInfo, setUserInfo] = useState({ age: '', sex: '', weight: '' });
-
-	// const loadingUserInfo = async () => {
-	// 	if (isLogin) {
-	// 		console.log('user logged in');
-
-	// 		const res = await Api.get(`user/${userId}`);
-	// 		console.log('res data', res.data.age, res.data.sex, res.data.weight);
-	// 		setUserInfo({ age: res.data.age, sex: res.data.sex, weight: res.data.weight });
-	// 		console.log(userInfo);
-	// 	} else {
-	// 		console.log('not login');
-	// 		setUserInfo({ age: '', sex: '', weight: '' });
-	// 	}
-	// };
-	// useEffect(() => {
-	// 	loadingUserInfo();
-	// }, []);
-
-	// const { handleSubmit, getFieldProps, touched, errors } = useFormik;
 	const ALERT_TYPE = {
 		EMPTY: 'EMPTY',
 		FULLFILLED: 'FULLFILLED',
