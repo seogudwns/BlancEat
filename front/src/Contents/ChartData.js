@@ -89,29 +89,29 @@ export const data4 = {
 		{
 			borderWidth: 1, // 테두리 두께
 			data: [10, 18, 28], // 수치
+			backgroundColor: ['#fd8a8a'],
 		},
 	],
 };
-export const options_BarChart = {
-	responsive: true,
-	plugins: {
-		legend: {
-			position: 'none',
+export const PieData1 = {
+	labels: ['동물성 지방 음식', '식물성 지방 음식'],
+	datasets: [
+		{
+			data: [50.5, 49.5],
+			backgroundColor: ['pink', 'green'],
+			hoverBackgroundColor: ['#36A2EB', '#FFCE56'],
 		},
-	},
-	scales: {
-		yAxes: [
-			{
-				ticks: {
-					min: 0, // y축 스케일에 대한 최소값 설정
-					stepSize: 1, // y축 그리드 한 칸당 수치
-				},
-			},
-		],
-	},
-
-	// false : 사용자 정의 크기에 따라 그래프 크기가 결정됨.
-	// true : 크기가 알아서 결정됨.
+	],
+};
+export const PieData2 = {
+	labels: ['동물성 지방 음식', '식물성 지방 음식'],
+	datasets: [
+		{
+			data: [70, 30],
+			backgroundColor: ['pink', 'green'],
+			hoverBackgroundColor: ['#36A2EB', '#FFCE56'],
+		},
+	],
 };
 
 export const options_LineChart = {

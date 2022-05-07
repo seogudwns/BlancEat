@@ -7,7 +7,7 @@ const get = async (endpoint, params = '') => {
 	console.log(`GET 요청 : ${url + endpoint + '/' + params}`);
 
 	return axios.get(
-		+endpoint + '/' + params,
+		url + endpoint + '/' + params,
 		// jwt 토큰 사용 시 아래 코드 주석 삭제
 		{
 			headers: {

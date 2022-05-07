@@ -9,8 +9,11 @@ class Meal {
 		return await MealModel.find({ user_id });
 	}
 
-	static async findSome({ user_id, time, timestamps }) {
-		return await MealModel.find({ user_id, meal_time: time }, { timestamps });
+	static async findSome({ user_id, start, end }) {
+		return await MealModel.find(
+			{ user_id, createdAt: { $gte: start, $lte: end } },
+			{ _id: 0, foodList: 1 },
+		);
 	}
 
 	static async deleteOne(meal_id) {

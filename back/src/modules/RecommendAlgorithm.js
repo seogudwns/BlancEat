@@ -1,5 +1,5 @@
 // 알고리즘의 원리 및 구조도는 같은 이름의 md파일로 저장되있습니다. 참고 바랍니다.
-import { Nutrition, Recommend_nutrition } from '../DB/index.js';
+import { Recommend_nutrition, Food } from '../DB/index.js';
 
 class Recommend {
 	static async recommendSystem(age, sex, weight, eat) {
@@ -26,9 +26,6 @@ class Recommend {
 		}
 
 		let result = [];
-
-		// ? 하루 식사로 생각하고, 로직을 약간 바꿔야하는데..... 절대량보다는 비율 우선?
-		// TODO 음식을 더 세세하게 영양소를 나눠서 추천.. db를 업데이트 후 생각해보기.
 
 		const personInfo = await Recommend_nutrition.getinfo({ ageRange, sex });
 
@@ -64,7 +61,7 @@ class Recommend {
 		let errMessage = null;
 
 		if (nutrientTable[2].reduce((x, y) => x + y) <= 0) {
-			const randomFood = await Nutrition.findFood();
+			const randomFood = await Food.findFood();
 
 			errMessage = '충분한 음식을 섭취하셨습니다. 내일 이걸 드셔보시는 것은 어떨까요?';
 			result.push(randomFood[parseInt(Math.random() * randomFood.length)]);
@@ -72,7 +69,7 @@ class Recommend {
 			result.push(randomFood[parseInt(Math.random() * randomFood.length)]);
 			isResult = true;
 		} else {
-			recommendFood = await Nutrition.findManyByNutrition([
+			recommendFood = await Food.findManyByNutrition([
 				nutrientTable[2][0],
 				nutrientTable[2][1],
 				nutrientTable[2][2],
@@ -89,7 +86,7 @@ class Recommend {
 			result.push(recommendFood[parseInt(Math.random() * recommendFood.length)]);
 			isResult = true;
 		} else {
-			recommendFood = await Nutrition.findManyByNutrition([
+			recommendFood = await Food.findManyByNutrition([
 				nutrientTable[2][0],
 				nutrientTable[2][1],
 				nutrientTable[2][2],
@@ -105,7 +102,7 @@ class Recommend {
 			result.push(recommendFood[parseInt(Math.random() * recommendFood.length)]);
 			result.push(recommendFood[parseInt(Math.random() * recommendFood.length)]);
 		} else {
-			recommendFood = await Nutrition.findManyByNutrition2([
+			recommendFood = await Food.findManyByNutrition2([
 				nutrientTable[0][0],
 				nutrientTable[0][1],
 				nutrientTable[0][2],

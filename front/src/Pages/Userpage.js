@@ -1,47 +1,72 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
+import { StyledButton as StyledBtn } from '../Components/Styles/styleButton';
 import { Card } from 'react-bootstrap';
 import ContentUserPageText from '../Contents/ContentUserPageText';
 import ContentUserInfo from '../Contents/ContentUserInfo';
 import ContentGraph from '../Contents/ContentGraph';
-import { data, data2, data3, data4, options_BarChart } from '../Contents/ChartData';
+import { useSetRecoilState, useRecoilValue } from 'recoil';
+import { userIdState, loginState } from './User/UserAtom';
+import * as Api from '../Commons/Api';
+import { StyledText } from '../Contents/styleContents';
+
+import { data } from '../Contents/ChartData';
 const StyledContainer = styled.div`
-	width: 100vw;
+	width: 100%;
 	margin: ${param => param.margin};
 `;
 
 const Userpage = () => {
-	const userInfos = ['연령 만 29 세/ 남성', '키 175cm', '몸무게 68kg'];
+	const id = useRecoilValue(userIdState);
+
+	const loadingUserFood = async () => {
+		const res = await Api.get(`user/mealdata/${id}`);
+		console.log(res);
+	};
+	useEffect(() => {
+		loadingUserFood();
+	}, []);
+
+	const noFood = true;
+
 	return (
 		<>
 			<StyledContainer margin="0px">
 				<ContentUserPageText />
 			</StyledContainer>
-			<StyledContainer margin="15px 0 0 0" style={{ display: 'flex' }}>
-				<ContentUserInfo num={1} title={'기본정보'} userInfos={userInfos} />
-				<ContentUserInfo num={2} title={'BMI'} userInfos={userInfos} />
-			</StyledContainer>
-
-			<StyledContainer margin="25px 0 0 0" style={{ display: 'flex' }}>
-				<ContentUserInfo num={3} title={'기본정보'} userInfos={userInfos} />
+			<StyledContainer
+				margin="25px 0 0 0"
+				style={{ display: 'flex', justifyContent: 'center' }}
+			>
 				<ContentGraph
 					data={data}
 					num={1}
 					height={'10%'}
-					width={'42%'}
+					width={'70%'}
 					title={'금일 영양 정보'}
 				></ContentGraph>
 			</StyledContainer>
-
-			<StyledContainer margin="25px 0 40px 0" style={{ display: 'flex' }}>
-				<ContentGraph
-					data={data}
-					num={2}
-					height={'20%'}
-					width={'68%'}
-					title={'요일별 칼로리 섭취량'}
-				></ContentGraph>
-			</StyledContainer>
+			<div style={{ display: 'flex', justifyContent: 'center', marginTop: '1.5rem' }}>
+				{!noFood ? (
+					<StyledText color="red" size="1.5rem">
+						오늘의 식단을 입력하지 않으셨습니다. 아래 버튼을 눌러 오늘 예상 식단을
+						입력해주세요!
+					</StyledText>
+				) : (
+					<StyledText color="red" size="1.5rem" style={{ visibility: 'hidden' }}>
+						오늘의 식단을 입력하지 않으셨습니다. 아래 버튼을 눌러 오늘 예상 식단을
+						입력해주세요!
+					</StyledText>
+				)}
+			</div>
+			<div style={{ display: 'flex', justifyContent: 'center' }}>
+				<StyledBtn
+					style={{ background: '#075f3a', margin: '1.5rem 0 1.5rem 0', width: '30%' }}
+					onClick={() => navigate('/recommand')}
+				>
+					<b style={{ fontSize: '1.5rem' }}>오늘의 식단 추천 받기</b>
+				</StyledBtn>
+			</div>
 		</>
 	);
 };

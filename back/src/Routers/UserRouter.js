@@ -1,10 +1,9 @@
-// is? ... @sindresorhus/is 로부터 받는데 headertype에 대한 경고? 인 것 같다.
-// Router - express, middleWare, service, tokenblacklist..
 import { Router } from 'express';
 import { userService } from '../Services/UserService.js';
-import { Meal } from '../DB/index.js';
+import { MealService } from '../services/MealService.js';
 import { login_required } from '../MiddleWare/login_require.js';
 import is from '@sindresorhus/is';
+import { NutritionService } from '../Services/NutritionService.js';
 
 const userRouter = Router();
 
@@ -44,14 +43,13 @@ userRouter.post('/user/register', async (req, res, next) => {
 	}
 });
 
-// 로그인.. done
+// 로그인.
 userRouter.post('/user/login', async (req, res, next) => {
 	try {
 		const { email, password } = req.body;
 
 		const loginuser = await userService.getUser({ email, password });
 
-		// null일 경우 false와 같음.
 		if (loginuser.errMessage) {
 			throw new Error(errMessage);
 		}
@@ -62,11 +60,11 @@ userRouter.post('/user/login', async (req, res, next) => {
 	}
 });
 
-// 정보 변경.. done.
+// 정보 변경.
 userRouter.put('/user/infoexchange/:id', login_required, async (req, res, next) => {
 	try {
 		const { updateInfo } = req.body;
-		const id = req.params;
+		const { id } = req.params;
 		const checkId = req.currentUserId;
 		const changeUser = await userService.setUser(id, {
 			checkId,
@@ -83,12 +81,26 @@ userRouter.put('/user/infoexchange/:id', login_required, async (req, res, next) 
 	}
 });
 
-//! NutritionRouter에 recommend는 어떻게 하지..?..
+// 유저 아이디 받아서 유저 정보 보내주기.
+userRouter.get('/user/:id', login_required, async (req, res, next) => {
+	try {
+		const { id } = req.params;
+		const user = await userService.getUserData({ id });
+
+		if (user.errorMessage) {
+			throw new Error(user.errorMessage);
+		}
+
+		res.status(200).json(user);
+	} catch (err) {
+		next(err);
+	}
+});
 
 //그동안 먹은 음식 정보 보내주기.
-userRouter.post('/user/mealdata/:id', login_required, async (req, res, next) => {
+userRouter.get('/user/mealdata/:id', login_required, async (req, res, next) => {
 	try {
-		const id = req.params;
+		const { id } = req.params;
 		const checkId = req.currentUserId;
 
 		if (id !== checkId) {
@@ -99,8 +111,39 @@ userRouter.post('/user/mealdata/:id', login_required, async (req, res, next) => 
 		if (eatenMenu.length === 0) {
 			throw new Error('매뉴가 없습니다.');
 		}
+		// const eatenMenu = await Meal.findSome({ user_id: id, start, end });
+		// if (eatenMenu.length === 0) {
+		// 	throw new Error('메뉴가 없습니다.');
+		// }
 
-		res.status(200).json(eatenMenu);
+		const todayMeals = eatenMenu.reduce((prev, curr) => {
+			prev.foodList = prev.foodList.concat(curr.foodList);
+			return prev;
+		});
+
+		const nutritionData = await NutritionService.getNutritionalFacts({
+			foodName: todayMeals.foodList,
+		});
+
+		if (nutritionData.errorMessage) {
+			throw new Error(nutritionData.errorMessage);
+		}
+
+		res.status(200).json(nutritionData);
+	} catch (err) {
+		next(err);
+	}
+});
+userRouter.get('/user/:id', login_required, async (req, res, next) => {
+	try {
+		const { id } = req.params;
+		const user = await userService.getUserData({ id });
+
+		if (user.errorMessage) {
+			throw new Error(user.errorMessage);
+		}
+
+		res.status(200).json(user);
 	} catch (err) {
 		next(err);
 	}
@@ -109,14 +152,19 @@ userRouter.post('/user/mealdata/:id', login_required, async (req, res, next) => 
 //음식 삭제 기능 구현.
 userRouter.delete('/user/meal/:meal_id', login_required, async (req, res, next) => {
 	try {
-		const { meal_id } = req.body;
-		const deleteRequireFoodList = await Meal.deleteOne(meal_id);
+		const { meal_id } = req.params;
+		const deleteRequireFoodList = await MealService.deleteMeal(meal_id);
 
-		if (!deleteRequireFoodList) {
-			throw new Error('해당 음식 리스트가 존재하지 않습니다.');
+		if (deleteRequireFoodList.errMessage) {
+			throw new Error(deleteRequireFoodList.errMessage);
 		}
+		// const deleteRequireFoodList = await Meal.deleteOne(meal_id);
 
-		res.status(204).send('삭제 완료');
+		// if (!deleteRequireFoodList) {
+		// 	throw new Error('해당 음식 리스트가 존재하지 않습니다.');
+		// }
+
+		res.status(204).send(deleteRequireFoodList.Message);
 	} catch (err) {
 		next(err);
 	}

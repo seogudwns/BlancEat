@@ -8,6 +8,10 @@ import Recommand from './Pages/Recommands/Recommand';
 import Footer from './Pages/Footer';
 import BalancEat from './Pages/BalancEat';
 import Userpage from './Pages/Userpage';
+<<<<<<< HEAD
+=======
+import Testpage from './Pages/Recommands/Testpage';
+>>>>>>> dev
 
 import theme from './Commons/theme';
 import { GlobalStyle, Container } from './Commons/GlobalStyle';
