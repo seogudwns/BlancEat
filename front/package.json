@@ -18,11 +18,8 @@
     "downshift": "^6.1.7",
     "faker": "^5.5.3",
     "formik": "^2.2.9",
-<<<<<<< HEAD
     "lodash": "^4.17.21",
-=======
     "moment": "^2.29.3",
->>>>>>> dev
     "polished": "^4.2.2",
     "react": "^18.0.0",
     "react-autosuggest": "^10.1.0",
