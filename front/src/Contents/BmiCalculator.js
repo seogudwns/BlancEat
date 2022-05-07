@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 import { StyledText } from './styleContents';
+import { StyledButton as StyledBtn } from '../Components/Styles/styleButton';
 
 const StyledContainer = styled.div`
 	width: 623px;
@@ -32,6 +34,8 @@ const BmiCalculator = () => {
 	const [bmi, setBmi] = useState(0);
 	const [status, setStatus] = useState(false);
 
+	const navigate = useNavigate();
+
 	useEffect(() => {
 		if (!isNaN(bmi) && kg !== 0 && cm !== 0) {
 			setBmi((kg / (cm / 100) ** 2).toFixed(2));
@@ -57,7 +61,7 @@ const BmiCalculator = () => {
 	};
 
 	const toggleStatus = () => {
-		if (bmi <= 23 && 18.5 <= bmi) {
+		if (bmi <= 23 && 18.5 <= bmi && bmi > 0) {
 			setStatus(true);
 		} else {
 			setStatus(false);
@@ -94,19 +98,53 @@ const BmiCalculator = () => {
 				</form>
 				<br />
 				{status ? (
-					<StyledText ta="center" size="1rem" style={{ width: '100%' }}>
-						BMI로 측정한 회원님의 현재 건강은{' '}
-						<StyledText size="1.5rem" color="green" style={{ fontWeight: 'bold' }}>
-							건강합니다.
+					<>
+						<StyledText ta="center" size="1rem" style={{ width: '100%' }}>
+							BMI로 측정한 회원님의 현재 건강은{' '}
+							<StyledText size="1.5rem" color="green" style={{ fontWeight: 'bold' }}>
+								건강합니다.
+							</StyledText>
 						</StyledText>
-					</StyledText>
+						<div
+							style={{
+								display: 'flex',
+								width: '100%',
+								justifyContent: 'center',
+								marginTop: '10px',
+							}}
+						>
+							<StyledBtn
+								style={{ background: '#075f3a' }}
+								onClick={() => navigate('/recommand')}
+							>
+								지금 바로 식단을 추천받고, 건강을 유지해보세요.
+							</StyledBtn>
+						</div>
+					</>
 				) : (
-					<StyledText ta="center" size="1rem" style={{ width: '100%' }}>
-						BMI로 측정한 회원님의 현재 건강은{' '}
-						<StyledText size="1.5rem" color="red" style={{ fontWeight: 'bold' }}>
-							위험합니다.
+					<>
+						<StyledText ta="center" size="1rem" style={{ width: '100%' }}>
+							BMI로 측정한 회원님의 현재 건강은{' '}
+							<StyledText size="1.5rem" color="red" style={{ fontWeight: 'bold' }}>
+								위험합니다.
+							</StyledText>
 						</StyledText>
-					</StyledText>
+						<div
+							style={{
+								display: 'flex',
+								width: '100%',
+								justifyContent: 'center',
+								marginTop: '10px',
+							}}
+						>
+							<StyledBtn
+								style={{ background: '#075f3a' }}
+								onClick={() => navigate('/recommand')}
+							>
+								지금 바로 식단을 추천받고, 건강을 개선해보세요.
+							</StyledBtn>
+						</div>
+					</>
 				)}
 			</StyledContainer>
 		</>
