@@ -30,7 +30,6 @@
     "react-scripts": "^5.0.1",
     "react-tag-autocomplete": "^6.3.0",
     "react-tag-input": "^6.8.0",
-    "react-tagsinput-2": "^3.19.8",
     "recoil": "^0.7.3-alpha.1",
     "recoil-persist": "^4.1.0",
     "styled-components": "^5.3.5",

@@ -3,9 +3,8 @@ import React, { useContext, useState } from 'react';
 import { Formik, Form, Field, useFormik } from 'formik';
 import { RecommandContext } from './RecommandContext';
 import { FoodDataContext } from './ContentRecommand';
-import { InputGroup, FormControl, Radio, Col, Row, Alert } from 'react-bootstrap';
+import { Alert } from 'react-bootstrap';
 
-import { TitleWrapper } from '../../Components/Styles/styleContentLabel';
 import { FormikTagsInputStyle, RecsysInputFormStyle } from './FormikTagsInputStyle';
 import Button from '../../Components/Button';
 import TagInput_keep from './TagInput_keep';

@@ -1,7 +1,6 @@
 import React, { useContext } from 'react';
 
 // import { RecommandContext } from './RecommandContext';
-import RecsysInputForm from './RecsysInputForm';
 import RecsysInputForm_keep from './RecsysInputForm_keep';
 import ContentLabel from '../../Components/ContentLabel';
 import { SubContainer, BGDiv } from '../../Contents/Styles/styleContents';
