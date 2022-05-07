@@ -1,6 +1,6 @@
 import { Router } from 'express';
 import { userService } from '../Services/UserService.js';
-import { Meal } from '../DB/index.js';
+import { MealService } from '../services/MealService.js';
 import { login_required } from '../MiddleWare/login_require.js';
 import is from '@sindresorhus/is';
 import moment from 'moment';
@@ -112,10 +112,14 @@ userRouter.get('/user/mealdata/:id', login_required, async (req, res, next) => {
 		const start = moment(now).startOf('day').format();
 		const end = moment(now).endOf('day').format();
 
-		const eatenMenu = await Meal.findSome({ user_id: id, start, end });
-		if (eatenMenu.length === 0) {
-			throw new Error('메뉴가 없습니다.');
+		const eatenMenu = await MealService.findSome({ user_id: id, start, end });
+		if (eatenMenu.errMessage) {
+			throw new Error(eatenMenu.errMessage);
 		}
+		// const eatenMenu = await Meal.findSome({ user_id: id, start, end });
+		// if (eatenMenu.length === 0) {
+		// 	throw new Error('메뉴가 없습니다.');
+		// }
 
 		const todayMeals = eatenMenu.reduce((prev, curr) => {
 			prev.foodList = prev.foodList.concat(curr.foodList);
@@ -140,13 +144,18 @@ userRouter.get('/user/mealdata/:id', login_required, async (req, res, next) => {
 userRouter.delete('/user/meal/:meal_id', login_required, async (req, res, next) => {
 	try {
 		const { meal_id } = req.params;
-		const deleteRequireFoodList = await Meal.deleteOne(meal_id);
+		const deleteRequireFoodList = await MealService.deleteMeal(meal_id);
 
-		if (!deleteRequireFoodList) {
-			throw new Error('해당 음식 리스트가 존재하지 않습니다.');
+		if (deleteRequireFoodList.errMessage) {
+			throw new Error(deleteRequireFoodList.errMessage);
 		}
+		// const deleteRequireFoodList = await Meal.deleteOne(meal_id);
 
-		res.status(204).send('삭제 완료');
+		// if (!deleteRequireFoodList) {
+		// 	throw new Error('해당 음식 리스트가 존재하지 않습니다.');
+		// }
+
+		res.status(204).send(deleteRequireFoodList.Message);
 	} catch (err) {
 		next(err);
 	}
