@@ -5,6 +5,8 @@ const theme = {
 		pink: '#f06595',
 		primary: '#075F3A',
 		secondary: '#023D1A',
+		dark: '#141514',
+		surface: '#FCFBFA',
 		white_85: 'rgba(252, 251, 250, 0.85)',
 	},
 	primary_color: '#075F3A',

@@ -1,9 +1,9 @@
-import React, { useContext, useState } from 'react';
-
+import React, { useCallback, useContext, useState } from 'react';
+import { debounce } from 'lodash';
 import ReactTagStyle from './ReactTagStyle';
 import { WithContext as ReactTags } from 'react-tag-input';
-
 import { FoodDataContext } from './ContentRecommand';
+import { TagInputStyle } from './TagInputStyle';
 
 const KeyCodes = {
 	comma: 188,
@@ -12,15 +12,20 @@ const KeyCodes = {
 
 const delimiters = [KeyCodes.comma, KeyCodes.enter];
 
-const TagInput = ({ dataHandler }) => {
+const TagInput = ({ dataHandler, alertHandler }) => {
 	const { suggestions, getSuggestFoodList } = useContext(FoodDataContext);
 	const [tags, setTags] = useState([]);
 
+	const INPUT_LIMIT = 4;
 	const handleDelete = i => {
 		setTags(tags.filter((tag, index) => index !== i));
 	};
 
 	const handleAddition = tag => {
+		if (tags.length >= INPUT_LIMIT) {
+			alertHandler('FULLFILLED');
+			return;
+		}
 		if (suggestions.includes(tag)) {
 			const newList = [...tags, tag];
 			setTags(newList);
@@ -28,17 +33,12 @@ const TagInput = ({ dataHandler }) => {
 		}
 	};
 
-	const handleDrag = (tag, currPos, newPos) => {
-		const newTags = tags.slice();
+	/*throttle */
+	const debouncedFilter = useCallback(debounce(query => getSuggestFoodList(query), 200));
 
-		newTags.splice(currPos, 1);
-		newTags.splice(newPos, 0, tag);
-
-		// re-render
-		setTags(newTags);
-	};
 	const handleInputChange = tag => {
-		getSuggestFoodList(tag);
+		if (!tag) return;
+		debouncedFilter(tag);
 	};
 
 	const handleTagClick = index => {
@@ -54,15 +54,13 @@ const TagInput = ({ dataHandler }) => {
 	};
 
 	return (
-		<ReactTagStyle>
+		<TagInputStyle>
 			<ReactTags
 				handleDelete={handleDelete}
 				handleAddition={handleAddition}
 				handleInputChange={handleInputChange}
-				handleDrag={handleDrag}
 				delimiters={delimiters}
 				handleTagClick={handleTagClick}
-				onClearAll={onClearAll}
 				onTagUpdate={onTagUpdate}
 				placeholder="Search..."
 				minQueryLength={2}
@@ -75,20 +73,13 @@ const TagInput = ({ dataHandler }) => {
 				allowDragDrop={false}
 				inline={true}
 				inputFieldPosition="inline"
-				allowAdditionFromPaste={true}
+				allowAdditionFromPaste={false}
 				editable={true}
-				clearAll={true}
+				clearAll={false}
 				tags={tags}
 				suggestions={suggestions}
 			/>
-		</ReactTagStyle>
+		</TagInputStyle>
 	);
 };
 export default TagInput;
-
-// const suggestions = FOODS.map(food => {
-// 	return {
-// 		id: food,
-// 		text: food,
-// 	};
-// });
