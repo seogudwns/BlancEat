@@ -1,11 +1,12 @@
 // is? ... @sindresorhus/is 로부터 받는데 headertype에 대한 경고? 인 것 같다.
 // Router - express, middleWare, service, tokenblacklist..
+import moment from 'moment';
+import { endOfDay, startOfDay } from 'date-fns';
 import { Router } from 'express';
 import { userService } from '../Services/UserService.js';
 import { MealService } from '../Services/MealService.js';
 import { login_required } from '../MiddleWare/login_require.js';
 import is from '@sindresorhus/is';
-import moment from 'moment';
 import { NutritionService } from '../Services/NutritionService.js';
 
 const userRouter = Router();
@@ -111,9 +112,11 @@ userRouter.get('/user/mealdata/:id', login_required, async (req, res, next) => {
 			throw new Error('잘못된 토큰입니다.');
 		}
 
-		const now = moment().format();
-		const start = moment(now).startOf('day').format();
-		const end = moment(now).endOf('day').format();
+		const now = new Date();
+		const start = startOfDay(now);
+		const end = endOfDay(now);
+
+		console.log(now, start, end);
 
 		const eatenMenu = await MealService.findSome({ user_id: id, start, end });
 		if (eatenMenu.length === 0) {
