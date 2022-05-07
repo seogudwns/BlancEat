@@ -18,6 +18,8 @@ const StyledToomuchText = styled.h1`
 `;
 
 const ContentUserPageText = () => {
+	const userInfos = ['연령 만 29 세/ 남성', '키 175cm', '몸무게 68kg'];
+
 	return (
 		<div style={{ display: 'inline-flex' }}>
 			<StyledToomuchBox fontSize="30px" margin="20px 0 10px 30px" padding="5px 50px 0px 50px">
@@ -28,7 +30,11 @@ const ContentUserPageText = () => {
 				padding="5px 50px 0px 50px"
 				fontSize="30px"
 			>
-				당신의 건강상태는 <span style={{ color: 'green' }}>양호</span>입니다
+				당신은{' '}
+				<span style={{ color: 'green' }}>
+					{userInfos[0]}/{userInfos[1]}/{userInfos[2]}
+				</span>
+				입니다
 			</StyledToomuchText>
 		</div>
 	);

@@ -29,10 +29,6 @@ const Userpage = () => {
 			<StyledContainer margin="0px">
 				<ContentUserPageText />
 			</StyledContainer>
-			<StyledContainer margin="15px 0 0 0" style={{ display: 'flex' }}>
-				<ContentUserInfo num={1} title={'기본정보'} userInfos={userInfos} />
-				<ContentUserInfo num={2} title={'BMI'} userInfos={userInfos} />
-			</StyledContainer>
 
 			<StyledContainer margin="25px 0 0 0" style={{ display: 'flex' }}>
 				<ContentUserInfo num={3} title={'기본정보'} userInfos={userInfos} />
