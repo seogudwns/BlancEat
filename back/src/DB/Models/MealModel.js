@@ -10,7 +10,10 @@ class Meal {
 	}
 
 	static async findSome({ user_id, start, end }) {
-		return await MealModel.find({ user_id, createdAt: { $gte: start, $lte: end } });
+		return await MealModel.find(
+			{ user_id, createdAt: { $gte: start, $lte: end } },
+			{ _id: 0, foodList: 1 },
+		);
 	}
 
 	static async deleteOne(meal_id) {
