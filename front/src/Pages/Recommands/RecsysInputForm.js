@@ -3,30 +3,43 @@ import React, { useContext, useState } from 'react';
 import { Formik, Form, Field, useFormik } from 'formik';
 import { RecommandContext } from './RecommandContext';
 import { FoodDataContext } from './ContentRecommand';
-import { InputGroup, FormControl, Radio, Col, Row, Alert } from 'react-bootstrap';
+import { Alert } from 'react-bootstrap';
 
-import { TitleWrapper } from '../../Components/Styles/styleContentLabel';
-
+import { RecsysInputFormStyle } from './FormikTagsInputStyle';
 import Button from '../../Components/Button';
 import TagInput from './TagInput';
 
 const RecsysInputForm = () => {
-	const [age, setAge] = useState([]);
-	const [sex, setSex] = useState([]);
-	const [weight, setWeight] = useState([]);
+	//age, sex, weight => formik handling
 	const [breakfast, setBreakfast] = useState([]);
 	const [lunch, setLunch] = useState([]);
 	const [dinner, setDinner] = useState([]);
 	const [snack, setSnack] = useState([]);
 	const [showAlert, setShowAlert] = useState(false);
+	const [alertMessage, setAlertMessage] = useState('');
 	const { dispatch } = useContext(RecommandContext);
 	const { postData } = useContext(FoodDataContext);
 
 	// const { handleSubmit, getFieldProps, touched, errors } = useFormik;
-
+	const ALERT_TYPE = {
+		EMPTY: 'EMPTY',
+		FULLFILLED: 'FULLFILLED',
+	};
+	const ALERT_MESSAGE = {
+		EMPTY: '식사 정보가 입력되지 않았습니다. 정보를 입력해주세요.',
+		FULLFILLED: '항목 당 최대 4개의 품목만 입력할 수 있습니다.',
+	};
 	const formik = useFormik({
 		initialValues: { age: '', sex: '', weight: '' },
 	});
+
+	const alertHandler = type => {
+		setAlertMessage(ALERT_MESSAGE[type]);
+		setShowAlert(true);
+		setTimeout(() => {
+			setShowAlert(false);
+		}, 3000);
+	};
 
 	/* 입력데이터 post, 결과 data get */
 	const handleClickSubmit = async () => {
@@ -42,7 +55,7 @@ const RecsysInputForm = () => {
 		) {
 			/* 데이터가 입력되지 않은 경우 처리 */
 			console.log('input empty');
-			setShowAlert(true);
+			alertHandler('EMPTY');
 		} else {
 			const dataSet = {
 				age: formik.values.age,
@@ -82,13 +95,14 @@ const RecsysInputForm = () => {
 	//나이/성별/몸무게
 
 	return (
-		<div>
+		<RecsysInputFormStyle>
 			<Formik
 				initialValues={{ age: '', sex: '', weight: '' }}
 				onSubmit={(values, actions) => handleSubmit(values, actions)}
 			>
 				{FormikProps => (
-					<Form>
+					<Form className="infoContainer">
+						<div>기본 정보 </div>
 						<Field
 							type="text"
 							id="age"
@@ -128,18 +142,29 @@ const RecsysInputForm = () => {
 					</Form>
 				)}
 			</Formik>
-			<TagInput dataHandler={dataHandlerBreakfast} />
+			<div className="infoContainer">
+				<label> 아 침 </label>
+				<TagInput alertHandler={alertHandler} dataHandler={dataHandlerBreakfast} />
+			</div>
 			<br />
-			<TagInput dataHandler={dataHandlerLunch} />
+			<div className="infoContainer">
+				<label> 점 심 </label>
+				<TagInput alertHandler={alertHandler} dataHandler={dataHandlerLunch} />
+			</div>
 			<br />
-			<TagInput dataHandler={dataHandlerDinner} />
+			<div className="infoContainer">
+				<label> 저 녁 </label>
+				<TagInput alertHandler={alertHandler} dataHandler={dataHandlerDinner} />
+			</div>
 			<br />
-			<TagInput dataHandler={dataHandlerSnack} />
-
+			<div className="infoContainer">
+				<label> 간 식 </label>
+				<TagInput alertHandler={alertHandler} dataHandler={dataHandlerSnack} />
+			</div>
 			<br />
 			{showAlert && (
-				<Alert variant="info">
-					식사 정보가 입력되지 않았습니다. 정보를 입력해주세요.
+				<Alert variant="info" className="footer">
+					<h5>{alertMessage}</h5>
 					<hr />
 					<div className="d-flex justify-content-end">
 						<Button fullWidth size="small" onClick={() => setShowAlert(false)}>
@@ -148,19 +173,15 @@ const RecsysInputForm = () => {
 					</div>
 				</Alert>
 			)}
-			<Row>
-				<Col>
-					<Button variant="outline-warning" onClick={handleClickCancel}>
-						취소
-					</Button>
-				</Col>
-				<Col>
-					<Button variant="outline-success" onClick={handleClickSubmit}>
-						완료
-					</Button>
-				</Col>
-			</Row>
-		</div>
+			<div className="footer">
+				<Button variant="outline-warning" onClick={handleClickCancel}>
+					취소
+				</Button>
+				<Button variant="outline-success" onClick={handleClickSubmit}>
+					완료
+				</Button>
+			</div>
+		</RecsysInputFormStyle>
 	);
 };
 
