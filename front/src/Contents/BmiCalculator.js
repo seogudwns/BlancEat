@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
+import { StyledText } from './styleContents';
 
 const StyledContainer = styled.div`
 	width: 623px;
@@ -29,11 +30,12 @@ const BmiCalculator = () => {
 	const [cm, setCm] = useState(0);
 	const [kg, setKg] = useState(0);
 	const [bmi, setBmi] = useState(0);
-	const [status, setStatus] = useState(0);
+	const [status, setStatus] = useState(false);
 
 	useEffect(() => {
 		if (!isNaN(bmi) && kg !== 0 && cm !== 0) {
 			setBmi((kg / (cm / 100) ** 2).toFixed(2));
+			console.log(bmi);
 		} else if (isNaN(bmi) && kg === 0 && cm === 0) {
 			setBmi(0);
 		} else if (bmi === 'Infinity') {
@@ -44,11 +46,22 @@ const BmiCalculator = () => {
 		if (kg === 0 || cm === 0) {
 			setBmi(0);
 		}
+
+		toggleStatus();
 	}, [kg, cm, bmi]);
 
-	const resetBMI = () => {
+	const resetBMI = evt => {
+		evt.preventDefault();
 		setCm(0);
 		setKg(0);
+	};
+
+	const toggleStatus = () => {
+		if (bmi <= 23 && 18.5 <= bmi) {
+			setStatus(true);
+		} else {
+			setStatus(false);
+		}
 	};
 
 	return (
@@ -80,7 +93,21 @@ const BmiCalculator = () => {
 					</StyledButton>
 				</form>
 				<br />
-				회원님의
+				{status ? (
+					<StyledText ta="center" size="1rem" style={{ width: '100%' }}>
+						BMI로 측정한 회원님의 현재 건강은{' '}
+						<StyledText size="1.5rem" color="green" style={{ fontWeight: 'bold' }}>
+							건강합니다.
+						</StyledText>
+					</StyledText>
+				) : (
+					<StyledText ta="center" size="1rem" style={{ width: '100%' }}>
+						BMI로 측정한 회원님의 현재 건강은{' '}
+						<StyledText size="1.5rem" color="red" style={{ fontWeight: 'bold' }}>
+							위험합니다.
+						</StyledText>
+					</StyledText>
+				)}
 			</StyledContainer>
 		</>
 	);
