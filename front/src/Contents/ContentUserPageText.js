@@ -40,23 +40,27 @@ const ContentUserPageText = ({}) => {
 			<StyledToomuchBox
 				fontSize="30px"
 				margin="20px 0px 0px 30px"
-				padding="5px 50px 0px 50px"
+				padding="0px 50px 0px 50px"
+				style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}
 			>
 				사용자 건강정보
 			</StyledToomuchBox>
 			<StyledToomuchText
-				margin="20px 0 10px 30px"
+				margin="10px 0 10px 30px"
 				padding="5px 50px 0px 50px"
 				fontSize="30px"
 			>
-				당신은
-				<span style={{ color: 'green' }}>
-					{UserInfo?.nickName}님이며 나이는{UserInfo?.age}살 몸무게는 {UserInfo?.weight}
+				<span style={{ color: '#198754' }}>
+					{UserInfo?.nickName} 회원님! <br />
+					현재 등록된 건강 정보 상 나이는 {UserInfo?.age}살, 체중은 {UserInfo?.weight}
+					입니다.
 				</span>
-				입니다
 			</StyledToomuchText>
 
-			<Button onClick={() => setIsShow(true)} style={{ marginTop: '30px', weight: '50px' }}>
+			<Button
+				onClick={() => setIsShow(true)}
+				style={{ marginTop: '30px', weight: '50px', marginRight: '30px' }}
+			>
 				회원정보 수정
 			</Button>
 
