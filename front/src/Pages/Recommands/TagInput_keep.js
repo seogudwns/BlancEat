@@ -1,5 +1,5 @@
-import React, { useContext, useState } from 'react';
-
+import React, { useCallback, useContext, useState } from 'react';
+import { debounce } from 'lodash';
 import ReactTagStyle from './ReactTagStyle';
 import { WithContext as ReactTags } from 'react-tag-input';
 import { FoodDataContext } from './ContentRecommand';
@@ -10,7 +10,7 @@ const KeyCodes = {
 };
 const delimiters = [KeyCodes.comma, KeyCodes.enter];
 
-const TagInput = ({ dataHandler }) => {
+const TagInput = ({ dataHandler, alertHandler }) => {
 	const { suggestions, getSuggestFoodList } = useContext(FoodDataContext);
 	const [tags, setTags] = useState([]);
 
@@ -21,8 +21,8 @@ const TagInput = ({ dataHandler }) => {
 
 	const handleAddition = tag => {
 		if (tags.length >= INPUT_LIMIT) {
+			alertHandler('FULLFILLED');
 			return;
-			//setAlert
 		}
 		if (suggestions.includes(tag)) {
 			const newList = [...tags, tag];
@@ -31,8 +31,12 @@ const TagInput = ({ dataHandler }) => {
 		}
 	};
 
+	/*throttle */
+	const debouncedFilter = useCallback(debounce(query => getSuggestFoodList(query), 200));
+
 	const handleInputChange = tag => {
-		getSuggestFoodList(tag);
+		if (!tag) return;
+		debouncedFilter(tag);
 	};
 
 	const handleTagClick = index => {

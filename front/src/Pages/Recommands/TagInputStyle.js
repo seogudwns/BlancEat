@@ -50,13 +50,13 @@ export const TagInputStyle = styled.div`
 
     .ReactTags__selected span.ReactTags__tag {
 		border: 1px solid #ddd;
-		background: #63bcfd;
+		background: #075f3a;
 		color: white;
 		font-size: 0.875rem;
 		display: inline-block;
 		padding: 0.5rem;
 		margin: 0 5px;
-		border-radius: 0.125rem;
+		border-radius: 0.25rem;
 	}
 	.ReactTags__selected span.ReactTags__tag:first-child {
 		margin-left: 0px;
@@ -67,6 +67,7 @@ export const TagInputStyle = styled.div`
 		cursor: pointer;
 	}
     .ReactTags__suggestions {
+        font-size: 1rem;
 		position: absolute;
 		top: 60px;
 		z-index: 10;

@@ -33,6 +33,7 @@ const Header = () => {
 
 	const handleLogout = () => {
 		setIsLogin(false);
+		setUserId('');
 		sessionStorage.removeItem('userToken');
 		navigate('/');
 		alert('로그아웃');
@@ -52,7 +53,6 @@ const Header = () => {
 									{createLink('/', '메인페이지')}
 									{createLink('/balanceat', 'BalancEat')}
 									<Nav.Link href="/recommand">오늘 뭐 먹지?</Nav.Link>
-									<Nav.Link href="/testpage">testpage</Nav.Link>
 
 									{isLogin ? (
 										<Nav.Link href={`/userpage`}>사용자페이지</Nav.Link>

@@ -24,21 +24,18 @@ const ContentRecommand = () => {
 
 	/*입력데이터 전송후 결과 수신 */
 	const postData = async (inputData = {}) => {
-		console.log(isEmptyObj(inputData));
 		if (inputData) {
-			console.log('postData, input: ', inputData);
-
-			//빈배열, 빈문자열 처리 필요.
+			//빈배열, 빈문자열 처리
 			const sendData = {
-				age: inputData.age && 25,
-				sex: inputData.sex && 'F',
-				weight: inputData.weight && 60,
-				// foodList: inputData,
-				breakfast: inputData.breakfast && [''],
-				lunch: inputData.lunch && [''],
-				dinner: inputData.dinner && [''],
-				snack: inputData.snack && [''],
+				age: inputData.age || 25,
+				sex: inputData.sex || 'F',
+				weight: inputData.weight || 60,
+				breakfast: inputData.breakfast || [''],
+				lunch: inputData.lunch || [''],
+				dinner: inputData.dinner || [''],
+				snack: inputData.snack || [''],
 			};
+
 			let result = null;
 			if (isLogin) {
 				console.log('로그인 사용자 음식추천 요청');

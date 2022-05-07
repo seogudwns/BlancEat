@@ -19,14 +19,30 @@ const RecsysInputForm = () => {
 	const [dinner, setDinner] = useState([]);
 	const [snack, setSnack] = useState([]);
 	const [showAlert, setShowAlert] = useState(false);
+	const [alertMessage, setAlertMessage] = useState('');
 	const { dispatch } = useContext(RecommandContext);
 	const { postData } = useContext(FoodDataContext);
 
 	// const { handleSubmit, getFieldProps, touched, errors } = useFormik;
-
+	const ALERT_TYPE = {
+		EMPTY: 'EMPTY',
+		FULLFILLED: 'FULLFILLED',
+	};
+	const ALERT_MESSAGE = {
+		EMPTY: '식사 정보가 입력되지 않았습니다. 정보를 입력해주세요.',
+		FULLFILLED: '항목 당 최대 4개의 품목만 입력할 수 있습니다.',
+	};
 	const formik = useFormik({
 		initialValues: { age: '', sex: '', weight: '' },
 	});
+
+	const alertHandler = type => {
+		setAlertMessage(ALERT_MESSAGE[type]);
+		setShowAlert(true);
+		setTimeout(() => {
+			setShowAlert(false);
+		}, 3000);
+	};
 
 	/* 입력데이터 post, 결과 data get */
 	const handleClickSubmit = async () => {
@@ -42,7 +58,7 @@ const RecsysInputForm = () => {
 		) {
 			/* 데이터가 입력되지 않은 경우 처리 */
 			console.log('input empty');
-			setShowAlert(true);
+			alertHandler('EMPTY');
 		} else {
 			const dataSet = {
 				age: formik.values.age,
@@ -131,29 +147,27 @@ const RecsysInputForm = () => {
 			</Formik>
 			<div className="infoContainer">
 				<label> 아 침 </label>
-				<TagInput_keep dataHandler={dataHandlerBreakfast} />
+				<TagInput_keep alertHandler={alertHandler} dataHandler={dataHandlerBreakfast} />
 			</div>
 			<br />
 			<div className="infoContainer">
 				<label> 점 심 </label>
-				<TagInput_keep dataHandler={dataHandlerLunch} />
+				<TagInput_keep alertHandler={alertHandler} dataHandler={dataHandlerLunch} />
 			</div>
-
 			<br />
 			<div className="infoContainer">
 				<label> 저 녁 </label>
-				<TagInput_keep dataHandler={dataHandlerDinner} />
+				<TagInput_keep alertHandler={alertHandler} dataHandler={dataHandlerDinner} />
 			</div>
 			<br />
 			<div className="infoContainer">
 				<label> 간 식 </label>
-				<TagInput_keep dataHandler={dataHandlerSnack} />
+				<TagInput_keep alertHandler={alertHandler} dataHandler={dataHandlerSnack} />
 			</div>
-
 			<br />
 			{showAlert && (
-				<Alert variant="info">
-					식사 정보가 입력되지 않았습니다. 정보를 입력해주세요.
+				<Alert variant="info" className="footer">
+					<h5>{alertMessage}</h5>
 					<hr />
 					<div className="d-flex justify-content-end">
 						<Button fullWidth size="small" onClick={() => setShowAlert(false)}>
@@ -162,18 +176,14 @@ const RecsysInputForm = () => {
 					</div>
 				</Alert>
 			)}
-			<Row>
-				<Col>
-					<Button variant="outline-warning" onClick={handleClickCancel}>
-						취소
-					</Button>
-				</Col>
-				<Col>
-					<Button variant="outline-success" onClick={handleClickSubmit}>
-						완료
-					</Button>
-				</Col>
-			</Row>
+			<div className="footer">
+				<Button variant="outline-warning" onClick={handleClickCancel}>
+					취소
+				</Button>
+				<Button variant="outline-success" onClick={handleClickSubmit}>
+					완료
+				</Button>
+			</div>
 		</RecsysInputFormStyle>
 	);
 };
