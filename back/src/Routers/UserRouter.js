@@ -116,8 +116,6 @@ userRouter.get('/user/mealdata/:id', login_required, async (req, res, next) => {
 		const start = startOfDay(now);
 		const end = endOfDay(now);
 
-		console.log(now, start, end);
-
 		const eatenMenu = await MealService.findSome({ user_id: id, start, end });
 		if (eatenMenu.length === 0) {
 			throw new Error('메뉴가 없습니다.');
@@ -128,7 +126,7 @@ userRouter.get('/user/mealdata/:id', login_required, async (req, res, next) => {
 			return prev;
 		});
 
-		const nutritionData = await NutritionService.getNutritionalFacts({
+		const nutritionData = await NutritionService.getNutrient({
 			foodName: todayMeals.foodList,
 		});
 
