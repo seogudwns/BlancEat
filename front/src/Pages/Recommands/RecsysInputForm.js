@@ -10,6 +10,7 @@ import { loginState } from '../User/UserAtom';
 import { RecsysInputFormStyle } from './FormikTagsInputStyle';
 import Button from '../../Components/Button';
 import TagInput from './TagInput';
+import Loader from '../../Components/Loading';
 
 const RecsysInputForm = () => {
 	//age, sex, weight get by userInfo FoodDataContext => formik handling
@@ -18,6 +19,7 @@ const RecsysInputForm = () => {
 	const [dinner, setDinner] = useState([]);
 	const [snack, setSnack] = useState([]);
 	const [showAlert, setShowAlert] = useState(false);
+	const [isLoading, setIsLoading] = useState(false);
 	const [alertMessage, setAlertMessage] = useState('');
 	const { dispatch } = useContext(RecommandContext);
 	const { postData, userInfo } = useContext(FoodDataContext);
@@ -45,6 +47,9 @@ const RecsysInputForm = () => {
 
 	/* 입력데이터 post, 결과 data get */
 	const handleClickSubmit = async () => {
+		//로딩상태 활성화, 버튼 비활성화
+		setIsLoading(true);
+
 		if (
 			Array.isArray(breakfast) &&
 			breakfast.length === 0 &&
@@ -78,6 +83,7 @@ const RecsysInputForm = () => {
 				//실패시 에러 처리단계... try catch?
 			}
 		}
+		setIsLoading(false);
 	};
 	const handleClickCancel = () => {
 		dispatch({ type: 'RESET' });
@@ -180,15 +186,19 @@ const RecsysInputForm = () => {
 				</Alert>
 			)}
 			<div className="footer">
-				<Button variant="outline-warning" onClick={handleClickCancel}>
+				<Button variant="outline-warning" onClick={handleClickCancel} disabled={isLoading}>
 					취소
 				</Button>
-				<Button variant="outline-success" onClick={handleClickSubmit}>
+
+				<Button variant="outline-success" onClick={handleClickSubmit} disabled={isLoading}>
 					완료
 				</Button>
 			</div>
+			{isLoading && <Loader type="spokes" color="#66ff99" message="Loading" />}
 		</RecsysInputFormStyle>
 	);
 };
 
 export default RecsysInputForm;
+// {isLoading && <ReactLoading type="Spoke" color="white" />}
+// <ReactLoading type="spokes" color="#FF00FF" height={'20%'} width={'20%'} />

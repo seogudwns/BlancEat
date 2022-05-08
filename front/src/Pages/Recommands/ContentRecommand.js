@@ -135,9 +135,9 @@ const ContentRecommand = () => {
 				{step === RecommandStates.INPUT && <RecsysInput />}
 				{step === RecommandStates.OUTPUT && <RecsysOutput />}
 			</ImgBGContentContainer>
-			{step === RecommandStates.OUTPUT && <RecsysOutputAddon />}
 		</FoodDataContext.Provider>
 	);
 };
 
 export default ContentRecommand;
+// {step === RecommandStates.OUTPUT && <RecsysOutputAddon />}
