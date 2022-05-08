@@ -1,4 +1,4 @@
-import React, { createContext, useContext, useState } from 'react';
+import React, { createContext, useContext, useState, useEffect } from 'react';
 
 import * as Api from '../../Commons/Api';
 import { useRecoilValue } from 'recoil';
@@ -21,6 +21,25 @@ const ContentRecommand = () => {
 	const { step } = useContext(RecommandContext);
 	const userId = useRecoilValue(userIdState); //userId.
 	const isLogin = useRecoilValue(loginState); //로긴되었는가 불린값
+	const [userInfo, setUserInfo] = useState({ age: '', sex: '', weight: '' });
+
+	const loadingUserInfo = async () => {
+		if (isLogin) {
+			console.log('user logged in');
+
+			const res = await Api.get(`user/${userId}`);
+			console.log('res data', res.data.age, res.data.sex, res.data.weight);
+			setUserInfo({ age: res.data.age, sex: res.data.sex, weight: res.data.weight });
+			console.log(userInfo);
+		} else {
+			console.log('not login');
+			setUserInfo({ age: '', sex: '', weight: '' });
+		}
+	};
+
+	useEffect(() => {
+		loadingUserInfo();
+	}, []);
 
 	/*입력데이터 전송후 결과 수신 */
 	const postData = async (inputData = {}) => {
@@ -66,17 +85,6 @@ const ContentRecommand = () => {
 		return false;
 	};
 
-	//검색안된경우에도 500번이 떨어짐. 예외처리가 필요
-	//검색 성공의 경우 >>
-	//결과 길이 확인 >
-	//음식이름만 추출 , 최대 추천갯수까지만 >
-	//서제스트 리스트 그리기
-	//키워드 눌리지 않았을경우 다음번 요청시점 도착시 재요청
-
-	//검색 실패의 경우
-	//일치하는 음식 정보가 없습니다. 표시
-	//디바운싱 텀에 따라 다음번 요청시점까지 대기.
-
 	/* 음식정보입력시 취급품목인지 validation, Debouncing */
 	const getSuggestFoodList = async keyword => {
 		console.log('컨텐트 리커멘드, getSuggestFoodList', keyword);
@@ -89,9 +97,6 @@ const ContentRecommand = () => {
 			makeSuggestList(result.data);
 		} catch (err) {
 			console.error(err);
-			/*검색결과 받지 못해도 없다는 표시 처리 */
-			//to - do . 다른 방식으로 처리해야함.
-			//키워드와 일치 하지 않아 표시되지 않음
 			makeSuggestList(null);
 		}
 		let timeEnd = new Date().getTime();
@@ -116,6 +121,7 @@ const ContentRecommand = () => {
 	return (
 		<FoodDataContext.Provider
 			value={{
+				userInfo,
 				foodData,
 				suggestions,
 				setSuggestions,
@@ -129,9 +135,9 @@ const ContentRecommand = () => {
 				{step === RecommandStates.INPUT && <RecsysInput />}
 				{step === RecommandStates.OUTPUT && <RecsysOutput />}
 			</ImgBGContentContainer>
-			{step === RecommandStates.OUTPUT && <RecsysOutputAddon />}
 		</FoodDataContext.Provider>
 	);
 };
 
 export default ContentRecommand;
+// {step === RecommandStates.OUTPUT && <RecsysOutputAddon />}

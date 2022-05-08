@@ -1,26 +1,30 @@
-import React, { useContext, useState } from 'react';
+import React, { useContext, useState, useEffect } from 'react';
 
 import { Formik, Form, Field, useFormik } from 'formik';
 import { RecommandContext } from './RecommandContext';
 import { FoodDataContext } from './ContentRecommand';
 import { Alert } from 'react-bootstrap';
+import { useRecoilValue } from 'recoil';
+import { loginState } from '../User/UserAtom';
 
 import { RecsysInputFormStyle } from './FormikTagsInputStyle';
 import Button from '../../Components/Button';
 import TagInput from './TagInput';
+import Loader from '../../Components/Loading';
 
 const RecsysInputForm = () => {
-	//age, sex, weight => formik handling
+	//age, sex, weight get by userInfo FoodDataContext => formik handling
 	const [breakfast, setBreakfast] = useState([]);
 	const [lunch, setLunch] = useState([]);
 	const [dinner, setDinner] = useState([]);
 	const [snack, setSnack] = useState([]);
 	const [showAlert, setShowAlert] = useState(false);
+	const [isLoading, setIsLoading] = useState(false);
 	const [alertMessage, setAlertMessage] = useState('');
 	const { dispatch } = useContext(RecommandContext);
-	const { postData } = useContext(FoodDataContext);
+	const { postData, userInfo } = useContext(FoodDataContext);
+	const isLogin = useRecoilValue(loginState); //로긴되었는가 불린값
 
-	// const { handleSubmit, getFieldProps, touched, errors } = useFormik;
 	const ALERT_TYPE = {
 		EMPTY: 'EMPTY',
 		FULLFILLED: 'FULLFILLED',
@@ -30,7 +34,7 @@ const RecsysInputForm = () => {
 		FULLFILLED: '항목 당 최대 4개의 품목만 입력할 수 있습니다.',
 	};
 	const formik = useFormik({
-		initialValues: { age: '', sex: '', weight: '' },
+		initialValues: { age: userInfo.age, sex: userInfo.sex, weight: userInfo.weight },
 	});
 
 	const alertHandler = type => {
@@ -43,6 +47,9 @@ const RecsysInputForm = () => {
 
 	/* 입력데이터 post, 결과 data get */
 	const handleClickSubmit = async () => {
+		//로딩상태 활성화, 버튼 비활성화
+		setIsLoading(true);
+
 		if (
 			Array.isArray(breakfast) &&
 			breakfast.length === 0 &&
@@ -76,6 +83,7 @@ const RecsysInputForm = () => {
 				//실패시 에러 처리단계... try catch?
 			}
 		}
+		setIsLoading(false);
 	};
 	const handleClickCancel = () => {
 		dispatch({ type: 'RESET' });
@@ -97,7 +105,7 @@ const RecsysInputForm = () => {
 	return (
 		<RecsysInputFormStyle>
 			<Formik
-				initialValues={{ age: '', sex: '', weight: '' }}
+				enableReinitialize
 				onSubmit={(values, actions) => handleSubmit(values, actions)}
 			>
 				{FormikProps => (
@@ -107,6 +115,7 @@ const RecsysInputForm = () => {
 							type="text"
 							id="age"
 							placeholder="나이"
+							disabled={isLogin}
 							{...formik.getFieldProps('age')}
 						/>
 						<div role="group" aria-labelledby="my-radio-group">
@@ -116,6 +125,7 @@ const RecsysInputForm = () => {
 									id="sex"
 									name="sex"
 									value="M"
+									disabled={isLogin}
 									checked={formik.values.sex === 'M'}
 									onChange={formik.getFieldProps('sex').onChange}
 								/>
@@ -127,6 +137,7 @@ const RecsysInputForm = () => {
 									id="sex"
 									name="sex"
 									value="F"
+									disabled={isLogin}
 									checked={formik.values.sex === 'F'}
 									onChange={formik.getFieldProps('sex').onChange}
 								/>
@@ -137,6 +148,7 @@ const RecsysInputForm = () => {
 							id="text"
 							name="weight"
 							placeholder="몸무게"
+							disabled={isLogin}
 							{...formik.getFieldProps('weight')}
 						/>
 					</Form>
@@ -174,15 +186,19 @@ const RecsysInputForm = () => {
 				</Alert>
 			)}
 			<div className="footer">
-				<Button variant="outline-warning" onClick={handleClickCancel}>
+				<Button variant="outline-warning" onClick={handleClickCancel} disabled={isLoading}>
 					취소
 				</Button>
-				<Button variant="outline-success" onClick={handleClickSubmit}>
+
+				<Button variant="outline-success" onClick={handleClickSubmit} disabled={isLoading}>
 					완료
 				</Button>
 			</div>
+			{isLoading && <Loader type="spokes" color="#66ff99" message="Loading" />}
 		</RecsysInputFormStyle>
 	);
 };
 
 export default RecsysInputForm;
+// {isLoading && <ReactLoading type="Spoke" color="white" />}
+// <ReactLoading type="spokes" color="#FF00FF" height={'20%'} width={'20%'} />
