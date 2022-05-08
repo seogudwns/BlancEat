@@ -56,6 +56,7 @@ nutritionRouter.post('/nutrition', login_required, async (req, res, next) => {
 
 		const foodList = [...breakfast, ...lunch, ...dinner, ...snack];
 
+		// foodList.length로 체크하지 않은 이유는?..
 		if (isEmptyArr(foodList)) {
 			throw new Error('식사 정보를 입력해주세요.');
 		} else if (age < 15) {
@@ -77,6 +78,7 @@ nutritionRouter.post('/nutrition', login_required, async (req, res, next) => {
 
 		const bundle = { getFoodList, personInfo, result, errMessage };
 
+		// 이것도 옮겨야 하는데 시간이 없..ㅠ
 		for (let i = 0; i < meals.length; i++) {
 			if (isEmptyArr(meals[i])) {
 				continue;
