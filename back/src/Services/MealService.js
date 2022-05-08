@@ -1,5 +1,6 @@
+import { endOfDay, startOfDay } from 'date-fns';
 import { Meal } from '../DB/index.js';
-
+import { NutritionService } from './NutritionService.js';
 class MealService {
 	static async createMealData({ user_id, foodList, time }) {
 		const meal = await Meal.addMeal({ user_id, foodList, time });
@@ -13,7 +14,11 @@ class MealService {
 		return meal;
 	}
 
-	static async findSome({ user_id: id, start, end }) {
+	static async findSomeandSumNutrition({ user_id: id }) {
+		const now = new Date();
+		const start = startOfDay(now);
+		const end = endOfDay(now);
+
 		const eatenMenu = await Meal.findSome({ user_id: id, start, end });
 
 		if (eatenMenu.length === 0) {
@@ -21,7 +26,16 @@ class MealService {
 			return { errMessage };
 		}
 
-		return eatenMenu;
+		const todayMeals = eatenMenu.reduce((prev, curr) => {
+			prev.foodList = prev.foodList.concat(curr.foodList);
+			return prev;
+		});
+
+		const nutritionData = await NutritionService.getNutrient({
+			foodName: todayMeals.foodList,
+		});
+
+		return nutritionData;
 	}
 
 	static async deleteMeal(meal_id) {

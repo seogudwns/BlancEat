@@ -1,13 +1,8 @@
-// is? ... @sindresorhus/is 로부터 받는데 headertype에 대한 경고? 인 것 같다.
-// Router - express, middleWare, service, tokenblacklist..
-import moment from 'moment';
-import { endOfDay, startOfDay } from 'date-fns';
 import { Router } from 'express';
 import { userService } from '../Services/UserService.js';
 import { MealService } from '../Services/MealService.js';
 import { login_required } from '../MiddleWare/login_require.js';
 import is from '@sindresorhus/is';
-import { NutritionService } from '../Services/NutritionService.js';
 
 const userRouter = Router();
 
@@ -54,9 +49,8 @@ userRouter.post('/user/login', async (req, res, next) => {
 
 		const loginuser = await userService.getUser({ email, password });
 
-		// null일 경우 false와 같음.
 		if (loginuser.errMessage) {
-			throw new Error(errMessage);
+			throw new Error(loginuser.errMessage);
 		}
 
 		res.status(200).json(loginuser);
@@ -112,28 +106,10 @@ userRouter.get('/user/mealdata/:id', login_required, async (req, res, next) => {
 			throw new Error('잘못된 토큰입니다.');
 		}
 
-		const now = new Date();
-		const start = startOfDay(now);
-		const end = endOfDay(now);
+		const nutritionData = await MealService.findSomeandSumNutrition({ user_id: id });
 
-		console.log(now, start, end);
-
-		const eatenMenu = await MealService.findSome({ user_id: id, start, end });
-		if (eatenMenu.length === 0) {
-			throw new Error('메뉴가 없습니다.');
-		}
-
-		const todayMeals = eatenMenu.reduce((prev, curr) => {
-			prev.foodList = prev.foodList.concat(curr.foodList);
-			return prev;
-		});
-
-		const nutritionData = await NutritionService.getNutritionalFacts({
-			foodName: todayMeals.foodList,
-		});
-
-		if (nutritionData.errorMessage) {
-			throw new Error(nutritionData.errorMessage);
+		if (nutritionData.errMessage) {
+			throw new Error(nutritionData.errMessage);
 		}
 
 		res.status(200).json(nutritionData);
@@ -146,13 +122,13 @@ userRouter.get('/user/mealdata/:id', login_required, async (req, res, next) => {
 userRouter.delete('/user/meal/:meal_id', login_required, async (req, res, next) => {
 	try {
 		const { meal_id } = req.params;
-		const deleteRequireFoodList = await Meal.deleteOne(meal_id);
+		const deleteRequireFoodList = await MealService.deleteMeal(meal_id);
 
-		if (!deleteRequireFoodList) {
-			throw new Error('해당 음식 리스트가 존재하지 않습니다.');
+		if (deleteRequireFoodList.errMessage) {
+			throw new Error(deleteRequireFoodList.errMessage);
 		}
 
-		res.status(204).send('삭제 완료');
+		res.status(204).send(deleteRequireFoodList.Message);
 	} catch (err) {
 		next(err);
 	}
