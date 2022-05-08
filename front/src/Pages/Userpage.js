@@ -9,6 +9,7 @@ import { useRecoilState, useRecoilValue } from 'recoil';
 import { userIdState, loginState, carbonState } from './User/UserAtom';
 import * as Api from '../Commons/Api';
 import { StyledText } from '../Contents/styleContents';
+import { useNavigate } from 'react-router-dom';
 
 import { data } from '../Contents/ChartData';
 const StyledContainer = styled.div`
@@ -18,7 +19,7 @@ const StyledContainer = styled.div`
 
 const Userpage = () => {
 	const id = useRecoilValue(userIdState);
-
+	const navigate = useNavigate();
 	const noFood = true;
 
 	return (
@@ -32,7 +33,6 @@ const Userpage = () => {
 			>
 				{
 					<ContentGraph
-						data={data}
 						num={1}
 						height={'10%'}
 						width={'70%'}
