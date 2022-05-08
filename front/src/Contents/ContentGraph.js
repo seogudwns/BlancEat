@@ -23,35 +23,7 @@ const StyledGraphInfoText = styled.span`
 	font-weight: bold;
 `;
 
-const ContentGraph = ({ num, title, color, width, height }) => {
-	const id = useRecoilValue(userIdState);
-
-	const [단백질, setProtein] = useState(0);
-	const [지방, setfat] = useState(0);
-	const [탄수화물, setCarbon] = useState(0);
-	const [fooddata, setFooddata] = useState();
-	const [errorCheck, setErrorCheck] = useState(false);
-
-	const loadingUserFood = async () => {
-		const res = await Api.get(`user/mealdata/${id}`);
-		setfat(res.data.지방);
-		setProtein(res.data.단백질);
-		setCarbon(res.data.탄수화물);
-		setFooddata({ 지방, 단백질, 탄수화물 });
-		setErrorCheck(true);
-	};
-	useEffect(() => {
-		if (errorCheck) {
-			setTimeout(() => {
-				loadingUserFood();
-			}, [1]);
-		} else {
-			setTimeout(() => {
-				loadingUserFood();
-			}, [1]);
-		}
-	}, [errorCheck]);
-
+const ContentGraph = ({ num, title, color, width, height, fooddata }) => {
 	const data = {
 		// 각 막대별 라벨
 		datasets: [
