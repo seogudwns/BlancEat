@@ -9,7 +9,6 @@
 		}
 	},
 	"rules": {
-		"prettier/prettier": ["error"],
-		"react/jsx-one-expression-per-line": "off"
+		"prettier/prettier": ["error"]
 	}
 }
