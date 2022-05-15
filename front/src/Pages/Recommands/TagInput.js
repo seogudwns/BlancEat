@@ -1,19 +1,9 @@
-import React, { useContext, useState } from 'react';
-
-// import { FoodInputContext } from './RecsysInputForm';
-import { FOODS } from './foodlist';
-import './styleTagInput.css';
-// import './styleTagInput.scss';
-// import styles from "./ReactTags.module.scss";
-
+import React, { useCallback, useContext, useState } from 'react';
+import { debounce } from 'lodash';
+import ReactTagStyle from './ReactTagStyle';
 import { WithContext as ReactTags } from 'react-tag-input';
-//const ReactTags = require('react-tag-input').WithOutContext;
-const suggestions = FOODS.map(food => {
-	return {
-		id: food,
-		text: food,
-	};
-});
+import { FoodDataContext } from './ContentRecommand';
+import { TagInputStyle } from './TagInputStyle';
 
 const KeyCodes = {
 	comma: 188,
@@ -22,15 +12,20 @@ const KeyCodes = {
 
 const delimiters = [KeyCodes.comma, KeyCodes.enter];
 
-const TagInput = ({ dataHandler }) => {
-	// const { setMorning } = useContext(FoodInputContext);
+const TagInput = ({ dataHandler, alertHandler }) => {
+	const { suggestions, getSuggestFoodList } = useContext(FoodDataContext);
 	const [tags, setTags] = useState([]);
 
+	const INPUT_LIMIT = 4;
 	const handleDelete = i => {
 		setTags(tags.filter((tag, index) => index !== i));
 	};
 
 	const handleAddition = tag => {
+		if (tags.length >= INPUT_LIMIT) {
+			alertHandler('FULLFILLED');
+			return;
+		}
 		if (suggestions.includes(tag)) {
 			const newList = [...tags, tag];
 			setTags(newList);
@@ -38,14 +33,12 @@ const TagInput = ({ dataHandler }) => {
 		}
 	};
 
-	const handleDrag = (tag, currPos, newPos) => {
-		const newTags = tags.slice();
+	/*throttle */
+	const debouncedFilter = useCallback(debounce(query => getSuggestFoodList(query), 200));
 
-		newTags.splice(currPos, 1);
-		newTags.splice(newPos, 0, tag);
-
-		// re-render
-		setTags(newTags);
+	const handleInputChange = tag => {
+		if (!tag) return;
+		debouncedFilter(tag);
 	};
 
 	const handleTagClick = index => {
@@ -54,26 +47,39 @@ const TagInput = ({ dataHandler }) => {
 	const onClearAll = () => {
 		setTags([]);
 	};
+	const onTagUpdate = (i, newTag) => {
+		const updatedTags = tags.slice();
+		updatedTags.splice(i, 1, newTag);
+		setTags(updatedTags);
+	};
 
 	return (
-		<div>
+		<TagInputStyle>
 			<ReactTags
-				tags={tags}
-				suggestions={suggestions}
-				delimiters={delimiters}
 				handleDelete={handleDelete}
 				handleAddition={handleAddition}
-				handleDrag={handleDrag}
+				handleInputChange={handleInputChange}
+				delimiters={delimiters}
 				handleTagClick={handleTagClick}
-				onClearAll={onClearAll}
-				inputFieldPosition="bottom"
-				autocomplete
-				allowDeleteFromEmptyInput
-				clearAll={true}
+				onTagUpdate={onTagUpdate}
+				placeholder="Search..."
+				minQueryLength={2}
+				maxLength={5}
+				autofocus={false}
+				allowDeleteFromEmptyInput={true}
+				autocomplete={true}
+				readOnly={false}
+				allowUnique={true}
+				allowDragDrop={false}
+				inline={true}
+				inputFieldPosition="inline"
+				allowAdditionFromPaste={false}
+				editable={true}
+				clearAll={false}
+				tags={tags}
+				suggestions={suggestions}
 			/>
-		</div>
+		</TagInputStyle>
 	);
 };
 export default TagInput;
-
-// render(<App />, document.getElementById('root'));

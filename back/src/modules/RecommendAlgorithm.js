@@ -1,8 +1,8 @@
 // 알고리즘의 원리 및 구조도는 같은 이름의 md파일로 저장되있습니다. 참고 바랍니다.
-import { Nutrition, Recommend_nutrition } from '../DB/index.js';
+import { Recommend_nutrition, Food } from '../DB/index.js';
 
 class Recommend {
-	static async recommendSystem(age, sex, weight, eat, isLogin) {
+	static async recommendSystem(age, sex, weight, eat) {
 		let eatNutrition = [0, 0, 0];
 		eat.forEach(food => {
 			eatNutrition[0] += food.carbon;
@@ -27,12 +27,6 @@ class Recommend {
 
 		let result = [];
 
-		if (isLogin) {
-			// const userInfo = await UserModel.findById({ User_id: login });
-			console.log('로그인 후 사용가능한 기능입니다.');
-			const ErrorMessage = '로그인 기능 아직 없음. 나오면 이상한거임.';
-			return ErrorMessage;
-		}
 		const personInfo = await Recommend_nutrition.getinfo({ ageRange, sex });
 
 		let person3Nut = [
@@ -64,15 +58,18 @@ class Recommend {
 
 		let recommendFood = [];
 		let isResult = false;
+		let errMessage = null;
 
 		if (nutrientTable[2].reduce((x, y) => x + y) <= 0) {
-			const randomFood = await Nutrition.findFood();
+			const randomFood = await Food.findFood();
 
-			result.push('충분한 음식을 섭취하셨습니다. 내일 이걸 드셔보시는 것은 어떨까요?');
+			errMessage = '충분한 음식을 섭취하셨습니다. 내일 이걸 드셔보시는 것은 어떨까요?';
+			result.push(randomFood[parseInt(Math.random() * randomFood.length)]);
+			result.push(randomFood[parseInt(Math.random() * randomFood.length)]);
 			result.push(randomFood[parseInt(Math.random() * randomFood.length)]);
 			isResult = true;
 		} else {
-			recommendFood = await Nutrition.findManyByNutrition([
+			recommendFood = await Food.findManyByNutrition([
 				nutrientTable[2][0],
 				nutrientTable[2][1],
 				nutrientTable[2][2],
@@ -83,15 +80,13 @@ class Recommend {
 		}
 
 		if (isResult === true) {
-		} else if (recommendFood.length === 1) {
-			result.push(recommendFood[parseInt(Math.random() * recommendFood.length)]);
-			isResult = true;
 		} else if (recommendFood.length > 1) {
+			result.push(recommendFood[parseInt(Math.random() * recommendFood.length)]);
 			result.push(recommendFood[parseInt(Math.random() * recommendFood.length)]);
 			result.push(recommendFood[parseInt(Math.random() * recommendFood.length)]);
 			isResult = true;
 		} else {
-			recommendFood = await Nutrition.findManyByNutrition([
+			recommendFood = await Food.findManyByNutrition([
 				nutrientTable[2][0],
 				nutrientTable[2][1],
 				nutrientTable[2][2],
@@ -102,24 +97,24 @@ class Recommend {
 		}
 
 		if (isResult === true) {
-		} else if (recommendFood.length === 1) {
-			result.push(recommendFood[parseInt(Math.random() * recommendFood.length)]);
 		} else if (recommendFood.length > 1) {
 			result.push(recommendFood[parseInt(Math.random() * recommendFood.length)]);
 			result.push(recommendFood[parseInt(Math.random() * recommendFood.length)]);
+			result.push(recommendFood[parseInt(Math.random() * recommendFood.length)]);
 		} else {
-			recommendFood = await Nutrition.findManyByNutrition2([
+			recommendFood = await Food.findManyByNutrition2([
 				nutrientTable[0][0],
 				nutrientTable[0][1],
 				nutrientTable[0][2],
 			]);
-			result.push(
-				'영양소 섭취가 매우 부족합니다. 많은 음식을 섭취할 필요가 있는 것 같습니다.', //! 경고메세지는 일도님과 상의 후 결정.
-			);
+			errMessage =
+				'영양소 섭취가 매우 부족합니다. 많은 음식을 섭취할 필요가 있는 것 같습니다.';
+			result.push(recommendFood[parseInt(Math.random() * recommendFood.length)]);
+			result.push(recommendFood[parseInt(Math.random() * recommendFood.length)]);
 			result.push(recommendFood[parseInt(Math.random() * recommendFood.length)]);
 		}
 
-		return { personInfo, result };
+		return { personInfo, result, errMessage };
 	}
 }
 export { Recommend };

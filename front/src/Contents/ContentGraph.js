@@ -1,9 +1,11 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
 import { Card } from 'react-bootstrap';
 import ContentBarChart from './ContentBarChart';
 import ContnetLineChart from './ContentLineChart';
-
+import * as Api from '../Commons/Api';
+import { useRecoilState, useRecoilValue } from 'recoil';
+import { userIdState, loginState, carbonState } from '../Pages/User/UserAtom';
 const StyledGraphInfo = styled(Card)`
 	background-color: ${param => param.backgroundColor};
 	border: solid 1px black;
@@ -20,12 +22,24 @@ const StyledGraphInfoText = styled.span`
 	font-size: 30px;
 	font-weight: bold;
 `;
-const ContentGraph = ({ num, title, color, width, height }) => {
+
+const ContentGraph = ({ num, title, color, width, height, fooddata }) => {
+	const data = {
+		// 각 막대별 라벨
+		datasets: [
+			{
+				borderWidth: 1, // 테두리 두께
+				data: fooddata, // 수치
+				backgroundColor: ['yellow', 'red', 'green'], // 각 막대 색
+			},
+		],
+	};
+
 	return (
 		<>
-			<StyledGraphInfo height={height} minWidth="500px" width={width} backgroundColor={color}>
+			<StyledGraphInfo height={height} width={width} backgroundColor={color}>
 				<StyledGraphInfoText>{title}</StyledGraphInfoText>
-				{num === 1 ? <ContentBarChart /> : <ContnetLineChart />}
+				{num === 1 ? <ContentBarChart data={data} /> : <ContnetLineChart data={data} />}
 			</StyledGraphInfo>
 		</>
 	);
